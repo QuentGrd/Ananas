@@ -1,1 +1,1 @@
-# supreme-octo-chainsaw
+# Projet de Genie Logiciel (encore indeterminé)
