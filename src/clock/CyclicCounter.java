@@ -11,6 +11,9 @@ public class CyclicCounter extends BoundedCounter{
 		super(value, min, max);
 	}
 	
+	/**
+	 * This method increment the Cyclic Counter
+	 */
 	public void increment(){
 		if(counter == max)
 			this.counter = min;
@@ -18,6 +21,9 @@ public class CyclicCounter extends BoundedCounter{
 			this.counter++;
 	}
 	
+	/**
+	 * This method decrement the Cyclic Counter
+	 */
 	public void decrement(){
 		if(counter == min)
 			this.counter = max;

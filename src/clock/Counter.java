@@ -14,10 +14,16 @@ public class Counter {
 		this.counter = value;
 	}
 
+	/**
+	 * This method increment the counter
+	 */
 	public void increment(){
 		this.counter++;
 	}
 	
+	/**
+	 * This method decrement the counter
+	 */
 	public void decrement(){
 		this.counter--;
 	}

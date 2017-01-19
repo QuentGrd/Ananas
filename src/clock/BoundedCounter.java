@@ -16,12 +16,18 @@ public class BoundedCounter extends Counter{
 		this.max = max;
 	}
 	
+	/**
+	 * This method increment the bounded counter
+	 */
 	public void increment(){
 		if (counter < max){
 			this.counter++;
 		}
 	}
 	
+	/**
+	 * This method decrement the bounded counter
+	 */
 	public void decrement(){
 		if (counter > min){
 			this.counter--;

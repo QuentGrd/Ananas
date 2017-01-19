@@ -21,6 +21,9 @@ public class Clock extends Thread{
 		this.pause = false;
 	}
 	
+	/**
+	 * This method increment the clock
+	 */
 	public void increment(){
 		if (sec.getCounter() == sec.getMax()){
 			if(min.getCounter() == min.getMax()){
@@ -31,6 +34,9 @@ public class Clock extends Thread{
 		sec.increment();
 	}
 
+	/**
+	 * This method run the clock
+	 */
 	public void run(){
 		while(!pause){
 			try {

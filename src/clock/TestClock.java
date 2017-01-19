@@ -1,5 +1,10 @@
 package clock;
-
+ 
+/**
+ * This class is used to test the clock feature
+ * @author quentin
+ * @version 19012017
+ */
 public class TestClock {
 
 	public static void main(String[] args) {
