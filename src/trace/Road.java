@@ -1,5 +1,11 @@
 package trace;
 
-public class Road extends Trace{
 
+/**
+ * 
+ * @author Matthieu
+ *
+ */
+public class Road extends Trace{
+	
 }
