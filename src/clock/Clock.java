@@ -2,22 +2,29 @@ package clock;
 
 /**
  * This class represent a clock
- * @author quentin
- * @version 19012017
+ * @author quentin - matthieu
+ * @version 22012017
  */
 public class Clock extends Thread{
 	private CyclicCounter sec;
 	private CyclicCounter min;
 	private CyclicCounter hours;
+	private CyclicCounter days;
+	private CyclicCounter months;
+	private CyclicCounter years;
 	
 	private long speed;
 	private boolean pause;
 	
-	public Clock(int hours, int min, int sec){
+	public Clock(int hours, int min, int sec, int days, int mounths, int years){
 		this.sec = new CyclicCounter(sec, 0, 59);
 		this.min = new CyclicCounter(min, 0, 59);
 		this.hours = new CyclicCounter(hours, 0, 23);
-		this.speed = 1000;
+		this.days = new CyclicCounter(days, 1, 30);
+		this.months = new CyclicCounter(mounths, 1, 12);
+		this.years = new CyclicCounter(years, 2017, 2117);
+		
+		this.speed = 1;
 		this.pause = false;
 	}
 	
@@ -27,6 +34,15 @@ public class Clock extends Thread{
 	public void increment(){
 		if (sec.getCounter() == sec.getMax()){
 			if(min.getCounter() == min.getMax()){
+				if(hours.getCounter() == hours.getMax()){
+					if(days.getCounter() == days.getMax()){
+						if(months.getCounter() == months.getMax()){
+							years.increment();
+						}
+						months.increment();
+					}
+					days.increment();
+				}
 				hours.increment();
 			}
 			min.increment();
@@ -73,7 +89,30 @@ public class Clock extends Thread{
 		this.hours = hours;
 	}
 	
-	
+	public CyclicCounter getDays() {
+		return days;
+	}
+
+	public void setDays(CyclicCounter days) {
+		this.days = days;
+	}
+
+	public CyclicCounter getMonths() {
+		return months;
+	}
+
+	public void setMonths(CyclicCounter months) {
+		this.months = months;
+	}
+
+	public CyclicCounter getYears() {
+		return years;
+	}
+
+	public void setYears(CyclicCounter years) {
+		this.years = years;
+	}
+
 	public long getSpeed() {
 		return speed;
 	}
@@ -91,7 +130,7 @@ public class Clock extends Thread{
 	}
 
 	public String toString(){
-		return hours.toString() + ":" + min.toString() + ":" + sec.toString();
+		return "(" + days.toString() + "/" + months.toString() + "/" + years.toString() + ") - " + hours.toString() + ":" + min.toString() + ":" + sec.toString();
 	}
 	
 }
