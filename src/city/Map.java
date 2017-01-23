@@ -11,7 +11,9 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import building.Entertainment;
 import building.Home;
+import building.Work;
 import utils.Coordinates;
 
 /**
@@ -26,7 +28,7 @@ public class Map implements Serializable{
 	
 	private static final String[] BUILDINGFILEMAPPING = {"Type", "PosX", "PosY", "SizeX", "SizeY", "AdressX", "AdressY"};
 	
-	private static final String BUILDINGPATH = ("user.dir") + "/res/buildings.csv";
+	private static final String BUILDINGPATH = System.getProperty("user.dir") + "/res/buildings.csv";
 	
 	private static final String TYPE = "Type";
 	private static final String POSX = "PosX";
@@ -38,8 +40,13 @@ public class Map implements Serializable{
 	
 	private Infrastructure[][] grid;
 	
-	public Map(int taille){
-		grid = new Infrastructure[taille][taille];
+	private int size;
+	
+	public Map(int size){
+		this.size = size;
+		grid = new Infrastructure[size][size];
+		this.initBuildings();
+		System.out.println(this.toString());
 	}
 	
 	/**
@@ -53,7 +60,7 @@ public class Map implements Serializable{
 		int i, j;
 		for (i=position.getX(); i<size.getX(); i++){
 			for (j=position.getY(); j<size.getY(); j++){
-				if(grid[i][j] != null){
+				if(grid[i][j] == null){
 					grid[i][j] = building;
 				}
 				else{
@@ -93,18 +100,24 @@ public class Map implements Serializable{
 			ArrayList<CSVRecord> csvRecords = new ArrayList<CSVRecord>();
 			csvRecords = (ArrayList<CSVRecord>) reader.getRecords();
 			
-			for(i=0; i<csvRecords.size(); i++){
+			for(i=1; i<csvRecords.size(); i++){
 				CSVRecord record = csvRecords.get(i);
 				try{
 					switch(Integer.parseInt(record.get(TYPE))){
 						case 1: //Type 1 is Home
-							this.addToGrid(new Home(Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)), 
-									Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)), 
+							this.addToGrid(new Home(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
+									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)),
 									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
 							break;
 						case 2: //Type 2 is Work
+							this.addToGrid(new Work(Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)), 
+									Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)), 
+									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
 							break;
 						case 3: //Type 3 is Entertainment
+							this.addToGrid(new Entertainment(Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)), 
+									Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)), 
+									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
 							break;
 						default: //Default case
 							break;
@@ -122,5 +135,32 @@ public class Map implements Serializable{
 		}
 	}
 	
+	public String toString(){
+		String str = null;
+		int i, j;
+		for (i=0; i<size; i++){
+			for(j=0; j<size; j++){
+				switch(grid[i][j].getType()){
+					case 1: //Type 1 is for Home
+						str += "H";
+						break;
+					case 2: //Type 2 is for Work
+						str += "W";
+						break;
+					case 3: //Type 3 is for Entertainment
+						str += "E";
+						break;
+					case 4: //Type 4 is for Roads
+						str += " ";
+						break;
+					default:
+						str += " ";
+						break;
+				}
+			}
+			str += "\n";
+		}	
+		return str;
+	}
 	
 }
