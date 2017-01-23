@@ -57,7 +57,7 @@ public class Map implements Serializable{
 	public void addToGrid(Infrastructure building) throws PositionAlreadyTakenException{
 		Coordinates position = building.getPosition();
 		Coordinates size = building.getSize();
-		System.out.println("Size: " + size.getX() + "x" + size.getY() + " / Position: " + position.getX() + ", " + position.getY());
+		//System.out.println("Size: " + size.getX() + "x" + size.getY() + " / Position: " + position.getX() + ", " + position.getY());
 		int i, j;
 		for (j=position.getY(); j<(position.getY() + size.getY()); j++){
 			for (i=position.getX(); i<(position.getX() + size.getX()); i++){
