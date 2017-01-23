@@ -23,7 +23,7 @@ public class Character {
 	private BoundedCounter emotion;
 	
 	public Character(){
-		//initCharacter();
+		initCharacter();
 		age = randomSelection(1, 100);
 		emotion = new BoundedCounter(75, 0, 100);
 	}
@@ -37,9 +37,7 @@ public class Character {
 		String[] FILE_HEADER_MAPPING = {"gender","firstName","name"};
 		
 		try{
-			CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING).withRecordSeparator(';');
-			
-			System.out.println("#" + csvFileFormat.getRecordSeparator() + "#");//debug
+			CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
 			
 			FileReader fileReader = new FileReader("./res/characterID.csv");
 			CSVParser csvFileParser = new CSVParser(fileReader, csvFileFormat);
@@ -51,17 +49,18 @@ public class Character {
 			int randomLineForFirstName = randomSelection(0, csvRecords.size()-1);
 			
 			//research in file
-			for(int i=0; i<Math.max(randomLineForFirstName, randomLineForName); i++){
+			for(int i=0; i<=Math.max(randomLineForFirstName, randomLineForName); i++){
 				CSVRecord record = csvRecords.get(i);
-				System.out.println(record.size() + " : " + record.toString());//debug
 				if(i==randomLineForFirstName){
 					this.firstName = record.get("firstName");
-					this.gender = Boolean.parseBoolean(record.get("gender"));
-					System.out.println("firstname " + i);//debug
+					String boolGender = record.get("gender");
+					if(boolGender.equals("1"))
+						this.gender = true;
+					if(boolGender.equals("0"))
+						this.gender = false;
 				}
 				if(i==randomLineForName){
 					this.name = record.get("name");
-					System.out.println("name " + i);//debug
 				}
 			}
 			
@@ -93,17 +92,8 @@ public class Character {
 	}
 	
 	public String toString(){
-		String str = "name : " + name + "\tfirstName : " + firstName + "\tage : " + age;
-		if(gender == false)
-			str +=  "\tgender : female";
-		if(gender == true)
-			str += "\tgender : male";
+		String str = "name : " + name + "\tfirstName : " + firstName + "\tage : " + age + "\tgender : " + gender;
 		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
 		return str;
-	}
-	
-	public static void main(String[] args) {
-		Character c = new Character();
-		System.out.println(c.toString());
 	}
 }
