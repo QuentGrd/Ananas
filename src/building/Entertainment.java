@@ -16,5 +16,6 @@ public class Entertainment extends Building{
 		this.initPosition(posX, posY);
 		this.initSize(sizeX, sizeY);
 		this.initAddress(addressX, addressY);
+		this.setType(3);
 	}
 }

@@ -1,8 +1,6 @@
-package building;
+package city;
 
-import city.Map;
-
-public class Test {
+public class MapTest {
 
 	public static void main(String[] args) {
 		Map map = new Map(30);
