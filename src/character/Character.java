@@ -3,6 +3,7 @@ package character;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -16,12 +17,15 @@ public class Character {
 	private boolean gender;
 	private int age;
 	private String name;
+	private String firstName;
 	private Coordinates address;
 	
 	private BoundedCounter emotion;
 	
 	public Character(){
-		initCharacter();
+		//initCharacter();
+		age = randomSelection(1, 100);
+		emotion = new BoundedCounter(75, 0, 100);
 	}
 	
 	public void initCharacter(){
@@ -33,13 +37,33 @@ public class Character {
 		String[] FILE_HEADER_MAPPING = {"gender","firstName","name"};
 		
 		try{
-			CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
+			CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING).withRecordSeparator(';');
 			
-			FileReader fileReader = new FileReader("res/characterID.csv");
+			System.out.println("#" + csvFileFormat.getRecordSeparator() + "#");//debug
+			
+			FileReader fileReader = new FileReader("./res/characterID.csv");
 			CSVParser csvFileParser = new CSVParser(fileReader, csvFileFormat);
 			
 			List<CSVRecord> csvRecords = csvFileParser.getRecords();
 			
+			//random selection of name, first name and gender
+			int randomLineForName = randomSelection(0, csvRecords.size()-1);
+			int randomLineForFirstName = randomSelection(0, csvRecords.size()-1);
+			
+			//research in file
+			for(int i=0; i<Math.max(randomLineForFirstName, randomLineForName); i++){
+				CSVRecord record = csvRecords.get(i);
+				System.out.println(record.size() + " : " + record.toString());//debug
+				if(i==randomLineForFirstName){
+					this.firstName = record.get("firstName");
+					this.gender = Boolean.parseBoolean(record.get("gender"));
+					System.out.println("firstname " + i);//debug
+				}
+				if(i==randomLineForName){
+					this.name = record.get("name");
+					System.out.println("name " + i);//debug
+				}
+			}
 			
 			
 			
@@ -59,9 +83,27 @@ public class Character {
 		
 	}
 	
-	public int getSizeCsv(String path){
-		int size = 0;
+	public int randomSelection(int min, int max){
+		int random;
+		Random rand = new Random();
 		
-		return size;
+		random = rand.nextInt(max - min +1) + min;
+		
+		return random;
+	}
+	
+	public String toString(){
+		String str = "name : " + name + "\tfirstName : " + firstName + "\tage : " + age;
+		if(gender == false)
+			str +=  "\tgender : female";
+		if(gender == true)
+			str += "\tgender : male";
+		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
+		return str;
+	}
+	
+	public static void main(String[] args) {
+		Character c = new Character();
+		System.out.println(c.toString());
 	}
 }
