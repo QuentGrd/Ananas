@@ -1,5 +1,7 @@
 package clock;
 
+import utils.CyclicCounter;
+
 /**
  * This class represent a clock
  * @author quentin - matthieu
