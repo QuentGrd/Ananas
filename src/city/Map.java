@@ -57,9 +57,10 @@ public class Map implements Serializable{
 	public void addToGrid(Infrastructure building) throws PositionAlreadyTakenException{
 		Coordinates position = building.getPosition();
 		Coordinates size = building.getSize();
+		System.out.println("Size: " + size.getX() + "x" + size.getY() + " / Position: " + position.getX() + ", " + position.getY());
 		int i, j;
-		for (i=position.getX(); i<size.getX(); i++){
-			for (j=position.getY(); j<size.getY(); j++){
+		for (j=position.getY(); j<(position.getY() + size.getY()); j++){
+			for (i=position.getX(); i<(position.getX() + size.getX()); i++){
 				if(grid[i][j] == null){
 					grid[i][j] = building;
 				}
@@ -78,8 +79,8 @@ public class Map implements Serializable{
 		Coordinates position = building.getPosition();
 		Coordinates size = building.getSize();
 		int i, j;
-		for (i=position.getX(); i<size.getX(); i++){
-			for (j=position.getY(); j<size.getY(); j++){
+		for (j=position.getY(); j<(position.getY() + size.getY()); j++){
+			for (i=position.getX(); i<(position.getX() + size.getX()); i++){
 				grid[i][j] = null;
 			}
 		}
@@ -136,27 +137,31 @@ public class Map implements Serializable{
 	}
 	
 	public String toString(){
-		String str = null;
+		String str = "";
 		int i, j;
-		for (i=0; i<size; i++){
-			for(j=0; j<size; j++){
-				switch(grid[i][j].getType()){
-					case 1: //Type 1 is for Home
-						str += "H";
-						break;
-					case 2: //Type 2 is for Work
-						str += "W";
-						break;
-					case 3: //Type 3 is for Entertainment
-						str += "E";
-						break;
-					case 4: //Type 4 is for Roads
-						str += " ";
-						break;
-					default:
-						str += " ";
-						break;
+		for (j=0; j<size; j++){
+			for(i=0; i<size; i++){
+				if(grid[i][j] != null){
+					switch(grid[i][j].getType()){
+						case 1: //Type 1 is for Home
+							str += "H";
+							break;
+						case 2: //Type 2 is for Work
+							str += "W";
+							break;
+						case 3: //Type 3 is for Entertainment
+							str += "E";
+							break;
+						case 4: //Type 4 is for Roads
+							str += " ";
+							break;
+						default:
+							str += " ";
+							break;
+					}
 				}
+				else
+					str += " ";
 			}
 			str += "\n";
 		}	
