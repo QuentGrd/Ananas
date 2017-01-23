@@ -1,16 +1,30 @@
 package city;
 
+import utils.Coordinates;
+
 /**
  * 
- * @author Matthieu
+ * @author Matthieu - Quentin
  *
  */
-public abstract class Infrastucture {
+public abstract class Infrastructure {
 	
 	private String name;
-	private String address; //faire une classe coordonnées pour que l'adresse soit de type coordonnées.
-	private int[] size;
+	private Coordinates address;
+	private Coordinates position;
+	private Coordinates size;
 	private int nbUser;
 	
+	public Coordinates getPosition(){
+		return position;
+	}
+	
+	public Coordinates getSize(){
+		return size;
+	}
+	
+	public Coordinates getAddress(){
+		return address;
+	}
 	
 }

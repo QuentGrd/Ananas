@@ -1,6 +1,6 @@
 package building;
 
-import city.Infrastucture;
+import city.Infrastructure;
 
 
 /**
@@ -8,7 +8,7 @@ import city.Infrastucture;
  * @author Matthieu
  *
  */
-public abstract class Building extends Infrastucture{
+public abstract class Building extends Infrastructure{
 
 	private double reward;
 	//file d'attente de personnes

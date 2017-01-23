@@ -1,6 +1,6 @@
 package trace;
 
-import city.Infrastucture;
+import city.Infrastructure;
 
 
 /**
@@ -8,7 +8,7 @@ import city.Infrastucture;
  * @author Matthieu
  *
  */
-public abstract class Trace extends Infrastucture{
+public abstract class Trace extends Infrastructure{
 	
 	private double speed;
 }
