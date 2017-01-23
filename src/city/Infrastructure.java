@@ -1,5 +1,7 @@
 package city;
 
+import java.io.Serializable;
+
 import utils.Coordinates;
 
 /**
@@ -7,10 +9,9 @@ import utils.Coordinates;
  * @author Matthieu - Quentin
  *
  */
-public abstract class Infrastructure {
+public abstract class Infrastructure implements Serializable {
 	
 	private String name;
-	private Coordinates address;
 	private Coordinates position;
 	private Coordinates size;
 	private int nbUser;
@@ -21,10 +22,6 @@ public abstract class Infrastructure {
 	
 	public Coordinates getSize(){
 		return size;
-	}
-	
-	public Coordinates getAddress(){
-		return address;
 	}
 	
 }

@@ -1,15 +1,20 @@
 package building;
 
 import city.Infrastructure;
-
+import utils.Coordinates;
 
 /**
  * 
- * @author Matthieu
+ * @author Matthieu - Quentin
  *
  */
 public abstract class Building extends Infrastructure{
 
 	private double reward;
-	//file d'attente de personnes
+	private Coordinates address;
+	
+	public Coordinates getAddress(){
+		return address;
+	}
+	
 }

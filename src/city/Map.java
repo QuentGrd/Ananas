@@ -24,8 +24,8 @@ public class Map implements Serializable{
 	
 	/**
 	 * This method add an infrastructure on the grid
-	 * @param building
-	 * @throws PositionAlreadyTakenException
+	 * @param building Building to add
+	 * @throws PositionAlreadyTakenException If the Building try to take an already taken place
 	 */
 	public void addToGrid(Infrastructure building) throws PositionAlreadyTakenException{
 		Coordinates position = building.getPosition();
@@ -45,7 +45,7 @@ public class Map implements Serializable{
 	
 	/**
 	 * This method remove an infrastructure from the grid
-	 * @param building
+	 * @param building Building to remove
 	 */
 	public void removeFromGrid(Infrastructure building){
 		Coordinates position = building.getPosition();
