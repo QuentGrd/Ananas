@@ -1,5 +1,11 @@
 package utils;
 
+/**
+ * 
+ * @author quentin
+ * @version 23012017
+ */
+
 public class Coordinates {
 	
 	private int x;
