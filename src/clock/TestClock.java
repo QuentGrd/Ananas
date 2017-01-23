@@ -2,8 +2,8 @@ package clock;
  
 /**
  * This class is used to test the clock feature
- * @author quentin
- * @version 19012017
+ * @author quentin - matthieu
+ * @version 22012017
  */
 public class TestClock {
 
