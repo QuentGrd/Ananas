@@ -30,12 +30,12 @@ public class Character {
 	}
 	
 	public void initID(){
-		String[] FILE_HEADER_MAPPING = {"gender","name","firstName"};
+		String[] FILE_HEADER_MAPPING = {"gender","firstName","name"};
 		
 		try{
 			CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
 			
-			FileReader fileReader = new FileReader("characterID.csv");
+			FileReader fileReader = new FileReader("res/characterID.csv");
 			CSVParser csvFileParser = new CSVParser(fileReader, csvFileFormat);
 			
 			List<CSVRecord> csvRecords = csvFileParser.getRecords();
@@ -61,6 +61,7 @@ public class Character {
 	
 	public int getSizeCsv(String path){
 		int size = 0;
+		
 		return size;
 	}
 }
