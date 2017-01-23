@@ -15,6 +15,8 @@ public class Map implements Serializable{
 
 	private static final long serialVersionUID = 1930196824142386900L;
 	
+	private static final String BUILDINGPATH = ("user.dir") + "/res/buildings.csv";
+	
 	private ArrayList<Infrastructure> buildings;
 	private Infrastructure[][] grid;
 	
@@ -57,4 +59,6 @@ public class Map implements Serializable{
 			}
 		}
 	}
+	
+	
 }
