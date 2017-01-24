@@ -7,6 +7,7 @@ import utils.Coordinates;
 /**
  * 
  * @author Matthieu - Quentin
+ * @version 23012017
  *
  */
 public abstract class Infrastructure implements Serializable {

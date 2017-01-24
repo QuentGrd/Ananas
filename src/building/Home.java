@@ -3,6 +3,7 @@ package building;
 /**
  * 
  * @author Matthieu - Quentin
+ * @version 24012917
  *
  */
 public class Home extends Building{

@@ -14,6 +14,7 @@ import org.apache.commons.csv.CSVRecord;
 import building.Entertainment;
 import building.Home;
 import building.Work;
+import trace.Road;
 import utils.Coordinates;
 
 /**
@@ -26,9 +27,8 @@ public class Map implements Serializable{
 
 	private static final long serialVersionUID = 1930196824142386900L;
 	
-	private static final String[] BUILDINGFILEMAPPING = {"Type", "PosX", "PosY", "SizeX", "SizeY", "AdressX", "AdressY"};
-	
-	private static final String BUILDINGPATH = System.getProperty("user.dir") + "/res/buildings.csv";
+	private static final String[] INFRAFILEMAPPING = {"Type", "PosX", "PosY", "SizeX", "SizeY", "AdressX", "AdressY"};
+	private static final String INFRAPATH = System.getProperty("user.dir") + "/res/infrastructure.csv";
 	
 	private static final String TYPE = "Type";
 	private static final String POSX = "PosX";
@@ -46,6 +46,7 @@ public class Map implements Serializable{
 		this.size = size;
 		grid = new Infrastructure[size][size];
 		this.initBuildings();
+		//this.initRoads();
 		System.out.println(this.toString());
 	}
 	
@@ -54,15 +55,16 @@ public class Map implements Serializable{
 	 * @param building Building to add
 	 * @throws PositionAlreadyTakenException If the Building try to take an already taken place
 	 */
-	public void addToGrid(Infrastructure building) throws PositionAlreadyTakenException{
-		Coordinates position = building.getPosition();
-		Coordinates size = building.getSize();
-		//System.out.println("Type :" + building.getType() + "Size: " + size.getX() + "x" + size.getY() + " / Position: " + position.getX() + ", " + position.getY());
+	public void addToGrid(Infrastructure infrastructure) throws PositionAlreadyTakenException{
+		Coordinates position = infrastructure.getPosition();
+		Coordinates size = infrastructure.getSize();
+		//System.out.println("Type: " + infrastructure.getType() + " Size: " + size.getX() + "x" + size.getY() + " / Position: " + position.getX() + ", " + position.getY());
 		int i, j;
-		for (j=position.getY(); j<(position.getY() + size.getY()); j++){
-			for (i=position.getX(); i<(position.getX() + size.getX()); i++){
+		for (i=position.getX(); i<(position.getX() + size.getX()); i++){
+			for (j=position.getY(); j<(position.getY() + size.getY()); j++){
 				if(grid[i][j] == null){
-					grid[i][j] = building;
+					grid[i][j] = infrastructure;
+					//System.out.println("Added !");
 				}
 				else{
 					throw new PositionAlreadyTakenException();
@@ -79,23 +81,23 @@ public class Map implements Serializable{
 		Coordinates position = building.getPosition();
 		Coordinates size = building.getSize();
 		int i, j;
-		for (j=position.getY(); j<(position.getY() + size.getY()); j++){
-			for (i=position.getX(); i<(position.getX() + size.getX()); i++){
+		for (i=position.getX(); i<(position.getX() + size.getX()); i++){
+			for (j=position.getY(); j<(position.getY() + size.getY()); j++){
 				grid[i][j] = null;
 			}
 		}
 	}
 	
 	/**
-	 * This method initialize building object with the resource file
+	 * This method initialize infrastructure object with the resource file
 	 */
 	public void initBuildings(){
 		int i;
 		FileReader fileReader;
 		CSVParser reader;
 		try {
-			fileReader = new FileReader(new File(BUILDINGPATH));
-			CSVFormat format = CSVFormat.DEFAULT.withHeader(BUILDINGFILEMAPPING);
+			fileReader = new FileReader(new File(INFRAPATH));
+			CSVFormat format = CSVFormat.DEFAULT.withHeader(INFRAFILEMAPPING);
 			reader = new CSVParser(fileReader, format);
 			
 			ArrayList<CSVRecord> csvRecords = new ArrayList<CSVRecord>();
@@ -120,6 +122,10 @@ public class Map implements Serializable{
 									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)),
 									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
 							break;
+						case 4: //Type 4 is Normal Roads
+							this.addToGrid(new Road(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
+									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY))));
+							break;
 						default: //Default case
 							break;
 					}
@@ -139,8 +145,8 @@ public class Map implements Serializable{
 	public String toString(){
 		String str = "";
 		int i, j;
-		for (j=0; j<size; j++){
-			for(i=0; i<size; i++){
+		for (i=0; i<size; i++){
+			for(j=0; j<size; j++){
 				if(grid[i][j] != null){
 					switch(grid[i][j].getType()){
 						case 1: //Type 1 is for Home
@@ -152,8 +158,8 @@ public class Map implements Serializable{
 						case 3: //Type 3 is for Entertainment
 							str += "E";
 							break;
-						case 4: //Type 4 is for Roads
-							str += " ";
+						case 4: //Type 4 is for Road
+							str += "#";
 							break;
 						default:
 							str += " ";
