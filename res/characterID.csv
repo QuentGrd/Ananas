@@ -1,7 +1,7 @@
 1,Adam,MARTIN
 1,Alex,BERNARD
 1,Alexandre,ROUX
-1,Alexis,
+1,Alexis, VILAIN
 1,Anthony,PETIT
 1,Antoine,DURAND
 1,Benjamin,MICHEL
@@ -31,7 +31,7 @@
 1,Lucas,VINCENT
 1,Ludovic,CHEVALIER
 1,Malik,LEROY
-1,Mathieu,MARCHAND
+1,Matthieu,MARCHAND
 1,Mathis,PERRIN
 1,Maxime,MORIN
 1,Michaël,MASSON
@@ -40,7 +40,7 @@
 1,Noah,ROBIN
 1,Olivier,NICOLAS
 1,Philippe,BRUN
-1,Raphaël,MATHIEU
+1,Quentin,MATHIEU
 1,Samuel,CLEMENT
 1,Simon,LEFEBVRE
 1,Thomas,FABRE
@@ -63,7 +63,7 @@
 0,Chloé,BOYER
 0,Clara,COLIN
 0,Coralie,FONTAINE
-0,Daphnée,JEAN
+0,Daphnée,GERARD
 0,Delphine,BOURGEOIS
 0,Elizabeth,GAILLARD
 0,Élodie,NOEL
