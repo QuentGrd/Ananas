@@ -8,6 +8,8 @@ package building;
  */
 public class Work extends Building{
 	
+	private static final long serialVersionUID = 2170007801527174708L;
+
 	private static final int type = 2;
 	
 	private String timeTable;
@@ -17,6 +19,6 @@ public class Work extends Building{
 		this.initPosition(posX, posY);
 		this.initSize(sizeX, sizeY);
 		this.initAddress(addressX, addressY);
-		this.setType(2);
+		this.setType(type);
 	}
 }

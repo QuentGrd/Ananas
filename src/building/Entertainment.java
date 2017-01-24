@@ -7,6 +7,8 @@ package building;
  */
 public class Entertainment extends Building{
 	
+	private static final long serialVersionUID = 8975254877371478140L;
+
 	private static final int type = 3;
 	
 	private String timeTable;
@@ -16,6 +18,6 @@ public class Entertainment extends Building{
 		this.initPosition(posX, posY);
 		this.initSize(sizeX, sizeY);
 		this.initAddress(addressX, addressY);
-		this.setType(3);
+		this.setType(type);
 	}
 }

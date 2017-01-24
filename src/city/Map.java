@@ -57,7 +57,7 @@ public class Map implements Serializable{
 	public void addToGrid(Infrastructure building) throws PositionAlreadyTakenException{
 		Coordinates position = building.getPosition();
 		Coordinates size = building.getSize();
-		//System.out.println("Size: " + size.getX() + "x" + size.getY() + " / Position: " + position.getX() + ", " + position.getY());
+		//System.out.println("Type :" + building.getType() + "Size: " + size.getX() + "x" + size.getY() + " / Position: " + position.getX() + ", " + position.getY());
 		int i, j;
 		for (j=position.getY(); j<(position.getY() + size.getY()); j++){
 			for (i=position.getX(); i<(position.getX() + size.getX()); i++){
@@ -111,13 +111,13 @@ public class Map implements Serializable{
 									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
 							break;
 						case 2: //Type 2 is Work
-							this.addToGrid(new Work(Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)), 
-									Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)), 
+							this.addToGrid(new Work(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
+									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)),
 									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
 							break;
 						case 3: //Type 3 is Entertainment
-							this.addToGrid(new Entertainment(Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)), 
-									Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)), 
+							this.addToGrid(new Entertainment(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
+									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)),
 									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
 							break;
 						default: //Default case
@@ -161,7 +161,7 @@ public class Map implements Serializable{
 					}
 				}
 				else
-					str += " ";
+					str += ".";
 			}
 			str += "\n";
 		}	
