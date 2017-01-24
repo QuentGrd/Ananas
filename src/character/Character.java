@@ -10,15 +10,19 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import utils.BoundedCounter;
-import utils.Coordinates;
 
+/**
+ * 
+ * @author Matthieu
+ * @version 24012017
+ */
 public class Character {
 	
 	private boolean gender;
 	private int age;
 	private String name;
 	private String firstName;
-	private Coordinates address;
+	//private Coordinates address;
 	
 	private BoundedCounter emotion;
 	
@@ -27,29 +31,69 @@ public class Character {
 		age = randomSelection(1, 100);
 		emotion = new BoundedCounter(75, 0, 100);
 	}
-	
+	/**
+	 * character's data initialization
+	 */
 	public void initCharacter(){
-		initID();
+		initName();
+		initFirstName();
 		initWork();
 	}
 	
-	public void initID(){
-		String[] FILE_HEADER_MAPPING = {"gender","firstName","name"};
+	/**
+	 * random name initialization by reading name.csv
+	 */
+	public void initName(){
+		String[] FILE_HEADER_MAPPING = {"name"};
 		
 		try{
 			CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
 			
-			FileReader fileReader = new FileReader("./res/characterID.csv");
+			FileReader fileReader = new FileReader("./res/name.csv");
 			CSVParser csvFileParser = new CSVParser(fileReader, csvFileFormat);
 			
 			List<CSVRecord> csvRecords = csvFileParser.getRecords();
 			
 			//random selection of name, first name and gender
 			int randomLineForName = randomSelection(0, csvRecords.size()-1);
+			
+			//research in file
+			for(int i=0; i<=randomLineForName; i++){
+				CSVRecord record = csvRecords.get(i);
+				if(i==randomLineForName){
+					this.name = record.get("name");
+				}
+			}
+			
+			
+			
+			csvFileParser.close();
+			fileReader.close();
+			
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * random firstName and gender initialization by ready firstName.csv
+	 */
+	public void initFirstName(){
+		String[] FILE_HEADER_MAPPING = {"gender","firstName"};
+		
+		try{
+			CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
+			
+			FileReader fileReader = new FileReader("./res/firstName.csv");
+			CSVParser csvFileParser = new CSVParser(fileReader, csvFileFormat);
+			
+			List<CSVRecord> csvRecords = csvFileParser.getRecords();
+			
+			//random selection of name, first name and gender
 			int randomLineForFirstName = randomSelection(0, csvRecords.size()-1);
 			
 			//research in file
-			for(int i=0; i<=Math.max(randomLineForFirstName, randomLineForName); i++){
+			for(int i=0; i<=randomLineForFirstName; i++){
 				CSVRecord record = csvRecords.get(i);
 				if(i==randomLineForFirstName){
 					this.firstName = record.get("firstName");
@@ -59,12 +103,7 @@ public class Character {
 					if(boolGender.equals("0"))
 						this.gender = false;
 				}
-				if(i==randomLineForName){
-					this.name = record.get("name");
-				}
 			}
-			
-			
 			
 			csvFileParser.close();
 			fileReader.close();
@@ -82,6 +121,13 @@ public class Character {
 		
 	}
 	
+	
+	/**
+	 * found a random number betwin min and max
+	 * @param min
+	 * @param max
+	 * @return random number found
+	 */
 	public int randomSelection(int min, int max){
 		int random;
 		Random rand = new Random();
@@ -92,7 +138,11 @@ public class Character {
 	}
 	
 	public String toString(){
-		String str = "name : " + name + "\tfirstName : " + firstName + "\tage : " + age + "\tgender : " + gender;
+		String str = "name : " + name + "\tfirstName : " + firstName + "\tage : " + age;
+		if(gender == true)
+			str += "\tgender : Male";
+		else if(gender == false)
+			str += "\tgender : Female" ; 
 		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
 		return str;
 	}
