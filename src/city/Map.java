@@ -35,9 +35,6 @@ public class Map implements Serializable{
 	public Map(int size){
 		this.size = size;
 		grid = new Infrastructure[size][size];
-		MapBuilder builder = new MapBuilder(this);
-		builder.initBuildings();
-		System.out.println(this.toString());
 	}
 	
 	public Infrastructure[][] getGrid() {

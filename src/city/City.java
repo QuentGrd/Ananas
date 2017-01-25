@@ -14,10 +14,23 @@ public class City {
 	private Map map;
 	private Clock clock;
 	
-	public City(int size){
-		clock = new Clock(0, 0, 0, 1, 1, 2017);
-		map = new Map(size);
-		clock.setSpeed(1000);
-		clock.run();
+	public City(){
 	}
+
+	public Map getMap() {
+		return map;
+	}
+
+	public void setMap(Map map) {
+		this.map = map;
+	}
+
+	public Clock getClock() {
+		return clock;
+	}
+
+	public void setClock(Clock clock) {
+		this.clock = clock;
+	}
+	
 }

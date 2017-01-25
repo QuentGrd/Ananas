@@ -36,6 +36,7 @@ public class MapBuilder {
 	
 	public MapBuilder(Map map){
 		this.map = map;
+		map = new Map(30);
 	}
 	
 	/**
