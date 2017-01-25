@@ -9,7 +9,7 @@ import character.Character;
 /**
  * 
  * @author matthieu
- * @version 25/01/2017
+ * @version 25012017
  */
 public class Population {
 
