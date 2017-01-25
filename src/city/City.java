@@ -13,6 +13,7 @@ public class City {
 	
 	private Map map;
 	private Clock clock;
+	private Population population;
 	
 	public City(){
 	}
@@ -32,5 +33,14 @@ public class City {
 	public void setClock(Clock clock) {
 		this.clock = clock;
 	}
+
+	public Population getPopulation() {
+		return population;
+	}
+
+	public void setPopulation(Population population) {
+		this.population = population;
+	}
+	
 	
 }
