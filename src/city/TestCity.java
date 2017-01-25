@@ -1,9 +1,9 @@
 package city;
 
-public class MapTest {
+public class TestCity {
 
 	public static void main(String[] args) {
-		Map map = new Map(30);
+		City c = new City(30);
 	}
 
 }
