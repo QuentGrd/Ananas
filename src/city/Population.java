@@ -39,4 +39,14 @@ public class Population {
 		this.listCharacter = listCharacter;
 	}
 	
+	public String toString(){
+		String str = "";
+		
+		for(int i=0; i<nbOfCharacter; i++){
+			System.out.println(listCharacter.get(i).toString());
+		}
+		
+		return str;
+	}
+	
 }
