@@ -11,6 +11,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import builders.MapBuilder;
 import building.Entertainment;
 import building.Home;
 import building.Work;
@@ -34,16 +35,14 @@ public class Map implements Serializable{
 	public Map(int size){
 		this.size = size;
 		grid = new Infrastructure[size][size];
-		//this.initBuildings();
-		//this.initRoads();
+		MapBuilder builder = new MapBuilder(this);
+		builder.initBuildings();
 		System.out.println(this.toString());
 	}
 	
 	public Infrastructure[][] getGrid() {
 		return grid;
 	}
-
-
 
 	public void setGrid(Infrastructure[][] grid) {
 		this.grid = grid;

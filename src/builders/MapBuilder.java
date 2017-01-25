@@ -34,12 +34,16 @@ public class MapBuilder {
 	
 	private Map map;
 	
+	public MapBuilder(Map map){
+		this.map = map;
+	}
+	
 	/**
-	 * This method add an infrastructure on the map.getGrid()
+	 * This method add an infrastructure on the grid
 	 * @param building Building to add
 	 * @throws PositionAlreadyTakenException If the Building try to take an already taken place
 	 */
-	public void addTomap.getGrid()(Infrastructure infrastructure) throws PositionAlreadyTakenException{
+	public void addToGrid(Infrastructure infrastructure) throws PositionAlreadyTakenException{
 		Coordinates position = infrastructure.getPosition();
 		Coordinates size = infrastructure.getSize();
 		//System.out.println("Type: " + infrastructure.getType() + " Size: " + size.getX() + "x" + size.getY() + " / Position: " + position.getX() + ", " + position.getY());
@@ -58,10 +62,10 @@ public class MapBuilder {
 	}
 	
 	/**
-	 * This method remove an infrastructure from the map.getGrid()
+	 * This method remove an infrastructure from the grid
 	 * @param building Building to remove
 	 */
-	public void removeFrommap.getGrid()(Infrastructure building){
+	public void removeFromGrid(Infrastructure building){
 		Coordinates position = building.getPosition();
 		Coordinates size = building.getSize();
 		int i, j;
@@ -92,22 +96,22 @@ public class MapBuilder {
 				try{
 					switch(Integer.parseInt(record.get(TYPE))){
 						case 1: //Type 1 is Home
-							this.addTomap.getGrid()(new Home(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
+							this.addToGrid(new Home(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
 									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)),
 									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
 							break;
 						case 2: //Type 2 is Work
-							this.addTomap.getGrid()(new Work(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
+							this.addToGrid(new Work(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
 									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)),
 									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
 							break;
 						case 3: //Type 3 is Entertainment
-							this.addTomap.getGrid()(new Entertainment(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
+							this.addToGrid(new Entertainment(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
 									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)),
 									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
 							break;
 						case 4: //Type 4 is Normal Roads
-							this.addTomap.getGrid()(new Road(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
+							this.addToGrid(new Road(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
 									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY))));
 							break;
 						default: //Default case
