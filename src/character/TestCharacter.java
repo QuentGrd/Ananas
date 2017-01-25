@@ -10,7 +10,6 @@ public class TestCharacter {
 		for(int i=0; i<20; i++){
 			Character c = new Character();
 			System.out.println(c.toString());
-			System.out.println("lol");
 		}
 	}
 }
