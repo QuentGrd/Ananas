@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import builders.PopulationBuilder;
 import character.Character;
 
+
+/**
+ * 
+ * @author matthieu
+ * @version 25/01/2017
+ */
 public class Population {
 
 	private int nbOfCharacter;
