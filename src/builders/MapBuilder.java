@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -19,10 +20,24 @@ import city.PositionAlreadyTakenException;
 import trace.Road;
 import utils.Coordinates;
 
+
+/**
+ * 
+ * @author Quentin - Matthieu
+ *
+ */
 public class MapBuilder {
 	
 	private static final String[] INFRAFILEMAPPING = {"Type", "PosX", "PosY", "SizeX", "SizeY", "AdressX", "AdressY"};
 	private static final String INFRAPATH = System.getProperty("user.dir") + "/res/infrastructure.csv";
+	
+	private static final String[] WORKINFOMAPPING = {"NAME","OPENING_TIME","CLOSING_TIME","REWARD"};
+	private static final String WORKINFOPATH = System.getProperty("user.dir") + "/res/work.csv";
+	private int currentIndiceInWork;
+	
+	private static final String[] ENTERTAINMENTINFOMAPPING = {"NAME","OPENING_TIME","CLOSING_TIME","DURATION","REWARD"};
+	private static final String ENTERTAINMENTINFOPATH = System.getProperty("user.dir") + "/res/entertainment.csv";
+	private int currentIndiceInEntertainment;
 	
 	private static final String TYPE = "Type";
 	private static final String POSX = "PosX";
@@ -35,6 +50,7 @@ public class MapBuilder {
 	private Map map;
 	
 	public MapBuilder(Map map){
+		currentIndiceInWork=0;
 		this.map = map;
 		map = new Map(30);
 	}
@@ -97,23 +113,29 @@ public class MapBuilder {
 				try{
 					switch(Integer.parseInt(record.get(TYPE))){
 						case 1: //Type 1 is Home
-							this.addToGrid(new Home(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
+							Home home = new Home(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
 									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)),
-									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
+									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY)));
+							this.addToGrid(home);
 							break;
 						case 2: //Type 2 is Work
-							this.addToGrid(new Work(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
+							Work work = new Work(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
 									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)),
-									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
+									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY)));
+							initWorkInfo(work);
+							this.addToGrid(work);
 							break;
 						case 3: //Type 3 is Entertainment
-							this.addToGrid(new Entertainment(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
+							Entertainment enter = new Entertainment(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
 									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)),
-									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY))));
+									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY)));
+							initEntertainmentInfo(enter);
+							this.addToGrid(enter);
 							break;
 						case 4: //Type 4 is Normal Roads
-							this.addToGrid(new Road(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
-									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY))));
+							Road road = new Road(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
+									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)));
+							this.addToGrid(road);
 							break;
 						default: //Default case
 							break;
@@ -130,5 +152,76 @@ public class MapBuilder {
 			System.err.println(e.getMessage());
 		}
 	}
+	
+	
+	/**
+	 * this fonction search informations in work.csv to initialize work
+	 * @param work
+	 */
+	public void initWorkInfo(Work work){
+		try{
+			CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(WORKINFOMAPPING);
+			
+			FileReader fileReader = new FileReader(WORKINFOPATH);
+			CSVParser csvFileParser = new CSVParser(fileReader, csvFileFormat);
+			
+			List<CSVRecord> csvRecords = csvFileParser.getRecords();
+			
+			//research in file
+			for(int i=0; i<=currentIndiceInWork; i++){
+				CSVRecord record = csvRecords.get(i);
+				if(i==currentIndiceInWork){
+					work.setName(record.get("NAME"));
+					//probleme de format, convertion des nombres negatifs
+					//work.setReward(Double.parseDouble(record.get("REWARD")));
+					work.setTimeTable(record.get("OPENING_TIME") + "/" + record.get("CLOSING_TIME"));
+				}
+			}
+			
+			currentIndiceInWork ++;
+			
+			csvFileParser.close();
+			fileReader.close();
+			
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	
+	/**
+	 * This methode search in entertainment.csv to initialiaze enter
+	 * @param work
+	 */
+	public void initEntertainmentInfo(Entertainment enter){
+		try{
+			CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(ENTERTAINMENTINFOMAPPING);
+			
+			FileReader fileReader = new FileReader(ENTERTAINMENTINFOPATH);
+			CSVParser csvFileParser = new CSVParser(fileReader, csvFileFormat);
+			
+			List<CSVRecord> csvRecords = csvFileParser.getRecords();
+			
+			//research in file
+			for(int i=0; i<=currentIndiceInEntertainment; i++){
+				CSVRecord record = csvRecords.get(i);
+				if(i==currentIndiceInEntertainment){
+					enter.setName(record.get("NAME"));
+					enter.setReward(Double.parseDouble(record.get("REWARD")));
+					enter.setAverageUsageTime(record.get("DURATION"));
+					enter.setTimeTable(record.get("OPENING_TIME") + "/" + record.get("CLOSING_TIME"));
+				}
+			}
+			
+			currentIndiceInEntertainment ++;
+			
+			csvFileParser.close();
+			fileReader.close();
+			
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
 	
 }
