@@ -21,4 +21,19 @@ public class Work extends Building{
 		this.initAddress(addressX, addressY);
 		this.setType(type);
 	}
+
+	public String getTimeTable() {
+		return timeTable;
+	}
+
+	public void setTimeTable(String timeTable) {
+		this.timeTable = timeTable;
+	}
+	
+	public String toString(){
+		String str = "";
+		str += super.getType() + " - Name : " + super.getName() + "\tAdress : " + super.getAddress().toString() + "\tReward : " + super.getReward();
+		str += "\tTimeTable : " + this.timeTable;
+		return str;
+	}
 }
