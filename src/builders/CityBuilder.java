@@ -23,10 +23,10 @@ public class CityBuilder {
 		mapB.initBuildings();
 		System.out.println(map.toString());
 		
-		Clock clock = city.getClock();
+		/*Clock clock = city.getClock();
 		clock = new Clock(0, 0, 0, 1, 1, 2017);
-		clock.setSpeed(1000);
-		clock.run();
+		clock.setSpeed(100);
+		clock.run();*/
 	}
 
 }
