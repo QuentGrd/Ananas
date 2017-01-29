@@ -1,25 +1,24 @@
-NAME, ACCRESS_X, ADDRESS_Y, OPENING_TIME, CLOSING_TIME
-Tele Systeme,10,1,8h30, 18h30
-Infocom,1,6,9h,19h
-Matt&Quent's Corp,
-Cerisier Joaillerie,
-Auchan,
-Miemou Boulangerie,
-Carwash Laverie,
-Chez Dédé Atelier,
-H&M,
-Celio,
-Darty,
-La Fnac,
-Leclerc,
-La Poste,
-Credit Mutuel,
-Direct Assurance,
-Google,
-Alain Afflelou,
-SFR,
-Jennyfer,
-La Grande Récré,
-Micromania,
-Pharmatie La Vie,
-Yves Roche,
+Tele Systeme,8h30, 18h30,-10
+Infocom,9h,19h,-10
+Matt&Quent's Corp,7h30,21h30,10
+Cerisier Joaillerie,9h,18h,-10
+Auchan,8h30,22h,-20
+Miemou Boulangerie,6h30,19h,-10
+Carwash Laverie,9h,18h,-20
+Chez Dédé Atelier,8h30, 18h30,-25
+H&M,9h,18h,-15
+Celio,9h,18h,-15
+Darty,8h30,21h,-15
+La Fnac,8h30,21h,-15
+Leclerc,8h30,22h,-20
+La Poste,10h,16h,-25
+Credit Mutuel,9h,18h,15
+Direct Assurance,9h,18h,-10
+Google,7h30,21h30,-10
+Alain Afflelou,9h,18h,-10
+SFR,9h,18h,-20
+Jennyfer,9h,18h,-15
+La Grande Récré,9h,18h,-10
+Micromania,9h,18h,-20
+Pharmatie La Vie,6h30,19h,-15
+Yves Roche,9h,18h,-10
