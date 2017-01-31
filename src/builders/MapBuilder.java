@@ -172,8 +172,7 @@ public class MapBuilder {
 				CSVRecord record = csvRecords.get(i);
 				if(i==currentIndiceInWork){
 					work.setName(record.get("NAME"));
-					//probleme de format, convertion des nombres negatifs
-					//work.setReward(Double.parseDouble(record.get("REWARD")));
+					work.setReward(Double.valueOf(record.get("REWARD")));
 					work.setTimeTable(record.get("OPENING_TIME") + "/" + record.get("CLOSING_TIME"));
 				}
 			}
