@@ -28,24 +28,27 @@ public class GUIMap extends JPanel{
 	
 	public void initMap(){
 		int i, j;
-		for (i=0; i<map.getSize(); i++){
-			for (j=0; i<map.getSize(); j++){
+		int size = map.getSize();
+		System.out.println(size);
+		for (i=0; i<size; i++){
+			for (j=0; j<size; j++){
+				System.out.println(i + " " + j);
 				switch(map.getInfrastructure(i, j).getType()){
 					case 1:
 						System.out.println("Home");
-						add(new JLabel("Home"));
+						add(new JLabel("H"));
 						break;
 					case 2:
 						System.out.println("Work");
-						add(new JLabel("Work"));
+						add(new JLabel("W"));
 						break;
 					case 3:
 						System.out.println("Entertainment");
-						add(new JLabel("Entertainement"));
+						add(new JLabel("E"));
 						break;
 					case 4:
 						System.out.println("Road");
-						add(new JLabel("Road"));
+						add(new JLabel("R"));
 						break;
 					default:
 						System.out.println("Null");
