@@ -44,6 +44,14 @@ public class Map implements Serializable{
 	public void setGrid(Infrastructure[][] grid) {
 		this.grid = grid;
 	}
+	
+	public int getSize(){
+		return size;
+	}
+	
+	public Infrastructure getInfrastructure(int x, int y){
+		return grid[x][y];
+	}
 
 	public String toString(){
 		String str = "";
