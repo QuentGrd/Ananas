@@ -52,7 +52,7 @@ public class MapBuilder {
 	public MapBuilder(Map map){
 		currentIndiceInWork=0;
 		this.map = map;
-		map = new Map(30);
+		//map = new Map(30);
 	}
 	
 	/**

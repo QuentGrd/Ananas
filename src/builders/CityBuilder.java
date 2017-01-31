@@ -21,9 +21,7 @@ public class CityBuilder {
 		map = new Map(30);
 		mapB = new MapBuilder(map);
 		mapB.initBuildings();
-		System.out.println(map.toString());
-		
-		System.out.println(map.getGrid()[2][10].toString());
+		city.setMap(map);
 		
 		/*Clock clock = city.getClock();
 		clock = new Clock(0, 0, 0, 1, 1, 2017);
