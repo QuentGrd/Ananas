@@ -10,15 +10,33 @@ import org.apache.commons.csv.CSVRecord;
 
 import building.Entertainment;
 
+
+/**
+ * 
+ * @author matthieu
+ *
+ */
 public class EntertainmentBuilder {
 
+	private static final String[] ENTERTAINMENTINFOMAPPING = {"NAME", "OPENING_TIME", "CLOSING_TIME", "DURATION", "REWARD"};
+	private static final String ENTERTAINMENTINFOPATH = System.getProperty("user.dir") + "/res/entertainment.csv";
+	private int currentIndiceInEntertainment;
+	
+	private Entertainment enter;
+	
+	public EntertainmentBuilder(){
+		enter = new Entertainment();
+	}
 	
 	
+	public void  creatEntertainment(){
+		initEntertainmentInfo(enter);
+	}
 	/**
 	 * This methode search in entertainment.csv to initialiaze enter
 	 * @param work
 	 */
-	/*public void initEntertainmentInfo(Entertainment enter){
+	public void initEntertainmentInfo(Entertainment enter){
 		try{
 			CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(ENTERTAINMENTINFOMAPPING);
 			
@@ -46,5 +64,17 @@ public class EntertainmentBuilder {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-	}*/
+	}
+
+
+	public Entertainment getEnter() {
+		return enter;
+	}
+
+
+	public void setEnter(Entertainment enter) {
+		this.enter = enter;
+	}
+	
+	
 }

@@ -94,6 +94,7 @@ public class MapBuilder {
 		CSVParser reader;
 		
 		WorkBuilder workBuilder = new WorkBuilder();
+		EntertainmentBuilder enterBuilder = new EntertainmentBuilder();
 		
 		try {
 			fileReader = new FileReader(new File(INFRAPATH));
@@ -117,8 +118,7 @@ public class MapBuilder {
 						case 2: //Type 2 is Work
 							
 							workBuilder.creatWork();
-							Work work = new Work();
-							work = workBuilder.getWork();
+							Work work = workBuilder.getWork();
 							
 							work.initPosition(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)));
 							work.initSize(Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)));
@@ -128,10 +128,13 @@ public class MapBuilder {
 							break;
 						case 3: //Type 3 is Entertainment
 							
-							Entertainment enter = new Entertainment(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
-									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)),
-									Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY)));
-							//initEntertainmentInfo(enter);
+							enterBuilder.creatEntertainment();
+							Entertainment enter = enterBuilder.getEnter();
+							
+							enter.initPosition(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)));
+							enter.initSize(Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)));
+							enter.initAddress(Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY)));
+							
 							this.addToGrid(enter);
 							break;
 						case 4: //Type 4 is Normal Roads
