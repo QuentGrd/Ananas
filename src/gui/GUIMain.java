@@ -25,7 +25,7 @@ public class GUIMain extends JFrame{
 		this.pack();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle("Urban");
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
