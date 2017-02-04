@@ -12,7 +12,7 @@ import building.Work;
 
 /**
  * 
- * @author matthieu
+ * @author matthieu - Quentin
  *
  */
 public class WorkBuilder {
@@ -24,10 +24,10 @@ public class WorkBuilder {
 	private Work work;
 	
 	public WorkBuilder(){
-		work = new Work();
 	}
 	
 	public void creatWork(){
+		work = new Work();	
 		initWorkInfo(work);
 	}
 	

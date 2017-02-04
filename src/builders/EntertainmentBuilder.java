@@ -13,7 +13,7 @@ import building.Entertainment;
 
 /**
  * 
- * @author matthieu
+ * @author matthieu - Quentin
  *
  */
 public class EntertainmentBuilder {
@@ -25,11 +25,11 @@ public class EntertainmentBuilder {
 	private Entertainment enter;
 	
 	public EntertainmentBuilder(){
-		enter = new Entertainment();
 	}
 	
 	
 	public void  creatEntertainment(){
+		enter = new Entertainment();
 		initEntertainmentInfo(enter);
 	}
 	/**
