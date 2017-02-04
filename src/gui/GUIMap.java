@@ -25,11 +25,14 @@ public class GUIMap extends JPanel{
 	
 	public GUIMap(Map map){
 		this.map = map;
-		jmap = new JPanel[map.getSize()][map.getSize()];
+		jmap = new JPanel[map.getSize() + 1][map.getSize() + 1];
 		this.setLayout(new GridLayout(map.getSize(), map.getSize()));
 		this.initMap();
 	}
 	
+	/**
+	 * This method initialize the JPanel Map
+	 */
 	public void initMap(){
 		int i, j;
 		int size = map.getSize();
@@ -69,6 +72,7 @@ public class GUIMap extends JPanel{
 				add(jmap[i][j]);
 			}
 		}
+		
 	}
 
 }

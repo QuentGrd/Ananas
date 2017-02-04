@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 import city.Map;
@@ -24,6 +26,7 @@ public class GUIMain extends JFrame{
 		this.add(gmap);
 		this.pack();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setMinimumSize(new Dimension(600, 600));
 		this.setTitle("Urban");
 		this.setResizable(true);
 		this.setLocationRelativeTo(null);
