@@ -26,7 +26,7 @@ public class GUIMap extends JPanel{
 	public GUIMap(Map map){
 		this.map = map;
 		jmap = new JPanel[map.getSize() + 1][map.getSize() + 1];
-		this.setLayout(new GridLayout(map.getSize(), map.getSize()));
+		this.setLayout(new GridLayout(map.getSize() + 1, map.getSize() + 1));
 		this.initMap();
 	}
 	
@@ -37,30 +37,40 @@ public class GUIMap extends JPanel{
 		int i, j;
 		int size = map.getSize();
 		System.out.println(size);
-		for (i=0; i<size; i++){
-			for (j=0; j<size; j++){
+		for (i=0; i<size + 1; i++){
+			for (j=0; j<size + 1; j++){
 				JPanel p = new JPanel();
-				switch(map.getInfrastructure(i, j).getType()){
-					case 1:
-						p.setBackground(new Color(52, 152, 219));
-						p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-						break;
-					case 2:
-						p.setBackground(new Color(231, 76, 60));
-						p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-						break;
-					case 3:
-						p.setBackground(new Color(39, 174, 96));
-						p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-						break;
-					case 4:
-						p.setBackground(new Color(149, 165, 166));
-						p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-						break;
-					default:
-						p.setBackground(new Color(236, 240, 241));
-						p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-						break;
+				if (i == 0){
+					JLabel label = new JLabel(String.valueOf(j));
+					p.add(label);
+				}
+				else if (j == 0){
+					JLabel label = new JLabel(String.valueOf(i));
+					p.add(label);
+				}
+				else{
+					switch(map.getInfrastructure(i - 1, j - 1).getType()){
+						case 1:
+							p.setBackground(new Color(52, 152, 219));
+							p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+							break;
+						case 2:
+							p.setBackground(new Color(231, 76, 60));
+							p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+							break;
+						case 3:
+							p.setBackground(new Color(39, 174, 96));
+							p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+							break;
+						case 4:
+							p.setBackground(new Color(149, 165, 166));
+							p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+							break;
+						default:
+							p.setBackground(new Color(236, 240, 241));
+							p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+							break;
+					}
 				}
 				jmap[i][j] = p;
 				add(jmap[i][j]);
