@@ -18,5 +18,9 @@ public class Home extends Building{
 		this.initAddress(addressX, addressY);
 		this.setType(type);
 	}
+	
+	public Home(){
+		
+	}
 
 }

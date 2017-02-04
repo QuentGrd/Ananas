@@ -21,6 +21,10 @@ public class Work extends Building{
 		this.initAddress(addressX, addressY);
 		this.setType(type);
 	}
+	
+	public Work(){
+		this.setType(type);
+	}
 
 	public String getTimeTable() {
 		return timeTable;
