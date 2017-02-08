@@ -2,10 +2,14 @@ package gui;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.sun.xml.internal.ws.api.Component;
 
 import city.Map;
 
@@ -39,7 +43,7 @@ public class GUIMap extends JPanel{
 		System.out.println(size);
 		for (i=0; i<size + 1; i++){
 			for (j=0; j<size + 1; j++){
-				InfrastructureBlock p = new InfrastructureBlock(i, j);
+				JPanel p = new JPanel();
 				if (i == size){
 					JLabel label = new JLabel(String.valueOf(j));
 					p.add(label);
