@@ -2,6 +2,11 @@ package actions;
 
 import utils.Coordinates;
 
+/**
+ * 
+ * @author matthieu
+ *
+ */
 public class Shifting extends Actions{
 
 	private Coordinates begin;

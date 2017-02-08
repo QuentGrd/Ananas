@@ -1,5 +1,10 @@
 package actions;
 
+/**
+ * 
+ * @author matthieu
+ *
+ */
 public abstract class Occupation extends Actions{
 
 	private String duration;

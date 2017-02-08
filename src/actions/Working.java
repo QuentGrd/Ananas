@@ -2,12 +2,17 @@ package actions;
 
 import building.Work;
 
+/**
+ * 
+ * @author matthieu
+ *
+ */
 public class Working extends Occupation{
 
-	private Work work;
+	private Work place;
 	
 	public Working(Work work, String duration){
 		this.setDuration(duration);
-		this.work = work;
+		this.place = work;
 	}
 }
