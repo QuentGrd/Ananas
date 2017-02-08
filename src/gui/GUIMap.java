@@ -39,17 +39,17 @@ public class GUIMap extends JPanel{
 		System.out.println(size);
 		for (i=0; i<size + 1; i++){
 			for (j=0; j<size + 1; j++){
-				JPanel p = new JPanel();
-				if (i == 0){
+				InfrastructureBlock p = new InfrastructureBlock(i, j);
+				if (i == size){
 					JLabel label = new JLabel(String.valueOf(j));
 					p.add(label);
 				}
-				else if (j == 0){
+				else if (j == size){
 					JLabel label = new JLabel(String.valueOf(i));
 					p.add(label);
 				}
 				else{
-					switch(map.getInfrastructure(i - 1, j - 1).getType()){
+					switch(map.getInfrastructure(i, j).getType()){
 						case 1:
 							p.setBackground(new Color(52, 152, 219));
 							p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -78,5 +78,4 @@ public class GUIMap extends JPanel{
 		}
 		
 	}
-
 }
