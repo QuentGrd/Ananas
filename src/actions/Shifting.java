@@ -1,5 +1,6 @@
 package actions;
 
+import clock.Schedule;
 import utils.Coordinates;
 
 /**
@@ -12,7 +13,8 @@ public class Shifting extends Actions{
 	private Coordinates begin;
 	private Coordinates end;
 	
-	public Shifting(Coordinates begin, Coordinates end){
+	public Shifting(Schedule beginTime, Coordinates begin, Coordinates end){
+		this.setBeginTime(beginTime);
 		this.begin = begin;
 		this.end = end;
 		this.setReward(-5);

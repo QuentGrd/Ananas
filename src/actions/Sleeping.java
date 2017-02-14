@@ -7,8 +7,10 @@ public class Sleeping extends Occupation{
 	
 	private Home place;
 	
-	public Sleeping(Home home, Schedule duration){
+	public Sleeping(Home home, Schedule beginTime, Schedule duration){
+		this.setBeginTime(beginTime);
 		this.setDuration(duration);
+		this.setReward(home.getReward());
 		this.place = home;
 	}
 

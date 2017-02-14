@@ -12,8 +12,10 @@ public class Working extends Occupation{
 
 	private Work place;
 	
-	public Working(Work work, Schedule duration){
+	public Working(Work work,Schedule beginTime, Schedule duration){
+		this.setBeginTime(beginTime);
 		this.setDuration(duration);
+		this.setReward(work.getReward());
 		this.place = work;
 	}
 

@@ -7,8 +7,10 @@ public class Chilling extends Occupation{
 
 	private Home place;
 	
-	public Chilling(Home home, Schedule duration){
+	public Chilling(Home home, Schedule beginTime, Schedule duration){
+		this.setBeginTime(beginTime);
 		this.setDuration(duration);
+		this.setReward(home.getReward());
 		this.place = home;
 	}
 
