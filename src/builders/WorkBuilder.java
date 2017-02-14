@@ -8,6 +8,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import building.Building;
 import building.Work;
 import clock.Schedule;
 
@@ -30,6 +31,7 @@ public class WorkBuilder {
 	public void creatWork(){
 		work = new Work();	
 		initWorkInfo(work);
+		work.setMaxUser(Building.density);
 	}
 	
 	/**

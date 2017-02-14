@@ -20,7 +20,7 @@ public class Home extends Building{
 	}
 	
 	public Home(){
-		
+		this.setType(type);
 	}
 
 }

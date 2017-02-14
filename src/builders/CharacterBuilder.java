@@ -10,6 +10,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import character.Character;
+import city.Map;
 import utils.BoundedCounter;
 
 public class CharacterBuilder {
@@ -103,6 +104,19 @@ public class CharacterBuilder {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * init the character's home
+	 * @param map
+	 */
+	public void initCharacterHome(Map map){
+		int home;
+		do{
+			home = randomSelection(0, map.getHomeList().size());
+		}while(map.getHomeList().get(home).isFull());
+		character.setAddress(map.getHomeList().get(home));
+		map.getHomeList().get(home).addUser();
 	}
 	
 	/**

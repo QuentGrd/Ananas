@@ -29,12 +29,14 @@ public class Map implements Serializable{
 	private static final long serialVersionUID = 1930196824142386900L;
 	
 	private Infrastructure[][] grid;
+	private ArrayList<Home> homeList;
 	
 	private int size;
 	
 	public Map(int size){
 		this.size = size;
 		grid = new Infrastructure[size][size];
+		homeList = new ArrayList<Home>();
 	}
 	
 	public Infrastructure[][] getGrid() {
@@ -51,6 +53,14 @@ public class Map implements Serializable{
 	
 	public Infrastructure getInfrastructure(int x, int y){
 		return grid[x][y];
+	}
+
+	public ArrayList<Home> getHomeList() {
+		return homeList;
+	}
+
+	public void setHomeList(ArrayList<Home> homeList) {
+		this.homeList = homeList;
 	}
 
 	public String toString(){

@@ -52,6 +52,15 @@ public class Character {
 	public void setEmotion(BoundedCounter emotion) {
 		this.emotion = emotion;
 	}
+	
+	public Home getAddress() {
+		return address;
+	}
+
+	public void setAddress(Home address) {
+		this.address = address;
+	}
+
 	public String toString(){
 		String str = "name : " + name + "\tfirstName : " + firstName + "\tage : " + age;
 		if(gender == true)
@@ -59,6 +68,7 @@ public class Character {
 		else if(gender == false)
 			str += "\tgender : Female" ; 
 		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
+		str += "\tadress : " + this.address.toString();
 		return str;
 	}
 }

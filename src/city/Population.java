@@ -18,11 +18,8 @@ public class Population {
 	
 	public Population(int nbOfCharacter){
 		this.nbOfCharacter = nbOfCharacter;
-		PopulationBuilder builder = new PopulationBuilder(this);
 	}
 
-	
-	
 	public int getNbOfCharacter() {
 		return nbOfCharacter;
 	}

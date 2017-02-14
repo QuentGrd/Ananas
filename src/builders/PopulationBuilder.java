@@ -3,6 +3,7 @@ package builders;
 import java.util.ArrayList;
 
 import character.Character;
+import city.Map;
 import city.Population;
 
 /**
@@ -13,10 +14,11 @@ import city.Population;
 public class PopulationBuilder {
 
 	private Population pop;
+	private Map map;
 	
-	
-	public PopulationBuilder(Population pop){
+	public PopulationBuilder(Population pop, Map map){
 		this.pop = pop;
+		this.map = map;
 		populationCreation(pop.getNbOfCharacter());
 	}
 	
@@ -30,6 +32,7 @@ public class PopulationBuilder {
 		for(int i=0; i<pop.getNbOfCharacter(); i++){
 			Character character = new Character();
 			CharacterBuilder builder = new CharacterBuilder(character);
+			builder.initCharacterHome(map);
 			list.add(builder.getCharacter());
 		}
 		pop.setListCharacter(list);

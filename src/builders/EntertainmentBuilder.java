@@ -8,6 +8,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import building.Building;
 import building.Entertainment;
 import clock.Schedule;
 
@@ -32,6 +33,7 @@ public class EntertainmentBuilder {
 	public void  creatEntertainment(){
 		enter = new Entertainment();
 		initEntertainmentInfo(enter);
+		enter.setMaxUser(Building.density);
 	}
 	/**
 	 * This methode search in entertainment.csv to initialiaze enter

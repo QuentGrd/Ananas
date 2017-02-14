@@ -11,8 +11,13 @@ import utils.Coordinates;
 public abstract class Building extends Infrastructure{
 
 	private static final long serialVersionUID = -694506032732642763L;
+	
+	public static final int density = 1;
+	
 	private double reward;
 	private Coordinates address;
+	
+	private int maxUser;
 	
 	public void initAddress(int x, int y){
 		address = new Coordinates(x, y);
@@ -33,6 +38,18 @@ public abstract class Building extends Infrastructure{
 
 	public void setReward(double reward) {
 		this.reward = reward;
+	}
+
+	public int getMaxUser() {
+		return maxUser;
+	}
+
+	public void setMaxUser(int maxUser) {
+		this.maxUser = maxUser;
+	}
+	
+	public boolean isFull(){
+		return (this.maxUser == this.getNbUser());
 	}
 	
 }

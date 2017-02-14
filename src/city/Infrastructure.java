@@ -60,6 +60,10 @@ public abstract class Infrastructure implements Serializable {
 	public void setNbUser(int nbUser) {
 		this.nbUser = nbUser;
 	}
+	
+	public void addUser(){
+		this.nbUser++;
+	}
 
 	public int getType() {
 		return type;
