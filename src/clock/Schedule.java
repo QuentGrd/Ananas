@@ -22,6 +22,30 @@ public class Schedule {
 		else
 			this.minute = 0;
 	}
+	
+	public Schedule(String str){
+		String[] tab = new String[2];
+		tab = str.split("h");
+		if(tab.length == 2){
+			hour = Integer.parseInt(tab[0].trim());
+			minute = Integer.parseInt(tab[1].trim());
+		}
+		else if(tab.length == 1){
+			hour = Integer.parseInt(tab[0].trim());
+		}
+	}
+	
+	public void convertString(String str){
+		String[] tab = new String[2];
+		tab = str.split("h");
+		if(tab.length == 2){
+			hour = Integer.parseInt(tab[0].trim());
+			minute = Integer.parseInt(tab[1].trim());
+		}
+		else if(tab.length == 1){
+			hour = Integer.parseInt(tab[0].trim());
+		}
+	}
 
 	public int getHour() {
 		return hour;

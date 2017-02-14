@@ -1,6 +1,7 @@
 package actions;
 
 import building.Entertainment;
+import clock.Schedule;
 
 /**
  * 
@@ -11,7 +12,7 @@ public class Entertain extends Occupation{
 
 	private Entertainment place;
 	
-	public Entertain(Entertainment entertainment, String duration){
+	public Entertain(Entertainment entertainment, Schedule duration){
 		this.setDuration(duration);
 		this.place = entertainment;
 	}

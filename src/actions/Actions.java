@@ -1,5 +1,6 @@
 package actions;
 
+import clock.Schedule;
 
 /**
  * 
@@ -8,13 +9,13 @@ package actions;
  */
 public abstract class Actions {
 	
-	private String beginTime;
+	private Schedule beginTime;
 	private double reward;
 	
-	public String getBeginTime() {
+	public Schedule getBeginTime() {
 		return beginTime;
 	}
-	public void setBeginTime(String begin) {
+	public void setBeginTime(Schedule begin) {
 		this.beginTime = begin;
 	}
 	public double getReward() {

@@ -1,5 +1,7 @@
 package building;
 
+import clock.Schedule;
+
 /**
  * 
  * @author Matthieu - Quentin
@@ -11,8 +13,9 @@ public class Entertainment extends Building{
 
 	private static final int type = 3;
 	
-	private String timeTable;
-	private String averageUsageTime;
+	private Schedule openingTime;
+	private Schedule closingTime;
+	private Schedule averageUsageTime;
 	
 	public Entertainment(int posX, int posY, int sizeX, int sizeY, int addressX, int addressY){
 		this.initPosition(posX, posY);
@@ -25,26 +28,33 @@ public class Entertainment extends Building{
 		this.setType(type);
 	}
 
-	public String getTimeTable() {
-		return timeTable;
+	public Schedule getOpeningTime() {
+		return openingTime;
 	}
 
-	public void setTimeTable(String timeTable) {
-		this.timeTable = timeTable;
+	public void setOpeningTime(Schedule openingTime) {
+		this.openingTime = openingTime;
 	}
 
-	public String getAverageUsageTime() {
+	public Schedule getClosingTime() {
+		return closingTime;
+	}
+
+	public void setClosingTime(Schedule closingTime) {
+		this.closingTime = closingTime;
+	}
+
+	public Schedule getAverageUsageTime() {
 		return averageUsageTime;
 	}
 
-	public void setAverageUsageTime(String averageUsageTime) {
+	public void setAverageUsageTime(Schedule averageUsageTime) {
 		this.averageUsageTime = averageUsageTime;
 	}
-	
-	public String toString(){
-		String str = "";
-		str += super.getType() + " - Name : " + super.getName() + "\tAdress : " + super.getAddress().toString() + "\tReward : " + super.getReward();
-		str += "\tTimeTable : " + this.timeTable + "\tAverageUsageTime : " + this.averageUsageTime;
-		return str;
+
+	@Override
+	public String toString() {
+		return super.toString() + "Entertainment [openingTime=" + openingTime + ", closingTime=" + closingTime + ", averageUsageTime="
+				+ averageUsageTime + "]";
 	}
 }

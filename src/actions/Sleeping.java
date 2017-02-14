@@ -1,12 +1,13 @@
 package actions;
 
 import building.Home;
+import clock.Schedule;
 
 public class Sleeping extends Occupation{
 	
 	private Home place;
 	
-	public Sleeping(Home home, String duration){
+	public Sleeping(Home home, Schedule duration){
 		this.setDuration(duration);
 		this.place = home;
 	}

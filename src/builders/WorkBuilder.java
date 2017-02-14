@@ -9,6 +9,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import building.Work;
+import clock.Schedule;
 
 /**
  * 
@@ -50,7 +51,9 @@ public class WorkBuilder {
 				if(i==currentIndiceInWork){
 					work.setName(record.get("NAME"));
 					work.setReward(Double.valueOf(record.get("REWARD")));
-					work.setTimeTable(record.get("OPENING_TIME") + "/" + record.get("CLOSING_TIME"));
+					work.setOpeningTime(new Schedule(record.get("OPENING_TIME")));
+					work.setClosingTime(new Schedule(record.get("CLOSING_TIME")));
+					//work.setTimeTable(record.get("OPENING_TIME") + "/" + record.get("CLOSING_TIME"));
 				}
 			}
 			

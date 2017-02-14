@@ -1,5 +1,7 @@
 package actions;
 
+import clock.Schedule;
+
 /**
  * 
  * @author matthieu
@@ -7,13 +9,13 @@ package actions;
  */
 public abstract class Occupation extends Actions{
 
-	private String duration;
+	private Schedule duration;
 
-	public String getDuration() {
+	public Schedule getDuration() {
 		return duration;
 	}
 
-	public void setDuration(String duration) {
+	public void setDuration(Schedule duration) {
 		this.duration = duration;
 	}
 }

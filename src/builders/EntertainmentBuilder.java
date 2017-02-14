@@ -9,6 +9,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import building.Entertainment;
+import clock.Schedule;
 
 
 /**
@@ -51,8 +52,13 @@ public class EntertainmentBuilder {
 				if(i==currentIndiceInEntertainment){
 					enter.setName(record.get("NAME"));
 					enter.setReward(Double.parseDouble(record.get("REWARD")));
-					enter.setAverageUsageTime(record.get("DURATION"));
-					enter.setTimeTable(record.get("OPENING_TIME") + "/" + record.get("CLOSING_TIME"));
+					//enter.setAverageUsageTime(record.get("DURATION"));
+					//Schedule averageUsageTime = new Schedule(0,0);
+					//averageUsageTime.convertString(record.get("DURATION"));
+					enter.setAverageUsageTime(new Schedule(record.get("DURATION")));
+					//enter.setTimeTable(record.get("OPENING_TIME") + "/" + record.get("CLOSING_TIME"));
+					enter.setOpeningTime(new Schedule(record.get("OPENING_TIME")));
+					enter.setClosingTime(new Schedule(record.get("CLOSING_TIME")));
 				}
 			}
 			
