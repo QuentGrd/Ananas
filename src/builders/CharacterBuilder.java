@@ -115,7 +115,7 @@ public class CharacterBuilder {
 		do{
 			home = randomSelection(0, map.getHomeList().size());
 		}while(map.getHomeList().get(home).isFull()); // <!> ERREUR DE SEGMENTATION A CERTAINS MOMENTS
-		character.setAddress(map.getHomeList().get(home));
+		character.setHome(map.getHomeList().get(home));
 		map.getHomeList().get(home).addUser();
 	}
 	

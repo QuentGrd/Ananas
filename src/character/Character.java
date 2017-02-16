@@ -14,7 +14,7 @@ public class Character {
 	private int age;
 	private String name;
 	private String firstName;
-	private Home address;
+	private Home home;
 	
 	private BoundedCounter emotion;
 	
@@ -53,12 +53,12 @@ public class Character {
 		this.emotion = emotion;
 	}
 	
-	public Home getAddress() {
-		return address;
+	public Home getHome() {
+		return home;
 	}
 
-	public void setAddress(Home address) {
-		this.address = address;
+	public void setHome(Home home) {
+		this.home = home;
 	}
 
 	public String toString(){
@@ -68,7 +68,7 @@ public class Character {
 		else if(gender == false)
 			str += "\tgender : Female" ; 
 		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
-		str += "\tadress : " + this.address.getAddress().toString();
+		str += "\tHome : " + this.home.getAddress().toString();
 		return str;
 	}
 }
