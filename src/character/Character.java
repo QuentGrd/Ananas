@@ -68,7 +68,7 @@ public class Character {
 		else if(gender == false)
 			str += "\tgender : Female" ; 
 		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
-		str += "\tadress : " + this.address.toString();
+		str += "\tadress : " + this.address.getAddress().toString();
 		return str;
 	}
 }

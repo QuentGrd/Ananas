@@ -10,6 +10,7 @@ public class TestCity {
 		CityBuilder cityB = new CityBuilder(c);
 		
 		GUIMain gui = new GUIMain(c.getMap());
+		gui.getGmap().refreshMap(c.getPopulation());
 	}
 
 }

@@ -21,6 +21,7 @@ public class CityBuilder {
 		Population pop = city.getPopulation();
 		pop = new Population(20);
 		popBuilder = new PopulationBuilder(pop, map);
+		city.setPopulation(pop);
 		System.out.println(pop.toString());
 		
 		/*Clock clock = city.getClock();

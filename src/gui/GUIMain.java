@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 import city.Map;
+import city.Population;
 /**
  * This class represent the GUI
  * @author quentin
@@ -31,5 +32,9 @@ public class GUIMain extends JFrame{
 		this.setResizable(true);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+	}
+
+	public GUIMap getGmap() {
+		return gmap;
 	}
 }

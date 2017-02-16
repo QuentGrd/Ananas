@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import com.sun.xml.internal.ws.api.Component;
 
 import city.Map;
+import city.Population;
 
 /**
  * This class represent the Map in the GUI
@@ -81,5 +82,26 @@ public class GUIMap extends JPanel{
 			}
 		}
 		
+	}
+	
+	/**
+	 * this methode actualize the map to see the population
+	 */
+	public void refreshMap(Population pop){
+		for (int i = 0; i < pop.getListCharacter().size(); i++) {
+			int x = pop.getListCharacter().get(i).getAddress().getAddress().getX();
+			int y = pop.getListCharacter().get(i).getAddress().getAddress().getY();
+			setCaseColor(x, y, new Color(255,185,15));
+		}
+	}
+	
+	/**
+	 * this methode set the background the case (x,y) to color 
+	 * @param x
+	 * @param y
+	 * @param color
+	 */
+	public void setCaseColor(int x, int y, Color color){
+		jmap[x][y].setBackground(color);
 	}
 }
