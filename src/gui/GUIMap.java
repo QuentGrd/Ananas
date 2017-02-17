@@ -88,6 +88,29 @@ public class GUIMap extends JPanel{
 	 * this methode actualize the map to see the population
 	 */
 	public void refreshMap(Population pop){
+		for (int x = 0; x < map.getSize(); x++) {
+			for (int y = 0; y < map.getSize(); y++) {
+				switch(map.getInfrastructure(x, y).getType()){
+				case 1:
+					setCaseColor(x, y, new Color(52, 152, 219));
+					break;
+				case 2:
+					setCaseColor(x, y, new Color(231, 76, 60));
+					break;
+				case 3:
+					setCaseColor(x, y, new Color(39, 174, 96));
+					break;
+				case 4:
+					setCaseColor(x, y, new Color(149, 165, 166));
+					break;
+				default:
+					setCaseColor(x, y, new Color(236, 240, 241));
+					break;
+			}
+			}
+			
+		}
+		
 		for (int i = 0; i < pop.getListCharacter().size(); i++) {
 			int xPosition = pop.getListCharacter().get(i).getPosition().getX();
 			int yPosition = pop.getListCharacter().get(i).getPosition().getY();

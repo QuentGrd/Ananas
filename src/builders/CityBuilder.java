@@ -19,7 +19,7 @@ public class CityBuilder {
 		city.setMap(map);
 		
 		Population pop = city.getPopulation();
-		pop = new Population(20);
+		pop = new Population(5);
 		popBuilder = new PopulationBuilder(pop, map);
 		city.setPopulation(pop);
 		System.out.println(pop.toString());

@@ -2,15 +2,24 @@ package city;
 
 import builders.CityBuilder;
 import gui.GUIMain;
+import run.Run;
 
 public class TestCity {
 
 	public static void main(String[] args) {
-		City c = new City();
-		CityBuilder cityB = new CityBuilder(c);
 		
-		GUIMain gui = new GUIMain(c.getMap());
-		gui.getGmap().refreshMap(c.getPopulation());
+		Run run = new Run();
+		run.initialisation();
+		run.run();
+		
+		/*<AFFICHAGE SANS MOUVEMENT>
+		City city = new City();
+		CityBuilder cBuilder = new CityBuilder(city);
+		
+		GUIMain gui = new GUIMain(city.getMap());
+		gui.getGmap().refreshMap(city.getPopulation());
+		*/
+		
 	}
 
 }
