@@ -139,4 +139,5 @@ public class GUIMap extends JPanel{
 		JLabel jlabel = new JLabel(txt);
 		jmap[x][y].add(jlabel);
 	}
+	//test
 }
