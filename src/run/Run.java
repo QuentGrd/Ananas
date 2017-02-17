@@ -69,27 +69,42 @@ public class Run {
 		
 		ArrayList<Coordinates> valid = new ArrayList<Coordinates>();
 		if(currentX+1 < city.getMap().getSize()){
-			if(city.getMap().getInfrastructure(currentX+1, currentY).getType() == 4){
+			if(city.getMap().getInfrastructure(currentX+1, currentY).getType() == 4 || isAutorizedBuilding(currentX+1, currentY, car)){
 				valid.add(new Coordinates(currentX+1, currentY));
 			}
 		}
 		if(currentX-1 > 0){
-			if(city.getMap().getInfrastructure(currentX-1, currentY).getType() == 4){
+			if(city.getMap().getInfrastructure(currentX-1, currentY).getType() == 4 || isAutorizedBuilding(currentX-1, currentY, car)){
 				valid.add(new Coordinates(currentX-1, currentY));
 			}
 		}
 		if(currentY+1 < city.getMap().getSize()){
-			if(city.getMap().getInfrastructure(currentX, currentY+1).getType() == 4){
+			if(city.getMap().getInfrastructure(currentX, currentY+1).getType() == 4 || isAutorizedBuilding(currentX, currentY+1, car)){
 				valid.add(new Coordinates(currentX, currentY+1));
 			}
 		}
 		if(currentY-1 > 0){
-			if(city.getMap().getInfrastructure(currentX, currentY-1).getType() == 4){
+			if(city.getMap().getInfrastructure(currentX, currentY-1).getType() == 4 || isAutorizedBuilding(currentX, currentY-1, car)){
 				valid.add(new Coordinates(currentX, currentY-1));
 			}
 		}
 		
 		return valid;
+	}
+	
+	public boolean isAutorizedBuilding(int x, int y, Character car){
+		
+		//si c'est sa maison il peut rentrer 
+		if(car.getHome().getAddress().getX() == x && car.getHome().getAddress().getY() == y)
+			return true;
+		//si c'est son travail il peut rentrer
+		if(car.getWork().getAddress().getX() == x && car.getWork().getAddress().getY() == y)
+			return true;
+		
+		//si c'est un lieu de loisir il peut rentrer ...
+		
+		//sinon il peut pas rentrer
+		return false;
 	}
 	
 	public int randomSelection(int min, int max){
