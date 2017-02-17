@@ -1,90 +1,98 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
-import com.sun.xml.internal.ws.api.Component;
 
 import city.Map;
 import city.Population;
 
-/**
- * This class represent the Map in the GUI
- * @author quentin
- * @version 31012017
- *
- */
-
 public class GUIMap extends JPanel{
 
-	private static final long serialVersionUID = -7675152509176730289L;
-	
+	private int GRID_SIZE;
 	private Map map;
-	private JPanel[][] jmap;
-	
-	public GUIMap(Map map){
-		this.map = map;
-		jmap = new JPanel[map.getSize() + 1][map.getSize() + 1];
-		this.setLayout(new GridLayout(map.getSize() + 1, map.getSize() + 1));
-		this.initMap();
-	}
-	
-	/**
-	 * This method initialize the JPanel Map
-	 */
-	public void initMap(){
-		int i, j;
-		int size = map.getSize();
-		System.out.println(size);
-		for (i=0; i<size + 1; i++){
-			for (j=0; j<size + 1; j++){
-				JPanel p = new JPanel();
-				if (i == size){
-					JLabel label = new JLabel(String.valueOf(j));
+	private Cell[][] jmap;
+
+    public GUIMap(Map map) {
+        setPreferredSize(new Dimension(800, 800));
+        
+        this.map = map;
+        GRID_SIZE = map.getSize();
+        jmap = new Cell[GRID_SIZE][GRID_SIZE];
+        this.setLayout(new GridLayout(GRID_SIZE+1, GRID_SIZE+1));
+        this.initMap();
+                
+    }
+    
+    public void initMap(){
+    	for (int x = 0; x < GRID_SIZE +1; x++) {
+            for (int y = 0; y < GRID_SIZE +1; y++) {
+            	if (x == GRID_SIZE){
+            		JPanel p = new JPanel();
+            		JLabel label = new JLabel(String.valueOf(y));
 					p.add(label);
+					add(p);
 				}
-				else if (j == size){
-					JLabel label = new JLabel(String.valueOf(i));
+				else if (y == GRID_SIZE){
+					JPanel p = new JPanel();
+					JLabel label = new JLabel(String.valueOf(x));
 					p.add(label);
+					add(p);
 				}
 				else{
-					switch(map.getInfrastructure(i, j).getType()){
+	                Cell cell = new Cell(x, y);
+	                
+	                switch(map.getInfrastructure(x, y).getType()){
 						case 1:
-							p.setBackground(new Color(52, 152, 219));
-							p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+							cell.setBackground(new Color(52, 152, 219));
 							break;
 						case 2:
-							p.setBackground(new Color(231, 76, 60));
-							p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+							cell.setBackground(new Color(231, 76, 60));
 							break;
 						case 3:
-							p.setBackground(new Color(39, 174, 96));
-							p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+							cell.setBackground(new Color(39, 174, 96));
 							break;
 						case 4:
-							p.setBackground(new Color(149, 165, 166));
-							p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+							cell.setBackground(new Color(149, 165, 166));
 							break;
 						default:
-							p.setBackground(new Color(236, 240, 241));
-							p.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+							cell.setBackground(new Color(236, 240, 241));
 							break;
 					}
-				}
-				jmap[i][j] = p;
-				add(jmap[i][j]);
-			}
-		}
-		
-	}
+	 
+	                add(cell);
+	                MouseListener ml = new MouseListener() {
+	                    public void mouseClicked(MouseEvent e) {
+	                        click(e, cell);
+	                    }
+						public void mousePressed(MouseEvent e) {
 	
-	/**
+						}
+						public void mouseReleased(MouseEvent e) {
+		
+						}
+						public void mouseEntered(MouseEvent e) {
+		
+						}
+						public void mouseExited(MouseEvent e) {
+	
+						}
+	                };
+	                cell.addMouseListener(ml);
+	                jmap[x][y] = cell;
+	                add(jmap[x][y]);
+				}
+       
+            }
+        }
+    }
+    
+    /**
 	 * this methode actualize the map to see the population
 	 */
 	public void refreshMap(Population pop){
@@ -106,7 +114,7 @@ public class GUIMap extends JPanel{
 				default:
 					setCaseColor(x, y, new Color(236, 240, 241));
 					break;
-			}
+				}
 			}
 			
 		}
@@ -131,13 +139,21 @@ public class GUIMap extends JPanel{
 	 * @param color
 	 */
 	public void setCaseColor(int x, int y, Color color){
+		jmap[x][y].removeAll();
 		jmap[x][y].setBackground(color);
 	}
 	
 	public void setCaseColor(int x, int y, Color color, String txt){
+		jmap[x][y].removeAll();
 		jmap[x][y].setBackground(color);
 		JLabel jlabel = new JLabel(txt);
 		jmap[x][y].add(jlabel);
 	}
-	//test
+
+    public void click(MouseEvent e, Cell cell) {
+    	//System.out.println(cell.getX()+";"+cell.getY());
+    	int y = (cell.getX()-12)/25;
+		int x = (cell.getY()-12)/25;
+    	System.out.println(map.getInfrastructure(x, y).toString());
+    }
 }

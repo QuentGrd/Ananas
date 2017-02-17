@@ -29,7 +29,7 @@ public class GUIMain extends JFrame{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setMinimumSize(new Dimension(600, 600));
 		this.setTitle("Urban");
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
