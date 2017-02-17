@@ -3,6 +3,7 @@ package character;
 import building.Home;
 import building.Work;
 import utils.BoundedCounter;
+import utils.Coordinates;
 
 /**
  * 
@@ -17,8 +18,11 @@ public class Character {
 	private String firstName;
 	private Home home;
 	private Work work;
-	
 	private BoundedCounter emotion;
+	
+	private Coordinates position;
+	
+	private Routine rourine;
 	
 	public Character(){
 
@@ -69,6 +73,22 @@ public class Character {
 
 	public void setWork(Work work) {
 		this.work = work;
+	}
+
+	public Coordinates getPosition() {
+		return position;
+	}
+
+	public void setPosition(Coordinates position) {
+		this.position = position;
+	}
+
+	public Routine getRourine() {
+		return rourine;
+	}
+
+	public void setRourine(Routine rourine) {
+		this.rourine = rourine;
 	}
 
 	public String toString(){

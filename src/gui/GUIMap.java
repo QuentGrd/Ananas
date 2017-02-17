@@ -89,12 +89,15 @@ public class GUIMap extends JPanel{
 	 */
 	public void refreshMap(Population pop){
 		for (int i = 0; i < pop.getListCharacter().size(); i++) {
+			int xPosition = pop.getListCharacter().get(i).getPosition().getX();
+			int yPosition = pop.getListCharacter().get(i).getPosition().getY();
 			int xHome = pop.getListCharacter().get(i).getHome().getAddress().getX();
 			int yHome = pop.getListCharacter().get(i).getHome().getAddress().getY();
 			int xWork = pop.getListCharacter().get(i).getWork().getAddress().getX();
 			int yWork = pop.getListCharacter().get(i).getWork().getAddress().getY();
 			setCaseColor(xHome, yHome, new Color(255,215,0), ""+i);
 			setCaseColor(xWork, yWork, new Color(255,215,0), ""+i);
+			setCaseColor(xPosition, yPosition, new Color(155,48,255), ""+i);
 		}
 	}
 	

@@ -28,6 +28,7 @@ public class Routine {
 	public Routine(Home home, Work work){
 		this.work = work;
 		this.home = home;
+		initDailyRoutine();
 	}
 	
 	public void initDailyRoutine(){
@@ -64,4 +65,18 @@ public class Routine {
 		
 		return random;
 	}
+
+	public Queue<Actions> getDailyRoutine() {
+		return dailyRoutine;
+	}
+
+	public Queue<Actions> getCurrentRoutine() {
+		return currentRoutine;
+	}
+
+	public void setCurrentRoutine(Queue<Actions> currentRoutine) {
+		this.currentRoutine = currentRoutine;
+	}
+	
+	
 }

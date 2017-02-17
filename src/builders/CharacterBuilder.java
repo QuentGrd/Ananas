@@ -117,6 +117,8 @@ public class CharacterBuilder {
 		}while(map.getHomeList().get(home).isFull()); 
 		character.setHome(map.getHomeList().get(home));
 		map.getHomeList().get(home).addUser();
+		//initialise la position du perso à l'adresse de son domicile
+		character.setPosition(map.getHomeList().get(home).getAddress());
 	}
 	
 	/**
