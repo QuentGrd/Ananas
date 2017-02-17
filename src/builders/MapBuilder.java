@@ -132,6 +132,7 @@ public class MapBuilder {
 							work.initPosition(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)));
 							work.initSize(Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)));
 							work.initAddress(Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY)));
+							map.getWorkList().add(work);
 							
 							this.addToGrid(work);
 							break;

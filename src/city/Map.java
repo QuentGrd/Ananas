@@ -30,6 +30,7 @@ public class Map implements Serializable{
 	
 	private Infrastructure[][] grid;
 	private ArrayList<Home> homeList;
+	private ArrayList<Work> workList;
 	
 	private int size;
 	
@@ -37,6 +38,7 @@ public class Map implements Serializable{
 		this.size = size;
 		grid = new Infrastructure[size][size];
 		homeList = new ArrayList<Home>();
+		workList = new ArrayList<Work>();
 	}
 	
 	public Infrastructure[][] getGrid() {
@@ -61,6 +63,14 @@ public class Map implements Serializable{
 
 	public void setHomeList(ArrayList<Home> homeList) {
 		this.homeList = homeList;
+	}
+
+	public ArrayList<Work> getWorkList() {
+		return workList;
+	}
+
+	public void setWorkList(ArrayList<Work> workList) {
+		this.workList = workList;
 	}
 
 	public String toString(){

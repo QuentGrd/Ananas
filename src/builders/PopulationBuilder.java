@@ -33,6 +33,7 @@ public class PopulationBuilder {
 			Character character = new Character();
 			CharacterBuilder builder = new CharacterBuilder(character);
 			builder.initCharacterHome(map);
+			builder.initCharacterWork(map);
 			list.add(builder.getCharacter());
 		}
 		pop.setListCharacter(list);

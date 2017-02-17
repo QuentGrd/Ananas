@@ -1,6 +1,7 @@
 package character;
 
 import building.Home;
+import building.Work;
 import utils.BoundedCounter;
 
 /**
@@ -15,6 +16,7 @@ public class Character {
 	private String name;
 	private String firstName;
 	private Home home;
+	private Work work;
 	
 	private BoundedCounter emotion;
 	
@@ -61,6 +63,14 @@ public class Character {
 		this.home = home;
 	}
 
+	public Work getWork() {
+		return work;
+	}
+
+	public void setWork(Work work) {
+		this.work = work;
+	}
+
 	public String toString(){
 		String str = "name : " + name + "\tfirstName : " + firstName + "\tage : " + age;
 		if(gender == true)
@@ -69,6 +79,7 @@ public class Character {
 			str += "\tgender : Female" ; 
 		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
 		str += "\tHome : " + this.home.getAddress().toString();
+		str += "\tWork : " + this.work.getAddress().toString();
 		return str;
 	}
 }

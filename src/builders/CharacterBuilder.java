@@ -113,10 +113,23 @@ public class CharacterBuilder {
 	public void initCharacterHome(Map map){
 		int home;
 		do{
-			home = randomSelection(0, map.getHomeList().size());
-		}while(map.getHomeList().get(home).isFull()); // <!> ERREUR DE SEGMENTATION A CERTAINS MOMENTS
+			home = randomSelection(0, map.getHomeList().size()-1);
+		}while(map.getHomeList().get(home).isFull()); 
 		character.setHome(map.getHomeList().get(home));
 		map.getHomeList().get(home).addUser();
+	}
+	
+	/**
+	 * init the character's work
+	 * @param map
+	 */
+	public void initCharacterWork(Map map){
+		int work;
+		do{
+			work = randomSelection(0, map.getWorkList().size()-1);
+		}while(map.getWorkList().get(work).isFull());
+		character.setWork(map.getWorkList().get(work));
+		map.getWorkList().get(work).addUser();
 	}
 	
 	/**
