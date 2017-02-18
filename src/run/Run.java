@@ -6,14 +6,15 @@ import java.util.Random;
 import builders.CityBuilder;
 import character.Character;
 import city.City;
+import clock.Clock;
 import gui.GUIMain;
 import utils.Coordinates;
 
 public class Run {
 
 	private City city;
-	
 	private GUIMain gui;
+	private Clock clock;
 	
 	public Run(){
 		
@@ -22,15 +23,17 @@ public class Run {
 	public void initialisation(){
 		city = new City();
 		CityBuilder cBuilder = new CityBuilder(city);
+		clock = new Clock(0, 0, 0, 1, 1, 2017);
 		
-		gui = new GUIMain(city.getMap());
+		gui = new GUIMain(city.getMap(), clock, city.getPopulation());
 	}
 	
 	public void run(){
 		
 		while(true){
+			clock.increment();
 			movePopulation();
-			gui.getGmap().refreshMap(city.getPopulation());
+			gui.refreshGUI(city.getPopulation(), clock);
 			try{
 				Thread.sleep(500);
 			}catch(InterruptedException e){
@@ -111,7 +114,7 @@ public class Run {
 		int random;
 		Random rand = new Random();
 		
-		random = rand.nextInt(max - min +1) + min;
+		random = rand.nextInt(max - min +1) + min; //<!PROBLEME MUST BE POSITIVE>
 		
 		return random;
 	}

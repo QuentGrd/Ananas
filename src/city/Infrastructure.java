@@ -73,4 +73,8 @@ public abstract class Infrastructure implements Serializable {
 		this.type = type;
 	}
 	
+	public String toString(){
+		return type + " : " + name + "\t[" + nbUser + "]";
+	}
+	
 }

@@ -1,11 +1,15 @@
 package gui;
 
 import java.awt.Dimension;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import city.Map;
 import city.Population;
+import clock.Clock;
 /**
  * This class represent the GUI
  * @author quentin
@@ -16,15 +20,22 @@ public class GUIMain extends JFrame{
 	
 	private static final long serialVersionUID = 8220592859191502808L;
 	
-	private GUIMap gmap;
+	private JPanel back = new JPanel();
 	
-	public GUIMain(Map map){
+	private GUIMap gmap;
+	private InfoPart infoPart;
+	
+	public GUIMain(Map map, Clock clock, Population pop){
 		gmap = new GUIMap(map);
+		infoPart = new InfoPart(clock, pop);
 		draw();
 	}
 	
 	public void draw(){
-		this.add(gmap);
+		this.getContentPane().add(back);
+		back.setLayout(new GridLayout(1, 2));
+		back.add(gmap);
+		back.add(infoPart);
 		this.pack();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setMinimumSize(new Dimension(600, 600));
@@ -36,5 +47,10 @@ public class GUIMain extends JFrame{
 
 	public GUIMap getGmap() {
 		return gmap;
+	}
+	
+	public void refreshGUI(Population pop, Clock clock){
+		gmap.refreshMap(pop);
+		infoPart.refreshInfoPart(clock);
 	}
 }

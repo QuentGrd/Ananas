@@ -65,6 +65,6 @@ public class Schedule {
 
 	@Override
 	public String toString() {
-		return "Schedule [hour=" + hour + ", minute=" + minute + "]";
+		return hour + "h" + minute;
 	}
 }
