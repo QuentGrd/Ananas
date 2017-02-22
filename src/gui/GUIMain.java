@@ -1,10 +1,9 @@
 package gui;
 
 import java.awt.Dimension;
-import java.awt.GridLayout;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import city.Map;
@@ -33,7 +32,8 @@ public class GUIMain extends JFrame{
 	
 	public void draw(){
 		this.getContentPane().add(back);
-		back.setLayout(new GridLayout(1, 2));
+		//back.setLayout(new GridLayout(1, 2));
+		back.setLayout(new BoxLayout(back, BoxLayout.LINE_AXIS));
 		back.add(gmap);
 		back.add(infoPart);
 		this.pack();
