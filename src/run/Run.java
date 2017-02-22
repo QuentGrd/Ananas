@@ -16,8 +16,10 @@ public class Run {
 	private GUIMain gui;
 	private Clock clock;
 	
+	private boolean run;
+	
 	public Run(){
-		
+		run = false;
 	}
 	
 	public void initialisation(){
@@ -31,14 +33,16 @@ public class Run {
 	public void run(){
 		
 		while(true){
-			clock.increment();
-			movePopulation();
-			gui.refreshGUI(city.getPopulation(), clock);
-			try{
-				Thread.sleep(500);
-			}catch(InterruptedException e){
-				Thread.currentThread().interrupt();
-				e.printStackTrace();
+			if(run){
+				clock.increment();
+				movePopulation();
+				gui.refreshGUI(city.getPopulation(), clock);
+				try{
+					Thread.sleep(500);
+				}catch(InterruptedException e){
+					Thread.currentThread().interrupt();
+					e.printStackTrace();
+				}
 			}
 		}
 	}
