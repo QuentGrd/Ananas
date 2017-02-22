@@ -19,7 +19,7 @@ public class GUIMap extends JPanel{
 	private Cell[][] jmap;
 
     public GUIMap(Map map) {
-        setPreferredSize(new Dimension(800, 800));
+        setPreferredSize(new Dimension(600, 600));
         
         this.map = map;
         GRID_SIZE = map.getSize();

@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
@@ -38,6 +39,7 @@ public class InfoPart extends JPanel{
 		
 		initClockPart();
 		this.add(clockPart);
+		this.setPreferredSize(new Dimension(400, 600));
 	}
 	
 	public void initClockPart(){
