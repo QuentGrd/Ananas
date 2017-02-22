@@ -3,9 +3,11 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -49,6 +51,10 @@ public class GUIMap extends JPanel{
 	                
 	                switch(map.getInfrastructure(x, y).getType()){
 						case 1:
+							JLabel img = new JLabel();
+							ImageIcon sprite = new ImageIcon(System.getProperty("user.dir") + "/res/img/home.png");
+							img.setIcon(sprite);
+							cell.add(img);
 							cell.setBackground(new Color(52, 152, 219));
 							break;
 						case 2:
