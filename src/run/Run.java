@@ -19,7 +19,7 @@ public class Run {
 	private boolean run;
 	
 	public Run(){
-		run = false;
+		run = true;
 	}
 	
 	public void initialisation(){
