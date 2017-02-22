@@ -152,8 +152,8 @@ public class GUIMap extends JPanel{
 
     public void click(MouseEvent e, Cell cell) {
     	//System.out.println(cell.getX()+";"+cell.getY());
-    	int y = (cell.getX()-12)/25;
-		int x = (cell.getY()-12)/25;
+    	int y = (cell.getX()-5)/19;
+		int x = (cell.getY()-5)/19;
     	System.out.println(map.getInfrastructure(x, y).toString());
     }
 }
