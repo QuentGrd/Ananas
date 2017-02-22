@@ -20,22 +20,28 @@ public class GUIMain extends JFrame{
 	private static final long serialVersionUID = 8220592859191502808L;
 	
 	private JPanel back = new JPanel();
+	private JPanel front = new JPanel();
 	
 	private GUIMap gmap;
-	private InfoPart infoPart;
+	private GUIClockInfo clockInfo;
+	private InfoPart info;
 	
 	public GUIMain(Map map, Clock clock, Population pop){
 		gmap = new GUIMap(map);
-		infoPart = new InfoPart(clock, pop);
+		clockInfo = new GUIClockInfo(clock);
+		info = new InfoPart(pop);
 		draw();
 	}
 	
 	public void draw(){
-		this.getContentPane().add(back);
 		//back.setLayout(new GridLayout(1, 2));
 		back.setLayout(new BoxLayout(back, BoxLayout.LINE_AXIS));
 		back.add(gmap);
-		back.add(infoPart);
+		back.add(info);
+		front.setLayout(new BoxLayout(front, BoxLayout.PAGE_AXIS));
+		front.add(clockInfo);
+		front.add(back);
+		this.getContentPane().add(front);
 		this.pack();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setMinimumSize(new Dimension(600, 600));
@@ -51,6 +57,6 @@ public class GUIMain extends JFrame{
 	
 	public void refreshGUI(Population pop, Clock clock){
 		gmap.refreshMap(pop);
-		infoPart.refreshInfoPart(clock);
+		clockInfo.refreshClock(clock);
 	}
 }
