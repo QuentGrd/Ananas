@@ -19,6 +19,7 @@ public class Character {
 	private Home home;
 	private Work work;
 	private BoundedCounter emotion;
+	private String id;
 	
 	private Coordinates position;
 	
@@ -91,12 +92,21 @@ public class Character {
 		this.rourine = rourine;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String toString(){
 		String str = "name : " + name + "\tfirstName : " + firstName + "\tage : " + age;
 		if(gender == true)
 			str += "\tgender : Male";
 		else if(gender == false)
-			str += "\tgender : Female" ; 
+			str += "\tgender : Female" ;
+		str += "\tID : " + id;
 		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
 		str += "\tHome : " + this.home.getAddress().toString();
 		str += "\tWork : " + this.work.getAddress().toString();

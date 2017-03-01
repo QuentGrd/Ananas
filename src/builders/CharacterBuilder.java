@@ -36,6 +36,14 @@ public class CharacterBuilder {
 	}
 	
 	/**
+	 * This method initialize character's ID
+	 */
+	public void initCharacterID(){
+		String id = "" + character.hashCode();
+		character.setId(id);
+	}
+	
+	/**
 	 * random name initialization by reading name.csv
 	 */
 	public void initCharacterName(){

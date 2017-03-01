@@ -2,7 +2,6 @@ package city;
 
 import java.util.ArrayList;
 
-import builders.PopulationBuilder;
 import character.Character;
 
 
@@ -30,6 +29,15 @@ public class Population {
 
 	public ArrayList<Character> getListCharacter() {
 		return listCharacter;
+	}
+	
+	public Character[] getCharacterTab(){
+		int i;
+		Character charList[] = new Character[listCharacter.size()];
+		for (i=0; i<listCharacter.size(); i++){
+			charList[i] = listCharacter.get(i);
+		}
+		return charList;
 	}
 
 	public void setListCharacter(ArrayList<Character> listCharacter) {
