@@ -52,7 +52,7 @@ public class GUIInfoPart extends JPanel{
 	
 	public void initCharacterListPanel(){
 		DefaultListModel<String> model = new DefaultListModel<String>();
-		String[] list = this.transform();
+		String[] list = pop.transform();
 		for (int i = 0; i < list.length; i++) {
 			model.addElement(list[i]);
 		}
@@ -62,17 +62,6 @@ public class GUIInfoPart extends JPanel{
 		characterList.setVisibleRowCount(-1);
 		listScroller = new JScrollPane(characterList);
 		listScroller.setPreferredSize(new Dimension(400, 600));
-	}
-	
-	public String[] transform(){
-		character.Character[] list = pop.getCharacterTab();
-		String nameList[];
-		nameList = new String[list.length];
-		int i;
-		for (i=0; i<list.length; i++){
-			nameList[i] = list[i].getFirstName() + list[i].getName();
-		}
-		return nameList;
 	}
 	
 }

@@ -39,6 +39,17 @@ public class Population {
 		}
 		return charList;
 	}
+	
+	public String[] transform(){
+		Character[] list = this.getCharacterTab();
+		String nameList[];
+		nameList = new String[list.length];
+		int i;
+		for (i=0; i<list.length; i++){
+			nameList[i] = list[i].getFirstName() + list[i].getName();
+		}
+		return nameList;
+	}
 
 	public void setListCharacter(ArrayList<Character> listCharacter) {
 		this.listCharacter = listCharacter;
