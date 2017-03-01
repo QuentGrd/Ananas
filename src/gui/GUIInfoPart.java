@@ -33,7 +33,6 @@ public class GUIInfoPart extends JPanel{
 	
 	public GUIInfoPart(Population pop){
 		this.pop = pop;
-		this.initCharacterListPanel();
 		this.initCardLayout();
 		this.setPreferredSize(new Dimension(400, 600));
 		this.add(cardsContainer);
@@ -43,7 +42,7 @@ public class GUIInfoPart extends JPanel{
 		cl = new CardLayout();
 		infoPart = new JPanel();
 		cardsContainer = new JPanel();
-		characterListPanel = new JPanel();
+		this.initCharacterListPanel();
 		cardsContainer.setLayout(cl);
 		cardsContainer.add(characterListPanel, CHARACTERPANEL);
 		cardsContainer.add(infoPart, INFOPANEL);
@@ -51,6 +50,7 @@ public class GUIInfoPart extends JPanel{
 	}
 	
 	public void initCharacterListPanel(){
+		characterListPanel = new JPanel();
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		String[] list = pop.transform();
 		for (int i = 0; i < list.length; i++) {
@@ -58,10 +58,11 @@ public class GUIInfoPart extends JPanel{
 		}
 		characterList = new JList<String>(model);
 		characterList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		characterList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		characterList.setLayoutOrientation(JList.VERTICAL);
 		characterList.setVisibleRowCount(-1);
 		listScroller = new JScrollPane(characterList);
 		listScroller.setPreferredSize(new Dimension(400, 600));
+		characterListPanel.add(listScroller);
 	}
 	
 }

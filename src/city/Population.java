@@ -46,7 +46,7 @@ public class Population {
 		nameList = new String[list.length];
 		int i;
 		for (i=0; i<list.length; i++){
-			nameList[i] = list[i].getFirstName() + list[i].getName();
+			nameList[i] = list[i].getFirstName() + " " + list[i].getName();
 		}
 		return nameList;
 	}
