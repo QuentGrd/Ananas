@@ -1,4 +1,4 @@
-package city;
+package test;
 
 import builders.CityBuilder;
 import gui.GUIMain;
