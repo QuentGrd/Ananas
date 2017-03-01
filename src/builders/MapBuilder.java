@@ -144,6 +144,7 @@ public class MapBuilder {
 							enter.initPosition(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)));
 							enter.initSize(Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)));
 							enter.initAddress(Integer.parseInt(record.get(ADRESSX)), Integer.parseInt(record.get(ADRESSY)));
+							map.getEntertainmentList().add(enter);
 							
 							this.addToGrid(enter);
 							break;
