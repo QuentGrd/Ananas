@@ -3,7 +3,6 @@ package builders;
 import city.City;
 import city.Map;
 import city.Population;
-import clock.Clock;
 
 public class CityBuilder {
 	

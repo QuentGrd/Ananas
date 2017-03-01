@@ -1,22 +1,11 @@
 package city;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-
-import builders.MapBuilder;
 import building.Entertainment;
 import building.Home;
 import building.Work;
-import trace.Road;
-import utils.Coordinates;
 
 /**
  * 
