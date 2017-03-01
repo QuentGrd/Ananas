@@ -24,12 +24,12 @@ public class GUIMain extends JFrame{
 	
 	private GUIMap gmap;
 	private GUIClockInfo clockInfo;
-	private InfoPart info;
+	private GUIInfoPart info;
 	
 	public GUIMain(Map map, Clock clock, Population pop){
 		gmap = new GUIMap(map);
 		clockInfo = new GUIClockInfo(clock);
-		info = new InfoPart(pop);
+		info = new GUIInfoPart(pop);
 		draw();
 	}
 	
