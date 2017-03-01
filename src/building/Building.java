@@ -52,4 +52,8 @@ public abstract class Building extends Infrastructure{
 		return (this.maxUser == this.getNbUser());
 	}
 	
+	public String toString(){
+		return super.toString() + "\t(" + address.toString() +")";
+	}
+	
 }

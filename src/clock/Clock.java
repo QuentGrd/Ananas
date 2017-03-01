@@ -26,7 +26,7 @@ public class Clock extends Thread{
 		this.months = new CyclicCounter(mounths, 1, 12);
 		this.years = new CyclicCounter(years, 2017, 2117);
 		
-		this.speed = 1;
+		this.speed = 500;
 		this.pause = false;
 	}
 	
@@ -129,6 +129,16 @@ public class Clock extends Thread{
 
 	public void setPause(boolean pause) {
 		this.pause = pause;
+	}
+	
+	public static String transform(int value){
+		String str;
+		if (value < 10)
+			str = "0" + value;
+		else
+			str = String.valueOf(value);
+		
+		return str;
 	}
 
 	public String toString(){

@@ -54,7 +54,6 @@ public class Entertainment extends Building{
 
 	@Override
 	public String toString() {
-		return super.toString() + "Entertainment [openingTime=" + openingTime + ", closingTime=" + closingTime + ", averageUsageTime="
-				+ averageUsageTime + "]";
+		return super.toString() + "\topen : " + openingTime + " - close : " + closingTime + "\taverageUsageTime : " + averageUsageTime;
 	}
 }

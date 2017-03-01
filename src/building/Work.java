@@ -54,7 +54,6 @@ public class Work extends Building{
 
 	@Override
 	public String toString() {
-		return super.toString() + "Work [openingTime=" + openingTime + ", closingTime=" + closingTime + ", averageUsageTime="
-				+ averageUsageTime + "]";
+		return super.toString() + "\topen : " + openingTime + " - close : " + closingTime + "\taverageUsageTime : " + averageUsageTime;
 	}
 }
