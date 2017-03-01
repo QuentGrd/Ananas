@@ -25,7 +25,7 @@ public class Run {
 	public void initialisation(){
 		city = new City();
 		CityBuilder cBuilder = new CityBuilder(city);
-		clock = new Clock(0, 0, 0, 1, 1, 2017);
+		clock = new Clock(0, 0, 1, 1, 2017);
 		
 		gui = new GUIMain(city.getMap(), clock, city.getPopulation());
 	}

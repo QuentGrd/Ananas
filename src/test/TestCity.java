@@ -1,7 +1,5 @@
 package test;
 
-import builders.CityBuilder;
-import gui.GUIMain;
 import run.Run;
 
 public class TestCity {

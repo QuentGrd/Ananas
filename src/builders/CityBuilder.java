@@ -24,10 +24,6 @@ public class CityBuilder {
 		city.setPopulation(pop);
 		System.out.println(pop.toString());
 		
-		Clock clock = city.getClock();
-		clock = new Clock(0, 0, 0, 1, 1, 2017);
-		clock.setSpeed(100);
-		//clock.run();
 	}
 
 }

@@ -8,7 +8,6 @@ import utils.CyclicCounter;
  * @version 22012017
  */
 public class Clock extends Thread{
-	private CyclicCounter sec;
 	private CyclicCounter min;
 	private CyclicCounter hours;
 	private CyclicCounter days;
@@ -18,8 +17,7 @@ public class Clock extends Thread{
 	private long speed;
 	private boolean pause;
 	
-	public Clock(int hours, int min, int sec, int days, int mounths, int years){
-		this.sec = new CyclicCounter(sec, 0, 59);
+	public Clock(int hours, int min, int days, int mounths, int years){
 		this.min = new CyclicCounter(min, 0, 59);
 		this.hours = new CyclicCounter(hours, 0, 23);
 		this.days = new CyclicCounter(days, 1, 30);
@@ -34,22 +32,19 @@ public class Clock extends Thread{
 	 * This method increment the clock
 	 */
 	public void increment(){
-		if (sec.getCounter() == sec.getMax()){
-			if(min.getCounter() == min.getMax()){
-				if(hours.getCounter() == hours.getMax()){
-					if(days.getCounter() == days.getMax()){
-						if(months.getCounter() == months.getMax()){
-							years.increment();
-						}
-						months.increment();
+		min.increment(6);
+		if(min.getCounter() == min.getMin()){
+			hours.increment();
+			if(hours.getCounter() == hours.getMin()){
+				days.increment();
+				if(days.getCounter() == days.getMin()){
+					months.increment();
+					if(months.getCounter() == months.getMin()){
+						years.increment();
 					}
-					days.increment();
 				}
-				hours.increment();
 			}
-			min.increment();
 		}
-		sec.increment();
 	}
 
 	/**
@@ -65,14 +60,6 @@ public class Clock extends Thread{
 			this.increment();
 			System.out.println(this.toString());
 		}
-	}
-	
-	public CyclicCounter getSec() {
-		return sec;
-	}
-
-	public void setSec(CyclicCounter sec) {
-		this.sec = sec;
 	}
 
 	public CyclicCounter getMin() {
@@ -142,7 +129,7 @@ public class Clock extends Thread{
 	}
 
 	public String toString(){
-		return "(" + days.toString() + "/" + months.toString() + "/" + years.toString() + ") - " + hours.toString() + ":" + min.toString() + ":" + sec.toString();
+		return "(" + days.toString() + "/" + months.toString() + "/" + years.toString() + ") - " + hours.toString() + ":" + min.toString();
 	}
 	
 }

@@ -12,7 +12,6 @@ import clock.Clock;
 public class City {
 	
 	private Map map;
-	private Clock clock;
 	private Population population;
 	
 	public City(){
@@ -24,14 +23,6 @@ public class City {
 
 	public void setMap(Map map) {
 		this.map = map;
-	}
-
-	public Clock getClock() {
-		return clock;
-	}
-
-	public void setClock(Clock clock) {
-		this.clock = clock;
 	}
 
 	public Population getPopulation() {

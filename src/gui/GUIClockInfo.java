@@ -15,7 +15,6 @@ public class GUIClockInfo extends JPanel{
 	
 	private JPanel clockPart;
 	private static Font clockFont = new Font(Font.MONOSPACED, Font.BOLD, 20);
-	private JLabel secLabel;
 	private JLabel minLabel;
 	private JLabel hourLabel;
 	private JLabel dayLabel;
@@ -42,10 +41,6 @@ public class GUIClockInfo extends JPanel{
 		minLabel = new JLabel(Clock.transform(clock.getMin().getCounter()));
 		minLabel.setFont(clockFont);
 		clockPart.add(minLabel);
-		clockPart.add(new JLabel(" : "));
-		secLabel = new JLabel(Clock.transform(clock.getSec().getCounter()));
-		secLabel.setFont(clockFont);
-		clockPart.add(secLabel);
 		clockPart.add(new JLabel(" - "));
 		
 		clockPart.add(new JLabel("("));
@@ -66,14 +61,9 @@ public class GUIClockInfo extends JPanel{
 	public void refreshClock(Clock clock){
 		hourLabel.setText(Clock.transform(clock.getHours().getCounter()));
 		minLabel.setText(Clock.transform(clock.getMin().getCounter()));
-		secLabel.setText(Clock.transform(clock.getSec().getCounter()));
 		dayLabel.setText(Clock.transform(clock.getDays().getCounter()));
 		monthLabel.setText(Clock.transform(clock.getMonths().getCounter()));
 		yearLabel.setText(Clock.transform(clock.getYears().getCounter()));
-	}
-
-	public void setSecLabel(JLabel secLabel) {
-		this.secLabel = secLabel;
 	}
 
 	public void setMinLabel(JLabel minLabel) {

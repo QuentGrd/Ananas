@@ -22,6 +22,19 @@ public class CyclicCounter extends BoundedCounter{
 	}
 	
 	/**
+	 * this methode make a multiple incrementation in the Cyclic Counter
+	 */
+	public void increment(int nb){
+		for (int i = 0; i < nb; i++) {
+			if(counter == max)
+				this.counter = min;
+			else
+				this.counter++;
+		}
+	}
+	
+	
+	/**
 	 * This method decrement the Cyclic Counter
 	 */
 	public void decrement(){
@@ -29,6 +42,18 @@ public class CyclicCounter extends BoundedCounter{
 			this.counter = max;
 		else
 			this.counter--;
+	}
+	
+	/**
+	 * this methode make a multiple decrementation in the Cyclic Counter
+	 */
+	public void decrement(int nb){
+		for (int i = 0; i < nb; i++) {
+			if(counter == min)
+				this.counter = max;
+			else
+				this.counter--;
+		}
 	}
 	
 }
