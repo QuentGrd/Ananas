@@ -1,7 +1,5 @@
 package city;
 
-import clock.Clock;
-
 /**
  * This class represent the city of the game (contain the clock, the map and the population)
  * @author quentin

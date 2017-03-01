@@ -23,7 +23,7 @@ public class Character {
 	
 	private Coordinates position;
 	
-	private Routine rourine;
+	private Routine routine;
 	
 	public Character(){
 
@@ -84,12 +84,12 @@ public class Character {
 		this.position = position;
 	}
 
-	public Routine getRourine() {
-		return rourine;
+	public Routine getRoutine() {
+		return routine;
 	}
 
-	public void setRourine(Routine rourine) {
-		this.rourine = rourine;
+	public void setRoutine(Routine routine) {
+		this.routine = routine;
 	}
 
 	public String getId() {
@@ -110,6 +110,7 @@ public class Character {
 		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
 		str += "\tHome : " + this.home.getAddress().toString();
 		str += "\tWork : " + this.work.getAddress().toString();
+		str += routine.toString();
 		return str;
 	}
 }

@@ -25,5 +25,7 @@ public abstract class Actions {
 		this.reward = reward;
 	}
 	
-	
+	public String toString(){
+		return "["+reward+"]"+"-"+beginTime;
+	}
 }

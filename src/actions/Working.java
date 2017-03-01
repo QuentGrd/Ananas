@@ -26,4 +26,8 @@ public class Working extends Occupation{
 	public void setPlace(Work place) {
 		this.place = place;
 	}
+	
+	public String toString(){
+		return super.toString()+" -"+place.getName();
+	}
 }

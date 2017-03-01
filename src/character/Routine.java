@@ -1,5 +1,6 @@
 package character;
 
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Random;
 
@@ -19,8 +20,8 @@ import clock.Schedule;
  */
 public class Routine {
 
-	private Queue<Actions> dailyRoutine;
-	private Queue<Actions> currentRoutine;
+	private ArrayList<Actions> dailyRoutine;
+	private ArrayList<Actions> currentRoutine;
 	
 	private Home home;
 	private Work work;
@@ -28,6 +29,8 @@ public class Routine {
 	public Routine(Home home, Work work){
 		this.work = work;
 		this.home = home;
+		dailyRoutine = new ArrayList<Actions>();
+		currentRoutine = new ArrayList<Actions>();
 		initDailyRoutine();
 	}
 	
@@ -66,17 +69,25 @@ public class Routine {
 		return random;
 	}
 
-	public Queue<Actions> getDailyRoutine() {
+	public ArrayList<Actions> getDailyRoutine() {
 		return dailyRoutine;
 	}
 
-	public Queue<Actions> getCurrentRoutine() {
+	public ArrayList<Actions> getCurrentRoutine() {
 		return currentRoutine;
 	}
 
-	public void setCurrentRoutine(Queue<Actions> currentRoutine) {
+	public void setCurrentRoutine(ArrayList<Actions> currentRoutine) {
 		this.currentRoutine = currentRoutine;
 	}
 	
+	public String toString(){
+		String str = "";
+		for (int i = 0; i < dailyRoutine.size(); i++) {
+			str += "\n\t";
+			str += dailyRoutine.get(i);
+		}
+		return str;
+	}
 	
 }

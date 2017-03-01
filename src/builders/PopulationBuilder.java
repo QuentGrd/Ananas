@@ -35,6 +35,7 @@ public class PopulationBuilder {
 			builder.initCharacterHome(map);
 			builder.initCharacterWork(map);
 			builder.initCharacterID();
+			builder.initRoutine();
 			list.add(builder.getCharacter());
 		}
 		pop.setListCharacter(list);

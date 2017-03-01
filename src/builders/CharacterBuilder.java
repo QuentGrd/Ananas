@@ -9,7 +9,10 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import building.Home;
+import building.Work;
 import character.Character;
+import character.Routine;
 import city.Map;
 import utils.BoundedCounter;
 
@@ -37,10 +40,20 @@ public class CharacterBuilder {
 	
 	/**
 	 * This method initialize character's ID
+	 * init with the population, when we assign character's home/work
 	 */
 	public void initCharacterID(){
 		String id = "" + character.hashCode();
 		character.setId(id);
+	}
+	
+	/**
+	 * This methode initialize character's routine
+	 * init with the population, when we assign character's home/work
+	 */
+	public void initRoutine(){
+		Routine routine = new Routine(character.getHome(), character.getWork());
+		character.setRoutine(routine);
 	}
 	
 	/**

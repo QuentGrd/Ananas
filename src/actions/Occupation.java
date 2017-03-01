@@ -18,4 +18,8 @@ public abstract class Occupation extends Actions{
 	public void setDuration(Schedule duration) {
 		this.duration = duration;
 	}
+	
+	public String toString(){
+		return super.toString() + " -"+duration;
+	}
 }
