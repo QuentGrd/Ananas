@@ -1,5 +1,6 @@
 package actions;
 
+import city.Map;
 import clock.Schedule;
 
 /**
@@ -11,6 +12,10 @@ public abstract class Actions {
 	
 	private Schedule beginTime;
 	private double reward;
+	
+	public void foundPath(Map map){
+		
+	}
 	
 	public Schedule getBeginTime() {
 		return beginTime;

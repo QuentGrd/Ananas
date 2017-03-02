@@ -23,6 +23,8 @@ public class Routine {
 	private ArrayList<Actions> dailyRoutine;
 	private ArrayList<Actions> currentRoutine;
 	
+	private Actions currentAction;
+	
 	private Home home;
 	private Work work;
 	
@@ -32,6 +34,8 @@ public class Routine {
 		dailyRoutine = new ArrayList<Actions>();
 		currentRoutine = new ArrayList<Actions>();
 		initDailyRoutine();
+		currentRoutine.add(dailyRoutine.get(0));
+		currentAction = dailyRoutine.get(2);
 	}
 	
 	public void initDailyRoutine(){
@@ -81,8 +85,16 @@ public class Routine {
 		this.currentRoutine = currentRoutine;
 	}
 	
+	public Actions getCurrentAction() {
+		return currentAction;
+	}
+
+	public void setCurrentAction(Actions currentAction) {
+		this.currentAction = currentAction;
+	}
+
 	public String toString(){
-		String str = "";
+		String str = "\n\t**"+currentAction.toString()+"**";
 		for (int i = 0; i < dailyRoutine.size(); i++) {
 			str += "\n\t";
 			str += dailyRoutine.get(i);

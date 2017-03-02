@@ -110,6 +110,7 @@ public class Run {
 		
 		//si c'est un lieu de loisir il peut rentrer ...
 		
+		
 		//sinon il peut pas rentrer
 		return false;
 	}
