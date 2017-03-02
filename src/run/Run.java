@@ -3,6 +3,8 @@ package run;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.event.CaretListener;
+
 import builders.CityBuilder;
 import character.Character;
 import city.City;
@@ -35,6 +37,7 @@ public class Run {
 		while(true){
 			if(run){
 				clock.increment();
+				//checkRoutine();
 				movePopulation();
 				gui.refreshGUI(city.getPopulation(), clock);
 				try{
@@ -63,6 +66,31 @@ public class Run {
 		ArrayList<Coordinates> possibleMoves = validNeighbour(car);
 		int selectedMove = randomSelection(0, possibleMoves.size()-1);
 		car.setPosition(possibleMoves.get(selectedMove));
+	}
+	
+	/**
+	 * this methode check in all routine if there are a new action to do
+	 */
+	public void checkRoutine(){
+		ArrayList<Character> carList = city.getPopulation().getListCharacter();
+		
+		//pour tout les perso
+		for (int i = 0; i < carList.size(); i++) {
+			
+			Character car = carList.get(i);
+			
+			//ajout de l'action de la dailyRoutine si c'est l'heure de debut
+			for (int j = 0; j < car.getRoutine().getDailyRoutine().size(); j++) {
+				
+				int hour = car.getRoutine().getDailyRoutine().get(i).getBeginTime().getHour();
+				int minute = car.getRoutine().getDailyRoutine().get(i).getBeginTime().getMinute();
+				
+				if(clock.getHours().getCounter() == hour && clock.getMin().getCounter() == minute){
+					car.getRoutine().getCurrentRoutine().add(car.getRoutine().getDailyRoutine().get(i));
+					System.out.println(car.getName() + " :\t"+car.getRoutine().getCurrentRoutine().toString());
+				}
+			}
+		}
 	}
 	
 	/**
