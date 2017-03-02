@@ -82,12 +82,14 @@ public class Run {
 			//ajout de l'action de la dailyRoutine si c'est l'heure de debut
 			for (int j = 0; j < car.getRoutine().getDailyRoutine().size(); j++) {
 				
-				int hour = car.getRoutine().getDailyRoutine().get(i).getBeginTime().getHour();
-				int minute = car.getRoutine().getDailyRoutine().get(i).getBeginTime().getMinute();
+				int hour = car.getRoutine().getDailyRoutine().get(j).getBeginTime().getHour();
+				int minute = car.getRoutine().getDailyRoutine().get(j).getBeginTime().getMinute();
 				
 				if(clock.getHours().getCounter() == hour && clock.getMin().getCounter() == minute){
-					car.getRoutine().getCurrentRoutine().add(car.getRoutine().getDailyRoutine().get(i));
-					System.out.println(car.getName() + " :\t"+car.getRoutine().getCurrentRoutine().toString());
+					car.getRoutine().getCurrentRoutine().add(car.getRoutine().getDailyRoutine().get(j));
+					for (int k = 0; k < car.getRoutine().getCurrentRoutine().size(); k++) {
+						System.out.println(car.getName() + " :\t"+car.getRoutine().getCurrentRoutine().get(k));
+					}
 				}
 			}
 		}
