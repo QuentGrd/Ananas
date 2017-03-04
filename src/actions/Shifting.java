@@ -18,6 +18,7 @@ public class Shifting extends Actions{
 	private Coordinates begin;
 	private Coordinates end;
 	private ArrayList<Coordinates> path;
+	private Boolean finish;
 	
 	public Shifting(Schedule beginTime, Coordinates begin, Coordinates end){
 		this.setBeginTime(beginTime);
@@ -25,12 +26,22 @@ public class Shifting extends Actions{
 		this.end = end;
 		this.setReward(-5);
 		
+		finish=false;
+		
 		path = new ArrayList<Coordinates>();
 	}
 
 	public void foundPath(Map map){
 		PathFounder pfounder = new PathFounder(new BinaryMap(map));
 		path = pfounder.getPath(begin, end);
+		if(path.size() == 0)
+			finish = true;
+	}
+	
+	public void suppFirst(){
+		path.remove(0);
+		if(path.size() == 0)
+			finish = true;
 	}
 	
 	public Coordinates getBegin() {
@@ -57,6 +68,14 @@ public class Shifting extends Actions{
 		this.path = path;
 	}
 	
+	public Boolean getFinish() {
+		return finish;
+	}
+
+	public void setFinish(Boolean finish) {
+		this.finish = finish;
+	}
+
 	public String toString(){
 		String str =  super.toString()+"\t["+begin.toString()+"->"+end.toString()+"]";
 		str += "\t";

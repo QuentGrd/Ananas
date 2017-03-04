@@ -1,7 +1,10 @@
 package actions;
 
+import java.util.ArrayList;
+
 import city.Map;
 import clock.Schedule;
+import utils.Coordinates;
 
 /**
  * 

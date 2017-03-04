@@ -40,17 +40,17 @@ public class Routine {
 	
 	public void initDailyRoutine(){
 		//il dort chez lui a partir de 0h00 pendant une durée aleatoire de 7h à 7h30
-		Sleeping sleepAction = new Sleeping(home, new Schedule(0,0), new Schedule(7, randomSelection(0, 30)));
+		Sleeping sleepAction = new Sleeping(home, new Schedule(0,0), new Schedule(7, 0));
 		//il se prepart chez lui pendant 1h
 		Chilling breakfastAction = new Chilling(home, new Schedule(7,0), new Schedule(1,0));
 		//il part travailler
 		Shifting goToWorkAction = new Shifting(new Schedule(8,0), home.getAddress(), work.getAddress());
 		//il travail pendant 8h
-		Working workAction = new Working(work, new Schedule(8,30), new Schedule(8, 0));
+		Working workAction = new Working(work, new Schedule(8,0), new Schedule(8, 30));
 		//il rentre chez lui
 		Shifting goHomeAction = new Shifting(new Schedule(16,30), work.getAddress(), home.getAddress());
 		//il reste chez lui à s'occuper jusqu'à 0h00
-		Chilling stayHomeAction = new Chilling(home, new Schedule(17,0), new Schedule(6,0));
+		Chilling stayHomeAction = new Chilling(home, new Schedule(16,30), new Schedule(6,30));
 		
 		try{
 			dailyRoutine.add(sleepAction);

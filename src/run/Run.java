@@ -3,12 +3,13 @@ package run;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.event.CaretListener;
-
+import actions.Occupation;
+import actions.Shifting;
 import builders.CityBuilder;
 import character.Character;
 import city.City;
 import clock.Clock;
+import clock.Schedule;
 import gui.GUIMain;
 import utils.Coordinates;
 
@@ -37,8 +38,7 @@ public class Run {
 		while(true){
 			if(run){
 				clock.increment();
-				//checkRoutine();
-				movePopulation();
+				checkRoutine();
 				gui.refreshGUI(city.getPopulation(), clock);
 				try{
 					Thread.sleep(500);
@@ -73,13 +73,16 @@ public class Run {
 	 */
 	public void checkRoutine(){
 		ArrayList<Character> carList = city.getPopulation().getListCharacter();
-		
+		System.out.println("\n");
 		//pour tout les perso
 		for (int i = 0; i < carList.size(); i++) {
 			
 			Character car = carList.get(i);
+			System.out.println("\t" + car.getName() + " : " + car.getRoutine().getCurrentAction().toString());
+			System.out.println("\t\t" + car.getRoutine().getCurrentRoutine().toString());
 			
-			//ajout de l'action de la dailyRoutine si c'est l'heure de debut
+		
+			//ajout de l'action de la dailyRoutine dans la currentRoutine si c'est l'heure de debut
 			for (int j = 0; j < car.getRoutine().getDailyRoutine().size(); j++) {
 				
 				int hour = car.getRoutine().getDailyRoutine().get(j).getBeginTime().getHour();
@@ -87,12 +90,56 @@ public class Run {
 				
 				if(clock.getHours().getCounter() == hour && clock.getMin().getCounter() == minute){
 					car.getRoutine().getCurrentRoutine().add(car.getRoutine().getDailyRoutine().get(j));
-					for (int k = 0; k < car.getRoutine().getCurrentRoutine().size(); k++) {
-						System.out.println(car.getName() + " :\t"+car.getRoutine().getCurrentRoutine().get(k));
-					}
 				}
 			}
+			
+			//gestion de l'action courante
+			//si l'action est un deplacment
+			if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Shifting")){
+				Shifting shift = (Shifting) car.getRoutine().getCurrentAction();
+				//si l'action n'est pas fini
+				if(!shift.getFinish()){
+					moveCharacter(car, shift.getPath().get(0));
+					shift.suppFirst();
+				}
+				//si l'action est fini
+				else{
+					if(car.getRoutine().getCurrentRoutine().size()>0)
+						car.getRoutine().setCurrentAction(car.getRoutine().getCurrentRoutine().get(0));
+				}
+			}
+			
 		}
+	}
+	
+	/**
+	 * This methode move the caracter car to the position coordNextPosition
+	 * @param car
+	 * @param coordNextPoisition
+	 */
+	public void moveCharacter(Character car, Coordinates coordNextPoisition){
+		car.setPosition(coordNextPoisition);
+	}
+	
+	/**
+	 * This methode calcul a new schedule with a begin time and a duration
+	 * @param beginTime
+	 * @param duration
+	 * @return
+	 */
+	public Schedule calculFinishTime(Schedule beginTime, Schedule duration){
+		Schedule result = new Schedule(beginTime.getHour(), beginTime.getMinute());
+		
+		int sum = result.getMinute()+duration.getMinute();
+		result.setMinute(sum%60);
+		if(sum>=60){
+			result.setHour((result.getHour()+duration.getHour()+1)%24);
+		}
+		else{
+			result.setHour((result.getHour()+duration.getHour())%24);
+		}
+		
+		return result;
 	}
 	
 	/**
