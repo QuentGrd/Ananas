@@ -3,6 +3,8 @@ package pathFounder;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import utils.Coordinates;
+
 /**
  * 
  * @author matthieu
@@ -15,14 +17,21 @@ public class PathFounder {
 	private LinkedList<Node> openList;
 	private LinkedList<Node> closeList;
 	
-	public PathFounder(BinaryMap BinaryMap){
+	public PathFounder(BinaryMap binaryMap){
 		openList = new LinkedList<Node>();
 		closeList = new LinkedList<Node>();
-		this.binaryMap = BinaryMap;
-		this.size = BinaryMap.getSize();
+		this.binaryMap = binaryMap;
+		this.size = binaryMap.getSize();
 	}
 	
-	public ArrayList<Node> getPath(Node begin, Node goal){
+	public ArrayList<Coordinates> getPath(Coordinates coordBegin, Coordinates coordGoal){
+		
+		binaryMap.addStart(coordBegin.getX(), coordBegin.getY());
+		binaryMap.addGoal(coordGoal.getX(), coordGoal.getY());
+		//System.out.println(binaryMap.toString());
+		
+		Node begin = binaryMap.getNode(coordBegin.getX(), coordBegin.getY()); 
+		Node goal = binaryMap.getNode(coordGoal.getX(), coordGoal.getY());
 		
 		calculValue(begin, goal);
 		begin.setPrevious(null);
@@ -56,8 +65,8 @@ public class PathFounder {
 		}
 		
 		
-		ArrayList<Node> emptyList = new ArrayList<Node>();
-		emptyList.add(begin);
+		ArrayList<Coordinates> emptyList = new ArrayList<Coordinates>();
+		emptyList.add(begin.getCoord());
 		return emptyList;
 	}
 	
@@ -141,12 +150,12 @@ public class PathFounder {
 		return lower;
 	}
 	
-	public ArrayList<Node> buildPath(Node begin, Node goal){
-		ArrayList<Node> list = new ArrayList<Node>();
+	public ArrayList<Coordinates> buildPath(Node begin, Node goal){
+		ArrayList<Coordinates> list = new ArrayList<Coordinates>();
 		
 		Node tmp = goal;
 		while(!tmp.equals(begin)){
-			list.add(0, tmp);
+			list.add(0, tmp.getCoord());
 			tmp = tmp.getPrevious();
 		}
 		

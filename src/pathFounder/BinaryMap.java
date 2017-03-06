@@ -133,5 +133,16 @@ public class BinaryMap {
 	public void setGoal(Node goal) {
 		this.goal = goal;
 	}
+	
+	public String toString(){
+		String str = "";
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				str+= map[i][j].getType();
+			}
+			str+="\n";
+		}
+		return str;
+	}
 }
 
