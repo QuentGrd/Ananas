@@ -63,40 +63,39 @@ public class GUIMap extends JPanel{
             		JPanel p = new JPanel();
             		JLabel label = new JLabel(String.valueOf(y));
 					p.add(label);
-					add(p);
+					gridMap.add(p);
 				}
 				else if (y == GRID_SIZE){
 					JPanel p = new JPanel();
 					JLabel label = new JLabel(String.valueOf(x));
 					p.add(label);
-					add(p);
+					gridMap.add(p);
 				}
 				else{
 	                Cell cell = new Cell(x, y);
-	                
+	                JLabel sprite = new JLabel();
 	                switch(map.getInfrastructure(x, y).getType()){
 						case 1:
-							mngr.printHome((Home) map.getInfrastructure(x, y), spriteMap);
+							sprite = mngr.printHome((Home) map.getInfrastructure(x, y), spriteMap);
 							cell.setBackground(new Color(52, 152, 219));
 							break;
 						case 2:
-							mngr.printWork((Work) map.getInfrastructure(x, y), spriteMap);
+							sprite = mngr.printWork((Work) map.getInfrastructure(x, y), spriteMap);
 							cell.setBackground(new Color(231, 76, 60));
 							break;
 						case 3:
-							mngr.printEntertainment((Entertainment) map.getInfrastructure(x, y), spriteMap);
+							sprite = mngr.printEntertainment((Entertainment) map.getInfrastructure(x, y), spriteMap);
 							cell.setBackground(new Color(39, 174, 96));
 							break;
 						case 4:
-							mngr.printRoad((Road) map.getInfrastructure(x, y), spriteMap);
+							sprite = mngr.printRoad((Road) map.getInfrastructure(x, y), spriteMap);
 							cell.setBackground(new Color(149, 165, 166));
 							break;
 						default:
 							cell.setBackground(new Color(236, 240, 241));
 							break;
 					}
-	 
-	                gridMap.add(cell);
+	                
 	                MouseListener ml = new MouseListener() {
 	                    public void mouseClicked(MouseEvent e) {
 	                        click(e, cell);
@@ -115,8 +114,10 @@ public class GUIMap extends JPanel{
 						}
 	                };
 	                cell.addMouseListener(ml);
+	                sprite.addMouseListener(ml);
 	                jmap[x][y] = cell;
 	                gridMap.add(jmap[x][y]);
+	                spriteMap.add(sprite);
 				}
        
             }
