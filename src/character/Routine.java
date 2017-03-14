@@ -73,6 +73,16 @@ public class Routine {
 		return random;
 	}
 	
+	public Actions moveFirstCurrentRoutine(){
+		if(!isEmptyCurrentRoutine()){
+			Actions  first = currentRoutine.get(0);
+			currentRoutine.remove(0);
+			return first;
+		}
+		System.out.println("ERREUR DANS L'AJOUT DE L'ACTION DE TETE");
+		return null;
+	}
+	
 	public Boolean isEmptyCurrentRoutine(){
 		if(currentRoutine.size() == 0)
 			return true;
