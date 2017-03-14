@@ -72,6 +72,20 @@ public class Routine {
 		
 		return random;
 	}
+	
+	public Boolean isEmptyCurrentRoutine(){
+		if(currentRoutine.size() == 0)
+			return true;
+		else
+			return false;
+	}
+	
+	public Boolean isEmptyCurrentAction(){
+		if(currentAction == null)
+			return true;
+		else 
+			return false;
+	}
 
 	public ArrayList<Actions> getDailyRoutine() {
 		return dailyRoutine;
