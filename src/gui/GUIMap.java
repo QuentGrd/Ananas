@@ -1,23 +1,33 @@
 package gui;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import building.Entertainment;
+import building.Home;
+import building.Work;
 import city.Map;
 import city.Population;
+import trace.Road;
 
 public class GUIMap extends JPanel{
 
 	private int GRID_SIZE;
 	private Map map;
 	private Cell[][] jmap;
+	
+	private CardLayout cl;
+	private JPanel gridMap;
+	private JPanel spriteMap;
+	private static final String SPRITEMAP = "Sprite Map";
+	private static final String GRIDMAP = "Grid Map";
 
     public GUIMap(Map map) {
         setPreferredSize(new Dimension(600, 600));
@@ -25,12 +35,28 @@ public class GUIMap extends JPanel{
         this.map = map;
         GRID_SIZE = map.getSize();
         jmap = new Cell[GRID_SIZE][GRID_SIZE];
-        this.setLayout(new GridLayout(GRID_SIZE+1, GRID_SIZE+1));
+        
+        this.initCardLayout();
         this.initMap();
                 
     }
     
+    public void initCardLayout(){
+    	cl = new CardLayout();
+    	gridMap = new JPanel();
+    	spriteMap = new JPanel();
+    	
+    	this.setLayout(cl);
+    	gridMap.setLayout(new GridLayout(GRID_SIZE+1, GRID_SIZE+1));
+    	spriteMap.setLayout(null);
+    	
+    	this.add(spriteMap, SPRITEMAP);
+    	this.add(gridMap, GRIDMAP);
+    	cl.show(this, SPRITEMAP);
+    }
+    
     public void initMap(){
+    	MapManager mngr = new MapManager();
     	for (int x = 0; x < GRID_SIZE +1; x++) {
             for (int y = 0; y < GRID_SIZE +1; y++) {
             	if (x == GRID_SIZE){
@@ -50,19 +76,19 @@ public class GUIMap extends JPanel{
 	                
 	                switch(map.getInfrastructure(x, y).getType()){
 						case 1:
-							JLabel img = new JLabel();
-							ImageIcon sprite = new ImageIcon(System.getProperty("user.dir") + "/res/img/home.png");
-							img.setIcon(sprite);
-							cell.add(img);
+							mngr.printHome((Home) map.getInfrastructure(x, y), spriteMap);
 							cell.setBackground(new Color(52, 152, 219));
 							break;
 						case 2:
+							mngr.printWork((Work) map.getInfrastructure(x, y), spriteMap);
 							cell.setBackground(new Color(231, 76, 60));
 							break;
 						case 3:
+							mngr.printEntertainment((Entertainment) map.getInfrastructure(x, y), spriteMap);
 							cell.setBackground(new Color(39, 174, 96));
 							break;
 						case 4:
+							mngr.printRoad((Road) map.getInfrastructure(x, y), spriteMap);
 							cell.setBackground(new Color(149, 165, 166));
 							break;
 						default:
@@ -70,7 +96,7 @@ public class GUIMap extends JPanel{
 							break;
 					}
 	 
-	                add(cell);
+	                gridMap.add(cell);
 	                MouseListener ml = new MouseListener() {
 	                    public void mouseClicked(MouseEvent e) {
 	                        click(e, cell);
@@ -90,7 +116,7 @@ public class GUIMap extends JPanel{
 	                };
 	                cell.addMouseListener(ml);
 	                jmap[x][y] = cell;
-	                add(jmap[x][y]);
+	                gridMap.add(jmap[x][y]);
 				}
        
             }
