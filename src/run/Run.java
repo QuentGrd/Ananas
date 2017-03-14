@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import actions.Actions;
+import actions.Chilling;
+import actions.Entertain;
 import actions.Shifting;
+import actions.Sleeping;
+import actions.Working;
 import builders.CityBuilder;
 import character.Character;
 import city.City;
@@ -92,7 +96,7 @@ public class Run {
 			}
 			//si il y a une action courante
 			else{
-				//si c'est un deplacement
+				//actions.Shifting
 				if(carCurrentAction.getClass().getName().equals("actions.Shifting")){
 					Shifting shift = (Shifting) car.getRoutine().getCurrentAction();
 					//si l'action n'est pas fini
@@ -107,7 +111,26 @@ public class Run {
 					}
 				}
 				
-				//si c'est une 
+				//actions.Chilling
+				if(carCurrentAction.getClass().getName().equals("actions.Chilling")){
+					Chilling chill = (Chilling) car.getRoutine().getCurrentAction();
+				}
+				
+				//actions.Entertain
+				if(carCurrentAction.getClass().getName().equals("actions.Entertain")){
+					Entertain enter = (Entertain) car.getRoutine().getCurrentAction();
+				}
+				
+				//actions.Sleeping
+				if(carCurrentAction.getClass().getName().equals("actions.Sleeping")){
+					Sleeping sleep = (Sleeping) car.getRoutine().getCurrentAction();
+					sleep.getFinishTime().toString();
+				}
+				
+				//actions.Working
+				if(carCurrentAction.getClass().getName().equals("actions.Working")){
+					Working work = (Working) car.getRoutine().getCurrentAction();
+				}
 			}
 		}
 	}

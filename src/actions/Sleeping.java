@@ -10,6 +10,7 @@ public class Sleeping extends Occupation{
 	public Sleeping(Home home, Schedule beginTime, Schedule duration){
 		this.setBeginTime(beginTime);
 		this.setDuration(duration);
+		this.setFinishTime(calculFinishTime(beginTime, duration));
 		this.setReward(home.getReward());
 		this.place = home;
 	}
