@@ -18,12 +18,14 @@ public class Shifting extends Actions{
 	private Coordinates begin;
 	private Coordinates end;
 	private ArrayList<Coordinates> path;
+	private Boolean pathIsFound;
 	private Boolean finish;
 	
 	public Shifting(Schedule beginTime, Coordinates begin, Coordinates end){
 		this.setBeginTime(beginTime);
 		this.begin = begin;
 		this.end = end;
+		this.pathIsFound = false;
 		this.setReward(-5);
 		
 		finish=false;
@@ -74,6 +76,14 @@ public class Shifting extends Actions{
 
 	public void setFinish(Boolean finish) {
 		this.finish = finish;
+	}
+
+	public Boolean getPathIsFound() {
+		return pathIsFound;
+	}
+
+	public void setPathIsFound(Boolean pathIsFound) {
+		this.pathIsFound = pathIsFound;
 	}
 
 	public String toString(){

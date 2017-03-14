@@ -34,8 +34,8 @@ public class Routine {
 		dailyRoutine = new ArrayList<Actions>();
 		currentRoutine = new ArrayList<Actions>();
 		initDailyRoutine();
-		currentRoutine.add(dailyRoutine.get(0));
-		currentAction = dailyRoutine.get(2);
+		//currentRoutine.add(dailyRoutine.get(0));
+		//currentAction = dailyRoutine.get(2);
 	}
 	
 	public void initDailyRoutine(){
@@ -76,7 +76,7 @@ public class Routine {
 	public Actions moveFirstCurrentRoutine(){
 		if(!isEmptyCurrentRoutine()){
 			Actions  first = currentRoutine.get(0);
-			currentRoutine.remove(0);
+			currentRoutine.remove(currentRoutine.get(0));
 			return first;
 		}
 		System.out.println("ERREUR DANS L'AJOUT DE L'ACTION DE TETE");

@@ -41,9 +41,10 @@ public class Run {
 		
 		while(true){
 			if(run){
-				clock.increment();
+				initCurrentRoutine();
 				runRoutine();
 				gui.refreshGUI(city.getPopulation(), clock);
+				clock.increment();
 				try{
 					Thread.sleep(500);
 				}catch(InterruptedException e){
@@ -82,15 +83,18 @@ public class Run {
 		for (int i = 0; i < carListSize; i++) {
 			Character car = carList.get(i);
 			Actions carCurrentAction = car.getRoutine().getCurrentAction(); 
-			System.out.println("\t" + car.getFirstName() + " : " + carCurrentAction);
+			System.out.println(car.getFirstName() + " : " + carCurrentAction);
+			System.out.println("\t" + car.getRoutine().getDailyRoutine().toString());
+			System.out.println("\t" + car.getRoutine().getCurrentRoutine().toString());
 			ArrayList<Actions> carCurrentRoutine = car.getRoutine().getCurrentRoutine();
 			
 			//si il n'y a pas d'action courante
 			if(car.getRoutine().isEmptyCurrentAction()){
+				
 				if(!car.getRoutine().isEmptyCurrentRoutine()){
 					//si c'est l'heure d'ajouter une l'action de tete
 					if(equalSchedule(clock, carCurrentRoutine.get(0).getBeginTime())){
-						carCurrentAction = car.getRoutine().moveFirstCurrentRoutine();
+						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
 				}
 			}
@@ -99,6 +103,13 @@ public class Run {
 				//actions.Shifting
 				if(carCurrentAction.getClass().getName().equals("actions.Shifting")){
 					Shifting shift = (Shifting) car.getRoutine().getCurrentAction();
+					
+					if(!shift.getPathIsFound()){
+						shift.foundPath(city.getMap());
+						shift.setPathIsFound(true);
+					}
+					
+					
 					//si l'action n'est pas fini
 					if(!shift.getFinish()){
 						moveCharacter(car, shift.getPath().get(0));
@@ -114,22 +125,33 @@ public class Run {
 				//actions.Chilling
 				if(carCurrentAction.getClass().getName().equals("actions.Chilling")){
 					Chilling chill = (Chilling) car.getRoutine().getCurrentAction();
+					if(equalSchedule(clock, chill.getFinishTime())){
+						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+					}
 				}
 				
 				//actions.Entertain
 				if(carCurrentAction.getClass().getName().equals("actions.Entertain")){
 					Entertain enter = (Entertain) car.getRoutine().getCurrentAction();
+					if(equalSchedule(clock, enter.getFinishTime())){
+						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+					}
 				}
 				
 				//actions.Sleeping
 				if(carCurrentAction.getClass().getName().equals("actions.Sleeping")){
 					Sleeping sleep = (Sleeping) car.getRoutine().getCurrentAction();
-					sleep.getFinishTime().toString();
+					if(equalSchedule(clock, sleep.getFinishTime())){
+						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+					}
 				}
 				
 				//actions.Working
 				if(carCurrentAction.getClass().getName().equals("actions.Working")){
 					Working work = (Working) car.getRoutine().getCurrentAction();
+					if(equalSchedule(clock, work.getFinishTime())){
+						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+					}
 				}
 			}
 		}
