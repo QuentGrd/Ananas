@@ -92,8 +92,8 @@ public class Run {
 			if(car.getRoutine().isEmptyCurrentAction()){
 				
 				if(!car.getRoutine().isEmptyCurrentRoutine()){
-					//si c'est l'heure d'ajouter une l'action de tete
-					if(equalSchedule(clock, carCurrentRoutine.get(0).getBeginTime())){
+					//si c'est l'heure on ajoute l'action de tete
+					if(isPassed(clock, carCurrentRoutine.get(0).getBeginTime())){
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
 				}
@@ -127,7 +127,7 @@ public class Run {
 				//actions.Chilling
 				if(carCurrentAction.getClass().getName().equals("actions.Chilling")){
 					Chilling chill = (Chilling) car.getRoutine().getCurrentAction();
-					if(equalSchedule(clock, chill.getFinishTime())){
+					if(isPassed(clock, chill.getFinishTime())){
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
 				}
@@ -135,7 +135,7 @@ public class Run {
 				//actions.Entertain
 				if(carCurrentAction.getClass().getName().equals("actions.Entertain")){
 					Entertain enter = (Entertain) car.getRoutine().getCurrentAction();
-					if(equalSchedule(clock, enter.getFinishTime())){
+					if(isPassed(clock, enter.getFinishTime())){
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
 				}
@@ -143,7 +143,7 @@ public class Run {
 				//actions.Sleeping
 				if(carCurrentAction.getClass().getName().equals("actions.Sleeping")){
 					Sleeping sleep = (Sleeping) car.getRoutine().getCurrentAction();
-					if(equalSchedule(clock, sleep.getFinishTime())){
+					if(isPassed(clock, sleep.getFinishTime())){
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
 				}
@@ -151,7 +151,7 @@ public class Run {
 				//actions.Working
 				if(carCurrentAction.getClass().getName().equals("actions.Working")){
 					Working work = (Working) car.getRoutine().getCurrentAction();
-					if(equalSchedule(clock, work.getFinishTime())){
+					if(isPassed(clock, work.getFinishTime())){
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
 				}
@@ -191,6 +191,19 @@ public class Run {
 			
 			if(schedule.getMinute() == min1 || schedule.getMinute() == min2 || schedule.getMinute() == min3)
 				return true;
+			else
+				return false;
+		}
+		else
+			return false;
+	}
+	
+	public Boolean isPassed(Clock clock, Schedule schedule){
+		
+		if(clock.getHours().getCounter() >= schedule.getHour()){
+			if(clock.getMin().getCounter() >= schedule.getMinute()){
+				return true;
+			}
 			else
 				return false;
 		}
