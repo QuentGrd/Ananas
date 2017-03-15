@@ -12,6 +12,7 @@ public class Chilling extends Occupation{
 		this.setDuration(duration);
 		this.setFinishTime(calculFinishTime(beginTime, duration));
 		this.setReward(home.getReward());
+		this.setReward(10);
 		this.place = home;
 	}
 

@@ -130,6 +130,7 @@ public class Run {
 				if(carCurrentAction.getClass().getName().equals("actions.Chilling")){
 					Chilling chill = (Chilling) car.getRoutine().getCurrentAction();
 					if(isPassed(clock, chill.getFinishTime())){
+						System.out.println(chill.getReward());
 						car.getEmotion().increment((int)Math.abs(chill.getReward()));
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
@@ -139,6 +140,7 @@ public class Run {
 				if(carCurrentAction.getClass().getName().equals("actions.Entertain")){
 					Entertain enter = (Entertain) car.getRoutine().getCurrentAction();
 					if(isPassed(clock, enter.getFinishTime())){
+						System.out.println(enter.getReward());
 						car.getEmotion().increment((int)Math.abs(enter.getReward()));
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
@@ -148,6 +150,7 @@ public class Run {
 				if(carCurrentAction.getClass().getName().equals("actions.Sleeping")){
 					Sleeping sleep = (Sleeping) car.getRoutine().getCurrentAction();
 					if(isPassed(clock, sleep.getFinishTime())){
+						System.out.println(sleep.getReward());
 						car.getEmotion().increment((int)Math.abs(sleep.getReward()));
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
@@ -157,6 +160,7 @@ public class Run {
 				if(carCurrentAction.getClass().getName().equals("actions.Working")){
 					Working work = (Working) car.getRoutine().getCurrentAction();
 					if(isPassed(clock, work.getFinishTime())){
+						System.out.println(work.getReward());
 						car.getEmotion().decrement((int)Math.abs(work.getReward()));
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
