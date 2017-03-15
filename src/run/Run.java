@@ -83,9 +83,10 @@ public class Run {
 		for (int i = 0; i < carListSize; i++) {
 			Character car = carList.get(i);
 			Actions carCurrentAction = car.getRoutine().getCurrentAction(); 
-			System.out.println(car.getFirstName() + " : " + carCurrentAction);
-			System.out.println("\t" + car.getRoutine().getDailyRoutine().toString());
-			System.out.println("\t" + car.getRoutine().getCurrentRoutine().toString());
+			if(carCurrentAction != null)
+				System.out.println(car.getFirstName() + "["+ car.getEmotion().getCounter() +"] : " + carCurrentAction.getClass().getName());
+			else
+				System.out.println(car.getFirstName() + "["+ car.getEmotion().getCounter() +"] : " + carCurrentAction);
 			ArrayList<Actions> carCurrentRoutine = car.getRoutine().getCurrentRoutine();
 			
 			//si il n'y a pas d'action courante
@@ -113,6 +114,7 @@ public class Run {
 					//si l'action n'est pas fini
 					if(!shift.getFinish()){
 						moveCharacter(car, shift.getPath().get(0));
+						car.getEmotion().decrement();
 						shift.suppFirst();
 					}
 					//si l'action est fini
@@ -128,6 +130,7 @@ public class Run {
 				if(carCurrentAction.getClass().getName().equals("actions.Chilling")){
 					Chilling chill = (Chilling) car.getRoutine().getCurrentAction();
 					if(isPassed(clock, chill.getFinishTime())){
+						car.getEmotion().increment((int)Math.abs(chill.getReward()));
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
 				}
@@ -136,6 +139,7 @@ public class Run {
 				if(carCurrentAction.getClass().getName().equals("actions.Entertain")){
 					Entertain enter = (Entertain) car.getRoutine().getCurrentAction();
 					if(isPassed(clock, enter.getFinishTime())){
+						car.getEmotion().increment((int)Math.abs(enter.getReward()));
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
 				}
@@ -144,6 +148,7 @@ public class Run {
 				if(carCurrentAction.getClass().getName().equals("actions.Sleeping")){
 					Sleeping sleep = (Sleeping) car.getRoutine().getCurrentAction();
 					if(isPassed(clock, sleep.getFinishTime())){
+						car.getEmotion().increment((int)Math.abs(sleep.getReward()));
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
 				}
@@ -152,6 +157,7 @@ public class Run {
 				if(carCurrentAction.getClass().getName().equals("actions.Working")){
 					Working work = (Working) car.getRoutine().getCurrentAction();
 					if(isPassed(clock, work.getFinishTime())){
+						car.getEmotion().decrement((int)Math.abs(work.getReward()));
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
 				}
