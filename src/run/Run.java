@@ -117,6 +117,8 @@ public class Run {
 					}
 					//si l'action est fini
 					else{
+						shift.setFinish(false);
+						shift.foundPath(city.getMap());
 						if(!car.getRoutine().isEmptyCurrentRoutine())
 							car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
