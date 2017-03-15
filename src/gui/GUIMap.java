@@ -19,6 +19,8 @@ import trace.Road;
 
 public class GUIMap extends JPanel{
 
+	private static final long serialVersionUID = -2571888897605324494L;
+	
 	private int GRID_SIZE;
 	private Map map;
 	private Cell[][] jmap;
@@ -28,6 +30,8 @@ public class GUIMap extends JPanel{
 	private JPanel spriteMap;
 	private static final String SPRITEMAP = "Sprite Map";
 	private static final String GRIDMAP = "Grid Map";
+	
+	private MapManager mngr = new MapManager();
 
     public GUIMap(Map map) {
         setPreferredSize(new Dimension(600, 600));
@@ -52,11 +56,10 @@ public class GUIMap extends JPanel{
     	
     	this.add(spriteMap, SPRITEMAP);
     	this.add(gridMap, GRIDMAP);
-    	cl.show(this, SPRITEMAP);
+    	cl.show(this, GRIDMAP);
     }
     
     public void initMap(){
-    	MapManager mngr = new MapManager();
     	for (int x = 0; x < GRID_SIZE +1; x++) {
             for (int y = 0; y < GRID_SIZE +1; y++) {
             	if (x == GRID_SIZE){

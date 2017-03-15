@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -9,6 +10,7 @@ import javax.swing.JPanel;
 import building.Entertainment;
 import building.Home;
 import building.Work;
+import character.Character;
 import trace.Road;
 import utils.Coordinates;
 
@@ -74,4 +76,5 @@ public class MapManager {
 		//map.add(img);
 		return img;
 	}
+	
 }

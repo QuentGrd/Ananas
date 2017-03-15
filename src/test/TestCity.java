@@ -8,7 +8,7 @@ public class TestCity {
 		
 		Run run = new Run();
 		run.initialisation();
-		//run.run();
+		run.run();
 		
 		/*<AFFICHAGE SANS MOUVEMENT>
 		City city = new City();
