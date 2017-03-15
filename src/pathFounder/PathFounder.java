@@ -94,24 +94,23 @@ public class PathFounder {
 		
 
 		if(binaryMap.validCoord(currentX, currentY+1)){
-			result.add(binaryMap.getNode(currentX, currentY+1));
+			if(binaryMap.getNode(currentX, currentY+1).getType() != 1)
+				result.add(binaryMap.getNode(currentX, currentY+1));
 		}
 
 		if(binaryMap.validCoord(currentX, currentY-1)){
-			result.add(binaryMap.getNode(currentX, currentY-1));
+			if(binaryMap.getNode(currentX, currentY-1).getType() != 1)
+				result.add(binaryMap.getNode(currentX, currentY-1));
 		}
 
 		if(binaryMap.validCoord(currentX+1, currentY)){
-			result.add(binaryMap.getNode(currentX+1, currentY));
+			if(binaryMap.getNode(currentX+1, currentY).getType() != 1)
+				result.add(binaryMap.getNode(currentX+1, currentY));
 		}
 		
 		if(binaryMap.validCoord(currentX-1, currentY)){
-			result.add(binaryMap.getNode(currentX-1, currentY));
-		}
-		
-		for (int i = 0; i < result.size(); i++) {
-			if(result.get(i).getType() == 1)
-				result.remove(i);
+			if(binaryMap.getNode(currentX-1, currentY).getType() != 1)
+				result.add(binaryMap.getNode(currentX-1, currentY));
 		}
 		
 		return result;
