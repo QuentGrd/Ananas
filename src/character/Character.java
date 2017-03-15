@@ -110,7 +110,6 @@ public class Character {
 		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
 		str += "\tHome : " + this.home.getAddress().toString();
 		str += "\tWork : " + this.work.getAddress().toString();
-		str += routine.toString();
 		return str;
 	}
 }

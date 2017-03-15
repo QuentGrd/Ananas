@@ -15,6 +15,7 @@ public class Entertain extends Occupation{
 	public Entertain(Entertainment entertainment, Schedule beginTime, Schedule duration){
 		this.setBeginTime(beginTime);
 		this.setDuration(duration);
+		this.setFinishTime(calculFinishTime(beginTime, duration));
 		this.setReward(entertainment.getReward());
 		this.place = entertainment;
 	}

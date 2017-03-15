@@ -3,8 +3,12 @@ package run;
 import java.util.ArrayList;
 import java.util.Random;
 
-import actions.Occupation;
+import actions.Actions;
+import actions.Chilling;
+import actions.Entertain;
 import actions.Shifting;
+import actions.Sleeping;
+import actions.Working;
 import builders.CityBuilder;
 import character.Character;
 import city.City;
@@ -37,9 +41,10 @@ public class Run {
 		
 		while(true){
 			if(run){
-				clock.increment();
-				checkRoutine();
+				initCurrentRoutine();
+				runRoutine();
 				gui.refreshGUI(city.getPopulation(), clock);
+				clock.increment();
 				try{
 					Thread.sleep(500);
 				}catch(InterruptedException e){
@@ -68,48 +73,129 @@ public class Run {
 		car.setPosition(possibleMoves.get(selectedMove));
 	}
 	
-	/**
-	 * this methode check in all routine if there are a new action to do
-	 */
-	public void checkRoutine(){
+	
+	public void runRoutine(){
 		ArrayList<Character> carList = city.getPopulation().getListCharacter();
-		System.out.println("\n");
-		//pour tout les perso
-		for (int i = 0; i < carList.size(); i++) {
-			
-			Character car = carList.get(i);
-			System.out.println("\t" + car.getName() + " : " + car.getRoutine().getCurrentAction().toString());
-			System.out.println("\t\t" + car.getRoutine().getCurrentRoutine().toString());
-			
+		int carListSize = city.getPopulation().getNbOfCharacter();
 		
-			//ajout de l'action de la dailyRoutine dans la currentRoutine si c'est l'heure de debut
-			for (int j = 0; j < car.getRoutine().getDailyRoutine().size(); j++) {
+		System.out.println("\n");
+		
+		for (int i = 0; i < carListSize; i++) {
+			Character car = carList.get(i);
+			Actions carCurrentAction = car.getRoutine().getCurrentAction(); 
+			System.out.println(car.getFirstName() + " : " + carCurrentAction);
+			System.out.println("\t" + car.getRoutine().getDailyRoutine().toString());
+			System.out.println("\t" + car.getRoutine().getCurrentRoutine().toString());
+			ArrayList<Actions> carCurrentRoutine = car.getRoutine().getCurrentRoutine();
+			
+			//si il n'y a pas d'action courante
+			if(car.getRoutine().isEmptyCurrentAction()){
 				
-				int hour = car.getRoutine().getDailyRoutine().get(j).getBeginTime().getHour();
-				int minute = car.getRoutine().getDailyRoutine().get(j).getBeginTime().getMinute();
+				if(!car.getRoutine().isEmptyCurrentRoutine()){
+					//si c'est l'heure d'ajouter une l'action de tete
+					if(equalSchedule(clock, carCurrentRoutine.get(0).getBeginTime())){
+						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+					}
+				}
+			}
+			//si il y a une action courante
+			else{
+				//actions.Shifting
+				if(carCurrentAction.getClass().getName().equals("actions.Shifting")){
+					Shifting shift = (Shifting) car.getRoutine().getCurrentAction();
+					
+					if(!shift.getPathIsFound()){
+						shift.foundPath(city.getMap());
+						shift.setPathIsFound(true);
+					}
+					
+					
+					//si l'action n'est pas fini
+					if(!shift.getFinish()){
+						moveCharacter(car, shift.getPath().get(0));
+						shift.suppFirst();
+					}
+					//si l'action est fini
+					else{
+						shift.setFinish(false);
+						shift.foundPath(city.getMap());
+						if(!car.getRoutine().isEmptyCurrentRoutine())
+							car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+					}
+				}
 				
-				if(clock.getHours().getCounter() == hour && clock.getMin().getCounter() == minute){
+				//actions.Chilling
+				if(carCurrentAction.getClass().getName().equals("actions.Chilling")){
+					Chilling chill = (Chilling) car.getRoutine().getCurrentAction();
+					if(equalSchedule(clock, chill.getFinishTime())){
+						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+					}
+				}
+				
+				//actions.Entertain
+				if(carCurrentAction.getClass().getName().equals("actions.Entertain")){
+					Entertain enter = (Entertain) car.getRoutine().getCurrentAction();
+					if(equalSchedule(clock, enter.getFinishTime())){
+						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+					}
+				}
+				
+				//actions.Sleeping
+				if(carCurrentAction.getClass().getName().equals("actions.Sleeping")){
+					Sleeping sleep = (Sleeping) car.getRoutine().getCurrentAction();
+					if(equalSchedule(clock, sleep.getFinishTime())){
+						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+					}
+				}
+				
+				//actions.Working
+				if(carCurrentAction.getClass().getName().equals("actions.Working")){
+					Working work = (Working) car.getRoutine().getCurrentAction();
+					if(equalSchedule(clock, work.getFinishTime())){
+						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * this methode move all action from the dailyRoutine to the currentRoutine if it's a new day.
+	 */
+	public void initCurrentRoutine(){
+		
+		//si une nouvelle journée commence, on ajoute toute la dailyRoutine a la currentRoutine pour chaque perso
+		if(equalSchedule(clock, new Schedule(0,0))){
+			
+			ArrayList<Character> carList = city.getPopulation().getListCharacter();
+			int carListSize = city.getPopulation().getNbOfCharacter();
+			
+			//pour chaque personnage
+			for (int i = 0; i < carListSize; i++) {
+				Character car = carList.get(i);
+				
+				//on ajoute toute les action de la dailyRoutine
+				for (int j = 0; j < car.getRoutine().getDailyRoutine().size(); j++) {
 					car.getRoutine().getCurrentRoutine().add(car.getRoutine().getDailyRoutine().get(j));
 				}
 			}
-			
-			//gestion de l'action courante
-			//si l'action est un deplacment
-			if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Shifting")){
-				Shifting shift = (Shifting) car.getRoutine().getCurrentAction();
-				//si l'action n'est pas fini
-				if(!shift.getFinish()){
-					moveCharacter(car, shift.getPath().get(0));
-					shift.suppFirst();
-				}
-				//si l'action est fini
-				else{
-					if(car.getRoutine().getCurrentRoutine().size()>0)
-						car.getRoutine().setCurrentAction(car.getRoutine().getCurrentRoutine().get(0));
-				}
-			}
-			
 		}
+	}
+	
+	public Boolean equalSchedule(Clock clock, Schedule schedule){
+		
+		if(clock.getHours().getCounter() == schedule.getHour()){
+			int min1 = clock.getMin().getCounter();
+			int min2 = clock.getMin().getCounter()+1;
+			int min3 = clock.getMin().getCounter()+2;
+			
+			if(schedule.getMinute() == min1 || schedule.getMinute() == min2 || schedule.getMinute() == min3)
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;
 	}
 	
 	/**
