@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
@@ -24,11 +26,14 @@ public class GUIGraphicsMap extends JPanel{
 	public GUIGraphicsMap(Map map, Population pop){
 		this.map = map;
 		this.pop = pop;
+		this.addMouseListener(new GraphicsMouseListener());
 	}
 	
 	public void paintComponent(Graphics g){
+		
 		MapManager mngr = new MapManager();
 		Coordinates coord;
+		
 		int i = 0;
 		for(i=0; i<map.getWorkList().size(); i++){
 			coord = map.getWorkList().get(i).getPosition();
@@ -54,7 +59,37 @@ public class GUIGraphicsMap extends JPanel{
 			coord = pop.getListCharacter().get(i).getPosition();
 			g.drawImage(mngr.printCharacter(pop.getListCharacter().get(i)), coord.getY()*20, coord.getX()*20, this);
 		}
+		
 		System.out.println("Fin");
+	}
+	
+	
+	class GraphicsMouseListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			System.out.println("MouseListening");
+			System.out.println(e.getY() + ", " + e.getX());
+			int x = (e.getY() - 5)/19;
+			int y = (e.getX() - 5)/19;
+			System.out.println(map.getInfrastructure(x, y));
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+		}
 	}
 	
 }
