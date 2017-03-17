@@ -34,6 +34,7 @@ public class GUIMap extends JPanel{
 	private JPanel spriteMap;
 	private JPanel buildings;
 	private GUICharacters characters;
+	private GUIGraphicsMap gmap;
 	private OverlayLayout overl ;
 	private static final String SPRITEMAP = "Sprite Map";
 	private static final String GRIDMAP = "Grid Map";
@@ -60,6 +61,7 @@ public class GUIMap extends JPanel{
     	spriteMap = new JPanel();
     	buildings = new GUIBuildings(map);
     	characters = new GUICharacters(pop);
+    	gmap = new GUIGraphicsMap(map, pop);
     	
     	this.setLayout(cl);
     	gridMap.setLayout(new GridLayout(GRID_SIZE+1, GRID_SIZE+1));
@@ -67,8 +69,9 @@ public class GUIMap extends JPanel{
     	//characters.setLayout(null);
     	overl = new OverlayLayout(spriteMap);
     	spriteMap.setLayout(overl);
-    	//spriteMap.add(characters);
-    	spriteMap.add(buildings);
+    	/*spriteMap.add(characters);
+    	spriteMap.add(buildings);*/
+    	spriteMap.add(gmap);
     	
     	this.add(spriteMap, SPRITEMAP);
     	this.add(gridMap, GRIDMAP);
@@ -143,6 +146,7 @@ public class GUIMap extends JPanel{
 	 * this method actualize the map to see the population
 	 */
 	public void refreshMap(Population pop){
+		gmap.repaint();
 		for (int x = 0; x < map.getSize(); x++) {
 			for (int y = 0; y < map.getSize(); y++) {
 				switch(map.getInfrastructure(x, y).getType()){

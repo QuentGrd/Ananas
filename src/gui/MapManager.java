@@ -64,7 +64,7 @@ public class MapManager {
 		return sprite.getImage();
 	}
 	
-	public JLabel printRoad(Road road, JPanel map){
+	public Image printRoad(Road road){
 		Coordinates coord = road.getPosition();
 		Coordinates size = road.getSize();
 		JLabel img = new JLabel();
@@ -77,18 +77,17 @@ public class MapManager {
 		img.setIcon(sprite);
 		img.setBounds((coord.getY()*20), (coord.getX()*20), (size.getY()*20), (size.getX()*20));
 		//map.add(img);
-		return img;
+		return sprite.getImage();
 	}
 	
-	public JLabel printCharacter(Character c, JPanel map){
+	public Image printCharacter(Character c){
 		Coordinates coord = c.getPosition();
 		JLabel img = new JLabel();
-		ImageIcon sprite = new ImageIcon(System.getProperty("user.dir") + "/res/img/enter.png");
+		ImageIcon sprite = new ImageIcon(System.getProperty("user.dir") + "/res/img/players.png");
 		sprite = new ImageIcon(sprite.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		img.setIcon(sprite);
 		img.setBounds((coord.getY()*20), (coord.getX()*20), 20, 20);
-		map.add(img);
-		return img;
+		return sprite.getImage();
 	}
 	
 }

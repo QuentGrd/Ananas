@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import building.Entertainment;
 import building.Home;
 import building.Work;
+import trace.Road;
 
 /**
  * 
@@ -21,6 +22,7 @@ public class Map implements Serializable{
 	private ArrayList<Home> homeList;
 	private ArrayList<Work> workList;
 	private ArrayList<Entertainment> entertainmentList;
+	private ArrayList<Road> roadList;
 	
 	private int size;
 	
@@ -30,6 +32,7 @@ public class Map implements Serializable{
 		homeList = new ArrayList<Home>();
 		workList = new ArrayList<Work>();
 		entertainmentList = new ArrayList<Entertainment>();
+		roadList = new ArrayList<Road>();
 	}
 	
 	public Infrastructure[][] getGrid() {
@@ -70,6 +73,14 @@ public class Map implements Serializable{
 
 	public void setEntertainmentList(ArrayList<Entertainment> entertainmentList) {
 		this.entertainmentList = entertainmentList;
+	}
+
+	public ArrayList<Road> getRoadList() {
+		return roadList;
+	}
+
+	public void setRoadList(ArrayList<Road> roadList) {
+		this.roadList = roadList;
 	}
 
 	public String toString(){

@@ -27,7 +27,7 @@ public class GUICharacters extends JPanel{
 		characs = new ArrayList<CharacterSprite>();
 		int i;
 		for (i=0; i<nbSprite; i++){
-			System.out.println(pop.getListCharacter().get(i));
+			//System.out.println(pop.getListCharacter().get(i));
 			characs.add(new CharacterSprite(pop.getListCharacter().get(i)));
 		}
 	}
