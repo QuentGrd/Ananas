@@ -1,12 +1,14 @@
 package gui;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import utils.Coordinates;
-
 import character.Character;
+import utils.Coordinates;
 
 /**
  * 
@@ -26,7 +28,13 @@ public class CharacterSprite {
 	}
 	
 	public void initSprite(){
-		ImageIcon sprite = new ImageIcon(System.getProperty("user.dir") + "/res/img/player.png");
+		/*try {
+			img = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/players.png"));
+			img.getScaledInstance(20, 20, Image.SCALE_DEFAULT);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}*/
+		ImageIcon sprite = new ImageIcon(System.getProperty("user.dir") + "/res/img/players.png");
 		sprite = new ImageIcon(sprite.getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		img = sprite.getImage();
 	}

@@ -29,17 +29,17 @@ public class MapManager {
 		
 	}
 	
-	public JLabel printHome(Home home, JPanel map){
+	public Image printHome(Home home){
 		Coordinates coord = home.getPosition();
 		JLabel img = new JLabel();
 		ImageIcon sprite = new ImageIcon(System.getProperty("user.dir") + "/res/img/home.png");
 		img.setIcon(sprite);
 		img.setBounds((coord.getY()*20), (coord.getX()*20), 40, 40);
 		//map.add(img);
-		return img;
+		return sprite.getImage();
 	}
 	
-	public JLabel printWork(Work work, JPanel map){
+	public Image printWork(Work work){
 		Coordinates coord = work.getPosition();
 		Coordinates size = work.getSize();
 		JLabel img = new JLabel();
@@ -49,10 +49,10 @@ public class MapManager {
 		//img.setSize(size.getX(), size.getY());
 		img.setBounds((coord.getY()*20), (coord.getX()*20), (size.getY()*20), (size.getX()*20));
 		//map.add(img);
-		return img;
+		return sprite.getImage();
 	}
 	
-	public JLabel printEntertainment(Entertainment enter, JPanel map){
+	public Image printEntertainment(Entertainment enter){
 		Coordinates coord = enter.getPosition();
 		Coordinates size = enter.getSize();
 		JLabel img = new JLabel();
@@ -61,7 +61,7 @@ public class MapManager {
 		img.setIcon(sprite);
 		img.setBounds((coord.getY()*20), (coord.getX()*20), (size.getY()*20), (size.getX()*20));
 		//map.add(img);
-		return img;
+		return sprite.getImage();
 	}
 	
 	public JLabel printRoad(Road road, JPanel map){

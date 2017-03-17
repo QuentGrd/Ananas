@@ -37,7 +37,8 @@ public class GUICharacters extends JPanel{
         //draw(g);
         int i;
         for(i=0; i<pop.getListCharacter().size(); i++){
-        	g.fillOval((pop.getListCharacter().get(i).getPosition().getY())*20, (pop.getListCharacter().get(i).getPosition().getX())*20, 20, 20);
+        	//g.fillOval((pop.getListCharacter().get(i).getPosition().getY())*20, (pop.getListCharacter().get(i).getPosition().getX())*20, 20, 20);
+        	g.drawImage(characs.get(i).getImg(), characs.get(i).getCharac().getPosition().getY()*20, characs.get(i).getCharac().getPosition().getX()*20, this);
         }
     }
 	

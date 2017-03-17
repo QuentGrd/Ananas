@@ -58,16 +58,16 @@ public class GUIMap extends JPanel{
     	cl = new CardLayout();
     	gridMap = new JPanel();
     	spriteMap = new JPanel();
-    	buildings = new JPanel();
+    	buildings = new GUIBuildings(map);
     	characters = new GUICharacters(pop);
     	
     	this.setLayout(cl);
     	gridMap.setLayout(new GridLayout(GRID_SIZE+1, GRID_SIZE+1));
-    	buildings.setLayout(null);
-    	characters.setLayout(null);
+    	//buildings.setLayout(null);
+    	//characters.setLayout(null);
     	overl = new OverlayLayout(spriteMap);
     	spriteMap.setLayout(overl);
-    	spriteMap.add(characters);
+    	//spriteMap.add(characters);
     	spriteMap.add(buildings);
     	
     	this.add(spriteMap, SPRITEMAP);
@@ -95,19 +95,19 @@ public class GUIMap extends JPanel{
 	                JLabel sprite = new JLabel();
 	                switch(map.getInfrastructure(x, y).getType()){
 						case 1:
-							sprite = mngr.printHome((Home) map.getInfrastructure(x, y), buildings);
+							//sprite = mngr.printHome((Home) map.getInfrastructure(x, y), buildings);
 							cell.setBackground(new Color(52, 152, 219));
 							break;
 						case 2:
-							sprite = mngr.printWork((Work) map.getInfrastructure(x, y), buildings);
+							//sprite = mngr.printWork((Work) map.getInfrastructure(x, y), buildings);
 							cell.setBackground(new Color(231, 76, 60));
 							break;
 						case 3:
-							sprite = mngr.printEntertainment((Entertainment) map.getInfrastructure(x, y), buildings);
+							//sprite = mngr.printEntertainment((Entertainment) map.getInfrastructure(x, y), buildings);
 							cell.setBackground(new Color(39, 174, 96));
 							break;
 						case 4:
-							sprite = mngr.printRoad((Road) map.getInfrastructure(x, y), buildings);
+							//sprite = mngr.printRoad((Road) map.getInfrastructure(x, y), buildings);
 							cell.setBackground(new Color(149, 165, 166));
 							break;
 						default:
@@ -132,7 +132,7 @@ public class GUIMap extends JPanel{
 	                sprite.addMouseListener(ml);
 	                jmap[x][y] = cell;
 	                gridMap.add(jmap[x][y]);
-	                buildings.add(sprite);
+	                //buildings.add(sprite);
 				}
        
             }
@@ -165,6 +165,7 @@ public class GUIMap extends JPanel{
 			}
 			
 		}
+		buildings.repaint();
 		
 		for (int i = 0; i < pop.getListCharacter().size(); i++) {
 			int xPosition = pop.getListCharacter().get(i).getPosition().getX();
@@ -177,6 +178,7 @@ public class GUIMap extends JPanel{
 			setCaseColor(xWork, yWork, new Color(255,215,0), ""+i);
 			setCaseColor(xPosition, yPosition, new Color(155,48,255), ""+i);
 		}
+		characters.repaint();
 	}
 	
 	/**
