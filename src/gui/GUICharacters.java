@@ -32,19 +32,13 @@ public class GUICharacters extends JPanel{
 		}
 	}
 	
-	public void draw(Graphics g){
-		 Graphics2D g2d = (Graphics2D) g;
-		 int i;
-		 for (i=0; i<pop.getListCharacter().size(); i++){
-			 g2d.drawImage(characs.get(i).getImg(), characs.get(i).getCoord().getX(), characs.get(i).getCoord().getY(), this);
-		 }
-	}
-	
-	 @Override
-	    public void paintComponent(Graphics g) {
-	        super.paintComponent(g);
-	        draw(g);
-	        Toolkit.getDefaultToolkit().sync();
-	    }
+    public void paintComponent(Graphics g) {
+        System.out.println("Zbeb");
+        //draw(g);
+        int i;
+        for(i=0; i<pop.getListCharacter().size(); i++){
+        	g.fillOval((pop.getListCharacter().get(i).getPosition().getY())*20, (pop.getListCharacter().get(i).getPosition().getX())*20, 20, 20);
+        }
+    }
 	
 }
