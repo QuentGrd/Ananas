@@ -43,6 +43,7 @@ public class Run {
 			if(run){
 				initCurrentRoutine();
 				runRoutine();
+				lifeManagment();
 				gui.refreshGUI(city.getPopulation(), clock);
 				clock.increment();
 				try{
@@ -73,7 +74,9 @@ public class Run {
 		car.setPosition(possibleMoves.get(selectedMove));
 	}
 	
-	
+	/**
+	 * this methode manage all routine features
+	 */
 	public void runRoutine(){
 		ArrayList<Character> carList = city.getPopulation().getListCharacter();
 		int carListSize = city.getPopulation().getNbOfCharacter();
@@ -165,6 +168,19 @@ public class Run {
 						car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
 					}
 				}
+			}
+		}
+	}
+	
+	public void lifeManagment(){
+		ArrayList<Character> carList = city.getPopulation().getListCharacter();
+		int carListSize = city.getPopulation().getNbOfCharacter();
+		
+		for (int i = 0; i < carListSize; i++) {
+			Character car = carList.get(i); //<!> ERREUR
+			 
+			if(car.getEmotion().getCounter() == 0){
+				//carList.remove(carList.get(i));
 			}
 		}
 	}

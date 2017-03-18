@@ -32,7 +32,7 @@ public class Clock extends Thread{
 	 * This method increment the clock
 	 */
 	public void increment(){
-		min.increment(6);
+		min.increment(15);
 		if(min.getCounter() == min.getMin()){
 			hours.increment();
 			if(hours.getCounter() == hours.getMin()){
