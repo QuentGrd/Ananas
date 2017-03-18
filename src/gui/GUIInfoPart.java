@@ -42,6 +42,7 @@ public class GUIInfoPart extends JPanel{
 	private String textDefault = "First Name:\nName:\nID:\nEmotion:\nHome:\nWork:\n";
 	
 	private JPanel characterListPanel;
+	private GUIGraphicsInfo ginfo;
 	private static final String INFOPANEL = "Information Panel";
 	private static final String CHARACTERPANEL = "Character list Panel";
 	private JScrollPane listScroller;
@@ -58,12 +59,13 @@ public class GUIInfoPart extends JPanel{
 	}
 	
 	public void initCardLayout(){
+		ginfo = new GUIGraphicsInfo(pop);
 		cl = new CardLayout();
 		cardsContainer = new JPanel();
 		this.initInfoPanel();
 		this.initCharacterListPanel();
 		cardsContainer.setLayout(cl);
-		cardsContainer.add(characterListPanel, CHARACTERPANEL);
+		cardsContainer.add(/*characterListPanel*/ ginfo, CHARACTERPANEL);
 		cardsContainer.add(infoPart, INFOPANEL);
 		cl.show(cardsContainer, CHARACTERPANEL);
 	}
@@ -104,6 +106,10 @@ public class GUIInfoPart extends JPanel{
 		listScroller = new JScrollPane(characterList);
 		listScroller.setPreferredSize(new Dimension(390, 590));
 		characterListPanel.add(listScroller);
+	}
+	
+	public void refesh(){
+		ginfo.repaint();
 	}
 	
 	public String getCharacInfo(character.Character c){

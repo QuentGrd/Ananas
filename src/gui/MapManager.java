@@ -35,7 +35,6 @@ public class MapManager {
 		ImageIcon sprite = new ImageIcon(System.getProperty("user.dir") + "/res/img/home.png");
 		img.setIcon(sprite);
 		img.setBounds((coord.getY()*20), (coord.getX()*20), 40, 40);
-		//map.add(img);
 		return sprite.getImage();
 	}
 	
@@ -46,9 +45,7 @@ public class MapManager {
 		ImageIcon sprite = new ImageIcon(System.getProperty("user.dir") + "/res/img/work.png");
 		sprite = new ImageIcon(sprite.getImage().getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT));
 		img.setIcon(sprite);
-		//img.setSize(size.getX(), size.getY());
 		img.setBounds((coord.getY()*20), (coord.getX()*20), (size.getY()*20), (size.getX()*20));
-		//map.add(img);
 		return sprite.getImage();
 	}
 	
@@ -60,7 +57,6 @@ public class MapManager {
 		sprite = new ImageIcon(sprite.getImage().getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT));
 		img.setIcon(sprite);
 		img.setBounds((coord.getY()*20), (coord.getX()*20), (size.getY()*20), (size.getX()*20));
-		//map.add(img);
 		return sprite.getImage();
 	}
 	
@@ -76,7 +72,6 @@ public class MapManager {
 		sprite = new ImageIcon(sprite.getImage().getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT));
 		img.setIcon(sprite);
 		img.setBounds((coord.getY()*20), (coord.getX()*20), (size.getY()*20), (size.getX()*20));
-		//map.add(img);
 		return sprite.getImage();
 	}
 	

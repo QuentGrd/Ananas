@@ -26,7 +26,6 @@ public class GUIMap extends JPanel{
 	private CardLayout cl;
 	private JPanel gridMap;
 	private JPanel spriteMap;
-	private GUIGraphicsMap gmap;
 	private static final String SPRITEMAP = "Sprite Map";
 	private static final String GRIDMAP = "Grid Map";
 
@@ -118,7 +117,7 @@ public class GUIMap extends JPanel{
 	 * this method actualize the map to see the population
 	 */
 	public void refreshMap(Population pop){
-		gmap.repaint();
+		spriteMap.repaint();
 		for (int x = 0; x < map.getSize(); x++) {
 			for (int y = 0; y < map.getSize(); y++) {
 				switch(map.getInfrastructure(x, y).getType()){

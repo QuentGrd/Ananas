@@ -58,5 +58,6 @@ public class GUIMain extends JFrame{
 	public void refreshGUI(Population pop, Clock clock){
 		gmap.refreshMap(pop);
 		clockInfo.refreshClock(clock);
+		info.refesh();
 	}
 }
