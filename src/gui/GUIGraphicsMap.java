@@ -70,8 +70,8 @@ public class GUIGraphicsMap extends JPanel{
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("MouseListening");
 			System.out.println(e.getY() + ", " + e.getX());
-			int x = (e.getY() - 5)/19;
-			int y = (e.getX() - 5)/19;
+			int x = (e.getY()/20);
+			int y = e.getX()/20;
 			System.out.println(map.getInfrastructure(x, y));
 		}
 
