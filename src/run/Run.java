@@ -17,6 +17,11 @@ import clock.Schedule;
 import gui.GUIMain;
 import utils.Coordinates;
 
+/**
+ * 
+ * @author matthieu
+ *
+ */
 public class Run {
 
 	private City city;
@@ -39,21 +44,22 @@ public class Run {
 	
 	public void run(){
 		
-		while(true){
-			if(run){
-				initCurrentRoutine();
-				runRoutine();
-				lifeManagment();
-				gui.refreshGUI(city.getPopulation(), clock);
-				clock.increment();
-				try{
-					Thread.sleep(500);
-				}catch(InterruptedException e){
-					Thread.currentThread().interrupt();
-					e.printStackTrace();
-				}
+		while(run){
+			
+			initCurrentRoutine();
+			runRoutine();
+			lifeManagment();
+			run = !endOfTheGame();
+			gui.refreshGUI(city.getPopulation(), clock);
+			clock.increment();
+			try{
+				Thread.sleep(500);
+			}catch(InterruptedException e){
+				Thread.currentThread().interrupt();
+				e.printStackTrace();
 			}
 		}
+		System.out.println("###### FIN DU JEU ######\n## MERCI D'AVOIR JOUE ##");
 	}
 	
 	public void movePopulation(){
@@ -174,12 +180,15 @@ public class Run {
 		}
 	}
 	
+	/**
+	 * this methode manage the life of character
+	 */
 	public void lifeManagment(){
 		ArrayList<Character> carList = city.getPopulation().getListCharacter();
 		int carListSize = city.getPopulation().getNbOfCharacter();
 		
 		for (int i = 0; i < carListSize; i++) {
-			Character car = carList.get(i); //<!> ERREUR
+			Character car = carList.get(i);
 			 
 			if(car.getAlive() == true){
 				if(car.getEmotion().getCounter() == 0){
@@ -187,6 +196,14 @@ public class Run {
 				}
 			}
 		}
+	}
+	
+	public Boolean endOfTheGame(){
+		for (int i = 0; i < city.getPopulation().getListCharacter().size(); i++) {
+			if(city.getPopulation().getListCharacter().get(i).getAlive() == true)
+				return false;
+		}
+		return true;
 	}
 	
 	/**
