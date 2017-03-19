@@ -18,7 +18,7 @@ public class GUIGraphicsInfo extends JPanel{
 
 	private static final long serialVersionUID = -451852768204398689L;
 
-	private static final int chPerRow = 2;
+	private static final int chPerRow = 1;
 	private static final int width = 400;
 	private static final int height = 600;
 	
@@ -27,6 +27,17 @@ public class GUIGraphicsInfo extends JPanel{
 	public GUIGraphicsInfo(Population pop){
 		this.pop = pop;
 		this.setPreferredSize(new Dimension(width, height));
+	}
+	
+	public int getPopIndex(int x, int y){
+		int i = 0;
+		int nbCharac = pop.getNbOfCharacter();
+		int cellHeight = height/((nbCharac/chPerRow)+(nbCharac%chPerRow));
+		int widthCell = width/chPerRow;
+		int currentRow = (y/cellHeight);
+		int currentCol = (x/widthCell);
+		i = (currentRow*chPerRow) + currentCol;
+		return i;
 	}
 	
 	public void paintComponent(Graphics g){

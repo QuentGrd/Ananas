@@ -78,14 +78,14 @@ public class Run {
 		ArrayList<Character> carList = city.getPopulation().getListCharacter();
 		int carListSize = city.getPopulation().getNbOfCharacter();
 		
-		System.out.println("\n");
+		//System.out.println("\n");
 		
 		for (int i = 0; i < carListSize; i++) {
 			Character car = carList.get(i);
 			Actions carCurrentAction = car.getRoutine().getCurrentAction(); 
-			System.out.println(car.getFirstName() + " : " + carCurrentAction);
+			/*System.out.println(car.getFirstName() + " : " + carCurrentAction);
 			System.out.println("\t" + car.getRoutine().getDailyRoutine().toString());
-			System.out.println("\t" + car.getRoutine().getCurrentRoutine().toString());
+			System.out.println("\t" + car.getRoutine().getCurrentRoutine().toString());*/
 			ArrayList<Actions> carCurrentRoutine = car.getRoutine().getCurrentRoutine();
 			
 			//si il n'y a pas d'action courante
