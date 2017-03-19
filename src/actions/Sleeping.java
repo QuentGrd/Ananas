@@ -11,7 +11,7 @@ public class Sleeping extends Occupation{
 		this.setBeginTime(beginTime);
 		this.setDuration(duration);
 		this.setFinishTime(calculFinishTime(beginTime, duration));
-		this.setReward(home.getReward());
+		this.setReward(30);
 		this.place = home;
 	}
 

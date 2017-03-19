@@ -2,6 +2,7 @@ package builders;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -9,8 +10,6 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import building.Home;
-import building.Work;
 import character.Character;
 import character.Routine;
 import city.Map;
@@ -32,10 +31,12 @@ public class CharacterBuilder {
 	 * initialize the different component of the character by using the other methodes
 	 */
 	public void initCharacter(){
+		character.setAlive(true);
 		initCharacterName();
 		initCharacterFirstName();
-		character.setAge(randomSelection(1, 100));
+		character.setAge(randomSelection(10, 100));
 		character.setEmotion(new BoundedCounter(75, 0, 100));
+		character.setEmotionHistoric(new ArrayList<Integer>());
 	}
 	
 	/**
