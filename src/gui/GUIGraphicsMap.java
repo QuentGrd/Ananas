@@ -56,8 +56,10 @@ public class GUIGraphicsMap extends JPanel{
 		}
 		
 		for(i=0; i<pop.getListCharacter().size(); i++){
-			coord = pop.getListCharacter().get(i).getPosition();
-			g.drawImage(mngr.printCharacter(pop.getListCharacter().get(i)), coord.getY()*20, coord.getX()*20, this);
+			if (pop.getListCharacter().get(i).getAlive()){
+				coord = pop.getListCharacter().get(i).getPosition();
+				g.drawImage(mngr.printCharacter(pop.getListCharacter().get(i)), coord.getY()*20, coord.getX()*20, this);
+			}
 		}
 	}
 	
