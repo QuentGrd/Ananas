@@ -10,16 +10,14 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import building.Entertainment;
-import building.Home;
-import building.Work;
 import city.Map;
 import city.Population;
-import trace.Road;
 
 public class GUIMap extends JPanel{
 
 	private static final long serialVersionUID = -2571888897605324494L;
+	
+	private Population pop;
 	
 	private int GRID_SIZE;
 	private Map map;
@@ -30,10 +28,10 @@ public class GUIMap extends JPanel{
 	private JPanel spriteMap;
 	private static final String SPRITEMAP = "Sprite Map";
 	private static final String GRIDMAP = "Grid Map";
-	
-	private MapManager mngr = new MapManager();
 
-    public GUIMap(Map map) {
+    public GUIMap(Map map, Population pop) {
+    	this.pop = pop;
+    	
         setPreferredSize(new Dimension(600, 600));
         
         this.map = map;
@@ -48,15 +46,14 @@ public class GUIMap extends JPanel{
     public void initCardLayout(){
     	cl = new CardLayout();
     	gridMap = new JPanel();
-    	spriteMap = new JPanel();
+    	spriteMap = new GUIGraphicsMap(map, pop);
     	
     	this.setLayout(cl);
     	gridMap.setLayout(new GridLayout(GRID_SIZE+1, GRID_SIZE+1));
-    	spriteMap.setLayout(null);
     	
     	this.add(spriteMap, SPRITEMAP);
     	this.add(gridMap, GRIDMAP);
-    	cl.show(this, GRIDMAP);
+    	cl.show(this, SPRITEMAP);
     }
     
     public void initMap(){
@@ -76,22 +73,17 @@ public class GUIMap extends JPanel{
 				}
 				else{
 	                Cell cell = new Cell(x, y);
-	                JLabel sprite = new JLabel();
 	                switch(map.getInfrastructure(x, y).getType()){
 						case 1:
-							sprite = mngr.printHome((Home) map.getInfrastructure(x, y), spriteMap);
 							cell.setBackground(new Color(52, 152, 219));
 							break;
 						case 2:
-							sprite = mngr.printWork((Work) map.getInfrastructure(x, y), spriteMap);
 							cell.setBackground(new Color(231, 76, 60));
 							break;
 						case 3:
-							sprite = mngr.printEntertainment((Entertainment) map.getInfrastructure(x, y), spriteMap);
 							cell.setBackground(new Color(39, 174, 96));
 							break;
 						case 4:
-							sprite = mngr.printRoad((Road) map.getInfrastructure(x, y), spriteMap);
 							cell.setBackground(new Color(149, 165, 166));
 							break;
 						default:
@@ -104,23 +96,17 @@ public class GUIMap extends JPanel{
 	                        click(e, cell);
 	                    }
 						public void mousePressed(MouseEvent e) {
-	
 						}
 						public void mouseReleased(MouseEvent e) {
-		
 						}
 						public void mouseEntered(MouseEvent e) {
-		
 						}
 						public void mouseExited(MouseEvent e) {
-	
 						}
 	                };
 	                cell.addMouseListener(ml);
-	                sprite.addMouseListener(ml);
 	                jmap[x][y] = cell;
 	                gridMap.add(jmap[x][y]);
-	                spriteMap.add(sprite);
 				}
        
             }
@@ -128,9 +114,10 @@ public class GUIMap extends JPanel{
     }
     
     /**
-	 * this methode actualize the map to see the population
+	 * this method actualize the map to see the population
 	 */
 	public void refreshMap(Population pop){
+		spriteMap.repaint();
 		for (int x = 0; x < map.getSize(); x++) {
 			for (int y = 0; y < map.getSize(); y++) {
 				switch(map.getInfrastructure(x, y).getType()){
@@ -168,7 +155,7 @@ public class GUIMap extends JPanel{
 	}
 	
 	/**
-	 * this methode set the background the case (x,y) to color 
+	 * this method set the background the case (x,y) to color 
 	 * @param x
 	 * @param y
 	 * @param color

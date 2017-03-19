@@ -27,7 +27,7 @@ public class GUIMain extends JFrame{
 	private GUIInfoPart info;
 	
 	public GUIMain(Map map, Clock clock, Population pop){
-		gmap = new GUIMap(map);
+		gmap = new GUIMap(map, pop);
 		clockInfo = new GUIClockInfo(clock);
 		info = new GUIInfoPart(pop);
 		draw();
@@ -58,5 +58,6 @@ public class GUIMain extends JFrame{
 	public void refreshGUI(Population pop, Clock clock){
 		gmap.refreshMap(pop);
 		clockInfo.refreshClock(clock);
+		info.refesh();
 	}
 }

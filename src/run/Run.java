@@ -87,10 +87,11 @@ public class Run {
 		ArrayList<Character> carList = city.getPopulation().getListCharacter();
 		int carListSize = city.getPopulation().getNbOfCharacter();
 		
-		System.out.println("\n");
+		//System.out.println("\n");
 		
 		for (int i = 0; i < carListSize; i++) {
 			Character car = carList.get(i);
+      
 			if(car.getAlive() == true){
 				Actions carCurrentAction = car.getRoutine().getCurrentAction(); 
 				if(carCurrentAction != null)

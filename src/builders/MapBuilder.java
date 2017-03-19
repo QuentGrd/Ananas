@@ -151,6 +151,8 @@ public class MapBuilder {
 						case 4: //Type 4 is Normal Roads
 							Road road = new Road(Integer.parseInt(record.get(POSX)), Integer.parseInt(record.get(POSY)),
 									Integer.parseInt(record.get(SIZEX)), Integer.parseInt(record.get(SIZEY)));
+							
+							map.getRoadList().add(road);
 							this.addToGrid(road);
 							break;
 						default: //Default case

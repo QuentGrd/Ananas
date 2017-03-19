@@ -19,6 +19,8 @@ import javax.swing.ListSelectionModel;
 
 import city.Population;
 
+import character.Character;
+
 /**
  * 
  * @author Quentin - matthieu
@@ -42,6 +44,7 @@ public class GUIInfoPart extends JPanel{
 	private String textDefault = "First Name:\nName:\nID:\nEmotion:\nHome:\nWork:\n";
 	
 	private JPanel characterListPanel;
+	private GUIGraphicsInfo ginfo;
 	private static final String INFOPANEL = "Information Panel";
 	private static final String CHARACTERPANEL = "Character list Panel";
 	private JScrollPane listScroller;
@@ -58,12 +61,14 @@ public class GUIInfoPart extends JPanel{
 	}
 	
 	public void initCardLayout(){
+		ginfo = new GUIGraphicsInfo(pop);
+		ginfo.addMouseListener(new MouseListListener());
 		cl = new CardLayout();
 		cardsContainer = new JPanel();
 		this.initInfoPanel();
 		this.initCharacterListPanel();
 		cardsContainer.setLayout(cl);
-		cardsContainer.add(characterListPanel, CHARACTERPANEL);
+		cardsContainer.add(/*characterListPanel*/ ginfo, CHARACTERPANEL);
 		cardsContainer.add(infoPart, INFOPANEL);
 		cl.show(cardsContainer, CHARACTERPANEL);
 	}
@@ -106,6 +111,10 @@ public class GUIInfoPart extends JPanel{
 		characterListPanel.add(listScroller);
 	}
 	
+	public void refesh(){
+		ginfo.repaint();
+	}
+	
 	public String getCharacInfo(character.Character c){
 		String info = null;
 		if (c == null)
@@ -125,8 +134,12 @@ public class GUIInfoPart extends JPanel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			if (e.getClickCount() == 2){
-				int i = characterList.getSelectedIndex();
+				/*int i = characterList.getSelectedIndex();
 				character.Character charac = pop.getListCharacter().get(i);
+				infoText.setText(getCharacInfo(charac));
+				cl.show(cardsContainer, INFOPANEL);*/
+				System.out.println("Index: " + ginfo.getPopIndex(e.getX(), e.getY()));
+				Character charac = pop.getListCharacter().get(ginfo.getPopIndex(e.getX(), e.getY()));
 				infoText.setText(getCharacInfo(charac));
 				cl.show(cardsContainer, INFOPANEL);
 			}
