@@ -3,6 +3,8 @@ package run;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import actions.Actions;
 import actions.Chilling;
 import actions.Entertain;
@@ -59,7 +61,9 @@ public class Run {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("###### FIN DU JEU ######\n## MERCI D'AVOIR JOUE ##");
+		JOptionPane jop1 = new JOptionPane();
+
+		jop1.showMessageDialog(null, "Vous avez perdu !\nMerci d'avoir joué", "Fin du jeu", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public void movePopulation(){
