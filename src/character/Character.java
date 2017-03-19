@@ -1,5 +1,7 @@
 package character;
 
+import java.util.ArrayList;
+
 import building.Home;
 import building.Work;
 import utils.BoundedCounter;
@@ -21,6 +23,8 @@ public class Character {
 	private BoundedCounter emotion;
 	private String id;
 	private Boolean alive;
+	
+	private ArrayList<Integer> emotionHistoric;
 	
 	private Coordinates position;
 	
@@ -107,6 +111,14 @@ public class Character {
 
 	public void setAlive(Boolean alive) {
 		this.alive = alive;
+	}
+
+	public ArrayList<Integer> getEmotionHistoric() {
+		return emotionHistoric;
+	}
+
+	public void setEmotionHistoric(ArrayList<Integer> emotionHistoric) {
+		this.emotionHistoric = emotionHistoric;
 	}
 
 	public String toString(){
