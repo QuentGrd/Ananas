@@ -20,6 +20,7 @@ public class Character {
 	private Work work;
 	private BoundedCounter emotion;
 	private String id;
+	private Boolean alive;
 	
 	private Coordinates position;
 	
@@ -98,6 +99,14 @@ public class Character {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Boolean getAlive() {
+		return alive;
+	}
+
+	public void setAlive(Boolean alive) {
+		this.alive = alive;
 	}
 
 	public String toString(){

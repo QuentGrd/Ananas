@@ -32,9 +32,10 @@ public class CharacterBuilder {
 	 * initialize the different component of the character by using the other methodes
 	 */
 	public void initCharacter(){
+		character.setAlive(true);
 		initCharacterName();
 		initCharacterFirstName();
-		character.setAge(randomSelection(1, 100));
+		character.setAge(randomSelection(10, 100));
 		character.setEmotion(new BoundedCounter(75, 0, 100));
 	}
 	
