@@ -12,14 +12,14 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 
-import city.Population;
-
 import character.Character;
+import city.Population;
 
 /**
  * 
@@ -32,9 +32,12 @@ public class GUIInfoPart extends JPanel{
 
 	private Population pop;
 	
+	private Character currentCharacter;
+	
 	private JPanel buttonPart;
 	private JButton list;
 	private JButton info;
+	private JButton chart;
 	
 	private CardLayout cl;
 	private JPanel cardsContainer;
@@ -77,11 +80,15 @@ public class GUIInfoPart extends JPanel{
 		buttonPart = new JPanel();
 		info = new JButton("_info");
 		list = new JButton("Back");
+		chart = new JButton("Chart");
 		info.addActionListener(new DisplayInfoAction());
 		list.addActionListener(new DisplayListAction());
+		chart.addActionListener(new ActionShowChart());
 		buttonPart.setLayout(new FlowLayout());
 		buttonPart.add(list);
 		//buttonPart.add(info);
+		buttonPart.add(chart);
+		
 	}
 	
 	public void initInfoPanel(){
@@ -140,6 +147,7 @@ public class GUIInfoPart extends JPanel{
 				cl.show(cardsContainer, INFOPANEL);*/
 				System.out.println("Index: " + ginfo.getPopIndex(e.getX(), e.getY()));
 				Character charac = pop.getListCharacter().get(ginfo.getPopIndex(e.getX(), e.getY()));
+				currentCharacter = charac;
 				infoText.setText(getCharacInfo(charac));
 				cl.show(cardsContainer, INFOPANEL);
 			}
@@ -177,8 +185,24 @@ public class GUIInfoPart extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			cl.show(cardsContainer, CHARACTERPANEL);
+
 		}
 		
+	}
+	
+	class ActionShowChart implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			
+			if(currentCharacter.getEmotionHistoric().size()>0){
+				GUICharacterChart chart = new GUICharacterChart(currentCharacter);
+			}
+			else{
+				JOptionPane error = new JOptionPane();
+
+				error.showMessageDialog(null, "Nous ne parvenons pas à determiner l'historique de ce perosnnage", "Error", JOptionPane.ERROR_MESSAGE);
+
+			}
+		}
 	}
 	
 }
