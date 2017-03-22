@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import character.Character;
 import city.Population;
 
-public class GUIGraphicsInfo extends JPanel{
+public class GUIGraphicsList extends JPanel{
 
 	private static final long serialVersionUID = -451852768204398689L;
 
@@ -24,7 +24,7 @@ public class GUIGraphicsInfo extends JPanel{
 	
 	private Population pop;
 	
-	public GUIGraphicsInfo(Population pop){
+	public GUIGraphicsList(Population pop){
 		this.pop = pop;
 		this.setPreferredSize(new Dimension(width, height));
 	}

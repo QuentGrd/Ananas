@@ -9,14 +9,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-import javax.swing.ListSelectionModel;
 
 import character.Character;
 import city.Population;
@@ -46,11 +44,9 @@ public class GUIInfoPart extends JPanel{
 	private JTextPane infoText;
 	private String textDefault = "First Name:\nName:\nID:\nEmotion:\nHome:\nWork:\n";
 	
-	private JPanel characterListPanel;
-	private GUIGraphicsInfo ginfo;
+	private GUIGraphicsList ginfo;
 	private static final String INFOPANEL = "Information Panel";
 	private static final String CHARACTERPANEL = "Character list Panel";
-	private JScrollPane listScroller;
 	
 	private JList<String> characterList;
 	
@@ -64,14 +60,13 @@ public class GUIInfoPart extends JPanel{
 	}
 	
 	public void initCardLayout(){
-		ginfo = new GUIGraphicsInfo(pop);
+		ginfo = new GUIGraphicsList(pop);
 		ginfo.addMouseListener(new MouseListListener());
 		cl = new CardLayout();
 		cardsContainer = new JPanel();
 		this.initInfoPanel();
-		this.initCharacterListPanel();
 		cardsContainer.setLayout(cl);
-		cardsContainer.add(/*characterListPanel*/ ginfo, CHARACTERPANEL);
+		cardsContainer.add(ginfo, CHARACTERPANEL);
 		cardsContainer.add(infoPart, INFOPANEL);
 		cl.show(cardsContainer, CHARACTERPANEL);
 	}
@@ -101,28 +96,11 @@ public class GUIInfoPart extends JPanel{
 		infoPart.add(buttonPart);
 	}
 	
-	public void initCharacterListPanel(){
-		characterListPanel = new JPanel();
-		DefaultListModel<String> model = new DefaultListModel<String>();
-		String[] list = pop.transform();
-		for (int i = 0; i < list.length; i++) {
-			model.addElement(list[i]);
-		}
-		characterList = new JList<String>(model);
-		characterList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		characterList.setLayoutOrientation(JList.VERTICAL);
-		characterList.setVisibleRowCount(-1);
-		characterList.addMouseListener(new MouseListListener());
-		listScroller = new JScrollPane(characterList);
-		listScroller.setPreferredSize(new Dimension(390, 590));
-		characterListPanel.add(listScroller);
-	}
-	
 	public void refesh(){
 		ginfo.repaint();
 	}
 	
-	public String getCharacInfo(character.Character c){
+	public String getCharacInfo(Character c){
 		String info = null;
 		if (c == null)
 			info = "This character is dead !";
@@ -140,17 +118,15 @@ public class GUIInfoPart extends JPanel{
 	class MouseListListener implements MouseListener{
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if (e.getClickCount() == 2){
-				/*int i = characterList.getSelectedIndex();
-				character.Character charac = pop.getListCharacter().get(i);
-				infoText.setText(getCharacInfo(charac));
-				cl.show(cardsContainer, INFOPANEL);*/
-				System.out.println("Index: " + ginfo.getPopIndex(e.getX(), e.getY()));
-				Character charac = pop.getListCharacter().get(ginfo.getPopIndex(e.getX(), e.getY()));
-				currentCharacter = charac;
-				infoText.setText(getCharacInfo(charac));
-				cl.show(cardsContainer, INFOPANEL);
-			}
+			/*int i = characterList.getSelectedIndex();
+			character.Character charac = pop.getListCharacter().get(i);
+			infoText.setText(getCharacInfo(charac));
+			cl.show(cardsContainer, INFOPANEL);*/
+			System.out.println("Index: " + ginfo.getPopIndex(e.getX(), e.getY()));
+			Character charac = pop.getListCharacter().get(ginfo.getPopIndex(e.getX(), e.getY()));
+			currentCharacter = charac;
+			infoText.setText(getCharacInfo(charac));
+			cl.show(cardsContainer, INFOPANEL);
 		}
 
 		@Override
