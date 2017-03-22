@@ -8,50 +8,195 @@
 %\label{fig:modele}
 %\end{figure}
 
-\fig{images/programmer.png}{8cm}{7cm}{Un programmeur occupé}{programmeur}
+\subsection{Le Model - présentation des classes}
+
+\subsubsection{La ville}
+
+La ville est le premier élément qui constitue notre projet. Elle est composée de différentes infrastructures : Les routes, les maisons, les bâtiments de travail et les divertissements. Chaque type d'infrastructure possède une utilité qui lui est propre :
+\begin{itemize}
+ \item Les Routes permettent aux personnages de se déplacer
+ \item Les Maisons permettent aux personnages de se reposer le soir et regagner de l'émotion
+ \item Le Travail est une activité imposé à chaque personnages et sera la principale source de baisse d'émotion
+ \item Les Divertissements permettent aux personnages lorsqu'ils ne dorment pas de regagner de l'émotion
+\end{itemize}
+
+#image
+
+\paragraph{}
+Toutes les infrastructures possèdent en commun : 
+\begin{itemize}
+ \item Un nom de type String
+ \item Un type au format int
+ \item Une position dans la Map
+ \item Un taille
+ \item Et un nombre d'utilisateurs courant
+\end{itemize}
+
+ \paragraph{}
+ Et les bâtiments (hors routes) possèdent tous en commun ces caractéristiques :
+ \begin{itemize}
+  \item Une adresse, seule point d'entré dans le bâtiments au niveau de la Map
+  \item Une récompense, qui peut être positive ou négative suivant le type de bâtiment
+  \item Un nombre maximum d'utilisateur 
+ \end{itemize}
+ 
+ \paragraph{}
+En plus de ces caractéristiques, les bâtiments de travail et les divertissements possèdent un temps d'utilisation moyen par les personnages, ainsi que des horaires d'ouvertures durant lesquelles les personnages pourront utiliser ces bâtiments. 
+Il est également impossible pour un personnages d'utiliser un bâtiment lorsque celui ci à atteint son nombre maximum d'utilisateur.
+Les routes et les maisons sont ouverts 24h/24.
+
+\paragraph{}
+La taille de la Map ainsi que la répartition des infrastructures est déterminé à l'avance dans un fichier CSV. La création de la Map dans la mémoire se fait grâce au design pattern Builder. 
+Chaque ligne du fichier CSV renseigne, le type, l'adresse, la taille et sa position dans la Map. 
+Ainsi l'objet MapBuilder va lire les lignes du fichier une par une grâce à la bibliothèque Apache Common CSV, et faire appelle au autres Builder correspondant à chaque type d'infrastructure.
+ 
+ \paragraph{}
+ Durant leur création, les Infrastructures de type Work ou Entertainement, se voient également attribuer un nom, des horaires d'ouvertures et leur récompenses. 
+ Ces informations sont aussi renseignées à l'avance dans un fichier CSV.
+ 
+ \subsubsection{La population}
+ 
+ \paragraph{}
+ La population est le second ensemble qui constitue notre projet. 
+ Nous l'avons voulu le plus adaptatif possible. 
+ Ainsi elle peut contenir autant d'individu que souhaité. 
+ Cependant, une trop grande population provoquera des ralentissements de l'interface graphique mais le moteur de jeu est parfaitement capable de faire tourner une grande population. 
+ Pour la jouabilité du jeu, nous avons fixé le nombre d'individus au démarrage d'une partie à 5. 
+ 
+ \paragraph{Création des personnages}
+ Un personnage est composé d'informations de base comme d'un nom, d'un prénom, d'un sexe , d'un age et d'un numéro d'identité.
+
+ \fig{images/car.jpg}{8cm}{7cm}{Classe Character}{characterClass}
+ 
+ \paragraph{}
+ Pour le nom, le prénom et le sexe du personnage, ils sont initialisés à partir de fichier CSV. 
+ Le premier fichier contient une liste de 300 noms de familles et le second une liste de 200 prénoms, 100 masculin et 100 féminin. 
+ Lors de la création du personnage, le programme va prendre au hasard un nom dans le fichier name.csv et un prénom (associé à un sexe) dans le fichier firstName.csv. 
+ L'age du personnage est simplement choisit aléatoirement entre 10 et 100 ans. 
+ Le numéro d'identité du personnage est unique, il est calculé à partir de toutes les informations du personnage grâce à un code de hashage. 
+ Ce code nous permettra de reconnaître le personnage. 
+ Ce grand nombre de choix nous permet de garantire une grande diversité au sein de la population.
+ 
+ \paragraph{}
+  Comme le montre la figure 1, un personnage possède également une maison et un travail. 
+  Ces deux éléments sont également attribué aléatoirement via une recherche dans la liste de lieux de travail et d'habitation de la carte de jeu.
+  
+ \paragraph{}
+ Un personnage possède également une jauge d'émotion qui peut varier de 0 à 100. 
+ C'est comme la barre de vie du personnage. 
+ Elle est initialisé a 75 en début de partie mais elle variera en fonctions des actions des personnages. 
+ Si le personnage atteint une émotion de 0 il meurt.
+ 
+ \paragraph{}
+ Enfin la création de la routine sera expliqué dans la partie moteur.
+ 
+ \paragraph{}
+ Nous avons voulu rendre nos personnages le moins statique possible. Ainsi d'une partie à l'autre, la chance de tomber sur des personnages avec les mêmes propriétés est très faible.
+ 
+ \paragraph{L'organisation de la création}
+ des personnages se fait grâce au design pattern builder.
+ 
+ \begin{figure}[!h] 	
+  \centering \includegraphics[width=400pt]{images/pop.png}
+  \caption{Organisation de la partie population} \label{fig:population}
+\end{figure}
+ 
+ \paragraph{}
+ La classe PopulationBuilder va construire une population grâce à la carte de jeu (pour assigner les résidences) et grâce au CharacterBuilder. 
+ Ce dernier va faire la lecture dans les fichiers CSV grâce à la bibliothèque Apache-commons-csv et va faire les choix aléatoires pour initialiser les différentes composantes de nos personnages.
+ 
+ \subsection{Le moteur de jeu}
+ 
+ \subsubsection{Gestion de l'émotion des personnages}
+ 
+ \paragraph{}
+ L'émotion représente la barre de vie des personnages, elle varie de 0 à 100 en fonction du temps. 
+ Si elle atteint 0, le personnage meurt. 
+ L?évolution de cette jauge d?émotion est totalement dynamique, elle se fera automatiquement en fonction des actions faites par le personnage. 
+ Certaines actions vont apporter un bonus sur la jauge d'émotion du personnage alors que d'autres vont apporter un malus. 
+ Pour certaines actions le bonus est constant (par exemple dormir apportera toujours +30) mais pour d'autres le bonus/malus est variable en fonction du lieu dans lequel se fait l'action. 
+ Par exemple travailler dans un atelier auto apportera un malus de -25 car la tache est difficile alors que travailler dans une boutique d?électronique apportera un malus de -15. 
+ Même fonctionnement pour les bonus des loisirs. 
+ Ces valeurs sont initialiser lors que l'initialisation des bâtiments, elles proviennent donc d'un fichiers CSV. 
+ Enfin les rewards de sont pas toujours effectif au même moment. 
+ Pour la plupart des actions, le personnage perçoit le reward en fin d'action. 
+ Pour l'action de déplacement, dans un soucis de mieux représenter la réalité, le malus est retiré à chaque itération de temps. 
+ C'est à dire que plus le chemin que le personnage a à faire est long, plus il perd de l'émotion.
+ 
+ \begin{tabular} {|p{3.5cm}|p{5cm}|p{5cm}|}
+\hline
+Action & Reward & Effectivité \\
+\hline
+Sleeping & +30 & En fin d'action \\
+\hline
+Chilling & +5 & En fin d'action \\
+\hline
+Schifting & -1 & A chaque itération de temps \\
+\hline
+Working & Malus variable [-25;-10] & En fin d'action \\
+\hline
+Entertain & Bonus variable [+5;+20] & En fin d'action \\
+\hline
+\end{tabular}
+
+\subsubsection{Gestion de la routine}
+\paragraph{}
+La routine est un enchaînement d'actions que va exécuter le personnage. 
+Le personnage peut exécuter 5 types d'actions différentes regrouper en familles : les déplacements et les occupations.  
+Les actions d'occupation sont reliées à un lieu alors que les actions de déplacement sont reliées à un lieu de départ, un lieu d'arrivé et un chemin entre les deux.
 
 
-\paragraph{} Dans la figure \ref{fig:programmeur}, on peut voir un programmeur très occupé par son travail.
+\begin{figure}[!h] 	
+  \centering \includegraphics[width=400pt]{images/routine.jpg}
+  \caption{Classe routine} \label{fig:characterClass}
+\end{figure}
 
+\paragraph{}
+L'un des dilemme du projet est l?interaction entre les différentes actions pour  que chaque personnage puisse avoir puisse suivre une suite d'actions indépendantes mais que l'utilisateur puisse ajouter des actions a faire sans perturber le bonne enchaînement des actions.
 
-\begin{algorithm}
-\caption{Calculate $y = x^n$}
-\begin{algorithmic} 
-\REQUIRE $n \geq 0 \vee x \neq 0$
-\ENSURE $y = x^n$
-\STATE $y \leftarrow 1$
-\IF{$n < 0$}
-\STATE $X \leftarrow 1 / x$
-\STATE $N \leftarrow -n$
-\ELSE
-\STATE $X \leftarrow x$
-\STATE $N \leftarrow n$
-\ENDIF
-\WHILE{$N \neq 0$}
-\IF{$N$ is even}
-\STATE $X \leftarrow X \times X$
-\STATE $N \leftarrow N / 2$
-\ELSE[$N$ is odd]
-\STATE $y \leftarrow y \times X$
-\STATE $N \leftarrow N - 1$
-\ENDIF
-\ENDWHILE
-\end{algorithmic}
-\end{algorithm}
+\paragraph{}
+Nous avons décidé de décomposer ce problème en 3 partie :
+\begin{itemize}
+ \item Une partie statique qui organise les grandes lignes des journées du personnage : métro/boulot/dodo
+ \item Une partie dynamique qui évolue au court de la journée et qui représente la liste d'actions que le personnage a à faire
+ \item Une partie utilisateur associé à différente options d'ajout/suppression d'actions 
+\end{itemize}
 
-%%% Une autre façon pour écrire un algorithme %%%
-%\begin{algorithm}[H]
- %\KwData{this text}
- %\KwResult{how to write algorithm with \LaTeX2e }
- %initialization\;
- %\While{not at end of this document}{
-  %read current\;
-  %\eIf{understand}{
-   %go to next section\;
-   %current section becomes this one\;
-   %}{
-   %go back to the beginning of current section\;
-  %}
- %}
- %\caption{How to write algorithms}
-%\end{algorithm}
+\begin{figure}[!h] 	
+  \centering \includegraphics[width=400pt]{images/schemaRoutine.PNG}
+  \caption{Fonctionnement de la routine} \label{fig:fonctionnementRoutine}
+\end{figure}
+
+\paragraph{}
+La liste d'actions communes a chaque journées est stocké dans la liste DailyRoutine. 
+A chaque début de journée, on ajoute toutes les actions de cette liste a la de la journée courante, CurentRoutine. 
+La currentRoutine à les même propriétés qu'une files mais avec plus de possibilité d'ajout d'actions. 
+On défile currentRoutine et on ajoute cette action à l'action courante, currentAction. 
+Cette action est exécuté par le personnage et lorsqu'elle est finie, on défile à nouveau la currentRoutine. 
+Enfin l'utilisateur peut soit ajouter un action en tête ou en queue dans la currentRoutine ou il peut casser l'action courante du personnage mais cela engendra un malus d?émotion.
+
+\subsubsection{Calcul d'itinéraire}
+
+\subsection{L'interface homme/machine}
+
+\paragraph{}
+L'interface graphique est composé de plusieurs éléments :
+\begin{itemize}
+ \item L'horloge du jeu, permettant de savoir quelle est la date et l'heure dans notre ville fictive
+ \item La map, ou nous pouvons voir les infrastructures, et les personnages se déplacer
+ \item La liste des personnages accompagné de l'état de leur barre d'émotion
+\end{itemize}
+
+\paragraph{}
+Chacun de ces éléments sont séparé dans différentes classes qui héritent de la classe JPanel , ce qui permet un assemblage facile de l'interface graphique, et une permutation plus facile entre différentes versions d'un même éléments.
+
+\paragraph{}
+L'interface graphique est réalisé grâce à Java Swing/AWT/Java 2D .
+
+\paragraph{}
+Nous pouvons voir dans le diagramme ci dessus que l'ensemble des éléments graphiques sont rassemblé dans une seule classe principale, qui à pour but de les assembler correctement.
+
+\paragraph{}
+La Map et la liste des personnages sont cliquables et affiche des informations en fonction de la position du curseur au moment du clique. 
+Cela peut permettre d'ouvrir un autre Panel, une autre fenêtre ou autre, contenant les informations souhaitées, en fonction des situations (Pour plus de détail, se reporter au manuel d'utilisation). 
+Ces fonctionnalités ont été implémenté grâce à des MouseListener, qui nous permettent de récupérer des informations sur le curseur ou l'état de la souris/trackpad lors d'événements prédéfini, lors d'un clic de souris par exemple.
