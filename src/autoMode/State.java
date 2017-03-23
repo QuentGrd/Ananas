@@ -29,8 +29,8 @@ public class State {
 	
 	public State(int x, int y){
 		this.reward = 0;
-		this.coord.setX(x);
-		this.coord.setY(y);
+		coord = new Coordinates(x, y);
+		type = 1;
 	}
 
 	public double getReward() {
