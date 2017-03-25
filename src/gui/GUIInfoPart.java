@@ -41,7 +41,7 @@ public class GUIInfoPart extends JPanel{
 	public GUIInfoPart(Population pop){
 		this.pop = pop;
 		ginfo = new GUIGraphicsList(pop);
-		cinfo = new GUICharacterInfo();
+		cinfo = new GUICharacterInfo(this);
 		this.initCardLayout();
 		this.setPreferredSize(new Dimension(400, 600));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -60,6 +60,10 @@ public class GUIInfoPart extends JPanel{
 	
 	public void refesh(){
 		ginfo.repaint();
+	}
+	
+	public void showList(){
+		this.cl.show(cardsContainer, CHARACTERPANEL);
 	}
 	
 	class MouseListListener implements MouseListener{

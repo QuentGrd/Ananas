@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -29,7 +30,10 @@ public class GUICharacterInfo extends JPanel{
 	private JButton chart;
 	private JButton addAction;
 	
-	public GUICharacterInfo(){
+	private GUIInfoPart parent;
+	
+	public GUICharacterInfo(GUIInfoPart parent){
+		this.parent = parent;
 		this.setPreferredSize(new Dimension(400, 600));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.initButtonPart();
@@ -95,6 +99,7 @@ public class GUICharacterInfo extends JPanel{
 	class DisplayListAction implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			parent.showList();
 		}	
 	}
 	

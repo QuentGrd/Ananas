@@ -22,19 +22,21 @@ public class GUIGraphicsMap extends JPanel{
 	
 	private Map map;
 	private Population pop;
+	
+	private MapManager mngr;
 
 	public GUIGraphicsMap(Map map, Population pop){
 		this.map = map;
 		this.pop = pop;
 		this.addMouseListener(new GraphicsMouseListener());
+		mngr = new MapManager();
 	}
 	
 	public void paintComponent(Graphics g){
 		
-		MapManager mngr = new MapManager();
 		Coordinates coord;
-		
 		int i = 0;
+		
 		for(i=0; i<map.getWorkList().size(); i++){
 			coord = map.getWorkList().get(i).getPosition();
 			g.drawImage(mngr.printWork(map.getWorkList().get(i)), coord.getY()*20, coord.getX()*20, this);
@@ -56,13 +58,16 @@ public class GUIGraphicsMap extends JPanel{
 		}
 		
 		for(i=0; i<pop.getListCharacter().size(); i++){
+			coord = pop.getListCharacter().get(i).getPosition();
 			if (pop.getListCharacter().get(i).getAlive()){
-				coord = pop.getListCharacter().get(i).getPosition();
 				g.drawImage(mngr.printCharacter(pop.getListCharacter().get(i)), coord.getY()*20, coord.getX()*20, this);
 			}
 		}
 	}
 	
+	public void repaint(){
+		
+	}
 	
 	class GraphicsMouseListener implements MouseListener{
 
