@@ -51,6 +51,7 @@ public class Run {
 			initCurrentRoutine();
 			runRoutine();
 			lifeManagment();
+			statisticManagment();
 			run = !endOfTheGame();
 			gui.refreshGUI(city.getPopulation(), clock);
 			clock.increment();
@@ -194,14 +195,43 @@ public class Run {
 		
 		for (int i = 0; i < carListSize; i++) {
 			Character car = carList.get(i);
-			
-			car.getData().getEmotionHistoric().add(car.getEmotion().getCounter());
 			 
 			if(car.getAlive() == true){
 				if(car.getEmotion().getCounter() == 0){
 					car.setAlive(false);
 				}
 			}
+		}
+	}
+	
+	public void statisticManagment(){
+		ArrayList<Character> carList = city.getPopulation().getListCharacter();
+		int carListSize = city.getPopulation().getNbOfCharacter();
+		
+		for (int i = 0; i < carListSize; i++) {
+			Character car = carList.get(i);
+			
+			//emotionhistoric
+			car.getData().getEmotionHistoric().add(car.getEmotion().getCounter());
+			
+			//actionRepartition
+			if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Sleeping")){
+				car.getData().getActionRepartition().set(0, car.getData().getActionRepartition().get(0) +1);
+			}
+			else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Chilling")){
+				car.getData().getActionRepartition().set(1, car.getData().getActionRepartition().get(1) +1);
+			}
+			else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Shifting")){
+				car.getData().getActionRepartition().set(2, car.getData().getActionRepartition().get(2) +1);
+			}
+			else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Working")){
+				car.getData().getActionRepartition().set(3, car.getData().getActionRepartition().get(3) +1);
+			}
+			else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Entertain")){
+				car.getData().getActionRepartition().set(4, car.getData().getActionRepartition().get(4) +1);
+			}
+			else
+				car.getData().getActionRepartition().set(5, car.getData().getActionRepartition().get(5) +1);
 		}
 	}
 	
