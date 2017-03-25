@@ -30,29 +30,18 @@ public class GUIInfoPart extends JPanel{
 
 	private Population pop;
 	
-	private Character currentCharacter;
-	
-	private JPanel buttonPart;
-	private JButton list;
-	private JButton info;
-	private JButton chart;
-	
 	private CardLayout cl;
 	private JPanel cardsContainer;
 	
-	private JPanel infoPart;
-	private JTextPane infoText;
-	private String textDefault = "First Name:\nName:\nID:\nEmotion:\nHome:\nWork:\n";
-	
 	private GUIGraphicsList ginfo;
+	private GUICharacterInfo cinfo;
 	private static final String INFOPANEL = "Information Panel";
 	private static final String CHARACTERPANEL = "Character list Panel";
 	
-	private JList<String> characterList;
-	
 	public GUIInfoPart(Population pop){
 		this.pop = pop;
-		this.initButtonPart();
+		ginfo = new GUIGraphicsList(pop);
+		cinfo = new GUICharacterInfo();
 		this.initCardLayout();
 		this.setPreferredSize(new Dimension(400, 600));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -60,72 +49,25 @@ public class GUIInfoPart extends JPanel{
 	}
 	
 	public void initCardLayout(){
-		ginfo = new GUIGraphicsList(pop);
 		ginfo.addMouseListener(new MouseListListener());
 		cl = new CardLayout();
 		cardsContainer = new JPanel();
-		this.initInfoPanel();
 		cardsContainer.setLayout(cl);
 		cardsContainer.add(ginfo, CHARACTERPANEL);
-		cardsContainer.add(infoPart, INFOPANEL);
+		cardsContainer.add(cinfo, INFOPANEL);
 		cl.show(cardsContainer, CHARACTERPANEL);
-	}
-	
-	public void initButtonPart(){
-		buttonPart = new JPanel();
-		info = new JButton("_info");
-		list = new JButton("Back");
-		chart = new JButton("Chart");
-		info.addActionListener(new DisplayInfoAction());
-		list.addActionListener(new DisplayListAction());
-		chart.addActionListener(new ActionShowChart());
-		buttonPart.setLayout(new FlowLayout());
-		buttonPart.add(list);
-		//buttonPart.add(info);
-		buttonPart.add(chart);
-		
-	}
-	
-	public void initInfoPanel(){
-		infoPart = new JPanel();
-		infoText = new JTextPane();
-		infoText.setEditable(false);
-		infoText.setText(textDefault);
-		infoText.setPreferredSize(new Dimension(390, 550));
-		infoPart.add(infoText);
-		infoPart.add(buttonPart);
 	}
 	
 	public void refesh(){
 		ginfo.repaint();
 	}
 	
-	public String getCharacInfo(Character c){
-		String info = null;
-		if (c == null)
-			info = "This character is dead !";
-		else{
-			info = "First Name: \t" + c.getFirstName();
-			info += "\nName: \t" + c.getName();
-			info += "\nID: \t" + c.getId();
-			info += "\nEmotion: \t" + c.getEmotion().getCounter();
-			info += "\nHome: \t" + c.getHome().getAddress().toString();
-			info += "\nWork: \t" + c.getWork().getAddress().toString();
-		}
-		return info;
-	}
-	
 	class MouseListListener implements MouseListener{
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			/*int i = characterList.getSelectedIndex();
-			character.Character charac = pop.getListCharacter().get(i);
-			infoText.setText(getCharacInfo(charac));
-			cl.show(cardsContainer, INFOPANEL);*/
 			System.out.println("Index: " + ginfo.getPopIndex(e.getX(), e.getY()));
 			Character charac = pop.getListCharacter().get(ginfo.getPopIndex(e.getX(), e.getY()));
-			currentCharacter = charac;
-			infoText.setText(getCharacInfo(charac));
+			cinfo.setCurrentCharacter(charac);
 			cl.show(cardsContainer, INFOPANEL);
 		}
 
@@ -148,37 +90,17 @@ public class GUIInfoPart extends JPanel{
 	}
 	
 	class DisplayInfoAction implements ActionListener{
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			cl.show(cardsContainer, INFOPANEL);
 		}
-		
 	}
 	
 	class DisplayListAction implements ActionListener{
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			cl.show(cardsContainer, CHARACTERPANEL);
-
-		}
-		
-	}
-	
-	class ActionShowChart implements ActionListener{
-		public void actionPerformed(ActionEvent e){
-			
-			if(currentCharacter.getEmotionHistoric().size()>0){
-				GUICharacterChart chart = new GUICharacterChart(currentCharacter);
-			}
-			else{
-				JOptionPane error = new JOptionPane();
-
-				error.showMessageDialog(null, "Nous ne parvenons pas à determiner l'historique de ce perosnnage", "Error", JOptionPane.ERROR_MESSAGE);
-
-			}
-		}
+		}	
 	}
 	
 }
