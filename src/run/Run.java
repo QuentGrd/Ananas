@@ -195,7 +195,7 @@ public class Run {
 		for (int i = 0; i < carListSize; i++) {
 			Character car = carList.get(i);
 			
-			car.getEmotionHistoric().add(car.getEmotion().getCounter());
+			car.getData().getEmotionHistoric().add(car.getEmotion().getCounter());
 			 
 			if(car.getAlive() == true){
 				if(car.getEmotion().getCounter() == 0){

@@ -193,7 +193,7 @@ public class GUIInfoPart extends JPanel{
 	class ActionShowChart implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			
-			if(currentCharacter.getEmotionHistoric().size()>0){
+			if(currentCharacter.getData().getEmotionHistoric().size()>0){
 				GUICharacterChart chart = new GUICharacterChart(currentCharacter);
 			}
 			else{

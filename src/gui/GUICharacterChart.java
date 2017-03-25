@@ -42,8 +42,8 @@ public class GUICharacterChart extends JFrame{
 	private DefaultCategoryDataset createDataset( ){
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
   
-  		for(int i=0; i<character.getEmotionHistoric().size(); i++)
-	  		dataset.addValue(character.getEmotionHistoric().get(i) , "Emotion" , String.valueOf(i) );
+  		for(int i=0; i<character.getData().getEmotionHistoric().size(); i++)
+	  		dataset.addValue(character.getData().getEmotionHistoric().get(i) , "Emotion" , String.valueOf(i) );
   		return dataset;
    }
 }
