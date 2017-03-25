@@ -1,8 +1,6 @@
 package autoMode;
 
-import builders.CharacterBuilder;
 import builders.MapBuilder;
-import character.Character;
 import city.Map;
 
 public class TestAutoMode {
@@ -11,17 +9,13 @@ public class TestAutoMode {
 		MapBuilder mapB = new MapBuilder(map);
 		mapB.initBuildings();
 		
-		Character character = new Character();
-		CharacterBuilder builder = new CharacterBuilder(character);
-		builder.initCharacterHome(map);
-		builder.initCharacterWork(map);
-		builder.initCharacterID();
-		builder.initRoutine();
+		QCharacter qcar = new QCharacter();
+		QCharacterBuilder qCarBuilder = new QCharacterBuilder();
+		qCarBuilder.create(qcar, map);
 		
-		Environment env = new Environment(map, character.getHome(), character.getWork());
-		System.out.println(env.toString());
+		System.out.println(qcar.getEnvironment().toString());
 		
-		System.out.println("\nHome : " + character.getHome().getAddress().toString() + "\nWork : " + character.getWork().getAddress().toString());
+		System.out.println("\nHome : " + qcar.getHome().getAddress().toString() + "\nWork : " + qcar.getWork().getAddress().toString());
 		
 		System.out.println("\nOK.");
 	}

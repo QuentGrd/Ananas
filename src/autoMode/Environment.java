@@ -51,6 +51,7 @@ public class Environment {
 					if(newState.getInfrastructure().getType() == 3){
 						Entertainment enter = (Entertainment) newState.getInfrastructure();
 						if(enter.getAddress().getX() == i && enter.getAddress().getY() == j){
+							System.out.println("coucou");
 							newState.setType(0);
 						}
 						else
@@ -126,8 +127,8 @@ public class Environment {
 		
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
-//				result += " " + Qmap[i][j].getType();
-				result += " " + Qmap[i][j].getListAction().size();
+				result += " " + Qmap[i][j].getType();
+//				result += " " + Qmap[i][j].getListAction().size();
 			}
 			result += "\n";
 		}
