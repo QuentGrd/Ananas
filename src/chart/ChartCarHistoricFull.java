@@ -1,6 +1,13 @@
 package chart;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -21,16 +28,26 @@ public class ChartCarHistoricFull extends JFrame{
 	private static final long serialVersionUID = -8881399308101213332L;
 	private Character character;
 	
+	private JPanel fond;
+	private JButton refresh;
+	
+	DefaultCategoryDataset dataset;
+	
 	public ChartCarHistoricFull(Character character){
 		super("Character : " + character.getFirstName());
 		
 		this.character = character;
-		JFreeChart lineChart = ChartFactory.createLineChart("Evolution of "+character.getFirstName()+"'s emotion","Time","Emotion",createDataset(),PlotOrientation.VERTICAL,true,true,false);
 		
-		ChartPanel chartPanel = new ChartPanel( lineChart );
-	    chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
-	    setContentPane( chartPanel );
+		
+		fond = new JPanel();
+		fond.setLayout(new BorderLayout());
+	    setContentPane(fond);
+	    
+	    dataset = new DefaultCategoryDataset();
 	      
+	    initChart();
+	    initButton();
+	    
 		this.pack();
 		//position centrale
 		RefineryUtilities.centerFrameOnScreen(this);
@@ -39,11 +56,32 @@ public class ChartCarHistoricFull extends JFrame{
 		this.setVisible(true);
 	}
 	
+	private void initChart(){
+		JFreeChart lineChart = ChartFactory.createLineChart("Evolution of "+character.getFirstName()+"'s emotion","Time","Emotion",createDataset(),PlotOrientation.VERTICAL,true,true,false);
+		
+		ChartPanel chartPanel = new ChartPanel( lineChart );
+	    chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
+	    fond.add(chartPanel, BorderLayout.CENTER);
+	}
+	private void initButton(){
+		refresh = new JButton("Refresh");
+		refresh.addActionListener(new ActionRefreshChart());
+		
+		fond.add(refresh, BorderLayout.SOUTH);
+	}
+	
 	private DefaultCategoryDataset createDataset( ){
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
   
   		for(int i=0; i<character.getData().getEmotionHistoric().size(); i++)
 	  		dataset.addValue(character.getData().getEmotionHistoric().get(i) , "Emotion" , String.valueOf(i) );
   		return dataset;
    }
+	
+	class ActionRefreshChart implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			dataset.clear();
+			for(int i=0; i<character.getData().getEmotionHistoric().size(); i++)
+		  		dataset.addValue(character.getData().getEmotionHistoric().get(i) , "Emotion" , String.valueOf(i) );
+		}
+	}
 }

@@ -10,9 +10,11 @@ import java.util.ArrayList;
 public class DataCharacter {
 
 	private ArrayList<Integer> emotionHistoric;
+	private ArrayList<Integer> actionRepartition;
 	
 	public DataCharacter(){
 		this.emotionHistoric = new ArrayList<Integer>();
+		this.actionRepartition = new ArrayList<Integer>();
 	}
 
 	public ArrayList<Integer> getEmotionHistoric() {
@@ -21,5 +23,13 @@ public class DataCharacter {
 
 	public void setEmotionHistoric(ArrayList<Integer> emotionHistoric) {
 		this.emotionHistoric = emotionHistoric;
+	}
+
+	public ArrayList<Integer> getActionRepartition() {
+		return actionRepartition;
+	}
+
+	public void setActionRepartition(ArrayList<Integer> actionRepartition) {
+		this.actionRepartition = actionRepartition;
 	}
 }
