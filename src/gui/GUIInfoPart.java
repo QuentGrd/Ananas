@@ -19,6 +19,7 @@ import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 
 import character.Character;
+import chart.ChartCarHistoricFull;
 import city.Population;
 
 /**
@@ -194,7 +195,7 @@ public class GUIInfoPart extends JPanel{
 		public void actionPerformed(ActionEvent e){
 			
 			if(currentCharacter.getData().getEmotionHistoric().size()>0){
-				GUICharacterChart chart = new GUICharacterChart(currentCharacter);
+				ChartCarHistoricFull chart = new ChartCarHistoricFull(currentCharacter);
 			}
 			else{
 				JOptionPane error = new JOptionPane();

@@ -1,4 +1,4 @@
-package gui;
+package chart;
 
 import javax.swing.JFrame;
 
@@ -16,12 +16,12 @@ import character.Character;
  * @author matthieu
  *
  */
-public class GUICharacterChart extends JFrame{
+public class ChartCarHistoricFull extends JFrame{
 
 	private static final long serialVersionUID = -8881399308101213332L;
 	private Character character;
 	
-	public GUICharacterChart(Character character){
+	public ChartCarHistoricFull(Character character){
 		super("Character : " + character.getFirstName());
 		
 		this.character = character;
