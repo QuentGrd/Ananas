@@ -17,6 +17,7 @@ import actions.Actions;
 import actions.Entertain;
 import actions.Shifting;
 import character.Character;
+import chart.ChartActionRepartitionDaily;
 import city.Map;
 import clock.Schedule;
 import run.Run;
@@ -188,8 +189,12 @@ public class GUICharacterInfo extends JPanel{
 	class ActionShowChart implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			
-			if(currentCharacter.getEmotionHistoric().size()>0){
-				GUICharacterChart chart = new GUICharacterChart(currentCharacter);
+			if(currentCharacter.getData().getEmotionHistoric().size()>0){
+				//ChartActionRepartition chart = new ChartActionRepartition(currentCharacter);
+				//ChartEmotionHistoricFull chart = new ChartEmotionHistoricFull(currentCharacter);
+				//ChartEmotionHistoricDaily chart = new ChartEmotionHistoricDaily(currentCharacter);
+				//ChartRewardRepartitionFull chart = new ChartRewardRepartitionFull(currentCharacter);
+				ChartActionRepartitionDaily chart = new ChartActionRepartitionDaily(currentCharacter);
 			}
 			else{
 				JOptionPane error = new JOptionPane();
