@@ -11,6 +11,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import character.Character;
+import chart.ChartActionRepartitionDaily;
+import chart.ChartEmotionHistoricDaily;
+import chart.ChartEmotionHistoricFull;
+import chart.ChartRewardRepartitionFull;
 import city.Map;
 import city.Population;
 

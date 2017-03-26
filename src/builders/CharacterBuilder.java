@@ -11,6 +11,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import character.Character;
+import character.DataCharacter;
 import character.Routine;
 import city.Map;
 import utils.BoundedCounter;
@@ -36,7 +37,7 @@ public class CharacterBuilder {
 		initCharacterFirstName();
 		character.setAge(randomSelection(10, 100));
 		character.setEmotion(new BoundedCounter(75, 0, 100));
-		character.setEmotionHistoric(new ArrayList<Integer>());
+		character.setData(new DataCharacter());
 	}
 	
 	/**

@@ -55,6 +55,7 @@ public class Run {
 			initCurrentRoutine();
 			runRoutine();
 			lifeManagment();
+			statisticManagment();
 			run = !endOfTheGame();
 			gui.refreshGUI(city.getPopulation(), clock);
 			clock.increment();
@@ -198,8 +199,6 @@ public class Run {
 		
 		for (int i = 0; i < carListSize; i++) {
 			Character car = carList.get(i);
-			
-			car.getEmotionHistoric().add(car.getEmotion().getCounter());
 			 
 			if(car.getAlive() == true){
 				if(car.getEmotion().getCounter() == 0){
@@ -207,6 +206,115 @@ public class Run {
 				}
 			}
 		}
+	}
+	
+	public void statisticManagment(){
+		ArrayList<Character> carList = city.getPopulation().getListCharacter();
+		int carListSize = city.getPopulation().getNbOfCharacter();
+		
+		for (int i = 0; i < carListSize; i++) {
+			Character car = carList.get(i);
+			
+			//emotionhistoric
+			car.getData().getEmotionHistoric().add(car.getEmotion().getCounter());
+			
+			//emotionhistoric Today/Yesterday
+			if(equalSchedule(clock, new Schedule(0, 0))){
+				car.getData().setEmotionHistoricYesterday(car.getData().getEmotionHistoricToday());
+				car.getData().setEmotionHistoricToday(new ArrayList<Integer>());
+			}
+			else{
+				car.getData().getEmotionHistoricToday().add(car.getEmotion().getCounter());
+			}
+			
+			//actionRepartition + rewardRepartition + actionRepartitionDaily
+			//si l'action est nulle
+			if(car.getRoutine().getCurrentAction() == null){
+				//actionRepartition
+				car.getData().getActionRepartition().set(5, car.getData().getActionRepartition().get(5) +1);
+				//actionRepartitionDaily
+				if(equalSchedule(clock, new Schedule(0, 0))){
+					car.getData().setActionRepartitionYesterday(car.getData().getActionRepartitionToday());
+					car.getData().setActionRepartitionToday(arrayListInitialized(6));
+				}
+				else
+					car.getData().getActionRepartitionToday().set(5, car.getData().getActionRepartitionToday().get(5)+1);
+				//rewardRepartition
+				car.getData().getRewardRepartition().set(2, car.getData().getRewardRepartition().get(2)+1);
+			}
+			else{
+				//sleeping
+				if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Sleeping")){
+					car.getData().getActionRepartition().set(0, car.getData().getActionRepartition().get(0) +1);
+					if(equalSchedule(clock, new Schedule(0, 0))){
+						car.getData().setActionRepartitionYesterday(car.getData().getActionRepartitionToday());
+						car.getData().setActionRepartitionToday(arrayListInitialized(6));
+					}
+					else
+						car.getData().getActionRepartitionToday().set(0, car.getData().getActionRepartitionToday().get(0)+1);
+					car.getData().getRewardRepartition().set(0, car.getData().getRewardRepartition().get(0)+1);
+				}
+				//chilling
+				else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Chilling")){
+					car.getData().getActionRepartition().set(1, car.getData().getActionRepartition().get(1) +1);
+					if(equalSchedule(clock, new Schedule(0, 0))){
+						car.getData().setActionRepartitionYesterday(car.getData().getActionRepartitionToday());
+						car.getData().setActionRepartitionToday(arrayListInitialized(6));
+					}
+					else
+						car.getData().getActionRepartitionToday().set(1, car.getData().getActionRepartitionToday().get(1)+1);
+					car.getData().getRewardRepartition().set(2, car.getData().getRewardRepartition().get(2)+1);
+				}
+				//shifting
+				else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Shifting")){
+					car.getData().getActionRepartition().set(2, car.getData().getActionRepartition().get(2) +1);
+					if(equalSchedule(clock, new Schedule(0, 0))){
+						car.getData().setActionRepartitionYesterday(car.getData().getActionRepartitionToday());
+						car.getData().setActionRepartitionToday(arrayListInitialized(6));
+					}
+					else
+						car.getData().getActionRepartitionToday().set(2, car.getData().getActionRepartitionToday().get(2)+1);
+					car.getData().getRewardRepartition().set(1, car.getData().getRewardRepartition().get(1)+1);
+				}
+				//working
+				else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Working")){
+					car.getData().getActionRepartition().set(3, car.getData().getActionRepartition().get(3) +1);
+					if(equalSchedule(clock, new Schedule(0, 0))){
+						car.getData().setActionRepartitionYesterday(car.getData().getActionRepartitionToday());
+						car.getData().setActionRepartitionToday(arrayListInitialized(6));
+					}
+					else
+						car.getData().getActionRepartitionToday().set(3, car.getData().getActionRepartitionToday().get(3)+1);
+					car.getData().getRewardRepartition().set(1, car.getData().getRewardRepartition().get(1)+1);
+				}
+				//entertain
+				else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Entertain")){
+					car.getData().getActionRepartition().set(4, car.getData().getActionRepartition().get(4) +1);
+					if(equalSchedule(clock, new Schedule(0, 0))){
+						car.getData().setActionRepartitionYesterday(car.getData().getActionRepartitionToday());
+						car.getData().setActionRepartitionToday(arrayListInitialized(6));
+					}
+					else
+						car.getData().getActionRepartitionToday().set(4, car.getData().getActionRepartitionToday().get(4)+1);
+					car.getData().getRewardRepartition().set(0, car.getData().getRewardRepartition().get(0)+1);
+				}
+			}
+			System.out.println(car.getData().getActionRepartitionToday().toString()+"\n"+car.getData().getActionRepartitionYesterday().toString()+"\n");
+		}
+		System.out.println("-----------------------");
+	}
+	
+	/**
+	 * this methode initialize a integer arrayList of size value
+	 * @param value
+	 * @return
+	 */
+	public ArrayList<Integer> arrayListInitialized(int value){
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for (int i = 0; i < value; i++) {
+			list.add(0);
+		}
+		return list;
 	}
 	
 	public Boolean endOfTheGame(){
