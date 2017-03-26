@@ -16,13 +16,18 @@ public class DataCharacter {
 	
 	//0:Sleeping	1:Chilling	2:Shifting	3:working	4:Entertain	5:Nothing
 	private ArrayList<Integer> actionRepartition;
-	private String[] actionName = {"Sleeping","Chilling","Shifting","Working","Entertain","Other"}; 
+	private String[] actionName = {"Sleeping","Chilling","Shifting","Working","Entertain","Other"};
+	
+	//0:positiv	1:negativ	2:nul
+	private ArrayList<Integer> rewardRepartition;
+	private String[] rewardName = {"Positiv reward", "Negativ reward", "nul reward"};
 	
 	public DataCharacter(){
 		emotionHistoric = new ArrayList<Integer>();
 		emotionHistoricToday = new ArrayList<Integer>();
 		emotionHistoricYesterday = new ArrayList<Integer>();
 		initActionRepartition();
+		initRewardRepartition();
 		
 	}
 	
@@ -34,6 +39,13 @@ public class DataCharacter {
 		actionRepartition.add(0);
 		actionRepartition.add(0);
 		actionRepartition.add(0);
+	}
+	
+	public void initRewardRepartition(){
+		rewardRepartition = new ArrayList<Integer>();
+		rewardRepartition.add(0);
+		rewardRepartition.add(0);
+		rewardRepartition.add(0);
 	}
 
 	public ArrayList<Integer> getEmotionHistoric() {
@@ -70,5 +82,17 @@ public class DataCharacter {
 
 	public void setEmotionHistoricYesterday(ArrayList<Integer> emotionHistoricYesterday) {
 		this.emotionHistoricYesterday = emotionHistoricYesterday;
+	}
+
+	public ArrayList<Integer> getRewardRepartition() {
+		return rewardRepartition;
+	}
+
+	public void setRewardRepartition(ArrayList<Integer> rewardRepartition) {
+		this.rewardRepartition = rewardRepartition;
+	}
+
+	public String getRewardName(int i) {
+		return rewardName[i];
 	}
 }

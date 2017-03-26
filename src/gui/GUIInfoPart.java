@@ -21,6 +21,7 @@ import javax.swing.ListSelectionModel;
 import character.Character;
 import chart.ChartEmotionHistoricDaily;
 import chart.ChartEmotionHistoricFull;
+import chart.ChartRewardRepartitionFull;
 import city.Population;
 
 /**
@@ -198,7 +199,8 @@ public class GUIInfoPart extends JPanel{
 			if(currentCharacter.getData().getEmotionHistoric().size()>0){
 				//ChartActionRepartition chart = new ChartActionRepartition(currentCharacter);
 				//ChartEmotionHistoricFull chart = new ChartEmotionHistoricFull(currentCharacter);
-				ChartEmotionHistoricDaily chart = new ChartEmotionHistoricDaily(currentCharacter);
+				//ChartEmotionHistoricDaily chart = new ChartEmotionHistoricDaily(currentCharacter);
+				ChartRewardRepartitionFull chart = new ChartRewardRepartitionFull(currentCharacter);
 			}
 			else{
 				JOptionPane error = new JOptionPane();
