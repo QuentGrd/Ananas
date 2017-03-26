@@ -28,12 +28,16 @@ public class Run {
 
 	private City city;
 	private GUIMain gui;
-	private Clock clock;
+	private static Clock clock;
 	
 	private boolean run;
 	
 	public Run(){
 		run = true;
+	}
+	
+	public static Schedule getClockTime(){
+		return new Schedule(clock.getHours().getCounter(), clock.getMin().getCounter());
 	}
 	
 	public void initialisation(){

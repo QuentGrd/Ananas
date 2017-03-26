@@ -2,21 +2,16 @@ package gui;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
 
 import character.Character;
+import city.Map;
 import city.Population;
 
 /**
@@ -38,10 +33,10 @@ public class GUIInfoPart extends JPanel{
 	private static final String INFOPANEL = "Information Panel";
 	private static final String CHARACTERPANEL = "Character list Panel";
 	
-	public GUIInfoPart(Population pop){
+	public GUIInfoPart(Population pop, Map map){
 		this.pop = pop;
 		ginfo = new GUIGraphicsList(pop);
-		cinfo = new GUICharacterInfo(this);
+		cinfo = new GUICharacterInfo(this, map);
 		this.initCardLayout();
 		this.setPreferredSize(new Dimension(400, 600));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));

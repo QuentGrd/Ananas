@@ -29,7 +29,7 @@ public class GUIMain extends JFrame{
 	public GUIMain(Map map, Clock clock, Population pop){
 		gmap = new GUIMap(map, pop);
 		clockInfo = new GUIClockInfo(clock);
-		info = new GUIInfoPart(pop);
+		info = new GUIInfoPart(pop, map);
 		draw();
 	}
 	
