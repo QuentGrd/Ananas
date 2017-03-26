@@ -299,9 +299,7 @@ public class Run {
 					car.getData().getRewardRepartition().set(0, car.getData().getRewardRepartition().get(0)+1);
 				}
 			}
-			System.out.println(car.getData().getActionRepartitionToday().toString()+"\n"+car.getData().getActionRepartitionYesterday().toString()+"\n");
 		}
-		System.out.println("-----------------------");
 	}
 	
 	/**
