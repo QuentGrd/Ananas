@@ -214,25 +214,41 @@ public class Run {
 			//emotionhistoric
 			car.getData().getEmotionHistoric().add(car.getEmotion().getCounter());
 			
+			//emotionhistoric Today/Yesterday
+			if(equalSchedule(clock, new Schedule(0, 0))){
+				car.getData().setEmotionHistoricYesterday(car.getData().getEmotionHistoricToday());
+				car.getData().setEmotionHistoricToday(new ArrayList<Integer>());
+			}
+			else{
+				car.getData().getEmotionHistoricToday().add(car.getEmotion().getCounter());
+				System.out.println(car.getData().getEmotionHistoricToday().toString()+"\n"+car.getData().getEmotionHistoricYesterday().toString()+'\n');
+			}
+			
 			//actionRepartition
-			if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Sleeping")){
-				car.getData().getActionRepartition().set(0, car.getData().getActionRepartition().get(0) +1);
-			}
-			else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Chilling")){
-				car.getData().getActionRepartition().set(1, car.getData().getActionRepartition().get(1) +1);
-			}
-			else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Shifting")){
-				car.getData().getActionRepartition().set(2, car.getData().getActionRepartition().get(2) +1);
-			}
-			else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Working")){
-				car.getData().getActionRepartition().set(3, car.getData().getActionRepartition().get(3) +1);
-			}
-			else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Entertain")){
-				car.getData().getActionRepartition().set(4, car.getData().getActionRepartition().get(4) +1);
-			}
-			else
+			if(car.getRoutine().getCurrentAction() == null){
 				car.getData().getActionRepartition().set(5, car.getData().getActionRepartition().get(5) +1);
+			}
+			else{
+				if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Sleeping")){
+					car.getData().getActionRepartition().set(0, car.getData().getActionRepartition().get(0) +1);
+				}
+				else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Chilling")){
+					car.getData().getActionRepartition().set(1, car.getData().getActionRepartition().get(1) +1);
+				}
+				else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Shifting")){
+					car.getData().getActionRepartition().set(2, car.getData().getActionRepartition().get(2) +1);
+				}
+				else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Working")){
+					car.getData().getActionRepartition().set(3, car.getData().getActionRepartition().get(3) +1);
+				}
+				else if(car.getRoutine().getCurrentAction().getClass().getName().equals("actions.Entertain")){
+					car.getData().getActionRepartition().set(4, car.getData().getActionRepartition().get(4) +1);
+				}
+				else
+					car.getData().getActionRepartition().set(5, car.getData().getActionRepartition().get(5) +1);
+			}
 		}
+		System.out.println("----------------");
 	}
 	
 	public Boolean endOfTheGame(){

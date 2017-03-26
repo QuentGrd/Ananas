@@ -10,12 +10,18 @@ import java.util.ArrayList;
 public class DataCharacter {
 
 	private ArrayList<Integer> emotionHistoric;
+	
+	private ArrayList<Integer> emotionHistoricToday;
+	private ArrayList<Integer> emotionHistoricYesterday;
+	
 	//0:Sleeping	1:Chilling	2:Shifting	3:working	4:Entertain	5:Nothing
 	private ArrayList<Integer> actionRepartition;
 	private String[] actionName = {"Sleeping","Chilling","Shifting","Working","Entertain","Other"}; 
 	
 	public DataCharacter(){
-		this.emotionHistoric = new ArrayList<Integer>();
+		emotionHistoric = new ArrayList<Integer>();
+		emotionHistoricToday = new ArrayList<Integer>();
+		emotionHistoricYesterday = new ArrayList<Integer>();
 		initActionRepartition();
 		
 	}
@@ -48,5 +54,21 @@ public class DataCharacter {
 
 	public String getActionName(int i) {
 		return actionName[i];
+	}
+
+	public ArrayList<Integer> getEmotionHistoricToday() {
+		return emotionHistoricToday;
+	}
+
+	public void setEmotionHistoricToday(ArrayList<Integer> emotionHistoricToday) {
+		this.emotionHistoricToday = emotionHistoricToday;
+	}
+
+	public ArrayList<Integer> getEmotionHistoricYesterday() {
+		return emotionHistoricYesterday;
+	}
+
+	public void setEmotionHistoricYesterday(ArrayList<Integer> emotionHistoricYesterday) {
+		this.emotionHistoricYesterday = emotionHistoricYesterday;
 	}
 }
