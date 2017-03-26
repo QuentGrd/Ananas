@@ -23,7 +23,7 @@ import character.Character;
  * @author matthieu
  *
  */
-public class ChartActionRepartition extends JFrame{
+public class ChartActionRepartitionFull extends JFrame{
 
 	private static final long serialVersionUID = -8881399308101213332L;
 	private Character character;
@@ -33,7 +33,7 @@ public class ChartActionRepartition extends JFrame{
 	
 	DefaultCategoryDataset dataset;
 	
-	public ChartActionRepartition(Character character){
+	public ChartActionRepartitionFull(Character character){
 		super("Character : " + character.getFirstName());
 		
 		this.character = character;

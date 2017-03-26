@@ -19,6 +19,7 @@ import javax.swing.JTextPane;
 import javax.swing.ListSelectionModel;
 
 import character.Character;
+import chart.ChartActionRepartitionDaily;
 import chart.ChartEmotionHistoricDaily;
 import chart.ChartEmotionHistoricFull;
 import chart.ChartRewardRepartitionFull;
@@ -200,7 +201,8 @@ public class GUIInfoPart extends JPanel{
 				//ChartActionRepartition chart = new ChartActionRepartition(currentCharacter);
 				//ChartEmotionHistoricFull chart = new ChartEmotionHistoricFull(currentCharacter);
 				//ChartEmotionHistoricDaily chart = new ChartEmotionHistoricDaily(currentCharacter);
-				ChartRewardRepartitionFull chart = new ChartRewardRepartitionFull(currentCharacter);
+				//ChartRewardRepartitionFull chart = new ChartRewardRepartitionFull(currentCharacter);
+				ChartActionRepartitionDaily chart = new ChartActionRepartitionDaily(currentCharacter);
 			}
 			else{
 				JOptionPane error = new JOptionPane();
