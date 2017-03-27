@@ -16,11 +16,13 @@ import javax.swing.JTextPane;
 import actions.Actions;
 import actions.Entertain;
 import actions.Shifting;
+import actions.Sleeping;
 import character.Character;
 import chart.ChartActionRepartitionDaily;
 import city.Map;
 import clock.Schedule;
 import run.Run;
+import utils.Coordinates;
 
 public class GUICharacterInfo extends JPanel{
 	
@@ -175,14 +177,23 @@ public class GUICharacterInfo extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Actions action = null;
+			Coordinates adress = null;
 			switch(actionType.getSelectedIndex()){
 				case 1:
-					action = new Entertain(map.getEntertainmentList().get(infra.getSelectedIndex()), Run.getClockTime(), new Schedule(3, 0));
+					adress = map.getEntertainmentList().get(infra.getSelectedIndex()).getAddress();
+					action = new Entertain(map.getEntertainmentList().get(infra.getSelectedIndex()), Run.getClockTime(), new Schedule("3"));
 					break;
 				case 2:
-					action = new Shifting(Run.getClockTime(), currentCharacter.getPosition(), map.getEntertainmentList().get(infra.getSelectedIndex()).getAddress());
+					adress = map.getEntertainmentList().get(infra.getSelectedIndex()).getAddress();
+					action = new Shifting(Run.getClockTime(), currentCharacter.getPosition(), adress);
+					break;
+				case 3:
+					adress = currentCharacter.getHome().getAddress();
+					action = new Sleeping(currentCharacter.getHome(), Run.getClockTime(), new Schedule("3"));
+					break;
 			}
 			currentCharacter.getRoutine().addFirstToCR(action);
+			currentCharacter.getRoutine().addFirstToCR(new Shifting(Run.getClockTime(), currentCharacter.getPosition(), adress));
 		}
 	}
 	
