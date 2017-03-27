@@ -78,7 +78,7 @@ public class MapManager {
 	public Image printCharacter(Character c){
 		Image img = null;
 		try {
-			img = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/players.png")).getScaledInstance((20), (20), Image.SCALE_DEFAULT);
+			img = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/player1.png")).getScaledInstance((20), (20), Image.SCALE_DEFAULT);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -54,7 +54,7 @@ public class GUIGraphicsList extends JPanel{
 			try {
 				int imageWidth = 50;
 				int imageHeight = 50;
-				Image img = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/players.png")).getScaledInstance(imageWidth, imageHeight, Image.SCALE_DEFAULT);
+				Image img = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/player1.png")).getScaledInstance(imageWidth, imageHeight, Image.SCALE_DEFAULT);
 				g.drawImage(img, ((i%chPerRow)*widthCell)+(widthCell/2)-(imageWidth/2), ((i/chPerRow)*heightCell)+3*(heightCell/5)-(imageHeight)/*2*(heightCell/5)-(imageHeight/2)*/, this);
 			} catch (IOException e) {
 				e.printStackTrace();
