@@ -124,6 +124,7 @@ public class Run {
 					//actions.Shifting
 					if(carCurrentAction.getClass().getName().equals("actions.Shifting")){
 						Shifting shift = (Shifting) car.getRoutine().getCurrentAction();
+						shift.setBegin(car.getPosition());
 						
 						if(!shift.getPathIsFound()){
 							shift.foundPath(city.getMap());
