@@ -19,6 +19,10 @@ import actions.Shifting;
 import actions.Sleeping;
 import character.Character;
 import chart.ChartActionRepartitionDaily;
+import chart.ChartActionRepartitionFull;
+import chart.ChartEmotionHistoricDaily;
+import chart.ChartEmotionHistoricFull;
+import chart.ChartRewardRepartitionFull;
 import city.Map;
 import clock.Schedule;
 import run.Run;
@@ -39,7 +43,12 @@ public class GUICharacterInfo extends JPanel{
 	private JPanel buttonPart;
 	private JButton list;
 	private JButton info;
-	private JButton chart;
+	
+	private JButton chartAction;
+	private JButton chartEmotionFull;
+	private JButton chartEmotionDay;
+	private JButton chartRewardFull;
+	private JButton chartActionDay;
 	
 	private JPanel characRoutine;
 	private JButton addAction;
@@ -78,20 +87,33 @@ public class GUICharacterInfo extends JPanel{
 		infoText.setText(textDefault);
 		infoText.setPreferredSize(new Dimension(390, 220));
 		infoPart.add(infoText);
+		infoPart.add(chartRewardFull);
+		infoPart.add(chartAction);
+		infoPart.add(chartActionDay);
+		infoPart.add(chartEmotionFull);
+		infoPart.add(chartEmotionDay);
 	}
 	
 	public void initButtonPart(){
 		buttonPart = new JPanel();
 		info = new JButton("_info");
 		list = new JButton("Back");
-		chart = new JButton("Chart");
+		chartAction = new JButton("Full Action Repartition");
+		chartEmotionFull = new JButton("Full Emotion Repartition");
+		chartEmotionDay = new JButton("Daily Emotion Repartition");
+		chartRewardFull = new JButton("Full Reward Repartition");
+		chartActionDay = new JButton("Daily Action Repartition");
 		info.addActionListener(new DisplayInfoAction());
 		list.addActionListener(new DisplayListAction());
-		chart.addActionListener(new ActionShowChart());
+		chartAction.addActionListener(new ActionShowChart());
+		chartEmotionFull.addActionListener(new ActionShowChart());
+		chartEmotionDay.addActionListener(new ActionShowChart());
+		chartRewardFull.addActionListener(new ActionShowChart());
+		chartActionDay.addActionListener(new ActionShowChart());
 		buttonPart.setLayout(new FlowLayout());
 		buttonPart.add(list);
 		//buttonPart.add(info);
-		buttonPart.add(chart);
+		//buttonPart.add(chart);
 		
 	}
 	
@@ -200,12 +222,31 @@ public class GUICharacterInfo extends JPanel{
 	class ActionShowChart implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			
+			System.out.println(e.getActionCommand());
+			
 			if(currentCharacter.getData().getEmotionHistoric().size()>0){
 				//ChartActionRepartition chart = new ChartActionRepartition(currentCharacter);
 				//ChartEmotionHistoricFull chart = new ChartEmotionHistoricFull(currentCharacter);
 				//ChartEmotionHistoricDaily chart = new ChartEmotionHistoricDaily(currentCharacter);
 				//ChartRewardRepartitionFull chart = new ChartRewardRepartitionFull(currentCharacter);
-				ChartActionRepartitionDaily chart = new ChartActionRepartitionDaily(currentCharacter);
+				//ChartActionRepartitionDaily chart = new ChartActionRepartitionDaily(currentCharacter);
+				switch(e.getActionCommand()){
+					case "Daily Action Repartition":
+						ChartActionRepartitionDaily chart = new ChartActionRepartitionDaily(currentCharacter);
+						break;
+					case "Full Emotion Repartition":
+						ChartEmotionHistoricFull chart1 = new ChartEmotionHistoricFull(currentCharacter);
+						break;
+					case "Daily Emotion Repartition":
+						ChartEmotionHistoricDaily chart2 = new ChartEmotionHistoricDaily(currentCharacter);
+						break;
+					case "Full Reward Repartition":
+						ChartRewardRepartitionFull chart3 = new ChartRewardRepartitionFull(currentCharacter);
+						break;
+					case "Full Action Repartition":
+						ChartActionRepartitionFull chart4 = new ChartActionRepartitionFull(currentCharacter);
+						break;
+				}
 			}
 			else{
 				JOptionPane error = new JOptionPane();

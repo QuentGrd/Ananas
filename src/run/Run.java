@@ -32,8 +32,11 @@ public class Run {
 	
 	private boolean run;
 	
+	private static boolean play;
+	
 	public Run(){
 		run = true;
+		play = true;
 	}
 	
 	public static Schedule getClockTime(){
@@ -51,14 +54,15 @@ public class Run {
 	public void run(){
 		
 		while(run){
-			
-			initCurrentRoutine();
-			runRoutine();
-			lifeManagment();
-			statisticManagment();
-			run = !endOfTheGame();
-			gui.refreshGUI(city.getPopulation(), clock);
-			clock.increment();
+			if (play){
+				initCurrentRoutine();
+				runRoutine();
+				lifeManagment();
+				statisticManagment();
+				run = !endOfTheGame();
+				gui.refreshGUI(city.getPopulation(), clock);
+				clock.increment();
+			}
 			try{
 				Thread.sleep(500);
 			}catch(InterruptedException e){
@@ -463,5 +467,15 @@ public class Run {
 		random = rand.nextInt(max - min +1) + min; //<!PROBLEME MUST BE POSITIVE>
 		
 		return random;
+	}
+	public static void switchPlayStatus(){
+		if (play)
+			play = false;
+		else
+			play = true;
+	}
+
+	public static boolean isPlay() {
+		return play;
 	}
 }

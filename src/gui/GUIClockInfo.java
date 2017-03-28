@@ -3,11 +3,15 @@ package gui;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import clock.Clock;
+import run.Run;
 
 public class GUIClockInfo extends JPanel{
 	
@@ -20,6 +24,7 @@ public class GUIClockInfo extends JPanel{
 	private JLabel dayLabel;
 	private JLabel monthLabel;
 	private JLabel yearLabel;
+	private JButton playPause;
 	
 	public GUIClockInfo(Clock clock){
 		this.clock = clock;
@@ -56,6 +61,11 @@ public class GUIClockInfo extends JPanel{
 		yearLabel.setFont(clockFont);
 		clockPart.add(yearLabel);
 		clockPart.add(new JLabel(")"));
+		
+		playPause = new JButton("Pause");
+		playPause.addActionListener(new PlayPauseAction());
+		clockPart.add(playPause);
+		
 	}
 	
 	public void refreshClock(Clock clock){
@@ -64,6 +74,17 @@ public class GUIClockInfo extends JPanel{
 		dayLabel.setText(Clock.transform(clock.getDays().getCounter()));
 		monthLabel.setText(Clock.transform(clock.getMonths().getCounter()));
 		yearLabel.setText(Clock.transform(clock.getYears().getCounter()));
+	}
+	
+	class PlayPauseAction implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Run.switchPlayStatus();
+			if (Run.isPlay())
+				playPause.setText("Pause");
+			else
+				playPause.setText("Play");
+		}
 	}
 
 	public void setMinLabel(JLabel minLabel) {
