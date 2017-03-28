@@ -6,8 +6,12 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
+import building.Entertainment;
+import building.Home;
+import building.Work;
 import city.Map;
 import city.Population;
+import trace.Road;
 import utils.Coordinates;
 
 /**
@@ -78,6 +82,20 @@ public class GUIGraphicsMap extends JPanel{
 			int x = (e.getY()/20);
 			int y = e.getX()/20;
 			System.out.println(map.getInfrastructure(x, y));
+			switch(map.getInfrastructure(x, y).getType()){
+				case 1:
+					GUIInfrastructureInfo.setInfo((Home) map.getInfrastructure(x, y));
+					break;
+				case 2:
+					GUIInfrastructureInfo.setInfo((Work) map.getInfrastructure(x, y));
+					break;
+				case 3:
+					GUIInfrastructureInfo.setInfo((Entertainment) map.getInfrastructure(x, y));
+					break;
+				case 4:
+					GUIInfrastructureInfo.setInfo((Road) map.getInfrastructure(x, y));
+					break;
+			}
 		}
 
 		@Override

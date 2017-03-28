@@ -25,11 +25,13 @@ public class GUIMain extends JFrame{
 	private GUIMap gmap;
 	private GUIClockInfo clockInfo;
 	private GUIInfoPart info;
+	private GUIInfrastructureInfo infraInfo;
 	
 	public GUIMain(Map map, Clock clock, Population pop){
 		gmap = new GUIMap(map, pop);
 		clockInfo = new GUIClockInfo(clock);
 		info = new GUIInfoPart(pop, map);
+		infraInfo = new GUIInfrastructureInfo();
 		draw();
 	}
 	
@@ -41,6 +43,7 @@ public class GUIMain extends JFrame{
 		front.setLayout(new BoxLayout(front, BoxLayout.PAGE_AXIS));
 		front.add(clockInfo);
 		front.add(back);
+		front.add(infraInfo);
 		this.getContentPane().add(front);
 		this.pack();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
