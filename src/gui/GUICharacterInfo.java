@@ -85,7 +85,8 @@ public class GUICharacterInfo extends JPanel{
 		infoText = new JTextPane();
 		infoText.setEditable(false);
 		infoText.setText(textDefault);
-		infoText.setPreferredSize(new Dimension(390, 220));
+		infoText.setPreferredSize(new Dimension(390, 170));
+		infoPart.setPreferredSize(new Dimension(390, 250));
 		infoPart.add(infoText);
 		infoPart.add(chartRewardFull);
 		infoPart.add(chartAction);

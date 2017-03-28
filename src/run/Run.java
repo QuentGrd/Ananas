@@ -64,7 +64,7 @@ public class Run {
 				clock.increment();
 			}
 			try{
-				Thread.sleep(500);
+				Thread.sleep(100);
 			}catch(InterruptedException e){
 				Thread.currentThread().interrupt();
 				e.printStackTrace();
