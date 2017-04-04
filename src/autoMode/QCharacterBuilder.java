@@ -5,6 +5,11 @@ import character.Character;
 import city.Map;
 import utils.BoundedCounter;
 
+/**
+ * 
+ * @author matthieu
+ *
+ */
 public class QCharacterBuilder{
 
 	

@@ -53,4 +53,12 @@ public class QCharacter extends Character{
 	public void setInitialPosition(Coordinates initialPosition) {
 		this.initialPosition = initialPosition;
 	}
+	
+	public String toString(){
+		String str = "";
+		
+		str += this.getName() + "\t" + this.getFirstName() + "\tmoney : " + this.getMoney().getCounter() + "\tfamily : " + this.getFamily().getCounter();
+		
+		return str;
+	}
 }
