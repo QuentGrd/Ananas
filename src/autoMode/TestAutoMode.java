@@ -16,6 +16,7 @@ public class TestAutoMode {
 		System.out.println(qcar.getEnvironment().toString());
 		
 		System.out.println("\nHome : " + qcar.getHome().getAddress().toString() + "\nWork : " + qcar.getWork().getAddress().toString());
+		System.out.println("money : " + qcar.getMoney().getCounter() + "\tfamily : " + qcar.getFamily().getCounter());
 		
 		System.out.println("\nOK.");
 	}
