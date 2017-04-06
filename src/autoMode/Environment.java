@@ -52,6 +52,7 @@ public class Environment {
 						Entertainment enter = (Entertainment) newState.getInfrastructure();
 						if(enter.getAddress().getX() == i && enter.getAddress().getY() == j){
 							newState.setType(0);
+							newState.setReward(enter.getReward());
 						}
 						else
 							newState.setType(1);
@@ -69,8 +70,10 @@ public class Environment {
 						newState.setType(1);
 					
 					//si c'est la maison ou le travail du perso on autorise
-					if(home.getAddress().getX() == i && home.getAddress().getY() == j)
+					if(home.getAddress().getX() == i && home.getAddress().getY() == j){
 						newState.setType(0);
+						newState.setReward(home.getReward());
+					}
 					
 				}
 				
@@ -137,6 +140,7 @@ public class Environment {
 			for (int j = 0; j < SIZE; j++) {
 //				result += " " + Qmap[i][j].getType();
 				result += " " + Qmap[i][j].getListAction().size();
+//				result += " " + Qmap[i][j].getReward();
 			}
 			result += "\n";
 		}
