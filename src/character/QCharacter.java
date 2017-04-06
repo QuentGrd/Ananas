@@ -19,8 +19,24 @@ public class QCharacter extends Character{
 		
 	}
 	
+	public Coordinates getInitialPosition() {
+		return initialPosition;
+	}
+
+	public void setInitialPosition(Coordinates initialPosition) {
+		this.initialPosition = initialPosition;
+	}
+
+	public Environment getEnvironment() {
+		return environment;
+	}
+
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
+
 	public String toString(){
-		return "[auto]\t" + super.toString();
+		return "[auto]\t" + super.toString() + "\n" + environment.toString();
 	}
 	
 }

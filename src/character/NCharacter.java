@@ -1,5 +1,6 @@
 package character;
 
+import building.Work;
 
 /**
  * 
@@ -8,11 +9,20 @@ package character;
  */
 public class NCharacter extends Character{
 
+	private Work work;
 	private DataCharacter data;
 	private Routine routine;
 	
 	public NCharacter(){
 		
+	}
+	
+	public Work getWork() {
+		return work;
+	}
+
+	public void setWork(Work work) {
+		this.work = work;
 	}
 
 	public DataCharacter getData() {
@@ -32,6 +42,6 @@ public class NCharacter extends Character{
 	}
 	
 	public String toString(){
-		return "[norm]\t" + super.toString();
+		return "[norm]\t" + super.toString() + "\tWork : " + this.work.getAddress().toString();
 	}
 }

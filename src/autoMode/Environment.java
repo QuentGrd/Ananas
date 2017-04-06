@@ -17,14 +17,14 @@ public class Environment {
 	private State[][] Qmap;
 	private static final int SIZE = 30;
 	
-	public Environment(Map map, Home home, Work work){
+	public Environment(Map map, Home home){
 		Qmap = new State[SIZE][SIZE];
-		initQmap(map, home, work);
+		initQmap(map, home);
 	}
 	
-	public void initQmap(Map map, Home home, Work work){
+	public void initQmap(Map map, Home home){
 		
-		creatState(map, home, work);
+		creatState(map, home);
 		creatActions(map);
 		
 	}
@@ -35,7 +35,7 @@ public class Environment {
 	 * @param home
 	 * @param work
 	 */
-	public void creatState(Map map, Home home, Work work){
+	public void creatState(Map map, Home home){
 		
 		for(int i=0; i<SIZE; i++){
 			for(int j=0; j<SIZE; j++){
@@ -56,13 +56,22 @@ public class Environment {
 						else
 							newState.setType(1);
 					}
+					// si work, autorise l'accé a l'adresse
+					else if(newState.getInfrastructure().getType() == 2){
+						Work work = (Work) newState.getInfrastructure();
+						if(work.getAddress().getX() == i && work.getAddress().getY() == j){
+							newState.setType(0);
+						}
+						else
+							newState.setType(1);
+					}
+					else
+						newState.setType(1);
+					
 					//si c'est la maison ou le travail du perso on autorise
 					if(home.getAddress().getX() == i && home.getAddress().getY() == j)
 						newState.setType(0);
-					else if(work.getAddress().getX() == i && work.getAddress().getY() == j)
-						newState.setType(0);
-					else
-						newState.setType(1);
+					
 				}
 				
 				Qmap[i][j] = newState;

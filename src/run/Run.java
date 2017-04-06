@@ -445,7 +445,9 @@ public class Run {
 		return valid;
 	}
 	
-	public boolean isAutorizedBuilding(int x, int y, Character car){
+	public boolean isAutorizedBuilding(int x, int y, Character character){
+		
+		NCharacter car = (NCharacter)character;
 		
 		//si c'est sa maison il peut rentrer 
 		if(car.getHome().getAddress().getX() == x && car.getHome().getAddress().getY() == y)

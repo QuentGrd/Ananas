@@ -17,7 +17,6 @@ public abstract class Character {
 	private String name;
 	private String firstName;
 	private Home home;
-	private Work work;
 	private BoundedCounter emotion;
 	private String id;
 	private Boolean alive;
@@ -63,14 +62,6 @@ public abstract class Character {
 		this.home = home;
 	}
 
-	public Work getWork() {
-		return work;
-	}
-
-	public void setWork(Work work) {
-		this.work = work;
-	}
-
 	public Coordinates getPosition() {
 		return position;
 	}
@@ -104,7 +95,6 @@ public abstract class Character {
 		str += "\tID : " + id;
 		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
 		str += "\tHome : " + this.home.getAddress().toString();
-		str += "\tWork : " + this.work.getAddress().toString();
 		return str;
 	}
 }
