@@ -30,4 +30,8 @@ public class NCharacter extends Character{
 	public void setRoutine(Routine routine) {
 		this.routine = routine;
 	}
+	
+	public String toString(){
+		return "[norm]\t" + super.toString();
+	}
 }
