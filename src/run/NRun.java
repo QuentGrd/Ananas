@@ -46,7 +46,7 @@ public class NRun {
 	
 	public void initialisation(){
 		city = new City();
-		CityBuilder cBuilder = new CityBuilder(city);
+		CityBuilder cBuilder = new CityBuilder(city, false);
 		clock = new Clock(0, 0, 1, 1, 2017);
 		
 		gui = new GUIMain(city.getMap(), clock, city.getPopulation());
