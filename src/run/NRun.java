@@ -25,7 +25,7 @@ import utils.Coordinates;
  * @author matthieu
  *
  */
-public class Run {
+public class NRun {
 
 	private City city;
 	private GUIMain gui;
@@ -35,7 +35,7 @@ public class Run {
 	
 	private static boolean play;
 	
-	public Run(){
+	public NRun(){
 		run = true;
 		play = true;
 	}
@@ -65,7 +65,7 @@ public class Run {
 				clock.increment();
 			}
 			try{
-				Thread.sleep(100);
+				Thread.sleep(50);
 			}catch(InterruptedException e){
 				Thread.currentThread().interrupt();
 				e.printStackTrace();
@@ -80,7 +80,7 @@ public class Run {
 		ArrayList<Character> carList = city.getPopulation().getListCharacter();
 		
 		for (int i = 0; i < carList.size(); i++) {
-			moveCharacter(carList.get(i));
+			moveCharacter((NCharacter)carList.get(i));
 		}
 	}
 	
@@ -88,7 +88,7 @@ public class Run {
 	 * this metode change randomly the position of a character
 	 * @param car
 	 */
-	public void moveCharacter(Character car){
+	public void moveCharacter(NCharacter car){
 		ArrayList<Coordinates> possibleMoves = validNeighbour(car);
 		int selectedMove = randomSelection(0, possibleMoves.size()-1);
 		car.setPosition(possibleMoves.get(selectedMove));
@@ -416,7 +416,7 @@ public class Run {
 	 * @param car
 	 * @return
 	 */
-	public ArrayList<Coordinates> validNeighbour(Character car){
+	public ArrayList<Coordinates> validNeighbour(NCharacter car){
 		int currentX = car.getPosition().getX();
 		int currentY = car.getPosition().getY();
 		
@@ -445,9 +445,7 @@ public class Run {
 		return valid;
 	}
 	
-	public boolean isAutorizedBuilding(int x, int y, Character character){
-		
-		NCharacter car = (NCharacter)character;
+	public boolean isAutorizedBuilding(int x, int y, NCharacter car){
 		
 		//si c'est sa maison il peut rentrer 
 		if(car.getHome().getAddress().getX() == x && car.getHome().getAddress().getY() == y)

@@ -19,8 +19,8 @@ public class CityBuilder {
 		
 		Population pop = city.getPopulation();
 		pop = new Population(5);
-		popBuilder = new PopulationBuilder(pop, map);
-		city.setPopulation(pop);
+		popBuilder = new PopulationBuilder(pop, map, false);
+		city.setPopulation(popBuilder.populationCreation());
 		System.out.println(pop.toString());
 		
 	}

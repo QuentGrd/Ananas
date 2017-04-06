@@ -36,7 +36,7 @@ public class QCharacter extends Character{
 	}
 
 	public String toString(){
-		return "[auto]\t" + super.toString() + "\n" + environment.toString();
+		return "[auto]\t" + super.toString() ;
 	}
 	
 }

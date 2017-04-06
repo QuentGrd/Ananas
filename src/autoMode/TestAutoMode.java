@@ -1,9 +1,11 @@
 package autoMode;
 
 import builders.MapBuilder;
+import builders.PopulationBuilder;
 import builders.QCharacterBuilder;
 import character.QCharacter;
 import city.Map;
+import city.Population;
 
 public class TestAutoMode {
 
@@ -13,13 +15,10 @@ public class TestAutoMode {
 		MapBuilder mapB = new MapBuilder(map);
 		mapB.initBuildings();
 		
-		QCharacter qcar = new QCharacter();
-		QCharacterBuilder builder = new QCharacterBuilder(qcar);
-		
-		qcar = builder.createCharacter();
-		qcar = builder.initCharacterHome(map);
-		qcar = builder.initCharacterEnvironment(map, qcar.getHome());
-		System.out.println(qcar.toString());
+		Population pop = new Population(5);
+		PopulationBuilder builder = new PopulationBuilder(pop, map, true);
+		pop = builder.populationCreation();
+		System.out.println(pop.toString());
 	}
 
 }

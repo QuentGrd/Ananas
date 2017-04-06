@@ -26,7 +26,7 @@ import chart.ChartEmotionHistoricFull;
 import chart.ChartRewardRepartitionFull;
 import city.Map;
 import clock.Schedule;
-import run.Run;
+import run.NRun;
 import utils.Coordinates;
 
 public class GUICharacterInfo extends JPanel{
@@ -206,19 +206,19 @@ public class GUICharacterInfo extends JPanel{
 			switch(actionType.getSelectedIndex()){
 				case 1:
 					adress = map.getEntertainmentList().get(infra.getSelectedIndex()).getAddress();
-					action = new Entertain(map.getEntertainmentList().get(infra.getSelectedIndex()), Run.getClockTime(), new Schedule("3"));
+					action = new Entertain(map.getEntertainmentList().get(infra.getSelectedIndex()), NRun.getClockTime(), new Schedule("3"));
 					break;
 				case 2:
 					adress = map.getEntertainmentList().get(infra.getSelectedIndex()).getAddress();
-					action = new Shifting(Run.getClockTime(), currentCharacter.getPosition(), adress);
+					action = new Shifting(NRun.getClockTime(), currentCharacter.getPosition(), adress);
 					break;
 				case 3:
 					adress = currentCharacter.getHome().getAddress();
-					action = new Sleeping(currentCharacter.getHome(), Run.getClockTime(), new Schedule("3"));
+					action = new Sleeping(currentCharacter.getHome(), NRun.getClockTime(), new Schedule("3"));
 					break;
 			}
 			currentCharacter.getRoutine().addFirstToCR(action);
-			currentCharacter.getRoutine().addFirstToCR(new Shifting(Run.getClockTime(), currentCharacter.getPosition(), adress));
+			currentCharacter.getRoutine().addFirstToCR(new Shifting(NRun.getClockTime(), currentCharacter.getPosition(), adress));
 		}
 	}
 	

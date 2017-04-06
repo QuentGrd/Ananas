@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import clock.Clock;
-import run.Run;
+import run.NRun;
 
 public class GUIClockInfo extends JPanel{
 	
@@ -79,8 +79,8 @@ public class GUIClockInfo extends JPanel{
 	class PlayPauseAction implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Run.switchPlayStatus();
-			if (Run.isPlay())
+			NRun.switchPlayStatus();
+			if (NRun.isPlay())
 				playPause.setText("Pause");
 			else
 				playPause.setText("Play");
