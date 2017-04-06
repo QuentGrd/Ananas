@@ -2,6 +2,7 @@ package character;
 
 
 import autoMode.Environment;
+import autoMode.State;
 import utils.Coordinates;
 
 /**
@@ -12,7 +13,7 @@ import utils.Coordinates;
 public class QCharacter extends Character{
 
 	private Coordinates initialPosition;
-	
+	private State currentState;
 	private Environment environment;
 	
 	public QCharacter(){
@@ -25,6 +26,14 @@ public class QCharacter extends Character{
 
 	public void setInitialPosition(Coordinates initialPosition) {
 		this.initialPosition = initialPosition;
+	}
+
+	public State getCurrentState() {
+		return currentState;
+	}
+
+	public void setCurrentState(State currentState) {
+		this.currentState = currentState;
 	}
 
 	public Environment getEnvironment() {

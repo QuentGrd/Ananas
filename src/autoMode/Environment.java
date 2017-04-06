@@ -91,6 +91,9 @@ public class Environment {
 			for(int j = 0; j<SIZE; j++){
 				ArrayList<QActions> list = new ArrayList<QActions>();
 				
+				QActions actionStay = new QActions(Qmap[i][j], Qmap[i][j]);
+				list.add(actionStay);
+				
 				if(i>0){
 					if(Qmap[i-1][j].getType() == 0){
 						QActions actionDown = new QActions(Qmap[i][j], Qmap[i-1][j]);

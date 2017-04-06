@@ -6,32 +6,32 @@ package autoMode;
  *
  */
 public class QActions {
-	private State currentAction;
-	private State nextAction;
+	private State currentState;
+	private State nextState;
 	
 	private double value;
 	
 	public QActions(State current, State next){
-		this.currentAction = current;
-		this.nextAction = next;
+		this.currentState = current;
+		this.nextState = next;
 		
 		this.value = 0;
 	}
 
-	public State getCurrentAction() {
-		return currentAction;
+	public State getCurrentState() {
+		return currentState;
 	}
 
-	public void setCurrentAction(State currentAction) {
-		this.currentAction = currentAction;
+	public void setCurrentState(State currentState) {
+		this.currentState = currentState;
 	}
 
-	public State getNextAction() {
-		return nextAction;
+	public State getNextState() {
+		return nextState;
 	}
 
-	public void setNextAction(State nextAction) {
-		this.nextAction = nextAction;
+	public void setNextState(State nextState) {
+		this.nextState = nextState;
 	}
 
 	public double getValue() {

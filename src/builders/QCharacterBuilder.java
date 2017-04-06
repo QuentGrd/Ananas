@@ -140,6 +140,7 @@ public class QCharacterBuilder {
 	public QCharacter initCharacterEnvironment(Map map, Home home){
 		character.setEnvironment(new Environment(map, home));
 		character.setInitialPosition(home.getAddress());
+		character.setCurrentState(character.getEnvironment().getState(home.getAddress().getX(), home.getAddress().getY()));
 
 		return character;
 	}
