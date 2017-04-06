@@ -15,6 +15,7 @@ public class QCharacter extends Character{
 	private Coordinates initialPosition;
 	private State currentState;
 	private Environment environment;
+	private int nbOfDeath;
 	
 	public QCharacter(){
 		
@@ -42,6 +43,14 @@ public class QCharacter extends Character{
 
 	public void setEnvironment(Environment environment) {
 		this.environment = environment;
+	}
+
+	public int getNbOfDeath() {
+		return nbOfDeath;
+	}
+
+	public void setNbOfDeath(int nbOfDeath) {
+		this.nbOfDeath = nbOfDeath;
 	}
 
 	public String toString(){

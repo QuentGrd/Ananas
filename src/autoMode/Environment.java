@@ -62,6 +62,7 @@ public class Environment {
 						Work work = (Work) newState.getInfrastructure();
 						if(work.getAddress().getX() == i && work.getAddress().getY() == j){
 							newState.setType(0);
+							newState.setReward(work.getReward());
 						}
 						else
 							newState.setType(1);

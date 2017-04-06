@@ -32,6 +32,7 @@ public class QCharacterBuilder {
 	 */
 	public QCharacter createCharacter(){
 		character.setAlive(true);
+		character.setNbOfDeath(0);
 		initCharacterName();
 		initCharacterFirstName();
 		character.setAge(randomSelection(10, 100));

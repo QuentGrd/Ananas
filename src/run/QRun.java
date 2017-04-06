@@ -8,8 +8,10 @@ import javax.swing.JOptionPane;
 import autoMode.QActions;
 import autoMode.State;
 import builders.CityBuilder;
+import character.Character;
 import character.QCharacter;
 import city.City;
+import city.Infrastructure;
 import clock.Clock;
 import gui.GUIMain;
 import sun.management.resources.agent;
@@ -59,17 +61,21 @@ public class QRun {
 					QActions actionChosen;
 					QCharacter car = (QCharacter)city.getPopulation().getListCharacter().get(i);
 					//System.out.println(car.getCurrentState().getCoord() + " - " + car.getPosition());
-					
-					if(clock.getMin().getCounter()%exploration == 0){
-						actionChosen = randomActionChoise(car.getCurrentState().getListAction());
+					if(car.getAlive() == true){
+						if(clock.getMin().getCounter()%exploration == 0){
+							actionChosen = randomActionChoise(car.getCurrentState().getListAction());
+						}
+						else{
+							actionChosen = QLDecision(car);
+							System.out.println(actionChosen.getValue());
+						}
+						
+						moveAgent(actionChosen, car);
 					}
-					else{
-						actionChosen = QLDecision(car);
-					}
-					
-					moveAgent(actionChosen, car);
 				}
+				System.out.println("----------");
 				
+				lifeManagment();
 				gui.refreshGUI(city.getPopulation(), clock);
 				clock.increment();
 			}
@@ -84,6 +90,25 @@ public class QRun {
 
 		jop1.showMessageDialog(null, "Vous avez perdu !\nMerci d'avoir joué", "Fin du jeu", JOptionPane.INFORMATION_MESSAGE);
 	}
+	
+	/**
+	 * this methode manage the life of character
+	 */
+	public void lifeManagment(){
+		ArrayList<Character> carList = city.getPopulation().getListCharacter();
+		int carListSize = city.getPopulation().getNbOfCharacter();
+		
+		for (int i = 0; i < carListSize; i++) {
+			Character car = carList.get(i);
+			 
+			if(car.getAlive() == true){
+				if(car.getEmotion().getCounter() == 0){
+					car.setAlive(false);
+				}
+			}
+		}
+	}
+	
 	
 	/**
 	 * this methode say the right action to do
@@ -139,6 +164,16 @@ public class QRun {
 		agentQL.setPosition(agentQL.getCurrentState().getCoord());
 		setActionQValue(action);
 		agentQL.getEmotion().decrement();
+		
+		if(agentQL.getCurrentState().getReward() != 0){
+			Infrastructure infra = city.getMap().getInfrastructure(agentQL.getPosition().getX(), agentQL.getPosition().getY());
+			if(infra.getType() == 3){
+				agentQL.getEmotion().increment((int)agentQL.getCurrentState().getReward());
+			}
+			else if(infra.getType() == 2){
+				agentQL.getEmotion().decrement(Math.abs((int)agentQL.getCurrentState().getReward()));
+			}
+		}
 	}
 	
 	/**
