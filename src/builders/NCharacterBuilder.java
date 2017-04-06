@@ -2,7 +2,6 @@ package builders;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -12,18 +11,19 @@ import org.apache.commons.csv.CSVRecord;
 
 import character.Character;
 import character.DataCharacter;
+import character.NCharacter;
 import character.Routine;
 import city.Map;
 import utils.BoundedCounter;
 
-public class CharacterBuilder {
+public class NCharacterBuilder {
 
 	public static String[] FILE_HEADER_MAPPING_NAME = {"name"};
 	public static String[] FILE_HEADER_MAPPING_FIRSTNAME = {"gender","firstName"};
 	
-	private Character character;
+	private NCharacter character;
 	
-	public CharacterBuilder(Character character){
+	public NCharacterBuilder(NCharacter character){
 		this.character = character;
 		initCharacter();
 	}
@@ -172,7 +172,7 @@ public class CharacterBuilder {
 		return random;
 	}
 
-	public Character getCharacter() {
+	public NCharacter getCharacter() {
 		return character;
 	}
 }

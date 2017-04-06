@@ -13,6 +13,7 @@ import actions.Sleeping;
 import actions.Working;
 import builders.CityBuilder;
 import character.Character;
+import character.NCharacter;
 import city.City;
 import clock.Clock;
 import clock.Schedule;
@@ -103,7 +104,7 @@ public class Run {
 		//System.out.println("\n");
 		
 		for (int i = 0; i < carListSize; i++) {
-			Character car = carList.get(i);
+			NCharacter car = (NCharacter) carList.get(i);
       
 			if(car.getAlive() == true){
 				Actions carCurrentAction = car.getRoutine().getCurrentAction(); 
@@ -218,7 +219,7 @@ public class Run {
 		int carListSize = city.getPopulation().getNbOfCharacter();
 		
 		for (int i = 0; i < carListSize; i++) {
-			Character car = carList.get(i);
+			NCharacter car = (NCharacter) carList.get(i);
 			
 			//emotionhistoric
 			car.getData().getEmotionHistoric().add(car.getEmotion().getCounter());
@@ -341,7 +342,7 @@ public class Run {
 			
 			//pour chaque personnage
 			for (int i = 0; i < carListSize; i++) {
-				Character car = carList.get(i);
+				NCharacter car = (NCharacter) carList.get(i);
 				
 				//on ajoute toute les action de la dailyRoutine
 				for (int j = 0; j < car.getRoutine().getDailyRoutine().size(); j++) {

@@ -3,6 +3,7 @@ package builders;
 import java.util.ArrayList;
 
 import character.Character;
+import character.NCharacter;
 import city.Map;
 import city.Population;
 
@@ -30,8 +31,8 @@ public class PopulationBuilder {
 		
 		ArrayList<Character> list = new ArrayList<Character>();
 		for(int i=0; i<pop.getNbOfCharacter(); i++){
-			Character character = new Character();
-			CharacterBuilder builder = new CharacterBuilder(character);
+			NCharacter character = new NCharacter();
+			NCharacterBuilder builder = new NCharacterBuilder(character);
 			builder.initCharacterHome(map);
 			builder.initCharacterWork(map);
 			builder.initCharacterID();

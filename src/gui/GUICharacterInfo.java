@@ -18,6 +18,7 @@ import actions.Entertain;
 import actions.Shifting;
 import actions.Sleeping;
 import character.Character;
+import character.NCharacter;
 import chart.ChartActionRepartitionDaily;
 import chart.ChartActionRepartitionFull;
 import chart.ChartEmotionHistoricDaily;
@@ -32,7 +33,7 @@ public class GUICharacterInfo extends JPanel{
 	
 	private static final long serialVersionUID = -2871374449425310547L;
 	
-	private Character currentCharacter;
+	private NCharacter currentCharacter;
 	
 	private Map map;
 	
@@ -75,7 +76,7 @@ public class GUICharacterInfo extends JPanel{
 		this.add(buttonPart);
 	}
 	
-	public void setCurrentCharacter(Character c){
+	public void setCurrentCharacter(NCharacter c){
 		this.currentCharacter = c;
 		infoText.setText(getCharacInfo(currentCharacter));
 	}

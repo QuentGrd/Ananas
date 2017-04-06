@@ -10,11 +10,7 @@ import java.awt.event.MouseListener;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import character.Character;
-import chart.ChartActionRepartitionDaily;
-import chart.ChartEmotionHistoricDaily;
-import chart.ChartEmotionHistoricFull;
-import chart.ChartRewardRepartitionFull;
+import character.NCharacter;
 import city.Map;
 import city.Population;
 
@@ -69,7 +65,7 @@ public class GUIInfoPart extends JPanel{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("Index: " + ginfo.getPopIndex(e.getX(), e.getY()));
-			Character charac = pop.getListCharacter().get(ginfo.getPopIndex(e.getX(), e.getY()));
+			NCharacter charac = (NCharacter) pop.getListCharacter().get(ginfo.getPopIndex(e.getX(), e.getY()));
 			cinfo.setCurrentCharacter(charac);
 			cl.show(cardsContainer, INFOPANEL);
 		}

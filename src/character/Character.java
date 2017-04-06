@@ -10,7 +10,7 @@ import utils.Coordinates;
  * @author Matthieu
  * @version 24012017
  */
-public class Character {
+public abstract class Character {
 	
 	private boolean gender;
 	private int age;
@@ -22,15 +22,7 @@ public class Character {
 	private String id;
 	private Boolean alive;
 	
-	private DataCharacter data;
-	
 	private Coordinates position;
-	
-	private Routine routine;
-	
-	public Character(){
-
-	}
 	
 	public boolean isGender() {
 		return gender;
@@ -87,14 +79,6 @@ public class Character {
 		this.position = position;
 	}
 
-	public Routine getRoutine() {
-		return routine;
-	}
-
-	public void setRoutine(Routine routine) {
-		this.routine = routine;
-	}
-
 	public String getId() {
 		return id;
 	}
@@ -109,14 +93,6 @@ public class Character {
 
 	public void setAlive(Boolean alive) {
 		this.alive = alive;
-	}
-
-	public DataCharacter getData() {
-		return data;
-	}
-
-	public void setData(DataCharacter data) {
-		this.data = data;
 	}
 
 	public String toString(){

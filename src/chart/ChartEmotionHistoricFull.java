@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import org.jfree.chart.ChartFactory;
@@ -16,7 +15,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RefineryUtilities;
 
-import character.Character;
+import character.NCharacter;
 
 /**
  * 
@@ -26,14 +25,14 @@ import character.Character;
 public class ChartEmotionHistoricFull extends JFrame{
 
 	private static final long serialVersionUID = -8881399308101213332L;
-	private Character character;
+	private NCharacter character;
 	
 	private JPanel fond;
 	private JButton refresh;
 	
 	private DefaultCategoryDataset dataset;
 	
-	public ChartEmotionHistoricFull(Character character){
+	public ChartEmotionHistoricFull(NCharacter character){
 		super("Character : " + character.getFirstName());
 		
 		this.character = character;

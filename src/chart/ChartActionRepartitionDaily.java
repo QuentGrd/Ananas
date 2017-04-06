@@ -15,7 +15,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.ui.RefineryUtilities;
 
-import character.Character;
+import character.NCharacter;
 
 /**
  * 
@@ -25,14 +25,14 @@ import character.Character;
 public class ChartActionRepartitionDaily extends JFrame{
 
 	private static final long serialVersionUID = -8881399308101213332L;
-	private Character character;
+	private NCharacter character;
 	
 	private JPanel fond;
 	private JButton refresh;
 	
 	DefaultCategoryDataset dataset;
 	
-	public ChartActionRepartitionDaily(Character character){
+	public ChartActionRepartitionDaily(NCharacter character){
 		super("Character : " + character.getFirstName());
 		
 		this.character = character;
