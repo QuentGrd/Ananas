@@ -8,13 +8,13 @@ import javax.swing.JOptionPane;
 import autoMode.QActions;
 import autoMode.State;
 import builders.CityBuilder;
+import building.Home;
 import character.Character;
 import character.QCharacter;
 import city.City;
 import city.Infrastructure;
 import clock.Clock;
 import gui.GUIMain;
-import sun.management.resources.agent;
 
 /**
  * 
@@ -67,7 +67,7 @@ public class QRun {
 						}
 						else{
 							actionChosen = QLDecision(car);
-							System.out.println(actionChosen.getValue());
+							System.out.println("[" + car.getNbOfDeath() +"] " + actionChosen.getValue());
 						}
 						
 						moveAgent(actionChosen, car);
@@ -99,13 +99,31 @@ public class QRun {
 		int carListSize = city.getPopulation().getNbOfCharacter();
 		
 		for (int i = 0; i < carListSize; i++) {
-			Character car = carList.get(i);
+			QCharacter car = (QCharacter) carList.get(i);
 			 
+			if(car.getAlive() == false){
+				car.getEmotion().setCounter(75);
+				car.setAlive(true);
+				
+				Home newHome;
+				//tirage aleatoire de sa nouvelle maison
+				Random rand = new Random();
+				int choise = rand.nextInt(city.getMap().getHomeList().size());
+				
+				newHome = city.getMap().getHomeList().get(choise);
+				car.setHome(newHome);
+				car.setInitialPosition(newHome.getAddress());
+				car.setPosition(newHome.getAddress());
+				car.setCurrentState(car.getEnvironment().getState(car.getPosition().getX(), car.getPosition().getY()));
+			}
+			
 			if(car.getAlive() == true){
 				if(car.getEmotion().getCounter() == 0){
 					car.setAlive(false);
+					car.setNbOfDeath(car.getNbOfDeath()+1);
 				}
 			}
+			
 		}
 	}
 	
