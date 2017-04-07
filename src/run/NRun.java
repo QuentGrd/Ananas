@@ -140,7 +140,7 @@ public class NRun {
 						//si l'action n'est pas fini
 						if(!shift.getFinish()){
 							moveCharacter(car, shift.getPath().get(0));
-							car.getEmotion().decrement();
+							car.getLife(0).decrement();
 							shift.suppFirst();
 						}
 						//si l'action est fini
@@ -157,7 +157,7 @@ public class NRun {
 						Chilling chill = (Chilling) car.getRoutine().getCurrentAction();
 						if(isPassed(clock, chill.getFinishTime())){
 							//System.out.println(chill.getReward());
-							car.getEmotion().increment((int)Math.abs(chill.getReward()));
+							car.getLife(0).increment((int)Math.abs(chill.getReward()));
 							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
@@ -167,7 +167,7 @@ public class NRun {
 						Entertain enter = (Entertain) car.getRoutine().getCurrentAction();
 						if(isPassed(clock, enter.getFinishTime())){
 							//System.out.println(enter.getReward());
-							car.getEmotion().increment((int)Math.abs(enter.getReward()));
+							car.getLife(0).increment((int)Math.abs(enter.getReward()));
 							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
@@ -177,7 +177,7 @@ public class NRun {
 						Sleeping sleep = (Sleeping) car.getRoutine().getCurrentAction();
 						if(isPassed(clock, sleep.getFinishTime())){
 							//System.out.println(sleep.getReward());
-							car.getEmotion().increment((int)Math.abs(sleep.getReward()));
+							car.getLife(0).increment((int)Math.abs(sleep.getReward()));
 							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
@@ -187,7 +187,7 @@ public class NRun {
 						Working work = (Working) car.getRoutine().getCurrentAction();
 						if(isPassed(clock, work.getFinishTime())){
 							//System.out.println(work.getReward());
-							car.getEmotion().decrement((int)Math.abs(work.getReward()));
+							car.getLife(0).decrement((int)Math.abs(work.getReward()));
 							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
@@ -207,7 +207,7 @@ public class NRun {
 			Character car = carList.get(i);
 			 
 			if(car.getAlive() == true){
-				if(car.getEmotion().getCounter() == 0){
+				if(car.getLife(0).getCounter() == 0){
 					car.setAlive(false);
 				}
 			}
@@ -222,7 +222,7 @@ public class NRun {
 			NCharacter car = (NCharacter) carList.get(i);
 			
 			//emotionhistoric
-			car.getData().getEmotionHistoric().add(car.getEmotion().getCounter());
+			car.getData().getEmotionHistoric().add(car.getLife(0).getCounter());
 			
 			//emotionhistoric Today/Yesterday
 			if(equalSchedule(clock, new Schedule(0, 0))){
@@ -230,7 +230,7 @@ public class NRun {
 				car.getData().setEmotionHistoricToday(new ArrayList<Integer>());
 			}
 			else{
-				car.getData().getEmotionHistoricToday().add(car.getEmotion().getCounter());
+				car.getData().getEmotionHistoricToday().add(car.getLife(0).getCounter());
 			}
 			
 			//actionRepartition + rewardRepartition + actionRepartitionDaily

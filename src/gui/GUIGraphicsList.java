@@ -66,7 +66,7 @@ public class GUIGraphicsList extends JPanel{
 			g.setColor(Color.BLACK);
 			g.drawRect(((i%chPerRow)*widthCell)+(widthCell/2)-((widthCell-(width/10))/2), ((i/chPerRow)*heightCell)+4*(heightCell/5)-(((heightCell/5)-(heightCell/10))/2), (widthCell-(width/10)), (heightCell/5)-(heightCell/10));
 			g.setColor(Color.GREEN);
-			g.fillRect(((i%chPerRow)*widthCell)+(widthCell/2)-((widthCell-(width/10))/2), ((i/chPerRow)*heightCell)+4*(heightCell/5)-(((heightCell/5)-(heightCell/10))/2), ((widthCell-(width/10))*c.getEmotion().getCounter())/100, (heightCell/5)-(heightCell/10));
+			g.fillRect(((i%chPerRow)*widthCell)+(widthCell/2)-((widthCell-(width/10))/2), ((i/chPerRow)*heightCell)+4*(heightCell/5)-(((heightCell/5)-(heightCell/10))/2), ((widthCell-(width/10))*c.getLife(0).getCounter())/100, (heightCell/5)-(heightCell/10));
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("Arial", Font.BOLD, 15));
 			g.drawString(c.getFirstName() + " " + c.getName(), ((i%chPerRow)*widthCell)+(widthCell/5), ((i/chPerRow)*heightCell)+1*(heightCell/5));

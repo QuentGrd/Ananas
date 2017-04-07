@@ -102,7 +102,7 @@ public class QRun {
 			QCharacter car = (QCharacter) carList.get(i);
 			 
 			if(car.getAlive() == false){
-				car.getEmotion().setCounter(75);
+				car.getLife(0).setCounter(75);
 				car.setAlive(true);
 				
 				Home newHome;
@@ -118,7 +118,7 @@ public class QRun {
 			}
 			
 			if(car.getAlive() == true){
-				if(car.getEmotion().getCounter() == 0){
+				if(car.getLife(0).getCounter() == 0){
 					car.setAlive(false);
 					car.setNbOfDeath(car.getNbOfDeath()+1);
 				}
@@ -181,15 +181,15 @@ public class QRun {
 		agentQL.setCurrentState(action.getNextState());
 		agentQL.setPosition(agentQL.getCurrentState().getCoord());
 		setActionQValue(action);
-		agentQL.getEmotion().decrement();
+		agentQL.getLife(0).decrement();
 		
 		if(agentQL.getCurrentState().getReward() != 0){
 			Infrastructure infra = city.getMap().getInfrastructure(agentQL.getPosition().getX(), agentQL.getPosition().getY());
 			if(infra.getType() == 3){
-				agentQL.getEmotion().increment((int)agentQL.getCurrentState().getReward());
+				agentQL.getLife(0).increment((int)agentQL.getCurrentState().getReward());
 			}
 			else if(infra.getType() == 2){
-				agentQL.getEmotion().decrement(Math.abs((int)agentQL.getCurrentState().getReward()));
+				agentQL.getLife(0).decrement(Math.abs((int)agentQL.getCurrentState().getReward()));
 			}
 		}
 	}

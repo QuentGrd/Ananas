@@ -159,7 +159,7 @@ public class GUICharacterInfo extends JPanel{
 			info += "\nName: \t" + c.getName();
 			info += "\nID: \t" + c.getId();
 			info += "\nAge: \t" + c.getAge();
-			info += "\nEmotion: \t" + c.getEmotion().getCounter();
+			info += "\nEmotion: \t" + c.getLife(0).getCounter();
 			info += "\nHome: \t" + c.getHome().getAddress().toString();
 			//info += "\nWork: \t" + c.getWork().getName();
 			//info += "\nRoutine: \t" + c.getRoutine().getCurrentRoutine().toString();

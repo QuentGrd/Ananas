@@ -17,9 +17,12 @@ public abstract class Character {
 	private String name;
 	private String firstName;
 	private Home home;
-	private BoundedCounter emotion;
 	private String id;
 	private Boolean alive;
+	
+	/*	0:emotion	1:money		2:familly*/
+	private BoundedCounter[] life;
+	private int rewardPriority;
 	
 	private Coordinates position;
 	
@@ -46,12 +49,6 @@ public abstract class Character {
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-	}
-	public BoundedCounter getEmotion() {
-		return emotion;
-	}
-	public void setEmotion(BoundedCounter emotion) {
-		this.emotion = emotion;
 	}
 	
 	public Home getHome() {
@@ -86,6 +83,39 @@ public abstract class Character {
 		this.alive = alive;
 	}
 
+	public BoundedCounter[] getLife() {
+		return life;
+	}
+	
+	public void setLife(BoundedCounter[] life) {
+		this.life = life;
+	}
+	
+	public BoundedCounter getLife(int index) {
+		if(index>=0 && index<3)
+			return life[index];
+		else{
+			System.out.println("ERREUR D'INDEXAGE : LIFE-GET");
+			return null;
+		}
+	}
+	
+	public void setLife(BoundedCounter counter, int index) {
+		this.life[index] = counter;
+		if(index>=0 && index<3)
+			this.life[index] = counter;
+		else{
+			System.out.println("ERREUR D'INDEXAGE : LIFE-SET");
+		}
+	}
+	
+	public int getRewardPriority() {
+		return rewardPriority;
+	}
+	public void setRewardPriority(int rewardPriority) {
+		this.rewardPriority = rewardPriority;
+	}
+	
 	public String toString(){
 		String str = "name : " + name + "\tfirstName : " + firstName + "\tage : " + age;
 		if(gender == true)
@@ -93,7 +123,6 @@ public abstract class Character {
 		else if(gender == false)
 			str += "\tgender : Female" ;
 		str += "\tID : " + id;
-		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
 		str += "\tHome : " + this.home.getAddress().toString();
 		return str;
 	}

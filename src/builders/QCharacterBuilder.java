@@ -36,7 +36,8 @@ public class QCharacterBuilder {
 		initCharacterName();
 		initCharacterFirstName();
 		character.setAge(randomSelection(10, 100));
-		character.setEmotion(new BoundedCounter(75, 0, 100));
+		initLife();
+		character.setRewardPriority(0);
 		
 		return character;
 	}
@@ -48,6 +49,16 @@ public class QCharacterBuilder {
 	public void initCharacterID(){
 		String id = "" + character.hashCode();
 		character.setId(id);
+	}
+	
+	/**
+	 * This methode initialize the 3 BoundedCounter of the character
+	 */
+	public void initLife(){
+		character.setLife(new BoundedCounter[3]);
+		for (int i = 0; i < 3; i++) {
+			character.setLife(new BoundedCounter(75, 0, 100), i);
+		}
 	}
 	
 	/**
