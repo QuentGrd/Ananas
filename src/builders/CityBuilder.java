@@ -22,7 +22,6 @@ public class CityBuilder {
 		popBuilder = new PopulationBuilder(pop, map);
 		city.setPopulation(pop);
 		System.out.println(pop.toString());
-		
 	}
 
 }
