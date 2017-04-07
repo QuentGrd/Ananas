@@ -141,6 +141,10 @@ public class NRun {
 						if(!shift.getFinish()){
 							moveCharacter(car, shift.getPath().get(0));
 							car.getLife(0).decrement();
+							if(clock.getMin().getCounter()%5 == 0){
+								car.getLife(1).decrement();
+								car.getLife(2).decrement();
+							}
 							shift.suppFirst();
 						}
 						//si l'action est fini
@@ -157,7 +161,7 @@ public class NRun {
 						Chilling chill = (Chilling) car.getRoutine().getCurrentAction();
 						if(isPassed(clock, chill.getFinishTime())){
 							//System.out.println(chill.getReward());
-							car.getLife(0).increment((int)Math.abs(chill.getReward(0)));
+							car.getLife(2).increment((int)Math.abs(chill.getReward(2)));
 							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
@@ -168,6 +172,8 @@ public class NRun {
 						if(isPassed(clock, enter.getFinishTime())){
 							//System.out.println(enter.getReward());
 							car.getLife(0).increment((int)Math.abs(enter.getReward(0)));
+							car.getLife(1).decrement((int)Math.abs(enter.getReward(1)));
+							car.getLife(2).increment((int)Math.abs(enter.getReward(2)));
 							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
@@ -178,6 +184,8 @@ public class NRun {
 						if(isPassed(clock, sleep.getFinishTime())){
 							//System.out.println(sleep.getReward());
 							car.getLife(0).increment((int)Math.abs(sleep.getReward(0)));
+							car.getLife(1).decrement((int)Math.abs(sleep.getReward(1)));
+							car.getLife(2).increment((int)Math.abs(sleep.getReward(2)));
 							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
@@ -188,6 +196,8 @@ public class NRun {
 						if(isPassed(clock, work.getFinishTime())){
 							//System.out.println(work.getReward());
 							car.getLife(0).decrement((int)Math.abs(work.getReward(0)));
+							car.getLife(1).increment((int)Math.abs(work.getReward(1)));
+							car.getLife(2).decrement((int)Math.abs(work.getReward(2)));
 							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
