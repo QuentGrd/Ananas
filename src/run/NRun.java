@@ -65,7 +65,7 @@ public class NRun {
 				clock.increment();
 			}
 			try{
-				Thread.sleep(50);
+				Thread.sleep(100);
 			}catch(InterruptedException e){
 				Thread.currentThread().interrupt();
 				e.printStackTrace();
@@ -101,7 +101,7 @@ public class NRun {
 		ArrayList<Character> carList = city.getPopulation().getListCharacter();
 		int carListSize = city.getPopulation().getNbOfCharacter();
 		
-		//System.out.println("\n");
+		System.out.println("\n");
 		
 		for (int i = 0; i < carListSize; i++) {
 			NCharacter car = (NCharacter) carList.get(i);
@@ -113,6 +113,7 @@ public class NRun {
 				else
 					System.out.println(car.getFirstName() + "["+ car.getEmotion().getCounter() +"] : " + carCurrentAction);*/
 				ArrayList<Actions> carCurrentRoutine = car.getRoutine().getCurrentRoutine();
+				//System.out.println(car.getRoutine().getCurrentRoutine().toString());
 				
 				//si il n'y a pas d'action courante
 				if(car.getRoutine().isEmptyCurrentAction()){
@@ -120,7 +121,7 @@ public class NRun {
 					if(!car.getRoutine().isEmptyCurrentRoutine()){
 						//si c'est l'heure on ajoute l'action de tete
 						if(isPassed(clock, carCurrentRoutine.get(0).getBeginTime())){
-							car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
 				}
@@ -129,7 +130,6 @@ public class NRun {
 					//actions.Shifting
 					if(carCurrentAction.getClass().getName().equals("actions.Shifting")){
 						Shifting shift = (Shifting) car.getRoutine().getCurrentAction();
-						shift.setBegin(car.getPosition());
 						
 						if(!shift.getPathIsFound()){
 							shift.foundPath(city.getMap());
@@ -148,7 +148,7 @@ public class NRun {
 							shift.setFinish(false);
 							shift.foundPath(city.getMap());
 							if(!car.getRoutine().isEmptyCurrentRoutine())
-								car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+								car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
 					
@@ -158,7 +158,7 @@ public class NRun {
 						if(isPassed(clock, chill.getFinishTime())){
 							//System.out.println(chill.getReward());
 							car.getEmotion().increment((int)Math.abs(chill.getReward()));
-							car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
 					
@@ -168,7 +168,7 @@ public class NRun {
 						if(isPassed(clock, enter.getFinishTime())){
 							//System.out.println(enter.getReward());
 							car.getEmotion().increment((int)Math.abs(enter.getReward()));
-							car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
 					
@@ -178,7 +178,7 @@ public class NRun {
 						if(isPassed(clock, sleep.getFinishTime())){
 							//System.out.println(sleep.getReward());
 							car.getEmotion().increment((int)Math.abs(sleep.getReward()));
-							car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
 					
@@ -188,7 +188,7 @@ public class NRun {
 						if(isPassed(clock, work.getFinishTime())){
 							//System.out.println(work.getReward());
 							car.getEmotion().decrement((int)Math.abs(work.getReward()));
-							car.getRoutine().setCurrentAction(car.getRoutine().moveFirstCurrentRoutine());
+							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
 				}
@@ -306,6 +306,37 @@ public class NRun {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * this methode return the first action of the currentRoutine and delete it in the currentRoutine
+	 * @return
+	 */
+	public Actions moveFirstCurrentRoutine(NCharacter car){
+		if(!car.getRoutine().isEmptyCurrentRoutine()){
+			Actions next = car.getRoutine().getCurrentRoutine().get(0);
+			//si l'action a mettre en debut est un deplacement alors on change son point de debut
+			if(next.getClass().getName().equals("actions.Shifting")){
+				Shifting nextShift = (Shifting) car.getRoutine().getCurrentRoutine().get(0);
+				nextShift.setBegin(car.getPosition());
+				car.getRoutine().getCurrentRoutine().remove(car.getRoutine().getCurrentRoutine().get(0));
+				return nextShift;
+			}
+			else{
+				car.getRoutine().getCurrentRoutine().remove(car.getRoutine().getCurrentRoutine().get(0));
+				return next;
+			}
+		}
+		System.out.println("ERREUR DANS L'AJOUT DE L'ACTION DE TETE");
+		return null;
+		
+//		if(!isEmptyCurrentRoutine()){
+//			Actions  first = currentRoutine.get(0);
+//			currentRoutine.remove(currentRoutine.get(0));
+//			return first;
+//		}
+//		System.out.println("ERREUR DANS L'AJOUT DE L'ACTION DE TETE");
+//		return null;
 	}
 	
 	/**

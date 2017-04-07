@@ -73,22 +73,6 @@ public class Routine {
 		return random;
 	}
 	
-	
-	/**
-	 * this methode return the first action of the currentRoutine and delete it in the currentRoutine
-	 * @return
-	 */
-	public Actions moveFirstCurrentRoutine(){
-		if(!isEmptyCurrentRoutine()){
-			Actions  first = currentRoutine.get(0);
-			currentRoutine.remove(currentRoutine.get(0));
-			return first;
-		}
-		System.out.println("ERREUR DANS L'AJOUT DE L'ACTION DE TETE");
-		return null;
-	}
-	
-	
 	/**
 	 * This methode add a action a the end of the currentRoutine
 	 * @param action
