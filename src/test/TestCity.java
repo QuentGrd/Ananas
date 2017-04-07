@@ -1,12 +1,12 @@
 package test;
 
-import run.Run;
+import run.NRun;
 
 public class TestCity {
 
 	public static void main(String[] args) {
 		
-		Run run = new Run();
+		NRun run = new NRun();
 		run.initialisation();
 		run.run();
 		

@@ -18,6 +18,7 @@ import actions.Entertain;
 import actions.Shifting;
 import actions.Sleeping;
 import character.Character;
+import character.NCharacter;
 import chart.ChartActionRepartitionDaily;
 import chart.ChartActionRepartitionFull;
 import chart.ChartEmotionHistoricDaily;
@@ -25,14 +26,14 @@ import chart.ChartEmotionHistoricFull;
 import chart.ChartRewardRepartitionFull;
 import city.Map;
 import clock.Schedule;
-import run.Run;
+import run.NRun;
 import utils.Coordinates;
 
 public class GUICharacterInfo extends JPanel{
 	
 	private static final long serialVersionUID = -2871374449425310547L;
 	
-	private Character currentCharacter;
+	private NCharacter currentCharacter;
 	
 	private Map map;
 	
@@ -75,7 +76,7 @@ public class GUICharacterInfo extends JPanel{
 		this.add(buttonPart);
 	}
 	
-	public void setCurrentCharacter(Character c){
+	public void setCurrentCharacter(NCharacter c){
 		this.currentCharacter = c;
 		infoText.setText(getCharacInfo(currentCharacter));
 	}
@@ -160,7 +161,7 @@ public class GUICharacterInfo extends JPanel{
 			info += "\nAge: \t" + c.getAge();
 			info += "\nEmotion: \t" + c.getEmotion().getCounter();
 			info += "\nHome: \t" + c.getHome().getAddress().toString();
-			info += "\nWork: \t" + c.getWork().getName();
+			//info += "\nWork: \t" + c.getWork().getName();
 			//info += "\nRoutine: \t" + c.getRoutine().getCurrentRoutine().toString();
 		}
 		return info;
@@ -205,19 +206,19 @@ public class GUICharacterInfo extends JPanel{
 			switch(actionType.getSelectedIndex()){
 				case 1:
 					adress = map.getEntertainmentList().get(infra.getSelectedIndex()).getAddress();
-					action = new Entertain(map.getEntertainmentList().get(infra.getSelectedIndex()), Run.getClockTime(), new Schedule("3"));
+					action = new Entertain(map.getEntertainmentList().get(infra.getSelectedIndex()), NRun.getClockTime(), new Schedule("3"));
 					break;
 				case 2:
 					adress = map.getEntertainmentList().get(infra.getSelectedIndex()).getAddress();
-					action = new Shifting(Run.getClockTime(), currentCharacter.getPosition(), adress);
+					action = new Shifting(NRun.getClockTime(), currentCharacter.getPosition(), adress);
 					break;
 				case 3:
 					adress = currentCharacter.getHome().getAddress();
-					action = new Sleeping(currentCharacter.getHome(), Run.getClockTime(), new Schedule("3"));
+					action = new Sleeping(currentCharacter.getHome(), NRun.getClockTime(), new Schedule("3"));
 					break;
 			}
 			currentCharacter.getRoutine().addFirstToCR(action);
-			currentCharacter.getRoutine().addFirstToCR(new Shifting(Run.getClockTime(), currentCharacter.getPosition(), adress));
+			currentCharacter.getRoutine().addFirstToCR(new Shifting(NRun.getClockTime(), currentCharacter.getPosition(), adress));
 		}
 	}
 	

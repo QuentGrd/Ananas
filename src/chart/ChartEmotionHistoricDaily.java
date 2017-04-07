@@ -16,7 +16,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.RefineryUtilities;
 
-import character.Character;
+import character.NCharacter;
 
 /**
  * 
@@ -26,14 +26,14 @@ import character.Character;
 public class ChartEmotionHistoricDaily extends JFrame{
 
 	private static final long serialVersionUID = -8881399308101213332L;
-	private Character character;
+	private NCharacter character;
 	
 	private JPanel fond;
 	private JButton refresh;
 	
 	private XYSeriesCollection data;
 	
-	public ChartEmotionHistoricDaily(Character character){
+	public ChartEmotionHistoricDaily(NCharacter character){
 		super("Character : " + character.getFirstName());
 		
 		this.character = character;

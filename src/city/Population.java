@@ -17,6 +17,7 @@ public class Population {
 	
 	public Population(int nbOfCharacter){
 		this.nbOfCharacter = nbOfCharacter;
+		listCharacter = new ArrayList<Character>();
 	}
 
 	public int getNbOfCharacter() {

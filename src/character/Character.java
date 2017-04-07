@@ -10,27 +10,18 @@ import utils.Coordinates;
  * @author Matthieu
  * @version 24012017
  */
-public class Character {
+public abstract class Character {
 	
 	private boolean gender;
 	private int age;
 	private String name;
 	private String firstName;
 	private Home home;
-	private Work work;
 	private BoundedCounter emotion;
 	private String id;
 	private Boolean alive;
 	
-	private DataCharacter data;
-	
 	private Coordinates position;
-	
-	private Routine routine;
-	
-	public Character(){
-
-	}
 	
 	public boolean isGender() {
 		return gender;
@@ -71,28 +62,12 @@ public class Character {
 		this.home = home;
 	}
 
-	public Work getWork() {
-		return work;
-	}
-
-	public void setWork(Work work) {
-		this.work = work;
-	}
-
 	public Coordinates getPosition() {
 		return position;
 	}
 
 	public void setPosition(Coordinates position) {
 		this.position = position;
-	}
-
-	public Routine getRoutine() {
-		return routine;
-	}
-
-	public void setRoutine(Routine routine) {
-		this.routine = routine;
 	}
 
 	public String getId() {
@@ -111,14 +86,6 @@ public class Character {
 		this.alive = alive;
 	}
 
-	public DataCharacter getData() {
-		return data;
-	}
-
-	public void setData(DataCharacter data) {
-		this.data = data;
-	}
-
 	public String toString(){
 		String str = "name : " + name + "\tfirstName : " + firstName + "\tage : " + age;
 		if(gender == true)
@@ -128,7 +95,6 @@ public class Character {
 		str += "\tID : " + id;
 		str += "\temotion lvl : " + emotion.getCounter() + "/100 ";
 		str += "\tHome : " + this.home.getAddress().toString();
-		str += "\tWork : " + this.work.getAddress().toString();
 		return str;
 	}
 }

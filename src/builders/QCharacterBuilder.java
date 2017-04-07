@@ -2,7 +2,6 @@ package builders;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -10,34 +9,36 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import character.Character;
-import character.DataCharacter;
-import character.Routine;
+import autoMode.Environment;
+import building.Home;
+import building.Work;
+import character.QCharacter;
 import city.Map;
 import utils.BoundedCounter;
 
-public class CharacterBuilder {
-
+public class QCharacterBuilder {
+	
 	public static String[] FILE_HEADER_MAPPING_NAME = {"name"};
 	public static String[] FILE_HEADER_MAPPING_FIRSTNAME = {"gender","firstName"};
 	
-	private Character character;
+	private QCharacter character;
 	
-	public CharacterBuilder(Character character){
+	public QCharacterBuilder(QCharacter character){
 		this.character = character;
-		initCharacter();
 	}
 	
 	/**
 	 * initialize the different component of the character by using the other methodes
 	 */
-	public void initCharacter(){
+	public QCharacter createCharacter(){
 		character.setAlive(true);
+		character.setNbOfDeath(0);
 		initCharacterName();
 		initCharacterFirstName();
 		character.setAge(randomSelection(10, 100));
 		character.setEmotion(new BoundedCounter(75, 0, 100));
-		character.setData(new DataCharacter());
+		
+		return character;
 	}
 	
 	/**
@@ -47,15 +48,6 @@ public class CharacterBuilder {
 	public void initCharacterID(){
 		String id = "" + character.hashCode();
 		character.setId(id);
-	}
-	
-	/**
-	 * This methode initialize character's routine
-	 * init with the population, when we assign character's home/work
-	 */
-	public void initRoutine(){
-		Routine routine = new Routine(character.getHome(), character.getWork());
-		character.setRoutine(routine);
 	}
 	
 	/**
@@ -133,7 +125,7 @@ public class CharacterBuilder {
 	 * init the character's home
 	 * @param map
 	 */
-	public void initCharacterHome(Map map){
+	public QCharacter initCharacterHome(Map map){
 		int home;
 		do{
 			home = randomSelection(0, map.getHomeList().size()-1);
@@ -142,19 +134,16 @@ public class CharacterBuilder {
 		map.getHomeList().get(home).addUser();
 		//initialise la position du perso à l'adresse de son domicile
 		character.setPosition(map.getHomeList().get(home).getAddress());
+		
+		return character;
 	}
 	
-	/**
-	 * init the character's work
-	 * @param map
-	 */
-	public void initCharacterWork(Map map){
-		int work;
-		do{
-			work = randomSelection(0, map.getWorkList().size()-1);
-		}while(map.getWorkList().get(work).isFull());
-		character.setWork(map.getWorkList().get(work));
-		map.getWorkList().get(work).addUser();
+	public QCharacter initCharacterEnvironment(Map map, Home home){
+		character.setEnvironment(new Environment(map, home));
+		character.setInitialPosition(home.getAddress());
+		character.setCurrentState(character.getEnvironment().getState(home.getAddress().getX(), home.getAddress().getY()));
+
+		return character;
 	}
 	
 	/**
@@ -170,9 +159,5 @@ public class CharacterBuilder {
 		random = rand.nextInt(max - min +1) + min;
 		
 		return random;
-	}
-
-	public Character getCharacter() {
-		return character;
 	}
 }
