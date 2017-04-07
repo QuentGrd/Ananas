@@ -157,7 +157,7 @@ public class NRun {
 						Chilling chill = (Chilling) car.getRoutine().getCurrentAction();
 						if(isPassed(clock, chill.getFinishTime())){
 							//System.out.println(chill.getReward());
-							car.getLife(0).increment((int)Math.abs(chill.getReward()));
+							car.getLife(0).increment((int)Math.abs(chill.getReward(0)));
 							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
@@ -167,7 +167,7 @@ public class NRun {
 						Entertain enter = (Entertain) car.getRoutine().getCurrentAction();
 						if(isPassed(clock, enter.getFinishTime())){
 							//System.out.println(enter.getReward());
-							car.getLife(0).increment((int)Math.abs(enter.getReward()));
+							car.getLife(0).increment((int)Math.abs(enter.getReward(0)));
 							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
@@ -177,7 +177,7 @@ public class NRun {
 						Sleeping sleep = (Sleeping) car.getRoutine().getCurrentAction();
 						if(isPassed(clock, sleep.getFinishTime())){
 							//System.out.println(sleep.getReward());
-							car.getLife(0).increment((int)Math.abs(sleep.getReward()));
+							car.getLife(0).increment((int)Math.abs(sleep.getReward(0)));
 							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
@@ -187,7 +187,7 @@ public class NRun {
 						Working work = (Working) car.getRoutine().getCurrentAction();
 						if(isPassed(clock, work.getFinishTime())){
 							//System.out.println(work.getReward());
-							car.getLife(0).decrement((int)Math.abs(work.getReward()));
+							car.getLife(0).decrement((int)Math.abs(work.getReward(0)));
 							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
 						}
 					}
