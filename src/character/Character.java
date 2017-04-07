@@ -101,7 +101,6 @@ public abstract class Character {
 	}
 	
 	public void setLife(BoundedCounter counter, int index) {
-		this.life[index] = counter;
 		if(index>=0 && index<3)
 			this.life[index] = counter;
 		else{

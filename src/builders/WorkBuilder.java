@@ -19,7 +19,7 @@ import clock.Schedule;
  */
 public class WorkBuilder {
 	
-	private static final String[] WORKINFOMAPPING = {"NAME","OPENING_TIME","CLOSING_TIME","REWARD"};
+	private static final String[] WORKINFOMAPPING = {"NAME","OPENING_TIME","CLOSING_TIME","EMOTION","MONEY","FAMILY"};
 	private static final String WORKINFOPATH = System.getProperty("user.dir") + "/res/work.csv";
 	private int currentIndiceInWork;
 	
@@ -29,7 +29,8 @@ public class WorkBuilder {
 	}
 	
 	public void creatWork(){
-		work = new Work();	
+		work = new Work();
+		work.setReward(new double[3]);
 		initWorkInfo(work);
 		work.setMaxUser(Building.density);
 	}
@@ -52,7 +53,9 @@ public class WorkBuilder {
 				CSVRecord record = csvRecords.get(i);
 				if(i==currentIndiceInWork){
 					work.setName(record.get("NAME"));
-					work.setReward(Double.valueOf(record.get("REWARD")));
+					work.setReward(Double.valueOf(record.get("EMOTION")), 0);
+					work.setReward(Double.valueOf(record.get("MONEY")), 1);
+					work.setReward(Double.valueOf(record.get("FAMILY")), 2);
 					work.setOpeningTime(new Schedule(record.get("OPENING_TIME")));
 					work.setClosingTime(new Schedule(record.get("CLOSING_TIME")));
 					//work.setTimeTable(record.get("OPENING_TIME") + "/" + record.get("CLOSING_TIME"));

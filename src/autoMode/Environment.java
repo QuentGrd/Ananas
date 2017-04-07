@@ -52,7 +52,7 @@ public class Environment {
 						Entertainment enter = (Entertainment) newState.getInfrastructure();
 						if(enter.getAddress().getX() == i && enter.getAddress().getY() == j){
 							newState.setType(0);
-							newState.setReward(enter.getReward());
+							newState.setReward(enter.getReward(0));
 						}
 						else
 							newState.setType(1);
@@ -62,7 +62,7 @@ public class Environment {
 						Work work = (Work) newState.getInfrastructure();
 						if(work.getAddress().getX() == i && work.getAddress().getY() == j){
 							newState.setType(0);
-							newState.setReward(work.getReward());
+							newState.setReward(work.getReward(0));
 						}
 						else
 							newState.setType(1);
@@ -73,7 +73,7 @@ public class Environment {
 					//si c'est la maison ou le travail du perso on autorise
 					if(home.getAddress().getX() == i && home.getAddress().getY() == j){
 						newState.setType(0);
-						newState.setReward(home.getReward());
+						newState.setReward(home.getReward(0));
 					}
 					
 				}

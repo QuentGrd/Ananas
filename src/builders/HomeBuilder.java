@@ -18,6 +18,10 @@ private Home home;
 	
 	public void creatWork(){
 		home = new Home();	
+		home.setReward(new double[3]);
+		home.setReward(10, 0);
+		home.setReward(0, 1);
+		home.setReward(30, 0);
 		home.setMaxUser(Building.density);
 	}
 

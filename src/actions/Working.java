@@ -16,7 +16,7 @@ public class Working extends Occupation{
 		this.setBeginTime(beginTime);
 		this.setDuration(duration);
 		this.setFinishTime(calculFinishTime(beginTime, duration));
-		this.setReward(work.getReward());
+		this.setReward(work.getReward(0));
 		this.place = work;
 	}
 
