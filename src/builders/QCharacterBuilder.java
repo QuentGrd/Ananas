@@ -2,6 +2,7 @@ package builders;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -11,10 +12,10 @@ import org.apache.commons.csv.CSVRecord;
 
 import autoMode.Environment;
 import building.Home;
-import building.Work;
 import character.QCharacter;
 import city.Map;
 import utils.BoundedCounter;
+import utils.Coordinates;
 
 public class QCharacterBuilder {
 	
@@ -38,6 +39,8 @@ public class QCharacterBuilder {
 		character.setAge(randomSelection(10, 100));
 		initLife();
 		character.setRewardPriority(0);
+		character.setGoingHome(false);
+		character.setPath(new ArrayList<Coordinates>());
 		
 		return character;
 	}

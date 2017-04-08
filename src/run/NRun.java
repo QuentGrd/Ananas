@@ -141,6 +141,7 @@ public class NRun {
 						if(!shift.getFinish()){
 							moveCharacter(car, shift.getPath().get(0));
 							car.getLife(0).decrement();
+							//les deux autres reward descendes moins vite
 							if(clock.getMin().getCounter()%5 == 0){
 								car.getLife(1).decrement();
 								car.getLife(2).decrement();

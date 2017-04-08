@@ -15,6 +15,9 @@ import city.City;
 import city.Infrastructure;
 import clock.Clock;
 import gui.GUIMain;
+import pathFounder.BinaryMap;
+import pathFounder.PathFounder;
+import utils.Coordinates;
 
 /**
  * 
@@ -72,7 +75,12 @@ public class QRun {
 							System.out.println(car.getRewardPriority()+" - (" + car.getNbOfDeath() +") [" + actionChosen.getValue(0)+"\t"+actionChosen.getValue(1)+"\t"+actionChosen.getValue(2)+"]");
 						}
 						
-						moveAgent(actionChosen, car);
+						//si il doit rentrer chez lui il suit un chemin
+						if(car.getGoingHome() == true && car.getPath().size()>0)
+							moveToHome(car, car.getPath().get(0));
+						//sinon il apprend
+						else
+							moveAgent(actionChosen, car);
 					}
 				}
 				System.out.println("----------");
@@ -142,8 +150,26 @@ public class QRun {
 		
 		for (int i = 0; i < carListSize; i++) {
 			QCharacter car = (QCharacter) carList.get(i);
+			int priority = car.choosePriority();
 			
-			car.setRewardPriority(car.choosePriority());
+			if(priority == 2){
+				//si le chemin est vide
+				if(car.getPath().size() == 0){
+					//soit on commence un retour à la maison
+					if(car.getGoingHome() == false){
+						car.setGoingHome(true);
+						PathFounder pf = new PathFounder(new BinaryMap(city.getMap()));
+						car.setPath(pf.getPath(car.getPosition(), car.getInitialPosition()));
+					}
+					//soit on fini le retour à la maison
+					else{
+						car.getLife(2).increment(30);
+						car.setGoingHome(false);
+					}
+				}
+			}
+			else
+				car.setRewardPriority(priority);
 		}
 	}
 	
@@ -191,6 +217,20 @@ public class QRun {
 		choise = rand.nextInt(list.size());
 		
 		return list.get(choise);
+	}
+	
+	/**
+	 * This methode move the caracter car to the position coordNextPosition
+	 * @param car
+	 * @param coordNextPoisition
+	 */
+	public void moveToHome(QCharacter car, Coordinates coordNextPoisition){
+		car.setPosition(coordNextPoisition);
+		car.setCurrentState(car.getEnvironment().getState(coordNextPoisition.getX(), coordNextPoisition.getY()));
+		car.getLife(0).decrement();
+		car.getLife(1).decrement();
+		car.getLife(2).decrement();
+		car.getPath().remove(0);
 	}
 	
 	/**
@@ -262,6 +302,17 @@ public class QRun {
 		}
 		
 		return max;
+	}
+	
+	public static void switchPlayStatus(){
+		if (play)
+			play = false;
+		else
+			play = true;
+	}
+
+	public static boolean isPlay() {
+		return play;
 	}
 	
 }

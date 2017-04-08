@@ -1,6 +1,8 @@
 package character;
 
 
+import java.util.ArrayList;
+
 import autoMode.Environment;
 import autoMode.State;
 import utils.Coordinates;
@@ -16,6 +18,9 @@ public class QCharacter extends Character{
 	private State currentState;
 	private Environment environment;
 	private int nbOfDeath;
+	
+	private Boolean goingHome;
+	private ArrayList<Coordinates> path;
 	
 	public QCharacter(){
 		
@@ -74,6 +79,22 @@ public class QCharacter extends Character{
 
 	public void setNbOfDeath(int nbOfDeath) {
 		this.nbOfDeath = nbOfDeath;
+	}
+
+	public Boolean getGoingHome() {
+		return goingHome;
+	}
+
+	public void setGoingHome(Boolean goingHome) {
+		this.goingHome = goingHome;
+	}
+
+	public ArrayList<Coordinates> getPath() {
+		return path;
+	}
+
+	public void setPath(ArrayList<Coordinates> path) {
+		this.path = path;
 	}
 
 	public String toString(){
