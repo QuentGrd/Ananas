@@ -26,7 +26,6 @@ public class QRun {
 	private City city;
 	private GUIMain gui;
 	private static Clock clock;
-	
 	private boolean run;
 	private static boolean play;
 	
@@ -67,7 +66,7 @@ public class QRun {
 						}
 						else{
 							actionChosen = QLDecision(car);
-							System.out.println("[" + car.getNbOfDeath() +"] " + actionChosen.getValue());
+							System.out.println("(" + car.getNbOfDeath() +") [" + actionChosen.getValue(0)+"\t"+actionChosen.getValue(1)+"\t"+actionChosen.getValue(2)+"]");
 						}
 						
 						moveAgent(actionChosen, car);
@@ -139,14 +138,14 @@ public class QRun {
 		
 		/*creation et remplissage d'une liste contenant le/les actions maximale(s)*/
 		ArrayList<QActions> listMax = new ArrayList<QActions>();
-		double max = choiseList.get(0).getValue();
+		double max = choiseList.get(0).getValue(agentQL.getRewardPriority());
 		for(int i=0; i<choiseList.size(); i++){
-			if(choiseList.get(i).getValue() > max){
+			if(choiseList.get(i).getValue(agentQL.getRewardPriority()) > max){
 				listMax.clear();
 				listMax.add(choiseList.get(i));
-				max = choiseList.get(i).getValue();
+				max = choiseList.get(i).getValue(agentQL.getRewardPriority());
 			}
-			else if(choiseList.get(i).getValue() == max){
+			else if(choiseList.get(i).getValue(agentQL.getRewardPriority()) == max){
 				listMax.add(choiseList.get(i));
 			}
 		}
@@ -180,16 +179,25 @@ public class QRun {
 	public void moveAgent(QActions action, QCharacter agentQL){
 		agentQL.setCurrentState(action.getNextState());
 		agentQL.setPosition(agentQL.getCurrentState().getCoord());
-		setActionQValue(action);
+		setActionQValue(action, agentQL);
 		agentQL.getLife(0).decrement();
 		
-		if(agentQL.getCurrentState().getReward() != 0){
+		if(!agentQL.getCurrentState().isNullReward()){
 			Infrastructure infra = city.getMap().getInfrastructure(agentQL.getPosition().getX(), agentQL.getPosition().getY());
 			if(infra.getType() == 3){
-				agentQL.getLife(0).increment((int)agentQL.getCurrentState().getReward());
+				agentQL.getLife(0).increment((int)agentQL.getCurrentState().getReward(0));
+				agentQL.getLife(1).decrement((int)agentQL.getCurrentState().getReward(1));
+				agentQL.getLife(2).increment((int)agentQL.getCurrentState().getReward(2));
 			}
 			else if(infra.getType() == 2){
-				agentQL.getLife(0).decrement(Math.abs((int)agentQL.getCurrentState().getReward()));
+				agentQL.getLife(0).decrement(Math.abs((int)agentQL.getCurrentState().getReward(0)));
+				agentQL.getLife(1).increment(Math.abs((int)agentQL.getCurrentState().getReward(1)));
+				agentQL.getLife(2).decrement(Math.abs((int)agentQL.getCurrentState().getReward(2)));
+			}
+			else if(infra.getType() == 1){
+				agentQL.getLife(0).increment(Math.abs((int)agentQL.getCurrentState().getReward(0)));
+				agentQL.getLife(1).decrement(Math.abs((int)agentQL.getCurrentState().getReward(1)));
+				agentQL.getLife(2).increment(Math.abs((int)agentQL.getCurrentState().getReward(2)));
 			}
 		}
 	}
@@ -198,15 +206,17 @@ public class QRun {
 	 * this methode set the value a action using the Q-learning equation
 	 * @param action
 	 */
-	public void setActionQValue(QActions action){
+	public void setActionQValue(QActions action, QCharacter character){
 		double newValue;
 		
-		double maxFutureQValue = maxQValue(action.getNextState());
+		double maxFutureQValue = maxQValue(action.getNextState(), character);
+		
+		int typeOfReward = character.getRewardPriority();
 		
 		//Q-Learning actualization
-		newValue = action.getValue() + learnFactor * (action.getNextState().getReward() + discountedFactor * maxFutureQValue - action.getValue());
+		newValue = action.getValue(typeOfReward) + learnFactor * (action.getNextState().getReward(typeOfReward) + discountedFactor * maxFutureQValue - action.getValue(typeOfReward));
 		
-		action.setValue(newValue);
+		action.setValue(newValue, typeOfReward);
 	}
 	
 	/**
@@ -215,12 +225,15 @@ public class QRun {
 	 * @param state
 	 * @return biggest QValue
 	 */
-	public double maxQValue(State state){
-		double max = state.getListAction().get(0).getValue();
+	public double maxQValue(State state, QCharacter character){
+		
+		int typeOfReward = character.getRewardPriority();
+		
+		double max = state.getListAction().get(0).getValue(typeOfReward);
 		
 		for(int i=0; i<state.getListAction().size(); i++){
-			if(state.getListAction().get(i).getValue() > max){
-				max = state.getListAction().get(i).getValue();
+			if(state.getListAction().get(i).getValue(typeOfReward) > max){
+				max = state.getListAction().get(i).getValue(typeOfReward);
 			}
 		}
 		
