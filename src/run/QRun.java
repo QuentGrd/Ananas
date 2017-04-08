@@ -28,6 +28,8 @@ public class QRun {
 	private static Clock clock;
 	private boolean run;
 	private static boolean play;
+	//lowest is faster
+	private int speed;
 	
 	private double learnFactor;
 	private double discountedFactor;
@@ -37,6 +39,7 @@ public class QRun {
 	public QRun(){
 		run = true;
 		play = true;
+		speed = 100;
 		
 		learnFactor = 0.5;
 		discountedFactor = 0.5;
@@ -66,7 +69,7 @@ public class QRun {
 						}
 						else{
 							actionChosen = QLDecision(car);
-							System.out.println("(" + car.getNbOfDeath() +") [" + actionChosen.getValue(0)+"\t"+actionChosen.getValue(1)+"\t"+actionChosen.getValue(2)+"]");
+							System.out.println(car.getRewardPriority()+" - (" + car.getNbOfDeath() +") [" + actionChosen.getValue(0)+"\t"+actionChosen.getValue(1)+"\t"+actionChosen.getValue(2)+"]");
 						}
 						
 						moveAgent(actionChosen, car);
@@ -74,12 +77,14 @@ public class QRun {
 				}
 				System.out.println("----------");
 				
+				priorityManagment();
 				lifeManagment();
+				
 				gui.refreshGUI(city.getPopulation(), clock);
 				clock.increment();
 			}
 			try{
-				Thread.sleep(500);
+				Thread.sleep(speed);
 			}catch(InterruptedException e){
 				Thread.currentThread().interrupt();
 				e.printStackTrace();
@@ -99,9 +104,10 @@ public class QRun {
 		
 		for (int i = 0; i < carListSize; i++) {
 			QCharacter car = (QCharacter) carList.get(i);
-			 
+			
+			//si le perso est mort
 			if(car.getAlive() == false){
-				car.getLife(0).setCounter(75);
+				car.resetLife();
 				car.setAlive(true);
 				
 				Home newHome;
@@ -116,13 +122,28 @@ public class QRun {
 				car.setCurrentState(car.getEnvironment().getState(car.getPosition().getX(), car.getPosition().getY()));
 			}
 			
+			//si le perso est en vie
 			if(car.getAlive() == true){
-				if(car.getLife(0).getCounter() == 0){
+				if(!car.isAlive()){
 					car.setAlive(false);
 					car.setNbOfDeath(car.getNbOfDeath()+1);
 				}
 			}
 			
+		}
+	}
+	
+	/**
+	 * This methode change the reward priority of the agent
+	 */
+	public void priorityManagment(){
+		ArrayList<Character> carList = city.getPopulation().getListCharacter();
+		int carListSize = city.getPopulation().getNbOfCharacter();
+		
+		for (int i = 0; i < carListSize; i++) {
+			QCharacter car = (QCharacter) carList.get(i);
+			
+			car.setRewardPriority(car.choosePriority());
 		}
 	}
 	
@@ -181,6 +202,8 @@ public class QRun {
 		agentQL.setPosition(agentQL.getCurrentState().getCoord());
 		setActionQValue(action, agentQL);
 		agentQL.getLife(0).decrement();
+		agentQL.getLife(1).decrement();
+		agentQL.getLife(2).decrement();
 		
 		if(!agentQL.getCurrentState().isNullReward()){
 			Infrastructure infra = city.getMap().getInfrastructure(agentQL.getPosition().getX(), agentQL.getPosition().getY());
@@ -207,16 +230,19 @@ public class QRun {
 	 * @param action
 	 */
 	public void setActionQValue(QActions action, QCharacter character){
-		double newValue;
 		
-		double maxFutureQValue = maxQValue(action.getNextState(), character);
-		
-		int typeOfReward = character.getRewardPriority();
-		
-		//Q-Learning actualization
-		newValue = action.getValue(typeOfReward) + learnFactor * (action.getNextState().getReward(typeOfReward) + discountedFactor * maxFutureQValue - action.getValue(typeOfReward));
-		
-		action.setValue(newValue, typeOfReward);
+		for (int i = 0; i < 3; i++) {
+			double newValue;
+			
+			double maxFutureQValue = maxQValue(action.getNextState(), i);
+			
+			int typeOfReward = i;
+			
+			//Q-Learning actualization
+			newValue = action.getValue(typeOfReward) + learnFactor * (action.getNextState().getReward(typeOfReward) + discountedFactor * maxFutureQValue - action.getValue(typeOfReward));
+			
+			action.setValue(newValue, typeOfReward);
+		}	
 	}
 	
 	/**
@@ -225,9 +251,7 @@ public class QRun {
 	 * @param state
 	 * @return biggest QValue
 	 */
-	public double maxQValue(State state, QCharacter character){
-		
-		int typeOfReward = character.getRewardPriority();
+	public double maxQValue(State state, int typeOfReward){
 		
 		double max = state.getListAction().get(0).getValue(typeOfReward);
 		

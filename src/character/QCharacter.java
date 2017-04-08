@@ -21,6 +21,29 @@ public class QCharacter extends Character{
 		
 	}
 	
+	/**
+	 * This methode return the index of the boundedCounter with the lower value as priority
+	 * @return priority
+	 */
+	public int choosePriority(){
+		int prio = 0;
+		int prioValue = this.getLife(0).getCounter();
+		
+		for (int i = 0; i < 3; i++) {
+			if(this.getLife(i).getCounter() < prioValue){
+				prio = i;
+				prioValue = this.getLife(i).getCounter();
+			}
+		}
+		return prio;
+	}
+	
+	public void resetLife(){
+		for (int i = 0; i < 3; i++) {
+			this.setLife(75, i);
+		}
+	}
+	
 	public Coordinates getInitialPosition() {
 		return initialPosition;
 	}

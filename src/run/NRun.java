@@ -217,7 +217,7 @@ public class NRun {
 			Character car = carList.get(i);
 			 
 			if(car.getAlive() == true){
-				if(car.getLife(0).getCounter() == 0 || car.getLife(1).getCounter() == 0 || car.getLife(2).getCounter() == 0){
+				if(!car.isAlive()){
 					car.setAlive(false);
 				}
 			}
