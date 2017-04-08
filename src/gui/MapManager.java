@@ -29,6 +29,7 @@ public class MapManager {
 	private Image imgRoadh;
 	private Image imgRoadw;
 	private Image player1;
+	private Image park;
 	
 	public MapManager(){
 		try {
@@ -39,6 +40,7 @@ public class MapManager {
 			imgRoadh = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/roadh.png"));
 			imgRoadw = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/roadw.png"));
 			player1 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/player1.png")).getScaledInstance((20), (20), Image.SCALE_DEFAULT);
+			park = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/park.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +61,10 @@ public class MapManager {
 	
 	public Image printEntertainment(Entertainment enter){
 		Coordinates size = enter.getSize();
-		return imgEnter1.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		if (enter.getName().equals("Park public"))
+			return park.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		else
+			return imgEnter1.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
 	}
 	
 	public Image printRoad(Road road){
