@@ -49,7 +49,7 @@ public class QRun {
 		CityBuilder cBuilder = new CityBuilder(city, true);
 		clock = new Clock(0, 0, 1, 1, 2017);
 		
-		gui = new GUIMain(city.getMap(), clock, city.getPopulation());
+		gui = new GUIMain(city.getMap(), clock, city.getPopulation(), 1);
 	}
 	
 	public void run(){
@@ -225,6 +225,17 @@ public class QRun {
 		}
 		
 		return max;
+	}
+	
+	public static void switchPlayStatus(){
+		if (play)
+			play = false;
+		else
+			play = true;
+	}
+
+	public static boolean isPlay() {
+		return play;
 	}
 	
 }

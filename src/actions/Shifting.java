@@ -26,7 +26,6 @@ public class Shifting extends Actions{
 		this.begin = begin;
 		this.end = end;
 		this.pathIsFound = false;
-		this.setReward(-5);
 		
 		finish=false;
 		

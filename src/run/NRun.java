@@ -49,7 +49,7 @@ public class NRun {
 		CityBuilder cBuilder = new CityBuilder(city, false);
 		clock = new Clock(0, 0, 1, 1, 2017);
 		
-		gui = new GUIMain(city.getMap(), clock, city.getPopulation());
+		gui = new GUIMain(city.getMap(), clock, city.getPopulation(), 0);
 	}
 	
 	public void run(){
@@ -101,7 +101,7 @@ public class NRun {
 		ArrayList<Character> carList = city.getPopulation().getListCharacter();
 		int carListSize = city.getPopulation().getNbOfCharacter();
 		
-		System.out.println("\n");
+		//System.out.println("\n");
 		
 		for (int i = 0; i < carListSize; i++) {
 			NCharacter car = (NCharacter) carList.get(i);

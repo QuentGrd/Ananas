@@ -33,18 +33,22 @@ public class GUIInfoPart extends JPanel{
 	private static final String INFOPANEL = "Information Panel";
 	private static final String CHARACTERPANEL = "Character list Panel";
 	
-	public GUIInfoPart(Population pop, Map map){
+	public GUIInfoPart(Population pop, Map map, int mode){
 		this.pop = pop;
-		ginfo = new GUIGraphicsList(pop);
+		if (mode == 0)
+			ginfo = new NGUIGraphicsList(pop);
+		else
+			ginfo = new QGUIGraphicsList(pop);
 		cinfo = new GUICharacterInfo(this, map);
-		this.initCardLayout();
+		this.initCardLayout(mode);
 		this.setPreferredSize(new Dimension(400, 600));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.add(cardsContainer);
 	}
 	
-	public void initCardLayout(){
-		ginfo.addMouseListener(new MouseListListener());
+	public void initCardLayout(int mode){
+		if (mode == 0)
+			ginfo.addMouseListener(new MouseListListener());
 		cl = new CardLayout();
 		cardsContainer = new JPanel();
 		cardsContainer.setLayout(cl);

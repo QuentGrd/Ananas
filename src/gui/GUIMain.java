@@ -27,10 +27,10 @@ public class GUIMain extends JFrame{
 	private GUIInfoPart info;
 	private GUIInfrastructureInfo infraInfo;
 	
-	public GUIMain(Map map, Clock clock, Population pop){
+	public GUIMain(Map map, Clock clock, Population pop, int mode){
 		gmap = new GUIMap(map, pop);
 		clockInfo = new GUIClockInfo(clock);
-		info = new GUIInfoPart(pop, map);
+		info = new GUIInfoPart(pop, map, mode);
 		infraInfo = new GUIInfrastructureInfo();
 		draw();
 	}

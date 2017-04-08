@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import clock.Clock;
 import run.NRun;
+import run.QRun;
 
 public class GUIClockInfo extends JPanel{
 	
@@ -80,6 +81,7 @@ public class GUIClockInfo extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			NRun.switchPlayStatus();
+			QRun.switchPlayStatus();
 			if (NRun.isPlay())
 				playPause.setText("Pause");
 			else
