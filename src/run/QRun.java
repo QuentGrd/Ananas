@@ -15,6 +15,9 @@ import city.City;
 import city.Infrastructure;
 import clock.Clock;
 import gui.GUIMain;
+import pathFounder.BinaryMap;
+import pathFounder.PathFounder;
+import utils.Coordinates;
 
 /**
  * 
@@ -26,9 +29,10 @@ public class QRun {
 	private City city;
 	private GUIMain gui;
 	private static Clock clock;
-	
 	private boolean run;
 	private static boolean play;
+	//lowest is faster
+	private int speed;
 	
 	private double learnFactor;
 	private double discountedFactor;
@@ -38,6 +42,7 @@ public class QRun {
 	public QRun(){
 		run = true;
 		play = true;
+		speed = 100;
 		
 		learnFactor = 0.5;
 		discountedFactor = 0.5;
@@ -67,20 +72,27 @@ public class QRun {
 						}
 						else{
 							actionChosen = QLDecision(car);
-							System.out.println("[" + car.getNbOfDeath() +"] " + actionChosen.getValue());
+							System.out.println(car.getRewardPriority()+" - (" + car.getNbOfDeath() +") [" + actionChosen.getValue(0)+"\t"+actionChosen.getValue(1)+"\t"+actionChosen.getValue(2)+"]");
 						}
 						
-						moveAgent(actionChosen, car);
+						//si il doit rentrer chez lui il suit un chemin
+						if(car.getGoingHome() == true && car.getPath().size()>0)
+							moveToHome(car, car.getPath().get(0));
+						//sinon il apprend
+						else
+							moveAgent(actionChosen, car);
 					}
 				}
 				System.out.println("----------");
 				
+				priorityManagment();
 				lifeManagment();
+				
 				gui.refreshGUI(city.getPopulation(), clock);
 				clock.increment();
 			}
 			try{
-				Thread.sleep(500);
+				Thread.sleep(speed);
 			}catch(InterruptedException e){
 				Thread.currentThread().interrupt();
 				e.printStackTrace();
@@ -100,9 +112,10 @@ public class QRun {
 		
 		for (int i = 0; i < carListSize; i++) {
 			QCharacter car = (QCharacter) carList.get(i);
-			 
+			
+			//si le perso est mort
 			if(car.getAlive() == false){
-				car.getLife(0).setCounter(75);
+				car.resetLife();
 				car.setAlive(true);
 				
 				Home newHome;
@@ -117,13 +130,46 @@ public class QRun {
 				car.setCurrentState(car.getEnvironment().getState(car.getPosition().getX(), car.getPosition().getY()));
 			}
 			
+			//si le perso est en vie
 			if(car.getAlive() == true){
-				if(car.getLife(0).getCounter() == 0){
+				if(!car.isAlive()){
 					car.setAlive(false);
 					car.setNbOfDeath(car.getNbOfDeath()+1);
 				}
 			}
 			
+		}
+	}
+	
+	/**
+	 * This methode change the reward priority of the agent
+	 */
+	public void priorityManagment(){
+		ArrayList<Character> carList = city.getPopulation().getListCharacter();
+		int carListSize = city.getPopulation().getNbOfCharacter();
+		
+		for (int i = 0; i < carListSize; i++) {
+			QCharacter car = (QCharacter) carList.get(i);
+			int priority = car.choosePriority();
+			
+			if(priority == 2){
+				//si le chemin est vide
+				if(car.getPath().size() == 0){
+					//soit on commence un retour à la maison
+					if(car.getGoingHome() == false){
+						car.setGoingHome(true);
+						PathFounder pf = new PathFounder(new BinaryMap(city.getMap()));
+						car.setPath(pf.getPath(car.getPosition(), car.getInitialPosition()));
+					}
+					//soit on fini le retour à la maison
+					else{
+						car.getLife(2).increment(30);
+						car.setGoingHome(false);
+					}
+				}
+			}
+			else
+				car.setRewardPriority(priority);
 		}
 	}
 	
@@ -139,14 +185,14 @@ public class QRun {
 		
 		/*creation et remplissage d'une liste contenant le/les actions maximale(s)*/
 		ArrayList<QActions> listMax = new ArrayList<QActions>();
-		double max = choiseList.get(0).getValue();
+		double max = choiseList.get(0).getValue(agentQL.getRewardPriority());
 		for(int i=0; i<choiseList.size(); i++){
-			if(choiseList.get(i).getValue() > max){
+			if(choiseList.get(i).getValue(agentQL.getRewardPriority()) > max){
 				listMax.clear();
 				listMax.add(choiseList.get(i));
-				max = choiseList.get(i).getValue();
+				max = choiseList.get(i).getValue(agentQL.getRewardPriority());
 			}
-			else if(choiseList.get(i).getValue() == max){
+			else if(choiseList.get(i).getValue(agentQL.getRewardPriority()) == max){
 				listMax.add(choiseList.get(i));
 			}
 		}
@@ -174,22 +220,47 @@ public class QRun {
 	}
 	
 	/**
+	 * This methode move the caracter car to the position coordNextPosition
+	 * @param car
+	 * @param coordNextPoisition
+	 */
+	public void moveToHome(QCharacter car, Coordinates coordNextPoisition){
+		car.setPosition(coordNextPoisition);
+		car.setCurrentState(car.getEnvironment().getState(coordNextPoisition.getX(), coordNextPoisition.getY()));
+		car.getLife(0).decrement();
+		car.getLife(1).decrement();
+		car.getLife(2).decrement();
+		car.getPath().remove(0);
+	}
+	
+	/**
 	 * this methode change the state of the agent using a action
 	 * @param nextState
 	 */
 	public void moveAgent(QActions action, QCharacter agentQL){
 		agentQL.setCurrentState(action.getNextState());
 		agentQL.setPosition(agentQL.getCurrentState().getCoord());
-		setActionQValue(action);
+		setActionQValue(action, agentQL);
 		agentQL.getLife(0).decrement();
+		agentQL.getLife(1).decrement();
+		agentQL.getLife(2).decrement();
 		
-		if(agentQL.getCurrentState().getReward() != 0){
+		if(!agentQL.getCurrentState().isNullReward()){
 			Infrastructure infra = city.getMap().getInfrastructure(agentQL.getPosition().getX(), agentQL.getPosition().getY());
 			if(infra.getType() == 3){
-				agentQL.getLife(0).increment((int)agentQL.getCurrentState().getReward());
+				agentQL.getLife(0).increment((int)agentQL.getCurrentState().getReward(0));
+				agentQL.getLife(1).decrement((int)agentQL.getCurrentState().getReward(1));
+				agentQL.getLife(2).increment((int)agentQL.getCurrentState().getReward(2));
 			}
 			else if(infra.getType() == 2){
-				agentQL.getLife(0).decrement(Math.abs((int)agentQL.getCurrentState().getReward()));
+				agentQL.getLife(0).decrement(Math.abs((int)agentQL.getCurrentState().getReward(0)));
+				agentQL.getLife(1).increment(Math.abs((int)agentQL.getCurrentState().getReward(1)));
+				agentQL.getLife(2).decrement(Math.abs((int)agentQL.getCurrentState().getReward(2)));
+			}
+			else if(infra.getType() == 1){
+				agentQL.getLife(0).increment(Math.abs((int)agentQL.getCurrentState().getReward(0)));
+				agentQL.getLife(1).decrement(Math.abs((int)agentQL.getCurrentState().getReward(1)));
+				agentQL.getLife(2).increment(Math.abs((int)agentQL.getCurrentState().getReward(2)));
 			}
 		}
 	}
@@ -198,15 +269,20 @@ public class QRun {
 	 * this methode set the value a action using the Q-learning equation
 	 * @param action
 	 */
-	public void setActionQValue(QActions action){
-		double newValue;
+	public void setActionQValue(QActions action, QCharacter character){
 		
-		double maxFutureQValue = maxQValue(action.getNextState());
-		
-		//Q-Learning actualization
-		newValue = action.getValue() + learnFactor * (action.getNextState().getReward() + discountedFactor * maxFutureQValue - action.getValue());
-		
-		action.setValue(newValue);
+		for (int i = 0; i < 3; i++) {
+			double newValue;
+			
+			double maxFutureQValue = maxQValue(action.getNextState(), i);
+			
+			int typeOfReward = i;
+			
+			//Q-Learning actualization
+			newValue = action.getValue(typeOfReward) + learnFactor * (action.getNextState().getReward(typeOfReward) + discountedFactor * maxFutureQValue - action.getValue(typeOfReward));
+			
+			action.setValue(newValue, typeOfReward);
+		}	
 	}
 	
 	/**
@@ -215,12 +291,13 @@ public class QRun {
 	 * @param state
 	 * @return biggest QValue
 	 */
-	public double maxQValue(State state){
-		double max = state.getListAction().get(0).getValue();
+	public double maxQValue(State state, int typeOfReward){
+		
+		double max = state.getListAction().get(0).getValue(typeOfReward);
 		
 		for(int i=0; i<state.getListAction().size(); i++){
-			if(state.getListAction().get(i).getValue() > max){
-				max = state.getListAction().get(i).getValue();
+			if(state.getListAction().get(i).getValue(typeOfReward) > max){
+				max = state.getListAction().get(i).getValue(typeOfReward);
 			}
 		}
 		

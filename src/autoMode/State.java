@@ -12,7 +12,7 @@ import utils.Coordinates;
  */
 public class State {
 	
-	private double reward;
+	private double[] reward;
 	private Coordinates coord;
 	
 	private Infrastructure infrastructure;
@@ -28,17 +28,44 @@ public class State {
 	private double QValueAverage;
 	
 	public State(int x, int y){
-		this.reward = 0;
+		this.reward = new double[3];
+		this.reward[0] = 0;
+		this.reward[1] = 0;
+		this.reward[2] = 0;
 		coord = new Coordinates(x, y);
 		type = 1;
 	}
+	
+	public Boolean isNullReward(){
+		if(reward[0] == 0 && reward[1] == 0 && reward[2] == 0)
+			return true;
+		else 
+			return false;
+	}
 
-	public double getReward() {
+	public double[] getReward() {
 		return reward;
 	}
 
-	public void setReward(double reward) {
+	public void setReward(double[] reward) {
 		this.reward = reward;
+	}
+	
+	public double getReward(int index) {
+		if(index>=0 && index<3)
+			return reward[index];
+		else{
+			System.out.println("ERREUR D'INDEXAGE : STATE-GET");
+			return 0;
+		}
+	}
+
+	public void setReward(double reward, int index) {
+		if(index>=0 && index<3)
+			this.reward[index] = reward;
+		else{
+			System.out.println("ERREUR D'INDEXAGE : STATE-SET");
+		}
 	}
 
 	public Coordinates getCoord() {

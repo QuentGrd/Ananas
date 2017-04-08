@@ -14,7 +14,8 @@ public abstract class Building extends Infrastructure{
 	
 	public static final int density = 1;
 	
-	private double reward;
+	/*	0:EMOTION	1:MONEY		2:FAMILY*/
+	private double[] reward;
 	private Coordinates address;
 	
 	private int maxUser;
@@ -32,12 +33,29 @@ public abstract class Building extends Infrastructure{
 		address.setY(y);
 	}
 
-	public double getReward() {
+	public double[] getReward() {
 		return reward;
 	}
 
-	public void setReward(double reward) {
+	public void setReward(double[] reward) {
 		this.reward = reward;
+	}
+	
+	public double getReward(int index) {
+		if(index>=0 && index<3)
+			return reward[index];
+		else{
+			System.out.println("ERREUR D'INDEXAGE : BUILDING-GET");
+			return 0;
+		}
+	}
+
+	public void setReward(double reward, int index) {
+		if(index>=0 && index<3)
+			this.reward[index] = reward;
+		else{
+			System.out.println("ERREUR D'INDEXAGE : BUILDING-SET");
+		}
 	}
 
 	public int getMaxUser() {

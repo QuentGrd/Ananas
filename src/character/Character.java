@@ -26,6 +26,13 @@ public abstract class Character {
 	
 	private Coordinates position;
 	
+	public Boolean isAlive(){
+		if(life[0].getCounter() > 0 && life[1].getCounter() > 0 && life[2].getCounter() > 0)
+			return true;
+		else 
+			return false;
+	}
+	
 	public boolean isGender() {
 		return gender;
 	}
@@ -101,9 +108,16 @@ public abstract class Character {
 	}
 	
 	public void setLife(BoundedCounter counter, int index) {
-		this.life[index] = counter;
 		if(index>=0 && index<3)
 			this.life[index] = counter;
+		else{
+			System.out.println("ERREUR D'INDEXAGE : LIFE-SET");
+		}
+	}
+	
+	public void setLife(int counter, int index) {
+		if(index>=0 && index<3)
+			this.life[index].setCounter(counter);
 		else{
 			System.out.println("ERREUR D'INDEXAGE : LIFE-SET");
 		}

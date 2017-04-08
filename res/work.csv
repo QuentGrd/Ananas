@@ -1,24 +1,24 @@
-Tele Systeme,8h30, 18h30,-10
-Infocom,9h,19h,-10
-Matt&Quent's Corp,7h30,21h30,10
-Cerisier Joaillerie,9h,18h,-10
-Auchan,8h30,22h,-20
-Miemou Boulangerie,6h30,19h,-10
-Carwash Laverie,9h,18h,-20
-Chez Dédé Atelier,8h30, 18h30,-25
-H&M,9h,18h,-15
-Celio,9h,18h,-15
-Darty,8h30,21h,-15
-La Fnac,8h30,21h,-15
-Leclerc,8h30,22h,-20
-La Poste,10h,16h,-25
-Credit Mutuel,9h,18h,15
-Direct Assurance,9h,18h,-10
-Google,7h30,21h30,-10
-Alain Afflelou,9h,18h,-10
-SFR,9h,18h,-20
-Jennyfer,9h,18h,-15
-La Grande Récré,9h,18h,-10
-Micromania,9h,18h,-20
-Pharmatie La Vie,6h30,19h,-15
-Yves Roche,9h,18h,-10
+Tele Systeme,8h30, 18h30,-10,20,-5
+Infocom,9h,19h,-10,20,-5
+Matt&Quent's Corp,7h30,21h30,-5,30,-5
+Cerisier Joaillerie,9h,18h,-10,25,-5
+Auchan,8h30,22h,-20,15,-5
+Miemou Boulangerie,6h30,19h,-10,15,-5
+Carwash Laverie,9h,18h,-20,15,-5
+Chez Dédé Atelier,8h30, 18h30,-25,20,-5
+H&M,9h,18h,-15,15,-5
+Celio,9h,18h,-15,20,-5
+Darty,8h30,21h,-15,20,-5
+La Fnac,8h30,21h,-15,25,-5
+Leclerc,8h30,22h,-20,20,-5
+La Poste,10h,16h,-25,20,-5
+Credit Mutuel,9h,18h,15,25,-5
+Direct Assurance,9h,18h,-10,20,-5
+Google,7h30,21h30,-10,30,-5
+Alain Afflelou,9h,18h,-10,20,-5
+SFR,9h,18h,-20,25,-5
+Jennyfer,9h,18h,-15,20,-5
+La Grande Récré,9h,18h,-10,20,-5
+Micromania,9h,18h,-20,20,-5
+Pharmatie La Vie,6h30,19h,-15,25,-5
+Yves Roche,9h,18h,-10,20,-5

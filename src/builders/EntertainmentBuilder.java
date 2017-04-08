@@ -20,7 +20,7 @@ import clock.Schedule;
  */
 public class EntertainmentBuilder {
 
-	private static final String[] ENTERTAINMENTINFOMAPPING = {"NAME", "OPENING_TIME", "CLOSING_TIME", "DURATION", "REWARD"};
+	private static final String[] ENTERTAINMENTINFOMAPPING = {"NAME", "OPENING_TIME", "CLOSING_TIME", "DURATION", "EMOTION", "MONEY", "FAMILY"};
 	private static final String ENTERTAINMENTINFOPATH = System.getProperty("user.dir") + "/res/entertainment.csv";
 	private int currentIndiceInEntertainment;
 	
@@ -32,6 +32,7 @@ public class EntertainmentBuilder {
 	
 	public void  creatEntertainment(){
 		enter = new Entertainment();
+		enter.setReward(new double[3]);
 		initEntertainmentInfo(enter);
 		enter.setMaxUser(Building.density);
 	}
@@ -53,7 +54,9 @@ public class EntertainmentBuilder {
 				CSVRecord record = csvRecords.get(i);
 				if(i==currentIndiceInEntertainment){
 					enter.setName(record.get("NAME"));
-					enter.setReward(Double.parseDouble(record.get("REWARD")));
+					enter.setReward(Double.valueOf(record.get("EMOTION")), 0);
+					enter.setReward(Double.valueOf(record.get("MONEY")), 1);
+					enter.setReward(Double.valueOf(record.get("FAMILY")), 2);
 					//enter.setAverageUsageTime(record.get("DURATION"));
 					//Schedule averageUsageTime = new Schedule(0,0);
 					//averageUsageTime.convertString(record.get("DURATION"));
