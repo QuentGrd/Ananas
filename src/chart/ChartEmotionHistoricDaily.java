@@ -74,12 +74,12 @@ public class ChartEmotionHistoricDaily extends JFrame{
   
 		
 		XYSeries yesterdaySerie = new XYSeries("Yesterday");
-  		for(int i=0; i<character.getData().getEmotionHistoricYesterday().size(); i++)
-	  		yesterdaySerie.add(i,character.getData().getEmotionHistoricYesterday().get(i));
+  		for(int i=0; i<character.getData().getEmotionHistoricYesterday(0).size(); i++)
+	  		yesterdaySerie.add(i,character.getData().getEmotionHistoricYesterday(0).get(i));
   		
   		XYSeries todaySerie = new XYSeries("Today");
-  		for (int i = 0; i < character.getData().getEmotionHistoricToday().size(); i++)
-			todaySerie.add(i, character.getData().getEmotionHistoricToday().get(i));
+  		for (int i = 0; i < character.getData().getEmotionHistoricToday(0).size(); i++)
+			todaySerie.add(i, character.getData().getEmotionHistoricToday(0).get(i));
   			
   		data.addSeries(yesterdaySerie);
   		data.addSeries(todaySerie);
@@ -90,12 +90,12 @@ public class ChartEmotionHistoricDaily extends JFrame{
 		public void actionPerformed(ActionEvent e){
 			data.removeAllSeries();
 			XYSeries yesterdaySerie = new XYSeries("Yesterday");
-	  		for(int i=0; i<character.getData().getEmotionHistoricYesterday().size(); i++)
-		  		yesterdaySerie.add(i,character.getData().getEmotionHistoricYesterday().get(i));
+	  		for(int i=0; i<character.getData().getEmotionHistoricYesterday(0).size(); i++)
+		  		yesterdaySerie.add(i,character.getData().getEmotionHistoricYesterday(0).get(i));
 	  		
 	  		XYSeries todaySerie = new XYSeries("Today");
-	  		for (int i = 0; i < character.getData().getEmotionHistoricToday().size(); i++)
-				todaySerie.add(i, character.getData().getEmotionHistoricToday().get(i));
+	  		for (int i = 0; i < character.getData().getEmotionHistoricToday(0).size(); i++)
+				todaySerie.add(i, character.getData().getEmotionHistoricToday(0).get(i));
 	  			
 	  		data.addSeries(yesterdaySerie);
 	  		data.addSeries(todaySerie);
