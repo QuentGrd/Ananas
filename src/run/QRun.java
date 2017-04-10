@@ -29,7 +29,7 @@ public class QRun {
 	private City city;
 	private GUIMain gui;
 	private static Clock clock;
-	private boolean run;
+	private static boolean run;
 	private static boolean play;
 	//lowest is faster
 	private int speed;
@@ -101,6 +101,7 @@ public class QRun {
 		JOptionPane jop1 = new JOptionPane();
 
 		jop1.showMessageDialog(null, "Vous avez perdu !\nMerci d'avoir joué", "Fin du jeu", JOptionPane.INFORMATION_MESSAGE);
+		gui.dispose();
 	}
 	
 	/**
@@ -304,11 +305,20 @@ public class QRun {
 		return max;
 	}
 	
+	/* Orienté poubelle ? (chercher de meilleurs solution) */
+	
 	public static void switchPlayStatus(){
 		if (play)
 			play = false;
 		else
 			play = true;
+	}
+	
+	public static void switchRun(){
+		if (run)
+			run = false;
+		else
+			run = true;
 	}
 
 	public static boolean isPlay() {

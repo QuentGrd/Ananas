@@ -31,7 +31,7 @@ public class NRun {
 	private GUIMain gui;
 	private static Clock clock;
 	
-	private boolean run;
+	private static boolean run;
 	
 	private static boolean play;
 	
@@ -74,6 +74,7 @@ public class NRun {
 		JOptionPane jop1 = new JOptionPane();
 
 		jop1.showMessageDialog(null, "Vous avez perdu !\nMerci d'avoir joué", "Fin du jeu", JOptionPane.INFORMATION_MESSAGE);
+		gui.dispose();
 	}
 	
 	public void movePopulation(){
@@ -511,11 +512,21 @@ public class NRun {
 		
 		return random;
 	}
+	
+	/* Orienté poubelle ? (chercher de meilleurs solution) */
+	
 	public static void switchPlayStatus(){
 		if (play)
 			play = false;
 		else
 			play = true;
+	}
+	
+	public static void switchRun(){
+		if (run)
+			run = false;
+		else
+			run = true;
 	}
 
 	public static boolean isPlay() {
