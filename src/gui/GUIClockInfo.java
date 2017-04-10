@@ -26,6 +26,7 @@ public class GUIClockInfo extends JPanel{
 	private JLabel monthLabel;
 	private JLabel yearLabel;
 	private JButton playPause;
+	private JButton menu;
 	
 	public GUIClockInfo(Clock clock){
 		this.clock = clock;
@@ -39,6 +40,10 @@ public class GUIClockInfo extends JPanel{
 		clockPart.setLayout(new FlowLayout());
 		
 		clockPart.setFont(clockFont);
+		
+		menu = new JButton("Menu");
+		menu.addActionListener(new MenuAction());
+		clockPart.add(menu);
 		
 		hourLabel = new JLabel(Clock.transform(clock.getHours().getCounter()));
 		hourLabel.setFont(clockFont);
@@ -86,6 +91,14 @@ public class GUIClockInfo extends JPanel{
 				playPause.setText("Pause");
 			else
 				playPause.setText("Play");
+		}
+	}
+	
+	class MenuAction implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			NRun.switchRun();
+			QRun.switchRun();
 		}
 	}
 
