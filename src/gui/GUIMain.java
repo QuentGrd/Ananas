@@ -22,13 +22,13 @@ public class GUIMain extends JFrame{
 	private JPanel back = new JPanel();
 	private JPanel front = new JPanel();
 	
-	private GUIMap gmap;
+	private GUIGraphicsMap gmap;
 	private GUIClockInfo clockInfo;
 	private GUIInfoPart info;
 	private GUIInfrastructureInfo infraInfo;
 	
 	public GUIMain(Map map, Clock clock, Population pop, int mode){
-		gmap = new GUIMap(map, pop);
+		gmap = new GUIGraphicsMap(map, pop);
 		clockInfo = new GUIClockInfo(clock);
 		info = new GUIInfoPart(pop, map, mode);
 		infraInfo = new GUIInfrastructureInfo();
@@ -53,14 +53,10 @@ public class GUIMain extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
-
-	public GUIMap getGmap() {
-		return gmap;
-	}
 	
 	public void refreshGUI(Population pop, Clock clock){
-		gmap.refreshMap(pop);
+		//gmap.refreshMap(pop);
 		clockInfo.refreshClock(clock);
-		info.refesh();
+		//info.refesh();
 	}
 }

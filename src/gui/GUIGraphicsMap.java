@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -32,6 +33,7 @@ public class GUIGraphicsMap extends JPanel{
 	public GUIGraphicsMap(Map map, Population pop){
 		this.map = map;
 		this.pop = pop;
+		this.setPreferredSize(new Dimension(600, 600));
 		this.addMouseListener(new GraphicsMouseListener());
 		mngr = new MapManager();
 	}
@@ -67,10 +69,6 @@ public class GUIGraphicsMap extends JPanel{
 				g.drawImage(mngr.printCharacter(pop.getListCharacter().get(i)), coord.getY()*20, coord.getX()*20, this);
 			}
 		}
-	}
-	
-	public void repaint(){
-		
 	}
 	
 	class GraphicsMouseListener implements MouseListener{
