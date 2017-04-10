@@ -3,6 +3,7 @@ package chart;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,7 +13,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.RefineryUtilities;
 
 import character.NCharacter;
@@ -30,7 +32,7 @@ public class ChartEmotionHistoricFull extends JFrame{
 	private JPanel fond;
 	private JButton refresh;
 	
-	private DefaultCategoryDataset dataset;
+	private XYSeriesCollection dataset = null;
 	
 	public ChartEmotionHistoricFull(NCharacter character){
 		super("Character : " + character.getFirstName());
@@ -42,7 +44,7 @@ public class ChartEmotionHistoricFull extends JFrame{
 		fond.setLayout(new BorderLayout());
 	    setContentPane(fond);
 	    
-	    dataset = new DefaultCategoryDataset();
+	    dataset = new XYSeriesCollection();
 	      
 	    initChart();
 	    initButton();
@@ -56,7 +58,7 @@ public class ChartEmotionHistoricFull extends JFrame{
 	}
 	
 	private void initChart(){
-		JFreeChart lineChart = ChartFactory.createLineChart("Evolution of "+character.getFirstName()+"'s emotion","Time","Emotion",createDataset(),PlotOrientation.VERTICAL,true,true,false);
+		JFreeChart lineChart = ChartFactory.createXYLineChart("Evolution of "+character.getFirstName()+"'s emotion","Time","Emotion",createDataset(),PlotOrientation.VERTICAL,true,true,false);
 		
 		ChartPanel chartPanel = new ChartPanel( lineChart );
 	    chartPanel.setPreferredSize( new java.awt.Dimension( 560 , 367 ) );
@@ -69,18 +71,31 @@ public class ChartEmotionHistoricFull extends JFrame{
 		fond.add(refresh, BorderLayout.SOUTH);
 	}
 	
-	private DefaultCategoryDataset createDataset( ){
+	private XYSeriesCollection createDataset( ){
   
-  		for(int i=0; i<character.getData().getEmotionHistoric().size(); i++)
-	  		dataset.addValue(character.getData().getEmotionHistoric().get(i) , "Emotion" , String.valueOf(i) );
-  		return dataset;
+  		for(int i=0; i<character.getData().getEmotionHistoric().size(); i++){
+  			ArrayList<Integer> rewards = character.getData().getEmotionHistoric(i);
+  			final XYSeries series = new XYSeries(character.getData().getRewardType(i));
+  			System.out.println(character.getData().getEmotionHistoric(i).toString());
+  			for (int j = 0; j < rewards.size(); j++) {
+  	 	  		series.add(j, character.getData().getEmotionHistoric(i).get(j));
+			}
+  			dataset.addSeries(series);
+  		}
+ 	  	return dataset;
    }
 	
 	class ActionRefreshChart implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			dataset.clear();
-			for(int i=0; i<character.getData().getEmotionHistoric().size(); i++)
-		  		dataset.addValue(character.getData().getEmotionHistoric().get(i) , "Emotion" , String.valueOf(i) );
+			dataset.removeAllSeries();
+			for(int i=0; i<character.getData().getEmotionHistoric().size(); i++){
+	  			ArrayList<Integer> rewards = character.getData().getEmotionHistoric(i);
+	  			final XYSeries series = new XYSeries(character.getData().getRewardType(i));
+	  			for (int j = 0; j < rewards.size(); j++) {
+	  	 	  		series.add(j, character.getData().getEmotionHistoric(i).get(j));
+				}
+	  			dataset.addSeries(series);
+	  		}
 		}
 	}
 }

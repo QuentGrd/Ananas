@@ -235,15 +235,19 @@ public class NRun {
 			NCharacter car = (NCharacter) carList.get(i);
 			
 			//emotionhistoric
-			car.getData().getEmotionHistoric().add(car.getLife(0).getCounter());
+			car.getData().getEmotionHistoric(0).add(car.getLife(0).getCounter());
+			car.getData().getEmotionHistoric(1).add(car.getLife(1).getCounter());
+			car.getData().getEmotionHistoric(2).add(car.getLife(2).getCounter());
 			
 			//emotionhistoric Today/Yesterday
 			if(equalSchedule(clock, new Schedule(0, 0))){
 				car.getData().setEmotionHistoricYesterday(car.getData().getEmotionHistoricToday());
-				car.getData().setEmotionHistoricToday(new ArrayList<Integer>());
+				car.getData().resetEmotionHistoricToday();
 			}
 			else{
-				car.getData().getEmotionHistoricToday().add(car.getLife(0).getCounter());
+				car.getData().getEmotionHistoricToday(0).add(car.getLife(0).getCounter());
+				car.getData().getEmotionHistoricToday(1).add(car.getLife(1).getCounter());
+				car.getData().getEmotionHistoricToday(2).add(car.getLife(2).getCounter());
 			}
 			
 			//actionRepartition + rewardRepartition + actionRepartitionDaily
