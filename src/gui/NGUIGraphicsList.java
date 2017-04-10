@@ -45,10 +45,22 @@ public class NGUIGraphicsList extends GUIGraphicsList{
 			}
 			// Emotion Bar
 			g.setColor(Color.BLACK);
-			g.drawRect(((i%chPerRow)*widthCell)+(widthCell/2)-((widthCell-(width/10))/2), ((i/chPerRow)*heightCell)+4*(heightCell/5)-(((heightCell/5)-(heightCell/10))/2), (widthCell-(width/10)), (heightCell/5)-(heightCell/10));
+			g.drawRect(((i%chPerRow)*widthCell)+(widthCell/2)-((widthCell-(width/10))/2), ((i/chPerRow)*heightCell)+4*(heightCell/7)-(((heightCell/7)-(heightCell/10))/2), (widthCell-(width/10)), (heightCell/5)-(heightCell/10));
 			g.setColor(Color.GREEN);
-			g.fillRect(((i%chPerRow)*widthCell)+(widthCell/2)-((widthCell-(width/10))/2), ((i/chPerRow)*heightCell)+4*(heightCell/5)-(((heightCell/5)-(heightCell/10))/2), ((widthCell-(width/10))*c.getLife(0).getCounter())/100, (heightCell/5)-(heightCell/10));
-
+			g.fillRect(((i%chPerRow)*widthCell)+(widthCell/2)-((widthCell-(width/10))/2), ((i/chPerRow)*heightCell)+4*(heightCell/7)-(((heightCell/7)-(heightCell/10))/2), ((widthCell-(width/10))*c.getLife(0).getCounter())/100, (heightCell/5)-(heightCell/10));
+			
+			//Money bar
+			g.setColor(Color.BLACK);
+			g.drawRect(((i%chPerRow)*widthCell)+(widthCell/2)-((widthCell-(width/10))/2), ((i/chPerRow)*heightCell)+5*(heightCell/7)-(((heightCell/7)-(heightCell/10))/2), (widthCell-(width/10)), (heightCell/5)-(heightCell/10));
+			g.setColor(Color.YELLOW);
+			g.fillRect(((i%chPerRow)*widthCell)+(widthCell/2)-((widthCell-(width/10))/2), ((i/chPerRow)*heightCell)+5*(heightCell/7)-(((heightCell/7)-(heightCell/10))/2), ((widthCell-(width/10))*c.getLife(1).getCounter())/100, (heightCell/5)-(heightCell/10));
+			
+			//Family Bar
+			g.setColor(Color.BLACK);
+			g.drawRect(((i%chPerRow)*widthCell)+(widthCell/2)-((widthCell-(width/10))/2), ((i/chPerRow)*heightCell)+6*(heightCell/7)-(((heightCell/7)-(heightCell/10))/2), (widthCell-(width/10)), (heightCell/5)-(heightCell/10));
+			g.setColor(Color.ORANGE);
+			g.fillRect(((i%chPerRow)*widthCell)+(widthCell/2)-((widthCell-(width/10))/2), ((i/chPerRow)*heightCell)+6*(heightCell/7)-(((heightCell/7)-(heightCell/10))/2), ((widthCell-(width/10))*c.getLife(2).getCounter())/100, (heightCell/5)-(heightCell/10));
+			
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("Arial", Font.BOLD, 15));
 			g.drawString(c.getFirstName() + " " + c.getName(), ((i%chPerRow)*widthCell)+(widthCell/5), ((i/chPerRow)*heightCell)+1*(heightCell/5));
