@@ -15,6 +15,7 @@ import builders.CityBuilder;
 import character.Character;
 import character.NCharacter;
 import city.City;
+import city.Map;
 import clock.Clock;
 import clock.Schedule;
 import gui.GUIMain;
@@ -121,7 +122,7 @@ public class NRun {
 					if(!car.getRoutine().isEmptyCurrentRoutine()){
 						//si c'est l'heure on ajoute l'action de tete
 						if(isPassed(clock, carCurrentRoutine.get(0).getBeginTime())){
-							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
+							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car, city.getMap()));
 						}
 					}
 				}
@@ -153,7 +154,7 @@ public class NRun {
 							shift.setFinish(false);
 							shift.foundPath(city.getMap());
 							if(!car.getRoutine().isEmptyCurrentRoutine())
-								car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
+								car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car, city.getMap()));
 						}
 					}
 					
@@ -163,7 +164,7 @@ public class NRun {
 						if(isPassed(clock, chill.getFinishTime())){
 							//System.out.println(chill.getReward());
 							car.getLife(2).increment((int)Math.abs(chill.getReward(2)));
-							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
+							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car, city.getMap()));
 						}
 					}
 					
@@ -175,7 +176,7 @@ public class NRun {
 							car.getLife(0).increment((int)Math.abs(enter.getReward(0)));
 							car.getLife(1).decrement((int)Math.abs(enter.getReward(1)));
 							car.getLife(2).increment((int)Math.abs(enter.getReward(2)));
-							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
+							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car, city.getMap()));
 						}
 					}
 					
@@ -187,7 +188,7 @@ public class NRun {
 							car.getLife(0).increment((int)Math.abs(sleep.getReward(0)));
 							car.getLife(1).decrement((int)Math.abs(sleep.getReward(1)));
 							car.getLife(2).increment((int)Math.abs(sleep.getReward(2)));
-							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
+							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car, city.getMap()));
 						}
 					}
 					
@@ -199,7 +200,7 @@ public class NRun {
 							car.getLife(0).decrement((int)Math.abs(work.getReward(0)));
 							car.getLife(1).increment((int)Math.abs(work.getReward(1)));
 							car.getLife(2).decrement((int)Math.abs(work.getReward(2)));
-							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car));
+							car.getRoutine().setCurrentAction(moveFirstCurrentRoutine(car, city.getMap()));
 						}
 					}
 				}
@@ -323,13 +324,14 @@ public class NRun {
 	 * this methode return the first action of the currentRoutine and delete it in the currentRoutine
 	 * @return
 	 */
-	public Actions moveFirstCurrentRoutine(NCharacter car){
+	public Actions moveFirstCurrentRoutine(NCharacter car, Map map){
 		if(!car.getRoutine().isEmptyCurrentRoutine()){
 			Actions next = car.getRoutine().getCurrentRoutine().get(0);
 			//si l'action a mettre en debut est un deplacement alors on change son point de debut
 			if(next.getClass().getName().equals("actions.Shifting")){
 				Shifting nextShift = (Shifting) car.getRoutine().getCurrentRoutine().get(0);
 				nextShift.setBegin(car.getPosition());
+				nextShift.foundPath(map);
 				car.getRoutine().getCurrentRoutine().remove(car.getRoutine().getCurrentRoutine().get(0));
 				return nextShift;
 			}
