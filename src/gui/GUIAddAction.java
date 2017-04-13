@@ -161,16 +161,20 @@ public class GUIAddAction extends JFrame{
 				else
 					action = new Sleeping(c.getHome(), NRun.getClockTime(), new Schedule("3"));
 				rendezVous = c.getHome().getAddress();
+				System.out.println("Adding Home Action");
 				break;
 			case 1:
 				action = new Working(c.getWork(), NRun.getClockTime(), new Schedule(detailChoice.getSelectedItem().toString()));
 				System.out.println(detailChoice.getSelectedItem().toString());
 				rendezVous = c.getWork().getAddress();
+				System.out.println("Adding Work Action");
 				break;
 			case 2:
 				Entertainment enter = map.getEntertainmentList().get(detailChoice.getSelectedIndex());
+				System.out.println(enter);
 				action = new Entertain(enter, NRun.getClockTime(), enter.getAverageUsageTime());
 				rendezVous = enter.getAddress();
+				System.out.println("Adding Entertainment Action");
 				break;
 			}
 			

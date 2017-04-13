@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,8 +54,8 @@ public class GUICharacterID extends JPanel{
 		this.map = map;
 		this.setMaximumSize(new Dimension(400, 400));
 		//this.setBackground(Color.blue);
-		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-		//this.setLayout(new FlowLayout());
+		//this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+		this.setLayout(new FlowLayout());
 		this.init();
 		this.build();
 	}
@@ -62,6 +63,7 @@ public class GUICharacterID extends JPanel{
 	public void initLabel(){
 		id = new JPanel();
 		id.setLayout(new BoxLayout(id, BoxLayout.Y_AXIS));
+		id.setPreferredSize(new Dimension(350, 65));
 		Font font = new Font("Arial", Font.PLAIN, 15);
 		age = new JLabel("1. ");
 		homeCoord = new JLabel("2. ");
@@ -77,6 +79,7 @@ public class GUICharacterID extends JPanel{
 	public void initGraph(){
 		chart = new JPanel();
 		chart.setLayout(new BoxLayout(chart, BoxLayout.LINE_AXIS));
+		chart.setPreferredSize(new Dimension(400, 40));
 		chartAction = new JButton("F.Act");
 		chartEmotionFull = new JButton("F.Emo");
 		chartEmotionDay = new JButton("D.Emo");
@@ -105,9 +108,12 @@ public class GUICharacterID extends JPanel{
 		addAction.addActionListener(new ActionAddRoutine());
 		refreshRoutine.addActionListener(new ActionRefreshRoutine());
 		
-		routine.setLayout(new BoxLayout(routine, BoxLayout.LINE_AXIS));
+		//routine.setLayout(new BoxLayout(routine, BoxLayout.LINE_AXIS));
+		routine.setLayout(new FlowLayout());
 		actionList.setLayout(new BoxLayout(actionList, BoxLayout.Y_AXIS));
 		routineButton.setLayout(new BoxLayout(routineButton, BoxLayout.PAGE_AXIS));
+		actionList.setPreferredSize(new Dimension(175, 200));
+		routineButton.setPreferredSize(new Dimension(175, 200));
 		for (int i = 0; i < 10; i++){
 			action[i] = new JLabel();
 			actionList.add(action[i]);
