@@ -51,19 +51,19 @@ public class GUIGraphicCharacterID extends JPanel{
 		g.setColor(Color.BLACK);
 		g.drawRect(15, 105, 370, 20);
 		g.setColor(Color.GREEN);
-		g.fillRect(15, 105, (370*charac.getLife(0).getCounter())/100, 20);
+		g.fillRect(15 + 1, 105 + 1, ((370 -1)*charac.getLife(0).getCounter())/100, 18);
 		
 		//Money Bar
 		g.setColor(Color.BLACK);
 		g.drawRect(15, 130, 370, 20);
 		g.setColor(Color.YELLOW);
-		g.fillRect(15, 130, (370*charac.getLife(1).getCounter())/100, 20);
+		g.fillRect(15 + 1, 130 + 1, ((370 - 1)*charac.getLife(1).getCounter())/100, 18);
 		
 		//Family Bar
 		g.setColor(Color.BLACK);
 		g.drawRect(15, 155, 370, 20);
 		g.setColor(Color.ORANGE);
-		g.fillRect(15, 155, (370*charac.getLife(2).getCounter())/100, 20);
+		g.fillRect(15 + 1, 155 + 1, ((370 - 1)*charac.getLife(2).getCounter())/100, 18);
 	}
 	
 }
