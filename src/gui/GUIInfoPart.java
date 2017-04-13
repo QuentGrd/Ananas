@@ -29,14 +29,14 @@ public class GUIInfoPart extends JPanel{
 	private JPanel cardsContainer;
 	
 	private GUIGraphicsList ginfo;
-	private OldGUICharacterInfo cinfo;
+	private GUICharacterInfo cinfo;
 	private static final String INFOPANEL = "Information Panel";
 	private static final String CHARACTERPANEL = "Character list Panel";
 	
 	public GUIInfoPart(Population pop, Map map, int mode){
 		this.pop = pop;
 		ginfo = new GUIGraphicsList(pop);
-		cinfo = new OldGUICharacterInfo(this, map);
+		cinfo = new GUICharacterInfo(this, map);
 		this.initCardLayout(mode);
 		this.setPreferredSize(new Dimension(400, 600));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -67,7 +67,7 @@ public class GUIInfoPart extends JPanel{
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("Index: " + ginfo.getPopIndex(e.getX(), e.getY()));
 			NCharacter charac = (NCharacter) pop.getListCharacter().get(ginfo.getPopIndex(e.getX(), e.getY()));
-			cinfo.setCurrentCharacter(charac);
+			cinfo.setCharacter(charac);
 			cl.show(cardsContainer, INFOPANEL);
 		}
 

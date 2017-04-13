@@ -21,12 +21,11 @@ public class GUICharacterInfo extends JPanel{
 	private GUICharacterID bot;
 
 	public GUICharacterInfo(GUIInfoPart parent, Map map){
-		this.map = map;
 		this.parent = parent;
 		this.setPreferredSize(new Dimension(400, 600));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		top = new GUIGraphicCharacterID();
-		bot = new GUICharacterID();
+		bot = new GUICharacterID(parent, map);
 		this.add(top);
 		this.add(bot);
 	}
@@ -34,6 +33,7 @@ public class GUICharacterInfo extends JPanel{
 	public void setCharacter(NCharacter c){
 		this.currentCharacter = c;
 		top.setCharactert(c);
+		bot.setCharacter(c);
 	}
 
 }

@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import character.NCharacter;
@@ -21,7 +22,7 @@ public class GUIGraphicCharacterID extends JPanel{
 	private Image img;
 
 	public GUIGraphicCharacterID(){
-		this.setMaximumSize(new Dimension(398, 200));
+		this.setMaximumSize(new Dimension(400, 200));
 		//this.setBackground(Color.orange);
 	}
 	
