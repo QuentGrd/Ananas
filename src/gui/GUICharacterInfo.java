@@ -22,6 +22,7 @@ public class GUICharacterInfo extends JPanel{
 
 	public GUICharacterInfo(GUIInfoPart parent, Map map){
 		this.parent = parent;
+		this.setBackground(GUIMain.background);
 		this.setPreferredSize(new Dimension(400, 600));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		top = new GUIGraphicCharacterID();

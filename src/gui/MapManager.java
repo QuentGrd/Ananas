@@ -40,10 +40,10 @@ public class MapManager {
 	
 	public MapManager(){
 		try {
-			imgHome0 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/home" + 0 + ".png"));
-			imgHome1 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/home" + 1 + ".png"));
-			imgHome2 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/home" + 2 + ".png"));
-			imgHome3 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/home" + 3 + ".png"));
+			imgHome0 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/home0.png"));
+			imgHome1 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/home1.png"));
+			imgHome2 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/home2.png"));
+			imgHome3 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/home3.png"));
 			imgWork0 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/work0.png"));
 			imgWork1 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/work1.png"));
 			imgWork2 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/work2.png"));

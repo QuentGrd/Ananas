@@ -36,9 +36,12 @@ public class NRun {
 	
 	private static boolean play;
 	
+	private static int speed;
+	
 	public NRun(){
 		run = true;
 		play = true;
+		speed = 500;
 	}
 	
 	public static Schedule getClockTime(){
@@ -66,7 +69,7 @@ public class NRun {
 				clock.increment();
 			}
 			try{
-				Thread.sleep(100);
+				Thread.sleep(speed);
 			}catch(InterruptedException e){
 				Thread.currentThread().interrupt();
 				e.printStackTrace();
@@ -533,6 +536,10 @@ public class NRun {
 			run = false;
 		else
 			run = true;
+	}
+	
+	public static void setSpeed(int s){
+		speed = s;
 	}
 
 	public static boolean isPlay() {

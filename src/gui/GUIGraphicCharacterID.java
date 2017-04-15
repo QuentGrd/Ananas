@@ -22,8 +22,8 @@ public class GUIGraphicCharacterID extends JPanel{
 	private Image img;
 
 	public GUIGraphicCharacterID(){
+		this.setBackground(GUIMain.background);
 		this.setMaximumSize(new Dimension(400, 200));
-		//this.setBackground(Color.orange);
 	}
 	
 	public void setCharactert(NCharacter c){

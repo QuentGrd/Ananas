@@ -32,7 +32,7 @@ public class QRun {
 	private static boolean run;
 	private static boolean play;
 	//lowest is faster
-	private int speed;
+	private static int speed;
 	
 	private double learnFactor;
 	private double discountedFactor;
@@ -319,6 +319,10 @@ public class QRun {
 			run = false;
 		else
 			run = true;
+	}
+	
+	public static void setSpeed(int s){
+		speed = s;
 	}
 
 	public static boolean isPlay() {

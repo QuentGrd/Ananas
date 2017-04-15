@@ -49,7 +49,7 @@ public class GUIGraphicsList extends JPanel{
 			Character c = pop.getListCharacter().get(i);
 			g.setColor(Color.BLACK);
 			g.drawRect((i%chPerRow)*widthCell, (i/chPerRow)*heightCell, widthCell, heightCell);
-			g.setColor(Color.GRAY);
+			g.setColor(GUIMain.background);
 			g.fillRect((i%chPerRow)*widthCell, (i/chPerRow)*heightCell, widthCell, heightCell);
 			try {
 				int imageWidth = 50;

@@ -28,15 +28,21 @@ public class GUIClockInfo extends JPanel{
 	private JButton playPause;
 	private JButton menu;
 	
+	private JButton x1speed;
+	private JButton x2speed;
+	private JButton x5speed;
+	
 	public GUIClockInfo(Clock clock){
 		this.clock = clock;
 		this.initClockPart();
+		this.setBackground(GUIMain.background);
 		this.setPreferredSize(new Dimension(800, 50));
 		this.add(clockPart);
 	}
 	
 	public void initClockPart(){
 		clockPart = new JPanel();
+		clockPart.setBackground(GUIMain.background);
 		clockPart.setLayout(new FlowLayout());
 		
 		clockPart.setFont(clockFont);
@@ -44,6 +50,10 @@ public class GUIClockInfo extends JPanel{
 		menu = new JButton("Menu");
 		menu.addActionListener(new MenuAction());
 		clockPart.add(menu);
+		
+		playPause = new JButton("Pause");
+		playPause.addActionListener(new PlayPauseAction());
+		clockPart.add(playPause);
 		
 		hourLabel = new JLabel(Clock.transform(clock.getHours().getCounter()));
 		hourLabel.setFont(clockFont);
@@ -68,9 +78,17 @@ public class GUIClockInfo extends JPanel{
 		clockPart.add(yearLabel);
 		clockPart.add(new JLabel(")"));
 		
-		playPause = new JButton("Pause");
-		playPause.addActionListener(new PlayPauseAction());
-		clockPart.add(playPause);
+		x1speed = new JButton(">");
+		x2speed = new JButton(">>");
+		x5speed = new JButton(">>>");
+		
+		x1speed.addActionListener(new ActionChangeSpeed());
+		x2speed.addActionListener(new ActionChangeSpeed());
+		x5speed.addActionListener(new ActionChangeSpeed());
+		
+		clockPart.add(x1speed);
+		clockPart.add(x2speed);
+		clockPart.add(x5speed);
 		
 	}
 	
@@ -99,6 +117,26 @@ public class GUIClockInfo extends JPanel{
 		public void actionPerformed(ActionEvent e) {
 			NRun.switchRun();
 			QRun.switchRun();
+		}
+	}
+	
+	class ActionChangeSpeed implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			switch(e.getActionCommand()){
+				case ">":
+					NRun.setSpeed(500);
+					QRun.setSpeed(500);
+					break;
+				case ">>":
+					NRun.setSpeed(100);
+					QRun.setSpeed(100);
+					break;
+				case ">>>":
+					NRun.setSpeed(50);
+					QRun.setSpeed(50);
+					break;
+			}
 		}
 	}
 
