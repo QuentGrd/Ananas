@@ -22,20 +22,32 @@ import utils.Coordinates;
 
 public class MapManager {
 	
+	private Image imgHome0;
 	private Image imgHome1;
+	private Image imgHome2;
+	private Image imgHome3;
+	private Image imgWork0;
 	private Image imgWork1;
 	private Image imgWork2;
+	private Image imgWork;
 	private Image imgEnter1;
 	private Image imgRoadh;
 	private Image imgRoadw;
 	private Image player1;
 	private Image park;
 	
+	private int i;
+	
 	public MapManager(){
 		try {
+			imgHome0 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/home" + 0 + ".png"));
 			imgHome1 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/home" + 1 + ".png"));
-			imgWork1 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/work0.png"));
-			imgWork2 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/work.png"));
+			imgHome2 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/home" + 2 + ".png"));
+			imgHome3 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/home" + 3 + ".png"));
+			imgWork0 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/work0.png"));
+			imgWork1 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/work1.png"));
+			imgWork2 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/work2.png"));
+			imgWork = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/work.png"));
 			imgEnter1 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/enter.png"));
 			imgRoadh = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/roadh.png"));
 			imgRoadw = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/roadw.png"));
@@ -44,19 +56,46 @@ public class MapManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		i = 0;
+	}
+	
+	public void setI(int i){
+		this.i = i;
 	}
 	
 	public Image printHome(Home home){
+		/*Coordinates size = home.getSize();
+		return imgHome1.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);*/
 		Coordinates size = home.getSize();
-		return imgHome1.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		switch(i){
+			case 0:
+				i = (i+1) % 4;
+				return imgHome0.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+			case 1:
+				i = (i+1) % 4;
+				return imgHome1.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+			case 2:
+				i = (i+1) % 4;
+				return imgHome2.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+			case 3:
+				i = (i+1) % 4;
+				return imgHome3.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+			default:
+				i = (i+1) % 4;
+				return imgHome1.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		}
 	}
 	
 	public Image printWork(Work work){
 		Coordinates size = work.getSize();
 		if (size.getX() == size.getY())
+			return imgWork0.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		else if (/*size.getX() == 2 && size.getY() == 4*/ size.getX() < size.getY())
 			return imgWork1.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
-		else
+		else if (size.getX() > size.getY())
 			return imgWork2.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		else
+			return imgWork.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
 	}
 	
 	public Image printEntertainment(Entertainment enter){

@@ -69,6 +69,8 @@ public class GUIGraphicsMap extends JPanel{
 				g.drawImage(mngr.printCharacter(pop.getListCharacter().get(i)), coord.getY()*20, coord.getX()*20, this);
 			}
 		}
+		
+		mngr.setI(0);
 	}
 	
 	class GraphicsMouseListener implements MouseListener{
