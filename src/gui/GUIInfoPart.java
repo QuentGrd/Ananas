@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import character.NCharacter;
 import city.Map;
 import city.Population;
+import run.Run;
 
 /**
  * 
@@ -33,10 +34,10 @@ public class GUIInfoPart extends JPanel{
 	private static final String INFOPANEL = "Information Panel";
 	private static final String CHARACTERPANEL = "Character list Panel";
 	
-	public GUIInfoPart(Population pop, Map map, int mode){
+	public GUIInfoPart(Population pop, Map map, int mode, Run run){
 		this.pop = pop;
 		ginfo = new GUIGraphicsList(pop);
-		cinfo = new GUICharacterInfo(this, map);
+		cinfo = new GUICharacterInfo(this, map, run);
 		this.initCardLayout(mode);
 		this.setPreferredSize(new Dimension(400, 600));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));

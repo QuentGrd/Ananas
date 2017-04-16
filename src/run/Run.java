@@ -1,33 +1,53 @@
 package run;
 
+import clock.Clock;
+import clock.Schedule;
+
 public class Run {
 	
-	private static boolean run;
+	protected boolean run;
+	protected boolean play;
+	protected int speed;
+	protected Clock clock;
 	
-	private static boolean play;
-	
-	private static int speed;
+	public Run(){
+		run = true;
+		play = true;
+		speed = 100;
+	}
 
-	public static void switchPlayStatus(){
+	public void switchPlayStatus(){
 		if (play)
-			play = false;
+			this.play = false;
 		else
-			play = true;
+			this.play = true;
 	}
 	
-	public static void switchRun(){
+	public void switchRun(){
 		if (run)
-			run = false;
+			this.run = false;
 		else
-			run = true;
+			this.run = true;
 	}
 	
-	public static void setSpeed(int s){
-		speed = s;
+	public void setSpeed(int s){
+		this.speed = s;
 	}
 
-	public static boolean isPlay() {
-		return play;
+	public boolean isPlay() {
+		return this.play;
+	}
+	
+	public Clock getClock(){
+		return this.clock;
+	}
+	
+	public Schedule getClockTime(){
+		return new Schedule(clock.getHours().getCounter(), clock.getMin().getCounter());
+	}
+	
+	public String toString(){
+		return "play: " + play + "; run: " + run + "; speed: " + speed;
 	}
 	
 }

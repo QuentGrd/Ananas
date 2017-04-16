@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -20,6 +19,7 @@ import chart.ChartEmotionHistoricDaily;
 import chart.ChartEmotionHistoricFull;
 import chart.ChartRewardRepartitionFull;
 import city.Map;
+import run.Run;
 
 public class GUICharacterID extends JPanel{
 	
@@ -28,6 +28,7 @@ public class GUICharacterID extends JPanel{
 	private NCharacter charac;
 	private GUIInfoPart parent;
 	private Map map;
+	private Run run;
 	
 	private JPanel id;
 	private JLabel age;
@@ -50,7 +51,7 @@ public class GUICharacterID extends JPanel{
 	
 	private JButton back;
 
-	public GUICharacterID(GUIInfoPart parent, Map map){
+	public GUICharacterID(GUIInfoPart parent, Map map, Run run){
 		this.parent = parent;
 		this.map = map;
 		this.setMaximumSize(new Dimension(400, 400));
@@ -181,7 +182,7 @@ public class GUICharacterID extends JPanel{
 	class ActionAddRoutine implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			GUIAddAction window = new GUIAddAction(charac, map);
+			GUIAddAction window = new GUIAddAction(charac, map, run);
 		}
 	}
 	

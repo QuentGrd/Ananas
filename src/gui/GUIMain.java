@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import city.Map;
 import city.Population;
 import clock.Clock;
+import run.Run;
 /**
  * This class represent the GUI
  * @author quentin
@@ -32,10 +33,10 @@ public class GUIMain extends JFrame{
 	public static Color background2 = new Color(139, 203, 222);
 	public static Color background = new Color(160, 185, 232);
 	
-	public GUIMain(Map map, Clock clock, Population pop, int mode){
+	public GUIMain(Map map, Population pop, int mode, Run run){
 		gmap = new GUIGraphicsMap(map, pop);
-		clockInfo = new GUIClockInfo(clock);
-		info = new GUIInfoPart(pop, map, mode);
+		clockInfo = new GUIClockInfo(run);
+		info = new GUIInfoPart(pop, map, mode, run);
 		infraInfo = new GUIInfrastructureInfo();
 		draw();
 	}

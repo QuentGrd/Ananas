@@ -24,15 +24,10 @@ import utils.Coordinates;
  * @author matthieu
  *
  */
-public class QRun {
+public class QRun extends Run{
 	
 	private City city;
 	private GUIMain gui;
-	private static Clock clock;
-	private static boolean run;
-	private static boolean play;
-	//lowest is faster
-	private static int speed;
 	
 	private double learnFactor;
 	private double discountedFactor;
@@ -40,9 +35,7 @@ public class QRun {
 	
 	
 	public QRun(){
-		run = true;
-		play = true;
-		speed = 100;
+		super();
 		
 		learnFactor = 0.5;
 		discountedFactor = 0.5;
@@ -54,7 +47,7 @@ public class QRun {
 		CityBuilder cBuilder = new CityBuilder(city, true);
 		clock = new Clock(0, 0, 1, 1, 2017);
 		
-		gui = new GUIMain(city.getMap(), clock, city.getPopulation(), 1);
+		gui = new GUIMain(city.getMap(), city.getPopulation(), 1, this);
 	}
 	
 	public void run(){
@@ -303,30 +296,6 @@ public class QRun {
 		}
 		
 		return max;
-	}
-	
-	/* Orienté poubelle ? (chercher de meilleurs solution) */
-	
-	public static void switchPlayStatus(){
-		if (play)
-			play = false;
-		else
-			play = true;
-	}
-	
-	public static void switchRun(){
-		if (run)
-			run = false;
-		else
-			run = true;
-	}
-	
-	public static void setSpeed(int s){
-		speed = s;
-	}
-
-	public static boolean isPlay() {
-		return play;
 	}
 	
 }

@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 import character.NCharacter;
 import city.Map;
+import run.Run;
 
 public class GUICharacterInfo extends JPanel{
 	
@@ -20,13 +21,13 @@ public class GUICharacterInfo extends JPanel{
 	private GUIGraphicCharacterID top;
 	private GUICharacterID bot;
 
-	public GUICharacterInfo(GUIInfoPart parent, Map map){
+	public GUICharacterInfo(GUIInfoPart parent, Map map, Run run){
 		this.parent = parent;
 		this.setBackground(GUIMain.background);
 		this.setPreferredSize(new Dimension(400, 600));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		top = new GUIGraphicCharacterID();
-		bot = new GUICharacterID(parent, map);
+		bot = new GUICharacterID(parent, map, run);
 		this.add(top);
 		this.add(bot);
 	}

@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import clock.Clock;
 import run.NRun;
 import run.QRun;
+import run.Run;
 
 public class GUIClockInfo extends JPanel{
 	
@@ -32,8 +33,12 @@ public class GUIClockInfo extends JPanel{
 	private JButton x2speed;
 	private JButton x5speed;
 	
-	public GUIClockInfo(Clock clock){
-		this.clock = clock;
+	private Run run;
+	
+	public GUIClockInfo(Run run){
+		//this.clock = clock;
+		this.run = run;
+		this.clock = run.getClock();
 		this.initClockPart();
 		this.setBackground(GUIMain.background);
 		this.setPreferredSize(new Dimension(800, 50));
@@ -103,9 +108,8 @@ public class GUIClockInfo extends JPanel{
 	class PlayPauseAction implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			NRun.switchPlayStatus();
-			QRun.switchPlayStatus();
-			if (NRun.isPlay())
+			run.switchPlayStatus();
+			if (run.isPlay())
 				playPause.setText("Pause");
 			else
 				playPause.setText("Play");
@@ -115,26 +119,23 @@ public class GUIClockInfo extends JPanel{
 	class MenuAction implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			NRun.switchRun();
-			QRun.switchRun();
+			run.switchRun();
 		}
 	}
 	
 	class ActionChangeSpeed implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			System.out.println(run);
 			switch(e.getActionCommand()){
 				case ">":
-					NRun.setSpeed(500);
-					QRun.setSpeed(500);
+					run.setSpeed(500);
 					break;
 				case ">>":
-					NRun.setSpeed(100);
-					QRun.setSpeed(100);
+					run.setSpeed(100);
 					break;
 				case ">>>":
-					NRun.setSpeed(50);
-					QRun.setSpeed(50);
+					run.setSpeed(50);
 					break;
 			}
 		}

@@ -24,6 +24,7 @@ import character.NCharacter;
 import city.Map;
 import clock.Schedule;
 import run.NRun;
+import run.Run;
 import utils.Coordinates;
 
 public class GUIAddAction extends JFrame{
@@ -32,6 +33,7 @@ public class GUIAddAction extends JFrame{
 	
 	private NCharacter c;
 	private Map map;
+	private Run run;
 	
 	private JPanel mainPanel;
 	
@@ -54,7 +56,8 @@ public class GUIAddAction extends JFrame{
 	
 	private JButton add;
 	
-	public GUIAddAction(NCharacter c, Map map){
+	public GUIAddAction(NCharacter c, Map map, Run run){
+		this.run = run;
 		this.c = c;
 		this.map = map;
 		this.initChoices();
@@ -157,14 +160,14 @@ public class GUIAddAction extends JFrame{
 			switch(typeChoice.getSelectedIndex()){
 			case 0:
 				if (detailChoice.getSelectedIndex() == 0)
-					action = new Chilling(c.getHome(), NRun.getClockTime(), new Schedule("3"));
+					action = new Chilling(c.getHome(), run.getClockTime(), new Schedule("3"));
 				else
-					action = new Sleeping(c.getHome(), NRun.getClockTime(), new Schedule("3"));
+					action = new Sleeping(c.getHome(), run.getClockTime(), new Schedule("3"));
 				rendezVous = c.getHome().getAddress();
 				System.out.println("Adding Home Action");
 				break;
 			case 1:
-				action = new Working(c.getWork(), NRun.getClockTime(), new Schedule(detailChoice.getSelectedItem().toString()));
+				action = new Working(c.getWork(), run.getClockTime(), new Schedule(detailChoice.getSelectedItem().toString()));
 				System.out.println(detailChoice.getSelectedItem().toString());
 				rendezVous = c.getWork().getAddress();
 				System.out.println("Adding Work Action");
@@ -172,7 +175,7 @@ public class GUIAddAction extends JFrame{
 			case 2:
 				Entertainment enter = map.getEntertainmentList().get(detailChoice.getSelectedIndex());
 				System.out.println(enter);
-				action = new Entertain(enter, NRun.getClockTime(), enter.getAverageUsageTime());
+				action = new Entertain(enter, run.getClockTime(), enter.getAverageUsageTime());
 				rendezVous = enter.getAddress();
 				System.out.println("Adding Entertainment Action");
 				break;
@@ -181,10 +184,10 @@ public class GUIAddAction extends JFrame{
 			switch(positionChoice.getSelectedIndex()){
 			case 0:
 				c.getRoutine().addFirstToCR(action);
-				c.getRoutine().addFirstToCR(new Shifting(NRun.getClockTime(), c.getPosition(), rendezVous));
+				c.getRoutine().addFirstToCR(new Shifting(run.getClockTime(), c.getPosition(), rendezVous));
 				break;
 			case 1:
-				c.getRoutine().addEndToCR(new Shifting(NRun.getClockTime(), c.getPosition(), rendezVous));
+				c.getRoutine().addEndToCR(new Shifting(run.getClockTime(), c.getPosition(), rendezVous));
 				c.getRoutine().addEndToCR(action);
 				break;
 			}

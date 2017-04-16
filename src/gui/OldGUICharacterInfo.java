@@ -27,6 +27,7 @@ import chart.ChartRewardRepartitionFull;
 import city.Map;
 import clock.Schedule;
 import run.NRun;
+import run.Run;
 import utils.Coordinates;
 
 public class OldGUICharacterInfo extends JPanel{
@@ -34,8 +35,8 @@ public class OldGUICharacterInfo extends JPanel{
 	private static final long serialVersionUID = -2871374449425310547L;
 	
 	private NCharacter currentCharacter;
-	
 	private Map map;
+	private Run run;
 	
 	private JPanel infoPart;
 	private JTextPane infoText;
@@ -62,9 +63,10 @@ public class OldGUICharacterInfo extends JPanel{
 	
 	private GUIInfoPart parent;
 	
-	public OldGUICharacterInfo(GUIInfoPart parent, Map map){
+	public OldGUICharacterInfo(GUIInfoPart parent, Map map, Run run){
 		this.map = map;
 		this.parent = parent;
+		this.run = run;
 		this.setPreferredSize(new Dimension(400, 600));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.initLists();
@@ -206,19 +208,19 @@ public class OldGUICharacterInfo extends JPanel{
 			switch(actionType.getSelectedIndex()){
 				case 1:
 					adress = map.getEntertainmentList().get(infra.getSelectedIndex()).getAddress();
-					action = new Entertain(map.getEntertainmentList().get(infra.getSelectedIndex()), NRun.getClockTime(), new Schedule("3"));
+					action = new Entertain(map.getEntertainmentList().get(infra.getSelectedIndex()), run.getClockTime(), new Schedule("3"));
 					break;
 				case 2:
 					adress = map.getEntertainmentList().get(infra.getSelectedIndex()).getAddress();
-					action = new Shifting(NRun.getClockTime(), currentCharacter.getPosition(), adress);
+					action = new Shifting(run.getClockTime(), currentCharacter.getPosition(), adress);
 					break;
 				case 3:
 					adress = currentCharacter.getHome().getAddress();
-					action = new Sleeping(currentCharacter.getHome(), NRun.getClockTime(), new Schedule("3"));
+					action = new Sleeping(currentCharacter.getHome(), run.getClockTime(), new Schedule("3"));
 					break;
 			}
 			currentCharacter.getRoutine().addFirstToCR(action);
-			currentCharacter.getRoutine().addFirstToCR(new Shifting(NRun.getClockTime(), currentCharacter.getPosition(), adress));
+			currentCharacter.getRoutine().addFirstToCR(new Shifting(run.getClockTime(), currentCharacter.getPosition(), adress));
 		}
 	}
 	

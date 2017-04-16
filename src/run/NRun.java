@@ -26,26 +26,13 @@ import utils.Coordinates;
  * @author matthieu
  *
  */
-public class NRun {
+public class NRun extends Run{
 
 	private City city;
 	private GUIMain gui;
-	private static Clock clock;
-	
-	private static boolean run;
-	
-	private static boolean play;
-	
-	private static int speed;
 	
 	public NRun(){
-		run = true;
-		play = true;
-		speed = 500;
-	}
-	
-	public static Schedule getClockTime(){
-		return new Schedule(clock.getHours().getCounter(), clock.getMin().getCounter());
+		super();
 	}
 	
 	public void initialisation(){
@@ -53,7 +40,7 @@ public class NRun {
 		CityBuilder cBuilder = new CityBuilder(city, false);
 		clock = new Clock(0, 0, 1, 1, 2017);
 		
-		gui = new GUIMain(city.getMap(), clock, city.getPopulation(), 0);
+		gui = new GUIMain(city.getMap(), city.getPopulation(), 0, this);
 	}
 	
 	public void run(){
@@ -520,29 +507,5 @@ public class NRun {
 		random = rand.nextInt(max - min +1) + min; //<!PROBLEME MUST BE POSITIVE>
 		
 		return random;
-	}
-	
-	/* Orienté poubelle ? (chercher de meilleurs solution) */
-	
-	public static void switchPlayStatus(){
-		if (play)
-			play = false;
-		else
-			play = true;
-	}
-	
-	public static void switchRun(){
-		if (run)
-			run = false;
-		else
-			run = true;
-	}
-	
-	public static void setSpeed(int s){
-		speed = s;
-	}
-
-	public static boolean isPlay() {
-		return play;
 	}
 }
