@@ -52,6 +52,7 @@ public class GUICharacterID extends JPanel{
 	private JButton back;
 
 	public GUICharacterID(GUIInfoPart parent, Map map, Run run){
+		this.run = run;
 		this.parent = parent;
 		this.map = map;
 		this.setMaximumSize(new Dimension(400, 400));
