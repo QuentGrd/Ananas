@@ -20,7 +20,7 @@ public class GUIInfrastructureInfo extends JPanel{
 	private static JLabel closing;
 
 	public GUIInfrastructureInfo(){
-		this.setBackground(GUIMain.background);
+		this.setBackground(GUIColor.background);
 		this.setLayout(new FlowLayout());
 		this.initLabel();
 		this.add(type);

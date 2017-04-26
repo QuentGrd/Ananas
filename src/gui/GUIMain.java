@@ -29,14 +29,10 @@ public class GUIMain extends JFrame{
 	private GUIInfoPart info;
 	private GUIInfrastructureInfo infraInfo; 
 	
-	public static Color background1 = new Color(137, 196, 244);
-	public static Color background2 = new Color(139, 203, 222);
-	public static Color background = new Color(160, 185, 232);
-	
 	public GUIMain(Map map, Population pop, int mode, Run run){
-		gmap = new GUIGraphicsMap(map, pop);
 		clockInfo = new GUIClockInfo(run);
 		info = new GUIInfoPart(pop, map, mode, run);
+		gmap = new GUIGraphicsMap(map, pop, info);
 		infraInfo = new GUIInfrastructureInfo();
 		draw();
 	}

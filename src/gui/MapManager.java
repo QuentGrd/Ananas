@@ -30,7 +30,9 @@ public class MapManager {
 	private Image imgWork1;
 	private Image imgWork2;
 	private Image imgWork;
+	private Image imgMQ;
 	private Image imgEnter1;
+	private Image imgMusee;
 	private Image imgRoadh;
 	private Image imgRoadw;
 	private Image player1;
@@ -48,7 +50,9 @@ public class MapManager {
 			imgWork1 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/work1.png"));
 			imgWork2 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/work2.png"));
 			imgWork = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/work.png"));
+			imgMQ = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/m&q.png"));
 			imgEnter1 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/enter.png"));
+			imgMusee = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/musee.png"));
 			imgRoadh = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/roadh.png"));
 			imgRoadw = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/roadw.png"));
 			player1 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/player1.png")).getScaledInstance((20), (20), Image.SCALE_DEFAULT);
@@ -88,7 +92,9 @@ public class MapManager {
 	
 	public Image printWork(Work work){
 		Coordinates size = work.getSize();
-		if (size.getX() == size.getY())
+		if (work.getName().equals("Matt&Quent's Corp"))
+			return imgMQ.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		else if (size.getX() == size.getY())
 			return imgWork0.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
 		else if (/*size.getX() == 2 && size.getY() == 4*/ size.getX() < size.getY())
 			return imgWork1.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
@@ -102,6 +108,8 @@ public class MapManager {
 		Coordinates size = enter.getSize();
 		if (enter.getName().equals("Park public"))
 			return park.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		else if (enter.getName().equals("Musée"))
+			return imgMusee.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
 		else
 			return imgEnter1.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
 	}

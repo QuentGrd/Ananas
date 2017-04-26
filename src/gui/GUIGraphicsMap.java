@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -27,12 +28,14 @@ public class GUIGraphicsMap extends JPanel{
 	
 	private Map map;
 	private Population pop;
+	private GUIInfoPart ginfo;
 	
 	private MapManager mngr;
 
-	public GUIGraphicsMap(Map map, Population pop){
+	public GUIGraphicsMap(Map map, Population pop, GUIInfoPart ginfo){
 		this.map = map;
 		this.pop = pop;
+		this.ginfo = ginfo;
 		this.setPreferredSize(new Dimension(600, 600));
 		this.addMouseListener(new GraphicsMouseListener());
 		mngr = new MapManager();
@@ -61,6 +64,12 @@ public class GUIGraphicsMap extends JPanel{
 		for(i=0; i<map.getRoadList().size(); i++){
 			coord = map.getRoadList().get(i).getPosition();
 			g.drawImage(mngr.printRoad(map.getRoadList().get(i)), coord.getY()*20, coord.getX()*20, this);
+		}
+		
+		if(ginfo.isPrintCircle()){
+			Coordinates coord1 = ginfo.getCharacter().getPosition();
+			g.setColor(new Color(1f,0f,0f,.5f ));
+			g.fillOval((coord1.getY()*20)-5, (coord1.getX()*20)-5, 30, 30);
 		}
 		
 		for(i=0; i<pop.getListCharacter().size(); i++){

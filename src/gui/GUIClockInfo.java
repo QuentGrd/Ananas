@@ -40,14 +40,14 @@ public class GUIClockInfo extends JPanel{
 		this.run = run;
 		this.clock = run.getClock();
 		this.initClockPart();
-		this.setBackground(GUIMain.background);
+		this.setBackground(GUIColor.background);
 		this.setPreferredSize(new Dimension(800, 50));
 		this.add(clockPart);
 	}
 	
 	public void initClockPart(){
 		clockPart = new JPanel();
-		clockPart.setBackground(GUIMain.background);
+		clockPart.setBackground(GUIColor.background);
 		clockPart.setLayout(new FlowLayout());
 		
 		clockPart.setFont(clockFont);

@@ -26,6 +26,8 @@ public class GUIInfoPart extends JPanel{
 
 	private Population pop;
 	
+	private boolean printCircle;
+	
 	private CardLayout cl;
 	private JPanel cardsContainer;
 	
@@ -36,6 +38,7 @@ public class GUIInfoPart extends JPanel{
 	
 	public GUIInfoPart(Population pop, Map map, int mode, Run run){
 		this.pop = pop;
+		this.printCircle = false;
 		ginfo = new GUIGraphicsList(pop);
 		cinfo = new GUICharacterInfo(this, map, run);
 		this.initCardLayout(mode);
@@ -61,14 +64,28 @@ public class GUIInfoPart extends JPanel{
 	
 	public void showList(){
 		this.cl.show(cardsContainer, CHARACTERPANEL);
+		this.printCircle = false;
 	}
 	
+	public boolean isPrintCircle() {
+		return printCircle;
+	}
+
+	public void setPrintCircle(boolean printCircle) {
+		this.printCircle = printCircle;
+	}
+	
+	public NCharacter getCharacter(){
+		return cinfo.getCharacter();
+	}
+
 	class MouseListListener implements MouseListener{
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			System.out.println("Index: " + ginfo.getPopIndex(e.getX(), e.getY()));
 			NCharacter charac = (NCharacter) pop.getListCharacter().get(ginfo.getPopIndex(e.getX(), e.getY()));
 			cinfo.setCharacter(charac);
+			printCircle = true;
 			cl.show(cardsContainer, INFOPANEL);
 		}
 

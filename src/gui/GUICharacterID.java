@@ -56,7 +56,7 @@ public class GUICharacterID extends JPanel{
 		this.parent = parent;
 		this.map = map;
 		this.setMaximumSize(new Dimension(400, 400));
-		this.setBackground(GUIMain.background);
+		this.setBackground(GUIColor.background);
 		//this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		this.setLayout(new FlowLayout());
 		this.init();
@@ -65,7 +65,7 @@ public class GUICharacterID extends JPanel{
 	
 	public void initLabel(){
 		id = new JPanel();
-		id.setBackground(GUIMain.background);
+		id.setBackground(GUIColor.background);
 		id.setLayout(new BoxLayout(id, BoxLayout.Y_AXIS));
 		id.setPreferredSize(new Dimension(350, 65));
 		Font font = new Font("Arial", Font.PLAIN, 15);
@@ -82,7 +82,7 @@ public class GUICharacterID extends JPanel{
 	
 	public void initGraph(){
 		chart = new JPanel();
-		chart.setBackground(GUIMain.background);
+		chart.setBackground(GUIColor.background);
 		chart.setLayout(new BoxLayout(chart, BoxLayout.LINE_AXIS));
 		chart.setPreferredSize(new Dimension(400, 40));
 		chartAction = new JButton("F.Act");
@@ -110,9 +110,9 @@ public class GUICharacterID extends JPanel{
 		addAction = new JButton("Add");
 		refreshRoutine = new JButton("Refresh");
 		
-		routine.setBackground(GUIMain.background);
-		actionList.setBackground(GUIMain.background);
-		routineButton.setBackground(GUIMain.background);
+		routine.setBackground(GUIColor.background);
+		actionList.setBackground(GUIColor.background);
+		routineButton.setBackground(GUIColor.background);
 		
 		addAction.addActionListener(new ActionAddRoutine());
 		refreshRoutine.addActionListener(new ActionRefreshRoutine());

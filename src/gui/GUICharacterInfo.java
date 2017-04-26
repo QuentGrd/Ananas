@@ -23,7 +23,7 @@ public class GUICharacterInfo extends JPanel{
 
 	public GUICharacterInfo(GUIInfoPart parent, Map map, Run run){
 		this.parent = parent;
-		this.setBackground(GUIMain.background);
+		this.setBackground(GUIColor.background);
 		this.setPreferredSize(new Dimension(400, 600));
 		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		top = new GUIGraphicCharacterID();
@@ -36,6 +36,10 @@ public class GUICharacterInfo extends JPanel{
 		this.currentCharacter = c;
 		top.setCharactert(c);
 		bot.setCharacter(c);
+	}
+	
+	public NCharacter getCharacter(){
+		return this.currentCharacter;
 	}
 
 }
