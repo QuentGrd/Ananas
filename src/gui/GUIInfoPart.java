@@ -39,7 +39,7 @@ public class GUIInfoPart extends JPanel{
 	public GUIInfoPart(Population pop, Map map, int mode, Run run){
 		this.pop = pop;
 		this.printCircle = false;
-		ginfo = new GUIGraphicsList(pop);
+		ginfo = new GUIGraphicsList(pop, mode);
 		cinfo = new GUICharacterInfo(this, map, run);
 		this.initCardLayout(mode);
 		this.setPreferredSize(new Dimension(400, 600));

@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import character.Character;
+import character.QCharacter;
 import city.Population;
 
 public class GUIGraphicsList extends JPanel{
@@ -22,10 +23,13 @@ public class GUIGraphicsList extends JPanel{
 	private final int width = 400;
 	private final int height = 600;
 	
+	private int mode;
+	
 	protected Population pop;
 	
-	public GUIGraphicsList(Population pop){
+	public GUIGraphicsList(Population pop, int mode){
 		this.pop = pop;
+		this.mode = mode;
 		this.setPreferredSize(new Dimension(width, height));
 	}
 	
@@ -45,8 +49,12 @@ public class GUIGraphicsList extends JPanel{
 		int widthCell = width/chPerRow;
 		int heightCell = height/((nbCharac/chPerRow)+(nbCharac%chPerRow));
 		int i;
+		Character c = null;
 		for (i=0; i<nbCharac; i++){
-			Character c = pop.getListCharacter().get(i);
+			if (mode == 1)
+				c = (QCharacter) pop.getListCharacter().get(i);
+			else
+				c = pop.getListCharacter().get(i);
 			g.setColor(Color.BLACK);
 			g.drawRect((i%chPerRow)*widthCell, (i/chPerRow)*heightCell, widthCell, heightCell);
 			g.setColor(GUIColor.background);
@@ -84,6 +92,12 @@ public class GUIGraphicsList extends JPanel{
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("Arial", Font.BOLD, 15));
 			g.drawString(c.getFirstName() + " " + c.getName(), ((i%chPerRow)*widthCell)+(widthCell/5), ((i/chPerRow)*heightCell)+1*(heightCell/5));
+			
+			if (mode == 1){
+				g.setColor(Color.BLACK);
+				g.setFont(new Font("Arial", Font.BOLD, 10));
+				g.drawString("Death counter: " + ((QCharacter) c).getNbOfDeath(), ((i%chPerRow)*widthCell)+7*(widthCell/10), ((i/chPerRow)*heightCell)+1*(heightCell/5));
+			}
 		}
 	}
 	
