@@ -31,13 +31,21 @@ public class NRun extends Run{
 	private City city;
 	private GUIMain gui;
 	
+	private int nbCharac;
+	
 	public NRun(){
 		super();
+		this.nbCharac = 5;
+	}
+	
+	public NRun(int nbCharac){
+		super();
+		this.nbCharac = nbCharac;
 	}
 	
 	public void initialisation(){
 		city = new City();
-		CityBuilder cBuilder = new CityBuilder(city, false);
+		CityBuilder cBuilder = new CityBuilder(city, false, nbCharac);
 		clock = new Clock(0, 0, 1, 1, 2017);
 		
 		gui = new GUIMain(city.getMap(), city.getPopulation(), 0, this);

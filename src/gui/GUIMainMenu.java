@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import run.NRun;
@@ -27,6 +28,10 @@ public class GUIMainMenu extends JFrame{
 	private JButton rules;
 	private JButton exitButton;
 	
+	private String[] modes = {"Easy", "Normal", "Hard", "Pro"};
+	private String[] characSelect = new String[60];
+	private static int nbCharac;
+	
 	private static int mode;
 	private static boolean choose;
 	private static boolean exit;
@@ -34,6 +39,8 @@ public class GUIMainMenu extends JFrame{
 	public GUIMainMenu(){
 		this.initComponent();
 		this.addListener();
+		for (int i = 1; i<=60; i++)
+			characSelect[i-1] = String.valueOf(i);
 		this.getContentPane().add(buttonPanel);
 		this.pack();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -89,9 +96,29 @@ public class GUIMainMenu extends JFrame{
 	class NormalModeListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			/*NRun run = new NRun();
-			run.initialisation();
-			run.run();*/
+			JOptionPane modeSelect = new JOptionPane();
+			@SuppressWarnings("static-access")
+			String selectedMode = (String)modeSelect.showInputDialog(null, 
+				      "Veuillez indiquer le niveau de difficulté :",
+				      "Mode Normal",
+				      JOptionPane.QUESTION_MESSAGE,
+				      null,
+				      modes,
+				      modes[1]);
+			switch(selectedMode){
+			case "Easy":
+				nbCharac = 1;
+				break;
+			case "Normal":
+				nbCharac = 3;
+				break;
+			case "Hard":
+				nbCharac = 5;
+				break;
+			case "Pro":
+				nbCharac = 15;
+				break;
+			}
 			mode = 1;
 			choose = true;
 		}
@@ -100,9 +127,16 @@ public class GUIMainMenu extends JFrame{
 	class AutoModeListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			/*QRun run = new QRun();
-			run.initialisation();
-			run.run();*/
+			JOptionPane modeSelect = new JOptionPane();
+			@SuppressWarnings("static-access")
+			String selectedMode = (String)modeSelect.showInputDialog(null, 
+				      "Veuillez indiquer le nombre de personnages",
+				      "Mode Autonome",
+				      JOptionPane.QUESTION_MESSAGE,
+				      null,
+				      characSelect,
+				      characSelect[6]);
+			nbCharac = Integer.parseInt(selectedMode);
 			mode = 2;
 			choose = true;
 		}
@@ -122,7 +156,7 @@ public class GUIMainMenu extends JFrame{
 			switch(mode){
 				case 1:
 					menu.setVisible(false);
-					NRun nrun = new NRun();
+					NRun nrun = new NRun(nbCharac);
 					nrun.initialisation();
 					nrun.run();
 					menu.setVisible(true);
@@ -131,12 +165,14 @@ public class GUIMainMenu extends JFrame{
 					break;
 				case 2:
 					menu.setVisible(false);
-					QRun qrun = new QRun();
+					QRun qrun = new QRun(nbCharac);
 					qrun.initialisation();
 					qrun.run();
 					menu.setVisible(true);
 					choose = false;
 					mode = 0;
+					break;
+				case 3:
 					break;
 			}
 		}

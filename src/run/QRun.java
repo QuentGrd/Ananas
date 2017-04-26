@@ -33,10 +33,19 @@ public class QRun extends Run{
 	private double discountedFactor;
 	private int exploration;
 	
+	private int nbCharac;
 	
 	public QRun(){
 		super();
-		
+		this.nbCharac = 5;
+		learnFactor = 0.5;
+		discountedFactor = 0.5;
+		exploration = 10;
+	}
+	
+	public QRun(int nbCharac){
+		super();
+		this.nbCharac = nbCharac;
 		learnFactor = 0.5;
 		discountedFactor = 0.5;
 		exploration = 10;
@@ -44,7 +53,7 @@ public class QRun extends Run{
 	
 	public void initialisation(){
 		city = new City();
-		CityBuilder cBuilder = new CityBuilder(city, true);
+		CityBuilder cBuilder = new CityBuilder(city, true, nbCharac);
 		clock = new Clock(0, 0, 1, 1, 2017);
 		
 		gui = new GUIMain(city.getMap(), city.getPopulation(), 1, this);

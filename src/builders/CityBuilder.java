@@ -9,7 +9,7 @@ public class CityBuilder {
 	private MapBuilder mapB;
 	private PopulationBuilder popBuilder;
 	
-	public CityBuilder(City city, Boolean autoMode){
+	public CityBuilder(City city, boolean autoMode, int nbCharac){
 		
 		Map map = city.getMap();
 		map = new Map(30);
@@ -20,12 +20,12 @@ public class CityBuilder {
 		
 		Population pop = city.getPopulation();
 		if(!autoMode){
-			pop = new Population(5);
+			pop = new Population(nbCharac);
 			popBuilder = new PopulationBuilder(pop, map, false);
 			city.setPopulation(popBuilder.populationCreation());
 		}
 		else{
-			pop = new Population(5);
+			pop = new Population(nbCharac);
 			popBuilder = new PopulationBuilder(pop, map, true);
 			city.setPopulation(popBuilder.populationCreation());
 		}
