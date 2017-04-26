@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -7,6 +8,8 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -90,6 +93,7 @@ public class GUIMainMenu extends JFrame{
 	public void addListener(){
 		normal.addActionListener(new NormalModeListener());
 		auto.addActionListener(new AutoModeListener());
+		rules.addActionListener(new ActionRulesListener());
 		exitButton.addActionListener(new ExitListener());
 	}
 	
@@ -139,6 +143,18 @@ public class GUIMainMenu extends JFrame{
 			nbCharac = Integer.parseInt(selectedMode);
 			mode = 2;
 			choose = true;
+		}
+	}
+	
+	class ActionRulesListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			URI uri = URI.create("https://www.youtube.com/watch?v=U7T4wBj0xHU");
+			try {
+				Desktop.getDesktop().browse(uri);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 	
