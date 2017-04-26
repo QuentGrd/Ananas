@@ -141,8 +141,25 @@ public class GUICharacterID extends JPanel{
 			if (i >= charac.getRoutine().getCurrentRoutine().size())
 				action[i].setText(i+1 + ". ");
 			else
-				action[i].setText(i+1 +". " + charac.getRoutine().getCurrentRoutine().get(i).getClass().getName());
+				action[i].setText(i+1 +". " + decryptRoutine(charac.getRoutine().getCurrentRoutine().get(i).getClass().getName()));
 			
+		}
+	}
+	
+	public String decryptRoutine(String name){
+		switch(name){
+		case "actions.Chilling":
+			return "Chilling";
+		case "actions.Sleeping":
+			return "Sleeping";
+		case "actions.Entertain":
+			return "Entertain";
+		case "actions.Shifting":
+			return "Shifting";
+		case "actions.Working":
+			return "Working";
+		default:
+			return "Unknown";
 		}
 	}
 	
