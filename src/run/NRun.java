@@ -12,6 +12,8 @@ import actions.Shifting;
 import actions.Sleeping;
 import actions.Working;
 import builders.CityBuilder;
+import building.Entertainment;
+import building.Work;
 import character.Character;
 import character.NCharacter;
 import city.City;
@@ -223,6 +225,46 @@ public class NRun extends Run{
 				}
 			}
 		}
+	}
+	
+	/**
+	 * this methode manage the deplacement of character in the different infrastructure
+	 * @param character
+	 * @param nextPos
+	 */
+	public void openningTimeManagment(NCharacter character, Coordinates nextPos){
+		if(city.getMap().getInfrastructure(nextPos.getX(), nextPos.getY()).getType() == 2){
+			Work work = (Work)city.getMap().getInfrastructure(nextPos.getX(), nextPos.getY());
+			if(!inputAccepted(work.getOpeningTime(), work.getClosingTime())){
+				character.getRoutine().getCurrentRoutine().remove(character.getRoutine().getCurrentRoutine().get(0));
+				character.getRoutine().setCurrentAction(new Shifting(new Schedule(clock.getHours().getCounter(), clock.getMin().getCounter()), character.getPosition(), character.getHome().getAddress()));
+				
+			}
+			
+		}
+		else if(city.getMap().getInfrastructure(nextPos.getX(), nextPos.getY()).getType() == 3){
+			Entertainment enter = (Entertainment)city.getMap().getInfrastructure(nextPos.getX(), nextPos.getY());
+			if(!inputAccepted(enter.getOpeningTime(), enter.getClosingTime())){
+				character.getRoutine().getCurrentRoutine().remove(character.getRoutine().getCurrentRoutine().get(0));
+				character.getRoutine().setCurrentAction(new Shifting(new Schedule(clock.getHours().getCounter(), clock.getMin().getCounter()), character.getPosition(), character.getHome().getAddress()));
+			
+			}
+		}
+	}
+	
+	/**
+	 * this methode check if the time is between 2 Schedule
+	 * @param open
+	 * @param close
+	 * @return
+	 */
+	public boolean inputAccepted(Schedule open, Schedule close){
+		if(clock.getHours().getCounter() >= open.getHour() && clock.getHours().getCounter() <= close.getHour()){
+			if(clock.getMin().getCounter() >= open.getMinute() && clock.getMin().getCounter() < close.getMinute()){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public void statisticManagment(){
