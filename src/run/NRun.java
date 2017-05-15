@@ -1,6 +1,8 @@
 package run;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -21,6 +23,8 @@ import city.Map;
 import clock.Clock;
 import clock.Schedule;
 import gui.GUIMain;
+import qrcode.EndOfGameWindow;
+import qrcode.QRCodeGenerator;
 import utils.Coordinates;
 
 /**
@@ -55,6 +59,10 @@ public class NRun extends Run{
 	
 	public void run(){
 		
+		SimpleDateFormat dateBegin = new SimpleDateFormat();
+		String dateBeginText = dateBegin.format(new Date());
+		System.out.println(dateBeginText);
+		
 		while(run){
 			if (play){
 				initCurrentRoutine();
@@ -72,9 +80,15 @@ public class NRun extends Run{
 				e.printStackTrace();
 			}
 		}
-		JOptionPane jop1 = new JOptionPane();
+		
+		SimpleDateFormat dateEnd = new SimpleDateFormat();
+		String dateEndText = dateEnd.format(new Date());
+		
+		
+		QRCodeGenerator generator = new QRCodeGenerator(dateBeginText, dateEndText);
+		EndOfGameWindow finalWindow = new EndOfGameWindow();
+		
 
-		jop1.showMessageDialog(null, "Vous avez perdu !\nMerci d'avoir joué", "Fin du jeu", JOptionPane.INFORMATION_MESSAGE);
 		gui.dispose();
 	}
 	
