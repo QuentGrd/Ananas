@@ -47,6 +47,7 @@ public class GUICharacterID extends JPanel{
 	private JPanel actionList;
 	private JLabel action[];
 	private JButton addAction;
+	private JButton deleteAction;
 	private JButton refreshRoutine;
 	
 	private JButton back;
@@ -108,6 +109,7 @@ public class GUICharacterID extends JPanel{
 		routineButton = new JPanel();
 		action = new JLabel[10];
 		addAction = new JButton("Add");
+		deleteAction = new JButton("Delete");
 		refreshRoutine = new JButton("Refresh");
 		
 		routine.setBackground(GUIColor.background);
@@ -115,6 +117,7 @@ public class GUICharacterID extends JPanel{
 		routineButton.setBackground(GUIColor.background);
 		
 		addAction.addActionListener(new ActionAddRoutine());
+		deleteAction.addActionListener(new ActionDeleteRoutine());
 		refreshRoutine.addActionListener(new ActionRefreshRoutine());
 		
 		//routine.setLayout(new BoxLayout(routine, BoxLayout.LINE_AXIS));
@@ -129,6 +132,7 @@ public class GUICharacterID extends JPanel{
 		}
 		
 		routineButton.add(addAction);
+		routineButton.add(deleteAction);
 		routineButton.add(refreshRoutine);
 		
 		routine.add(actionList);
@@ -201,6 +205,13 @@ public class GUICharacterID extends JPanel{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			GUIAddAction window = new GUIAddAction(charac, map, run);
+		}
+	}
+	
+	class ActionDeleteRoutine implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			GUIDeleteAction window = new GUIDeleteAction(charac);
 		}
 	}
 	
