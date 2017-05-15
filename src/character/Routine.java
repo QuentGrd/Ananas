@@ -1,7 +1,6 @@
 package character;
 
 import java.util.ArrayList;
-import java.util.Queue;
 import java.util.Random;
 
 import actions.Actions;

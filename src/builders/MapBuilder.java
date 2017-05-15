@@ -10,12 +10,15 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import com.sun.media.jfxmedia.logging.Logger;
+
 import building.Entertainment;
 import building.Home;
 import building.Work;
 import city.Infrastructure;
 import city.Map;
 import city.PositionAlreadyTakenException;
+import log.LoggerUtility;
 import trace.Road;
 import utils.Coordinates;
 
@@ -40,6 +43,8 @@ public class MapBuilder {
 	private static final String ADRESSY = "AdressY";
 	
 	private Map map;
+	
+	private static org.apache.log4j.Logger logger = LoggerUtility.getLogger(MapBuilder.class);
 	
 	public MapBuilder(Map map){
 		this.map = map;
@@ -169,6 +174,12 @@ public class MapBuilder {
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
+		
+		if (map != null)
+			logger.info("Map created");
+		else
+			logger.fatal("The Map hasn't been created");
+		
 	}
 	
 }

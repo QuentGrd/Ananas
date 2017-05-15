@@ -2,11 +2,14 @@ package builders;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import character.Character;
 import character.NCharacter;
 import character.QCharacter;
 import city.Map;
 import city.Population;
+import log.LoggerUtility;
 
 /**
  * 
@@ -18,6 +21,8 @@ public class PopulationBuilder {
 	private Population pop;
 	private Map map;
 	private Boolean autoMode;
+	
+	private static Logger logger = LoggerUtility.getLogger(PopulationBuilder.class);
 	
 	public PopulationBuilder(Population pop, Map map, Boolean autoMode){
 		this.pop = pop;
@@ -55,6 +60,12 @@ public class PopulationBuilder {
 			}
 		}
 		pop.setListCharacter(list);
+		
+		if(pop != null)
+			logger.info("Population created");
+		else
+			logger.fatal("Population hasn't been created");
+		
 		return pop;
 	}
 

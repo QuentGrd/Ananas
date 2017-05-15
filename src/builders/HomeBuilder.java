@@ -1,7 +1,10 @@
 package builders;
 
+import org.apache.log4j.Logger;
+
 import building.Building;
 import building.Home;
+import log.LoggerUtility;
 
 /**
  * 
@@ -12,6 +15,7 @@ import building.Home;
 public class HomeBuilder {
 	
 private Home home;
+private static Logger logger = LoggerUtility.getLogger(HomeBuilder.class);
 	
 	public HomeBuilder(){
 	}
@@ -23,6 +27,7 @@ private Home home;
 		home.setReward(0, 1);
 		home.setReward(30, 0);
 		home.setMaxUser(Building.density);
+		logger.info("Home created");
 	}
 
 	public Home getHome() {

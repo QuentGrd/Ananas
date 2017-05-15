@@ -8,18 +8,21 @@ import java.util.Random;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.log4j.Logger;
 
-import character.Character;
 import character.DataCharacter;
 import character.NCharacter;
 import character.Routine;
 import city.Map;
+import log.LoggerUtility;
 import utils.BoundedCounter;
 
 public class NCharacterBuilder {
 
 	public static String[] FILE_HEADER_MAPPING_NAME = {"name"};
 	public static String[] FILE_HEADER_MAPPING_FIRSTNAME = {"gender","firstName"};
+	
+	private static Logger logger = LoggerUtility.getLogger(NCharacterBuilder.class);
 	
 	private NCharacter character;
 	
@@ -39,6 +42,10 @@ public class NCharacterBuilder {
 		initLife();
 		character.setRewardPriority(0);
 		character.setData(new DataCharacter());
+		if (character != null)
+			logger.info("Character: " + character.getFirstName() + " " + character.getName() + " created");
+		else
+			logger.fatal("A character hasn't been created");
 	}
 	
 	/**

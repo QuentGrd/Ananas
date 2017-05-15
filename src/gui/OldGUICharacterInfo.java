@@ -26,7 +26,6 @@ import chart.ChartEmotionHistoricFull;
 import chart.ChartRewardRepartitionFull;
 import city.Map;
 import clock.Schedule;
-import run.NRun;
 import run.Run;
 import utils.Coordinates;
 

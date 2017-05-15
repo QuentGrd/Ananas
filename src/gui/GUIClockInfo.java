@@ -11,8 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import clock.Clock;
-import run.NRun;
-import run.QRun;
 import run.Run;
 
 public class GUIClockInfo extends JPanel{

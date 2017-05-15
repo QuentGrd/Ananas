@@ -9,11 +9,13 @@ import java.util.Random;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.log4j.Logger;
 
 import autoMode.Environment;
 import building.Home;
 import character.QCharacter;
 import city.Map;
+import log.LoggerUtility;
 import utils.BoundedCounter;
 import utils.Coordinates;
 
@@ -21,6 +23,8 @@ public class QCharacterBuilder {
 	
 	public static String[] FILE_HEADER_MAPPING_NAME = {"name"};
 	public static String[] FILE_HEADER_MAPPING_FIRSTNAME = {"gender","firstName"};
+	
+	private static Logger logger = LoggerUtility.getLogger(QCharacterBuilder.class);
 	
 	private QCharacter character;
 	
@@ -41,7 +45,10 @@ public class QCharacterBuilder {
 		character.setRewardPriority(0);
 		character.setGoingHome(false);
 		character.setPath(new ArrayList<Coordinates>());
-		
+		if (character != null)
+			logger.info("Character: " + character.getFirstName() + " " + character.getName() + " created");
+		else
+			logger.fatal("A character hasn't been created");
 		return character;
 	}
 	

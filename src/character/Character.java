@@ -1,7 +1,6 @@
 package character;
 
 import building.Home;
-import building.Work;
 import utils.BoundedCounter;
 import utils.Coordinates;
 

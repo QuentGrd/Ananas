@@ -7,10 +7,12 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.log4j.Logger;
 
 import building.Building;
 import building.Work;
 import clock.Schedule;
+import log.LoggerUtility;
 
 /**
  * 
@@ -23,6 +25,8 @@ public class WorkBuilder {
 	private static final String WORKINFOPATH = System.getProperty("user.dir") + "/res/work.csv";
 	private int currentIndiceInWork;
 	
+	private static Logger logger = LoggerUtility.getLogger(WorkBuilder.class);
+	
 	private Work work;
 	
 	public WorkBuilder(){
@@ -33,6 +37,7 @@ public class WorkBuilder {
 		work.setReward(new double[3]);
 		initWorkInfo(work);
 		work.setMaxUser(Building.density);
+		logger.info("Work creation for: " + work.getName());
 	}
 	
 	/**

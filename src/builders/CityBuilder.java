@@ -1,14 +1,20 @@
 package builders;
 
+import org.apache.log4j.Logger;
+
 import city.City;
 import city.Map;
 import city.Population;
+import log.LoggerUtility;
 
 public class CityBuilder {
 	
 	private MapBuilder mapB;
 	private PopulationBuilder popBuilder;
 	
+	private static Logger logger = LoggerUtility.getLogger(CityBuilder.class);
+	
+	@SuppressWarnings("unused")
 	public CityBuilder(City city, boolean autoMode, int nbCharac){
 		
 		Map map = city.getMap();
@@ -29,7 +35,11 @@ public class CityBuilder {
 			popBuilder = new PopulationBuilder(pop, map, true);
 			city.setPopulation(popBuilder.populationCreation());
 		}
-		System.out.println(pop.toString());
+		
+		if (city != null)
+			logger.info("City created");
+		else
+			logger.fatal("City hasn't been created");
 		
 	}
 

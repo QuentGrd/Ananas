@@ -7,10 +7,12 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.log4j.Logger;
 
 import building.Building;
 import building.Entertainment;
 import clock.Schedule;
+import log.LoggerUtility;
 
 
 /**
@@ -24,6 +26,8 @@ public class EntertainmentBuilder {
 	private static final String ENTERTAINMENTINFOPATH = System.getProperty("user.dir") + "/res/entertainment.csv";
 	private int currentIndiceInEntertainment;
 	
+	private static Logger logger = LoggerUtility.getLogger(EntertainmentBuilder.class);
+	
 	private Entertainment enter;
 	
 	public EntertainmentBuilder(){
@@ -35,6 +39,7 @@ public class EntertainmentBuilder {
 		enter.setReward(new double[3]);
 		initEntertainmentInfo(enter);
 		enter.setMaxUser(Building.density);
+		logger.info("Entertainment creation for: " + enter.getName());
 	}
 	/**
 	 * This methode search in entertainment.csv to initialiaze enter

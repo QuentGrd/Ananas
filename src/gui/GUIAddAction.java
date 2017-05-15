@@ -23,7 +23,6 @@ import building.Entertainment;
 import character.NCharacter;
 import city.Map;
 import clock.Schedule;
-import run.NRun;
 import run.Run;
 import utils.Coordinates;
 
