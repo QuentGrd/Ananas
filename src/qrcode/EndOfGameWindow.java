@@ -2,6 +2,7 @@ package qrcode;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -12,7 +13,9 @@ import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.google.zxing.BarcodeFormat;
@@ -35,16 +38,35 @@ public class EndOfGameWindow extends JFrame{
 		this.getContentPane().add(back);
 		this.pack();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setMinimumSize(new Dimension(400, 500));
-		this.setTitle("End of the game");
+		this.setMinimumSize(new Dimension(400, 600));
+		this.setTitle("End of game");
 		this.setResizable(false);
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
 	
-	private void initComponent(){
-		back = new JPanel();
+	public void initComponent(){
+		back = new JPanel()
+		{
+			protected void paintComponent(Graphics g) 
+            {
+                super.paintComponent(g);
+ 
+                ImageIcon m = new ImageIcon(new File(System.getProperty("user.dir") + "/qrcode/qrcode.png").getPath());
+                Image monImage = m.getImage();
+                g.drawImage(monImage, 0, 100,this);
+ 
+            }
+		};
+		
+		back.setLayout(null);
+		
+		JLabel title = new JLabel("Fin de la partie");
+		Font font = new Font("Arial",Font.BOLD,35);
+		title.setFont(font);
+		back.add(title);
+		title.setBounds(50, 10, 490, 100);
+		
 	}
 	
 	
