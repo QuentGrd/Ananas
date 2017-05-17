@@ -1,48 +1,46 @@
 package qrcode;
 
-import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.Hashtable;
+import java.net.URI;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.WriterException;
-import com.google.zxing.common.BitMatrix;
-import com.google.zxing.qrcode.QRCodeWriter;
-import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
 
 public class EndOfGameWindow extends JFrame{
 	
 	private JPanel back;
 	private String url;
+	
+	private JButton link ;
+	
+	private QRCodeGenerator generator;
 
-	public EndOfGameWindow(){
+	public EndOfGameWindow(QRCodeGenerator generator){
 
+		this.generator = generator;
+		url = generator.getUrl();
+		
 		this.initComponent();
 		
 		this.getContentPane().add(back);
-		this.pack();
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setMinimumSize(new Dimension(400, 600));
 		this.setTitle("End of game");
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		this.setAlwaysOnTop(true);
 	}
 	
 	public void initComponent(){
@@ -67,8 +65,24 @@ public class EndOfGameWindow extends JFrame{
 		back.add(title);
 		title.setBounds(50, 10, 490, 100);
 		
+		link = new JButton("Link to register");
+		link.addActionListener(new ActionRegisterListener());
+		back.add(link);
+		link.setBounds(110, 525, 180, 30);
+		
 	}
 	
-	
+	class ActionRegisterListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			System.out.println(url);
+			URI uri = URI.create(url);
+			try {
+				Desktop.getDesktop().browse(uri);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
 
 }

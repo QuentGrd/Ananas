@@ -86,7 +86,7 @@ public class NRun extends Run{
 		
 		
 		QRCodeGenerator generator = new QRCodeGenerator(dateBeginText, dateEndText);
-		EndOfGameWindow finalWindow = new EndOfGameWindow();
+		EndOfGameWindow finalWindow = new EndOfGameWindow(generator);
 		
 
 		gui.dispose();
