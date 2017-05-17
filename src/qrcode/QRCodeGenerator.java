@@ -30,7 +30,7 @@ public class QRCodeGenerator {
 	}
 	
 	public void generateImage(String timeBegin, String timeEnd){
-		url = "https://10.40.128.22/~qgerard/glpweb/index.php";/*/?b="+timeBegin+"&?e="+timeEnd;*/
+		url = "https://10.40.128.22/~qgerard/glpweb/enregistrement.php";/*/?b="+timeBegin+"&?e="+timeEnd;*/
 		String filePath = "./qrcode/qrcode.png";
 		int size = 400;
 		String fileType = "png";
