@@ -63,6 +63,8 @@ public class NRun extends Run{
 		String dateBeginText = dateBegin.format(new Date());
 		System.out.println(dateBeginText);
 		
+		String lvl = String.valueOf(city.getPopulation().getListCharacter().size());
+		
 		while(run){
 			if (play){
 				initCurrentRoutine();
@@ -85,7 +87,7 @@ public class NRun extends Run{
 		String dateEndText = dateEnd.format(new Date());
 		
 		
-		QRCodeGenerator generator = new QRCodeGenerator(dateBeginText, dateEndText);
+		QRCodeGenerator generator = new QRCodeGenerator(dateBeginText, dateEndText, lvl);
 		EndOfGameWindow finalWindow = new EndOfGameWindow(generator);
 		
 
