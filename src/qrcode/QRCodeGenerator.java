@@ -15,22 +15,32 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.sun.javafx.css.CalculatedValue;
 
 public class QRCodeGenerator {
 
 	private String begin;
 	private String end;
+	private String score;
+	
+	private String lvl;
 	
 	private String url;
 	
-	public QRCodeGenerator(String begin, String end){
+	public QRCodeGenerator(String begin, String end, String lvl){
 		this.begin = begin;
 		this.end = end;
+		score = calculScore(begin, end);
+		
+		this.lvl = lvl;
+		
 		generateImage(begin, end);
 	}
 	
 	public void generateImage(String timeBegin, String timeEnd){
-		url = "https://10.40.128.22/~qgerard/glpweb/enregistrement.php";/*/?b="+timeBegin+"&?e="+timeEnd;*/
+		String score = calculScore(timeBegin, timeEnd);
+		System.out.println("SCORE = " + score);
+		url = "https://10.40.128.22/~qgerard/glpweb/enregistrement.php?lvl="+lvl+"&score="+score;/*/?b="+timeBegin+"&?e="+timeEnd;*/
 		String filePath = "./qrcode/qrcode.png";
 		int size = 400;
 		String fileType = "png";
@@ -72,6 +82,28 @@ public class QRCodeGenerator {
 		}
 		ImageIO.write(image, fileType, qrFile);
 	}
+	
+	public String calculScore(String begin, String end){
+		String[] tabB = begin.split(" "); 
+		String[] tabE = end.split(" ");
+		
+		String[] timeB = tabB[1].split(":");
+		String[] timeE = tabE[1].split(":");
+		
+		int flag = 0;
+		
+		int score = 0 ;
+		int minute = Integer.parseInt(timeE[1]) - Integer.parseInt(timeB[1]);	
+		int hour = Integer.parseInt(timeE[0]) - Integer.parseInt(timeB[0]);
+		if(minute < 0){
+			score = hour*60 - Math.abs(minute);
+		}
+		else{
+			score = Math.abs(minute) + 60*hour;
+		}
+		
+		return String.valueOf(score);
+	}
 
 	public String getBegin() {
 		return begin;
@@ -96,6 +128,4 @@ public class QRCodeGenerator {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	
-	
 }
