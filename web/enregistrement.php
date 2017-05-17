@@ -1,3 +1,4 @@
+<?php include("php/function.inc.php"); ?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -8,13 +9,22 @@
 
 	<body>
 		<section>
-			<h2>Entrez votre pseudo :</h2>
-			<article>
-				<form method="get" action="index.php">
-					<input type="text" name="pseudo">
-					<input type="submit" name="valid" value="Je m'enregistre !">
-				</form>
-			</article>
+			<?php 
+			if (isset($_GET['lvl']) && isset($_GET['score'])){ 
+				$dest = decodeLvl($_GET['lvl'], 1);
+				echo '<h2>Entrez votre pseudo :</h2>';
+				echo '<article>';
+				echo '	<form method="post" action="'.$dest.'">';
+				echo '	<input type="text" name="pseudo">';
+				echo '	<input type="hidden" name="score" value="'.$_GET['score'].'">';
+				echo '	<input type="submit" name="valid" value="Je m enregistre !">';
+				echo '</form>';
+				echo '</article>';
+			} 
+			else{
+				echo "<h2>Nous ne pouvons pas enregistrer votre score !</h2>";
+			}
+			 ?>
 		</section>
 
 	</body>

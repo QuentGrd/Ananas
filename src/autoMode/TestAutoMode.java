@@ -1,9 +1,5 @@
 package autoMode;
 
-import builders.MapBuilder;
-import builders.PopulationBuilder;
-import city.Map;
-import city.Population;
 import run.QRun;
 
 public class TestAutoMode {

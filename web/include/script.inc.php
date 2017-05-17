@@ -11,7 +11,7 @@ $(document).on("scroll",function(){
 	if ($(document).scrollTop()>40)
 		$('h2').insertBefore($('nav'));
 	else
-		$('h2').insertBefore($('article'));
+		$('h2').insertBefore($('#firstArticle'));
 });
 </script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyAdw3QQQuCMFpMF2gNT1Bg7P2UN90jCIkw&sensor=false"></script>
