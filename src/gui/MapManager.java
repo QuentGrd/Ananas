@@ -41,6 +41,9 @@ public class MapManager {
 	private Image pub;
 	private Image resto;
 	private Image bowling;
+	private Image bistrot;
+	private Image laser;
+	private Image pointsoleil;
 	
 	private int i;
 	
@@ -66,6 +69,9 @@ public class MapManager {
 			pub = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/pub.png"));
 			resto = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/resto.png"));
 			bowling = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/bowling.png"));
+			laser = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/laser.png"));
+			bistrot = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/bistrot.png"));
+			pointsoleil = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/pointsoleil.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -129,6 +135,12 @@ public class MapManager {
 			return resto.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
 		else if (enter.getName().equals("Bowling"))
 			return bowling.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		else if (enter.getName().equals("Bistro"))
+			return bistrot.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		else if (enter.getName().equals("Laser game"))
+			return laser.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		else if (enter.getName().equals("Point soleil"))
+			return pointsoleil.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
 		else
 			return imgEnter1.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
 	}
