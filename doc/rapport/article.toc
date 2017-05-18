@@ -3,14 +3,24 @@
 \contentsline {paragraph}{Le projet}{1}
 \contentsline {paragraph}{Fonctionnalit\'es}{1}
 \contentsline {paragraph}{Nos motivations}{1}
-\contentsline {section}{\numberline {2}Sp\'ecification}{1}
-\contentsline {paragraph}{Chapeau}{1}
+\contentsline {section}{\numberline {2}Sp\'ecification}{2}
+\contentsline {paragraph}{Chapeau}{2}
 \contentsline {subsection}{\numberline {2.1}Premi\`ere sous-section}{2}
 \contentsline {paragraph}{Premier paragraphe}{2}
 \contentsline {paragraph}{}{2}
 \contentsline {subsection}{\numberline {2.2}Deuxi\`eme sous-section}{2}
 \contentsline {section}{\numberline {3}R\'ealisation}{2}
+\contentsline {subsection}{\numberline {3.1} Le model - pr\'esentation des classes }{2}
+\contentsline {subsubsection}{\numberline {3.1.1} La ville }{2}
+\contentsline {subsubsection}{\numberline {3.1.2} La population }{2}
 \contentsline {paragraph}{}{2}
-\contentsline {section}{\numberline {4}Manuel Utilisateur}{2}
-\contentsline {section}{\numberline {5}D\'eroulement du projet}{2}
-\contentsline {section}{\numberline {6}Conclusion}{2}
+\contentsline {paragraph}{Cr\'eation des personnages}{2}
+\contentsline {paragraph}{}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {paragraph}{}{3}
+\contentsline {paragraph}{Les diff\'erents types de personnages}{3}
+\contentsline {section}{\numberline {4}Manuel Utilisateur}{3}
+\contentsline {section}{\numberline {5}D\'eroulement du projet}{3}
+\contentsline {section}{\numberline {6}Conclusion}{3}
