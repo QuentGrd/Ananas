@@ -36,6 +36,8 @@ public class MapManager {
 	private Image imgRoadw;
 	private Image player1;
 	private Image park;
+	private Image cinema;
+	private Image sport;
 	
 	private int i;
 	
@@ -56,6 +58,8 @@ public class MapManager {
 			imgRoadw = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/roadw.png"));
 			player1 = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/player1.png")).getScaledInstance((20), (20), Image.SCALE_DEFAULT);
 			park = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/park.png"));
+			cinema = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/cinema.png"));
+			sport = ImageIO.read(new File(System.getProperty("user.dir") + "/res/img/sport.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -109,6 +113,10 @@ public class MapManager {
 			return park.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
 		else if (enter.getName().equals("Musée"))
 			return imgMusee.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		else if (enter.getName().equals("Cinema"))
+			return cinema.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
+		else if (enter.getName().equals("Club de sport"))
+			return sport.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
 		else
 			return imgEnter1.getScaledInstance((size.getY()*20), (size.getX()*20), Image.SCALE_DEFAULT);
 	}
