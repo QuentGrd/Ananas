@@ -1,2 +1,64 @@
 \subsection{Interface Homme-Machine}
 \label{real_ihm}
+\paragraph{}L'interface graphique est réalisé grâce à Java Swing/AWT/Java 2D et est composé de plusieurs éléments :
+\begin{itemize}
+\item L'horloge du jeu, permettant de savoir quelle est la date et l'heure dans notre ville fictive
+\item La map, ou nous pouvons voir les infrastructures, et les personnages se déplacer
+\item La liste des personnages accompagné de l'état de leur barre d'émotion
+\item Les informations du batiments séléctionné par l'utilisateur
+\end{itemize}
+\paragraph{}Chacun de ces éléments sont séparé dans différentes classes qui héritent de la classe JPanel , ce qui permet un assemblage facile de l'interface graphique, et une permutation plus facile entre différentes versions d'un même éléments.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/gui.png}
+		\caption{Diagramme UML de l'IHM}
+	\label{fig:ihm_uml}
+\end{figure}
+\paragraph{}Nous pouvons voir dans le diagramme ci dessus que l'ensemble des éléments graphiques sont rassemblé dans des classes principales, qui elles mêmes sont rassemblées dans une seule classe principale, qui à pour but de construire l'IHM correctement.
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/gui_ingame.png}
+		\caption{IHM du jeu}
+	\label{fig:ihm_game}
+\end{figure}
+
+\subsubsection{La Map}
+\label{ihm_map}
+\paragraph{}L'affichage de la map est effectué dans la classe "GUIGraphicsMap". L'affichage est géré par la methode "paintComponent", dans laquelle la liste de chaque type d'infrastructure de la Map est parcourue. Pour chaque infrastructure, la méthode redimensionne et positionne l'image correspondant à l'infrastructure via la classe "MapManager". Ensuite la méthode parcours la liste des personnages, et de la même manière, via la classe MapManager, redimensionne et positionne l'image du personnage au bonne endroit. Si l'utilisateur à sélectionné un personnage dans la liste des personnages, la méthode ajoutera un cercle rouge derrière le personnage en question.
+
+\subsubsection{Informations des personnages}
+\label{ihm_list}
+\paragraph{}La classe chargée de construire la partie de l'interface affichant la liste des personnages et les informations des personnages (plus d'informations dans le manuel d'utilisation) est la classe "GUIInfoPart". Nous pouvons voir que la classe "GUIGraphicsList", chargée d'afficher la liste des personnages, et la classe "GUICharacterInfo", chargée d'afficher les informations d'un personnages, sont relié à la classe "GUIInfoPart".
+\paragraph{}La classe "GUICharacterList", affiche la liste des personnages. Pour se faire, elle parcoure la liste des personnages, et pour chaque personnages, elle:
+\begin{itemize}
+\item Affiche son nom
+\item Affiche l'image correspondant à un personnage
+\item Affiche les 3 jauges: Emotion, Money et Family
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/charac_list_ind.png}
+		\caption{Exemple d'affichage d'un personnage dans la liste}
+	\label{fig:charac_list_ind}
+\end{figure}
+
+\paragraph{}La classe "GUICharacterInfo" recoit les données d'un des personnages que l'utilisateur a séléctionné, et en extrait les informations suivantes afin des les afficher:
+\begin{itemize}
+\item Son nom
+\item Son age
+\item Sa maison
+\item Son lieu de travail
+\item L'image correspondant à un personnage
+\item Les 3 jauges: Emotion, Money et Family
+\item Sa routine
+\item Des boutons affichant les graphiques liés a ce personnage
+\item Des boutons permettant l'ajout et la suppression d'action dans la routine
+\end{itemize}
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/charac_info.png}
+		\caption{Exemple d'affichage des informations d'un personnage}
+	\label{fig:charac_info}
+\end{figure}
