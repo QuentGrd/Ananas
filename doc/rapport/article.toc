@@ -1,26 +1,50 @@
 \select@language {french}
 \contentsline {section}{\numberline {1}Introduction}{1}
 \contentsline {paragraph}{Le projet}{1}
-\contentsline {paragraph}{Fonctionnalit\'es}{1}
-\contentsline {paragraph}{Nos motivations}{1}
+\contentsline {paragraph}{Fonctionnalit\'es}{2}
+\contentsline {paragraph}{Nos motivations}{2}
 \contentsline {section}{\numberline {2}Sp\'ecification}{2}
-\contentsline {paragraph}{Chapeau}{2}
-\contentsline {subsection}{\numberline {2.1}Premi\`ere sous-section}{2}
-\contentsline {paragraph}{Premier paragraphe}{2}
-\contentsline {paragraph}{}{2}
-\contentsline {subsection}{\numberline {2.2}Deuxi\`eme sous-section}{2}
-\contentsline {section}{\numberline {3}R\'ealisation}{2}
-\contentsline {subsection}{\numberline {3.1} Le model - pr\'esentation des classes }{2}
-\contentsline {subsubsection}{\numberline {3.1.1} La ville }{2}
-\contentsline {subsubsection}{\numberline {3.1.2} La population }{2}
-\contentsline {paragraph}{}{2}
-\contentsline {paragraph}{Cr\'eation des personnages}{2}
+\contentsline {section}{\numberline {3}R\'ealisation}{3}
+\contentsline {subsection}{\numberline {3.1} Le model - pr\'esentation des classes }{3}
+\contentsline {subsubsection}{\numberline {3.1.1} La ville }{3}
 \contentsline {paragraph}{}{3}
 \contentsline {paragraph}{}{3}
 \contentsline {paragraph}{}{3}
-\contentsline {paragraph}{}{3}
-\contentsline {paragraph}{}{3}
-\contentsline {paragraph}{Les diff\'erents types de personnages}{3}
-\contentsline {section}{\numberline {4}Manuel Utilisateur}{3}
-\contentsline {section}{\numberline {5}D\'eroulement du projet}{3}
-\contentsline {section}{\numberline {6}Conclusion}{3}
+\contentsline {paragraph}{}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {paragraph}{}{4}
+\contentsline {subsubsection}{\numberline {3.1.2} La population }{4}
+\contentsline {paragraph}{}{4}
+\contentsline {paragraph}{Cr\'eation des personnages}{4}
+\contentsline {paragraph}{}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {paragraph}{}{5}
+\contentsline {paragraph}{Les diff\'erents types de personnages}{5}
+\contentsline {paragraph}{}{6}
+\contentsline {paragraph}{}{6}
+\contentsline {paragraph}{Organisation de la cr\'eation de la population}{6}
+\contentsline {paragraph}{}{7}
+\contentsline {paragraph}{}{7}
+\contentsline {subsection}{\numberline {3.2}Le moteur de jeu : mode normale}{7}
+\contentsline {subsubsection}{\numberline {3.2.1}Gestion des jauges des personnages}{7}
+\contentsline {paragraph}{}{7}
+\contentsline {subsubsection}{\numberline {3.2.2}Gestion de la routine}{8}
+\contentsline {paragraph}{}{8}
+\contentsline {paragraph}{}{8}
+\contentsline {paragraph}{}{8}
+\contentsline {paragraph}{}{9}
+\contentsline {subsection}{\numberline {3.3}Interface Homme-Machine}{9}
+\contentsline {paragraph}{}{9}
+\contentsline {paragraph}{}{9}
+\contentsline {paragraph}{}{10}
+\contentsline {subsubsection}{\numberline {3.3.1}La Map}{10}
+\contentsline {paragraph}{}{10}
+\contentsline {subsubsection}{\numberline {3.3.2}Informations des personnages}{11}
+\contentsline {paragraph}{}{11}
+\contentsline {paragraph}{}{11}
+\contentsline {paragraph}{}{11}
+\contentsline {section}{\numberline {4}Manuel Utilisateur}{12}
+\contentsline {section}{\numberline {5}D\'eroulement du projet}{12}
+\contentsline {section}{\numberline {6}Conclusion}{12}
