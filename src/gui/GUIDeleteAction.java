@@ -67,7 +67,7 @@ public class GUIDeleteAction extends JFrame{
 		actions = new String[c.getRoutine().getCurrentRoutine().size()];
 		int i = 0;
 		for(i=0; i<c.getRoutine().getCurrentRoutine().size(); i++)
-			actions[i] = i+1 + ". " + c.getRoutine().getCurrentRoutine().get(i).getClass().getName();
+			actions[i] = i+1 + ". " + this.decryptRoutine(c.getRoutine().getCurrentRoutine().get(i).getClass().getName());
 		
 		actionsList = new DefaultComboBoxModel(actions);
 	}
@@ -89,6 +89,23 @@ public class GUIDeleteAction extends JFrame{
 		this.setAlwaysOnTop(true);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+	}
+	
+	public String decryptRoutine(String name){
+		switch(name){
+		case "actions.Chilling":
+			return "Chilling";
+		case "actions.Sleeping":
+			return "Sleeping";
+		case "actions.Entertain":
+			return "Entertain";
+		case "actions.Shifting":
+			return "Shifting";
+		case "actions.Working":
+			return "Working";
+		default:
+			return "Unknown";
+		}
 	}
 	
 	class ActionDelete implements ActionListener{

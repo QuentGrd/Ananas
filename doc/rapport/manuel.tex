@@ -66,39 +66,195 @@
 
 \subsubsection{Information des Infrastructures}
 \label{sec:maninfrainfo}
-\paragraph{}Pour afficher les informations d'une infrastructure, l'utilisateur peut double-cliquer sur n'importe qu'elle infrastructure sur la map.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.75\textwidth]{images/maninfrainfo.png}
 		\caption{Information des infrastructures}
 	\label{fig:maninfreinfo}
 \end{figure}
+\paragraph{}Pour afficher les informations d'une infrastructure, l'utilisateur peut double-cliquer sur n'importe qu'elle infrastructure sur la map.
 
 \subsubsection{Information de l'Horloge}
 \label{sec:manclock}
-\paragraph{}Cette partie, en plus de contenir les informations sur l'horloge rafraichie automatiquement, contient 5 boutons:
-\begin{itemize}
-\item Bouton menu: permet de revenir au menu principal (Met fin à la partie)
-\item Bouton Play/Pause: Permet de stopper l'horloge et de la faire reprendre
-\item Bouton Speed: 3 niveau disponible permettant de régler la rapidité de l'horloge
-\end{itemize}
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.75\textwidth]{images/manclock.png}
 		\caption{Information sur l'horloge}
 	\label{fig:manclock}
 \end{figure}
+\paragraph{}Cette partie, en plus de contenir les informations sur l'horloge rafraichie automatiquement, contient 5 boutons: (Fig.~\ref{fig:manclock})
+\begin{itemize}
+\item Bouton menu: permet de revenir au menu principal (Met fin à la partie)
+\item Bouton Play/Pause: Permet de stopper l'horloge et de la faire reprendre
+\item Bouton Speed: 3 niveau disponible permettant de régler la rapidité de l'horloge
+\end{itemize}
 
 \subsubsection{La Map}
 \label{sec:manmap}
-\paragraph{}La Map est un affichage de la situation de la population dans son environnement, à l'instant T, elle ne possède pas de bouton permettant de la controler.
 \begin{figure}[H]
 	\centering
-		\includegraphics[width=0.75\textwidth]{images/manmap.png}
+		\includegraphics[width=0.5\textwidth]{images/manmap.png}
 		\caption{Affichage de la Map}
 	\label{fig:manmap}
 \end{figure}
+\paragraph{}La Map est un affichage de la situation de la population dans son environnement, à l'instant T, elle ne possède pas de bouton permettant de la controler.
 
 \subsubsection{Liste des personnages}
 \label{sec:manlist}
-\paragraph{}
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.5\textwidth]{images/manlist.png}
+		\caption{Liste des personnages}
+	\label{fig:manlist}
+\end{figure}
+\paragraph{}Dans cette partie de l'interface, nous pouvons voir graphiquement l'état de chaque personnages de la population. Toutes les informations essentiels sont directement accessible visuellement, tel que:
+\begin{itemize}
+\item Le nom du personnage
+\item La jauge "Emotion" (en rouge)
+\item La jauge "Money" (en bleu)
+\item La jauge "Family" (en vert)
+\end{itemize}
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/ingame_2.png}
+		\caption{Affichage de l'IHM avec les informations détaillé sur un personnage}
+	\label{fig:ingame2}
+\end{figure}
+\paragraph{}Afin d'acceder à plus d'options et d'informations sur un personnages, il vous suffit de cliquer sur la case d'un personnages. Vous aller ensuite arriver sur l'interface de gestion d'un personnage qui remplace la liste des personnages.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.5\textwidth]{images/mancharacgest.png}
+		\caption{Interface de gestion d'un personnage}
+	\label{fig:mancharacgest}
+\end{figure}
+\paragraph{}L'interface de gestion d'un personnage est divisé en 4 parties: (Fig.~\ref{fig:mancharacgest})
+\begin{itemize}
+\item Les informations essentiels
+\item Les informations détaillé comprenant:
+\begin{itemize}
+\item L'age du personnages
+\item Sa maison
+\item Son lieu de travail
+\end{itemize}
+\item Les boutons pour accéder aux statistiques
+\item La gestion de la routine comprenant:
+\begin{itemize}
+\item La liste des actions dans la routine courante du personnage
+\item Un bouton pour ajouter une action dans la routine
+\item Un bouton pour supprimer une action dans la routine du personnage
+\item Un bouton pour rafraichir la liste des actions dans la routine courante du personnage
+\end{itemize}
+\item Un bouton pour revenir à la liste des personnages
+\end{itemize}
+\begin{figure}[H]
+	\centering
+		\includegraphics[]{images/manredcircle.png}
+		\caption{Le personnage "Maelle Reynaud" démarqué par un cercle rouge}
+	\label{fig:manredcircle}
+\end{figure}
+\paragraph{}Lorsqu'un personnage est séléctionner dans la liste et que l'interface de gestion du personnage est activé, le personnage est démarqué sur la map pour pouvoir le suivre plus facilement. En effet, dans ce cas là, un cercle rouge est présent derrière l'image representant le joueur, pour le repérer plus facilement.(Fig.~\ref{fig:manredcircle})
+
+\subsubsection{Les statistiques}
+\label{sec:manstat}
+\paragraph{}L'utilisateur peut accéder à 5 graphiques représentant l'évolution du personnages séléctionné, au cours du temps, en cliquant sur l'un des 5 boutons présent dans l'interface de gestion de personnages. Parmi les graphiques nous pouvons trouver, par ordre d'apparition:
+\begin{itemize}
+\item La répartition des actions du personnage
+\item La répartition des actions du personnage sur la journée en cours et celle de la veille
+\item L'évolution des jauge Emotion, Money et Family du personnages
+\item L'évolution des jauge Emotion, Money et Family du personnages sur la journée en cours et celle de la veille
+\item La répartition des recompense (récompense positive, négative et nulle) du personnage
+\end{itemize}
+
+\subsubsection{La routine}
+\label{sec:manroutine}
+\subsubsubsection{Ajout d'action dans la routine}
+\label{sec:manaddaction}
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/manaddaction.png}
+		\caption{Fenêtre d'ajout d'action d'un personnage}
+	\label{fig:manaddaction}
+\end{figure}
+\paragraph{}Pour accéder à l'interface d'ajout d'action dans la routine, l'utilisateur doit cliquer sur le bouton "Add" présent dans l'interface de gestion d'un personnage.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/manactionchoice.png}
+		\caption{Choix d'action disponible}
+	\label{fig:manactionchoice}
+\end{figure}
+\paragraph{}L'utilisateur à le choix entre 3 type d'actions:(Fig.~\ref{fig:manactionchoice})
+\begin{itemize}
+\item Go Home
+\item Go Work
+\item Entertain
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/mandetailhome.png}
+		\caption{Choix de detail lors du choix d'une action de type Go Home}
+	\label{fig:mandetailhome}
+\end{figure}
+\paragraph{}Lorsque l'utilisateur choisit une action de type "Go Home", il peut spécifier si le personnage doit dormir, ou juste se reposer.(Fig.~\ref{fig:mandetailhome})
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/mandetailwork.png}
+		\caption{Choix de detail lors du choix d'une action de type Go Work}
+	\label{fig:mandetailwork}
+\end{figure}
+\paragraph{}Lorsque l'utilisateur choisit une action de type "Go Work", il peut spécifier combien de temps le personnages doit travailler.(Fig.~\ref{fig:mandetailwork})
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/mandetailenter.png}
+		\caption{Choix de detail lors du choix d'une action de type Entertain}
+	\label{fig:mandetailwork}
+\end{figure}
+\paragraph{}Lorsque l'utilisateur choisit une action de type "Entertain", il peut spécifier où le personnages ira se divertir.(Fig.~\ref{fig:mandetailenter})
+
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/manpositionchoice.png}
+		\caption{Choix de la position de l'ajout de l'action}
+	\label{fig:manpositionchoice}
+\end{figure}
+\paragraph{}L'utilisateur à le choix, lors de l'ajout d'une action, de la position de l'action dans la routine courante (En premier ou en dernier)(Fig.~\ref{fig:manpositionchoice})
+
+\paragraph{}Pour valider l'ajout, l'utilisateur doit appuyer sur le bouton "Add". Lors de l'ajout d'une action, les actions de déplacement sont automatiquement pris en compte.
+
+\subsubsubsection{Suppression d'action dans la routine}
+\label{sec:mandeleteaction}
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/mandelete.png}
+		\caption{Fenêtre de supression d'action d'un personnage}
+	\label{fig:mandelete}
+\end{figure}
+\paragraph{}Pour accéder à l'interface de suppression d'action dans la routine, l'utilisateur doit cliquer sur le bouton "Delete" présent dans l'interface de gestion d'un personnage.
+\paragraph{}L'interface de suppression d'action est composé de la liste d'action dans la routine courante du personnage sélectionné, par ordre d'execution, ainsi l'action "1" est la prochaine à être éxecuté. L'utilisateur peut donc choisir précisement quelle action il souhaite supprimer dans la routine du personnage.(Fig.~\ref{fig:mandelete}) Pour valider la suppression l'utilisateur doit appuyer sur le bouton "Delete".
+
+\subsection{Après la partie}
+\label{sec:aftergame}
+\paragraph{}Une fois la partie terminé (en mode normale), un score de l'utilisateur est calculer, et le programme propose à l'utilisateur d'enregistrer son score et de consulter le classement des meilleurs joueurs à Urban Life Simulator. Son score n'apparait dans le classement que si il fait partie des 10 meilleurs joueurs dans son niveau de difficulté.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.25\textwidth]{images/manqrcode.png}
+		\caption{Fenêtre de fin de partie avec un exemple de QR Code}
+	\label{fig:manqrcode}
+\end{figure}
+\paragraph{}Pour enregistrer son score l'utilisateur peut scanner le QR Code unique que le jeu lui a généré (Il peut aussi directement cliquer sur le bouton en dessous du QR Code si il ne possède pas de lecteur de QR Code).(Fig.~\ref{fig:manqrcode}) Ce QR Code le redirige directement vers la plateforme de Leaderboard en ligne.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.25\textwidth]{images/manregscore.png}
+		\caption{Fenêtre d'enregistrement du score}
+	\label{fig:manregscore}
+\end{figure}
+\paragraph{}La page d'enregistrement est composé d'un champ pour entrer son pseudonyme et d'un bouton pour valider.(Fig.~\ref{fig:manregscore}) Pour l'exemple nous allons mettre "Projet Urbain" comme pseudonyme. Une fois valider le site web enregistre le score dans le classement correspondant au niveau de difficulté auquel l'utilisateur a joué, et redirige automatiquement vers la page du classement.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.25\textwidth]{images/manleader.png}
+		\caption{Classement du niveau Pro}
+	\label{fig:manleader}
+\end{figure}
+\paragraph{}Sur cette page (Fig.~\ref{fig:manleader}) l'utilisateur peut se comparé à d'autres personnes ayant joué au jeu sur le même niveau de difficulté que le sien. Nous pouvons voir que lors de la partie notre joueur "Projet Urbain", a fait un score de 16 en niveau "Pro", et est donc le premier du classement au moment où il a joué.
