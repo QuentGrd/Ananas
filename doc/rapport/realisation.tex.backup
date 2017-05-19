@@ -73,10 +73,12 @@ Un personnage possède également un tableau de jauges contenant :
  \item une jauge de fatigue
 \end{itemize}
 
+Ces jauges  varier de 0 à 100. 
+C'est comme la barre de vie du personnage. Elle est initialisé a 75 en début de partie mais elle variera en fonctions des actions des personnages. 
+Si le personnage atteint une émotion de 0 il meurt.
+
 \paragraph{}
-Ces jauges peuvent varier de 0 à 100. 
-Ces jauges représentent les critères de vie du personnage. Elle est initialisé à 75 en début de partie mais elle variera en fonctions des actions des personnages. 
-Si l'une des jauges du personnage arrive à 0 il meurt.
+Enfin la création de la routine sera expliqué dans la partie moteur.
 
 \paragraph{}
 Nous avons voulu rendre nos personnages le moins statique possible. 

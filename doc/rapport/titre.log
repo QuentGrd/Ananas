@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.2.26)  13 MAR 2017 20:13
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2017.2.26)  18 MAY 2017 13:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -231,7 +231,7 @@ Overfull \hbox (11.49994pt too wide) in paragraph at lines 20--20
 
 ! Undefined control sequence.
 l.22 				\noreffig
-                  {images/languages.png}{12.82cm}{8.2cm} \\
+                  {images/ville.png}{12.82cm}{8.2cm} \\
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -245,15 +245,11 @@ Missing character: There is no g in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no / in font nullfont!
+Missing character: There is no v in font nullfont!
+Missing character: There is no i in font nullfont!
 Missing character: There is no l in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no n in font nullfont!
-Missing character: There is no g in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no g in font nullfont!
+Missing character: There is no l in font nullfont!
 Missing character: There is no e in font nullfont!
-Missing character: There is no s in font nullfont!
 Missing character: There is no . in font nullfont!
 Missing character: There is no p in font nullfont!
 Missing character: There is no n in font nullfont!

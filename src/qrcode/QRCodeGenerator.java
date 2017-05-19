@@ -40,7 +40,7 @@ public class QRCodeGenerator {
 	public void generateImage(String timeBegin, String timeEnd){
 		String score = calculScore(timeBegin, timeEnd);
 		System.out.println("SCORE = " + score);
-		url = "https://10.40.128.22/~qgerard/glpweb/enregistrement.php?lvl="+lvl+"&score="+score;/*/?b="+timeBegin+"&?e="+timeEnd;*/
+		url = "http://projetwebmq.16mb.com/glpweb/enregistrement.php?lvl="+lvl+"&score="+score;/*/?b="+timeBegin+"&?e="+timeEnd;*/
 		String filePath = "./qrcode/qrcode.png";
 		int size = 400;
 		String fileType = "png";
