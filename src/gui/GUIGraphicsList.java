@@ -15,6 +15,12 @@ import character.Character;
 import character.QCharacter;
 import city.Population;
 
+/**
+ * Graphical list of all characters for the GUI
+ * @author quentin
+ *
+ */
+
 public class GUIGraphicsList extends JPanel{
 
 	private static final long serialVersionUID = -451852768204398689L;

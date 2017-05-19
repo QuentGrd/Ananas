@@ -21,6 +21,12 @@ import chart.ChartRewardRepartitionFull;
 import city.Map;
 import run.Run;
 
+/**
+ * GUI for character information
+ * @author quentin
+ *
+ */
+
 public class GUICharacterID extends JPanel{
 	
 	private static final long serialVersionUID = -6800002715222904465L;

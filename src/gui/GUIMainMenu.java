@@ -21,6 +21,12 @@ import javax.swing.JPanel;
 import run.NRun;
 import run.QRun;
 
+/**
+ * This class represent the main menu of the game
+ * @author quentin
+ *
+ */
+
 public class GUIMainMenu extends JFrame{
 
 	private static final long serialVersionUID = 6386363257594856967L;

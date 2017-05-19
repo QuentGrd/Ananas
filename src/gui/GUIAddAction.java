@@ -26,6 +26,12 @@ import clock.Schedule;
 import run.Run;
 import utils.Coordinates;
 
+/**
+ * GUI for routine's action adding
+ * @author quentin
+ *
+ */
+
 public class GUIAddAction extends JFrame{
 
 	private static final long serialVersionUID = -3665012827238467540L;

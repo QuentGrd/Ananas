@@ -15,6 +15,12 @@ import javax.swing.JPanel;
 
 import character.NCharacter;
 
+/**
+ * GUI for deleting action from character's routine
+ * @author quentin
+ *
+ */
+
 public class GUIDeleteAction extends JFrame{
 
 	private static final long serialVersionUID = -3665012827238467540L;

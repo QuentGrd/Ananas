@@ -13,7 +13,7 @@ import run.Run;
 /**
  * This class represent the GUI
  * @author quentin
- * @version 31012017
+ * @version 18052017
  *
  */
 public class GUIMain extends JFrame{

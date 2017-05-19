@@ -10,6 +10,12 @@ import building.Home;
 import building.Work;
 import trace.Road;
 
+/**
+ * This class represent the Infrastruction information part for the GUI
+ * @author quentin
+ *
+ */
+
 public class GUIInfrastructureInfo extends JPanel{
 
 	private static final long serialVersionUID = 4621083481921805583L;

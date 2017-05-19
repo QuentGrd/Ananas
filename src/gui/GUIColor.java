@@ -2,6 +2,12 @@ package gui;
 
 import java.awt.Color;
 
+/**
+ * This class centralized all colors of the GUI
+ * @author quentin
+ *
+ */
+
 public class GUIColor {
 	
 	public static Color emotion = new Color(231, 76, 60);

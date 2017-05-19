@@ -17,7 +17,7 @@ import trace.Road;
 import utils.Coordinates;
 
 /**
- * 
+ * Graphical Map for the GUI
  * @author quentin
  *
  */

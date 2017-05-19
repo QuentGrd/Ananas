@@ -33,6 +33,11 @@ public class GUIClockInfo extends JPanel{
 	
 	private Run run;
 	
+	/**
+	 * This class build the clock information part of the GUI
+	 * @param run
+	 */
+	
 	public GUIClockInfo(Run run){
 		//this.clock = clock;
 		this.run = run;

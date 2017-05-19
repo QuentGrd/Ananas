@@ -14,7 +14,7 @@ import trace.Road;
 import utils.Coordinates;
 
 /**
- * 
+ * This class load all the necessary images for the GUI
  * @author quentin
  *
  */

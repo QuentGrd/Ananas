@@ -13,6 +13,12 @@ import javax.swing.JPanel;
 
 import character.NCharacter;
 
+/**
+ * Graphical information of a character for the GUI
+ * @author quentin
+ *
+ */
+
 public class GUIGraphicCharacterID extends JPanel{
 
 	private static final long serialVersionUID = -6400646750851939562L;

@@ -16,10 +16,11 @@ import city.Population;
 import run.Run;
 
 /**
- * 
- * @author Quentin - matthieu
+ * This Class build all the Info part of the GUI
+ * @author quentin
  *
  */
+
 public class GUIInfoPart extends JPanel{
 
 	private static final long serialVersionUID = -560584172594140952L;

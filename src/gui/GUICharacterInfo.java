@@ -9,6 +9,12 @@ import character.NCharacter;
 import city.Map;
 import run.Run;
 
+/**
+ * This class build the complete character information part of the GUI
+ * @author quentin
+ *
+ */
+
 public class GUICharacterInfo extends JPanel{
 	
 	private static final long serialVersionUID = 1313679868217650779L;
