@@ -1,14 +1,88 @@
 \section{Spécification}
 \label{sec:spec}
 
-\paragraph{Fonctionnalités} Fonctionnalités du programme:
-Le joueur aura plusieurs actions possibles afn d'infuer sur l'évolution de la ville. Tout
-d'abord il pourra agir sur le temps en l'accélérant ou en le mettant en pause. Ensuite il pourra accéder
-à des informations sur les personnages comme : leurs informations de bases, leur historique ou leurs
-objectifs directs (exemple : ce personnage se rend à la piscine). Ces informations pourront être
-changées par l'utilisateur et il pourra ainsi renommer un personnage, le faire déménager ou le faire
-rentrer chez lui par exemple. De même pour les bâtiments, l'utilisateur pourra accéder à ses
-informations et les modifer. Il pourra donc par exemple modifer les horaires d'ouverture d'un lieu ou
-faire varier son nombre d'utilisateur maximum. Le joueur pourra donc modifer à sa guise ses
-informations et voir ce que ces modifcations apportent de bon ou de mauvais sur à population de la
-ville.
+\subsection{L'Environnement}
+\label{sec:environnement}
+\paragraph{}L'environnement est une ville composé de différentes infrastructures:
+\begin{itemize}
+\item Tracé (routes)
+\item Batiments:
+\begin{itemize}
+\item Maison (domicile des personnages)
+\item Travail (lieux de travails des personnages)
+\item Loisir
+\end{itemize}
+\end{itemize}
+
+\paragraph{}Les différents batiments auront:
+\begin{itemize}
+\item Un nom
+\item Un nombre maximum d'utilisateurs
+\item Une influence variable sur l'émotion des personnages (exemple: Un batiment Loisir rendra le personnage plus heureux, au contraire, aller travailler le rendra plus malheureux)
+\item Une adresse
+\item Un taille
+\end{itemize}
+
+\paragraph{}Chaque batiments possèderont ses characteristiques propres:
+\begin{itemize}
+\item Maison
+\begin{itemize}
+\item Un ou plusieurs propriètaire
+\end{itemize}
+\item Travail et Loisir:
+\begin{itemize}
+\item Des horaires d'ouvertures et de fermetures
+\item Un temps d'utilisation moyen
+\item Une file d'attente
+\end{itemize}
+\end{itemize}
+
+\paragraph{}Les tracés (routes) permettront aux personages de se déplacer dans l'environnement. L'environnement sera donc un quadrillage de différentes infrastructures, ainsi qu'une horloge permettant de simuler les différentes phases d'une journée (nuit, matin, après-midi, soir).
+
+\subsection{Personnages}
+\label{sec:personnages}
+\paragraph{}Le réel but du projet est d'analyser l'évolution d'une population dans un milieu urbain et cela sous la forme d'un jeu. Le point le plus important sera donc la vie quotidienne des personnes.
+
+\paragraph{}Chaque personnages aura pour informations de base:
+\begin{itemize}
+\item Un nom
+\item Un age
+\item Un sexe
+\item Une adresse (Un domicile representé par un Batiments de type Maison)
+\item Un travail, avec des horaires de travail
+\end{itemize}
+
+\paragraph{}Chaque personnages suivra une routine modélisé par une suite d'action, laquelle pourra être modifié par le joueur. Les différents type d'actions seront:
+\begin{itemize}
+\item Dormir
+\item Se divertir
+\item Aller travailler
+\item Se déplacer
+\end{itemize}
+
+\paragraph{}Chaque personnages possèdera trois jauge: Émotion, Money et Family; représentant respectivement son besoin en repos, travail, et divertisement. Chaque jauge diminuera au fur et à mesure du temps, le seul moyen de les augmenter est d'utiliser les batiments correspondant.
+
+\subsection{Fonctionnalités}
+\label{sec:fonctionnalite}
+\paragraph{} Fonctionnalités du programme:
+\begin{itemize}
+\item Le joueur aura plusieurs actions possibles afn d'infuer sur l'évolution de la ville:
+\begin{itemize}
+\item Agir sur le temps, en stoppant l'horloge, mais aussi en l'accelerant ou la ralentissant
+\item Acceder aux informations des batiments
+\end{itemize}
+\item Le joueur aura plusieurs actions possibles afn d'infuer sur l'évolution de la population:
+\begin{itemize}
+\item Acceder aux différentes informations des personnages:
+\begin{itemize}
+\item Les informations de base (Nom, Age, Domicile, Travail)
+\item Evolution du comportement du personnage dans le temps via des graphiques
+\item La liste des actions à venir par le personnages
+\end{itemize}
+\item Agir sur le comportement des différents personnages:
+\begin{itemize}
+\item Ajouter des actions à faire au personnage
+\item Supprimer des actions prévu dans l'activité du personnage
+\end{itemize}
+\end{itemize}
+\end{itemize}
