@@ -12,6 +12,43 @@
 
 \subsubsection{ La ville }
 
+\label{real_model}
+\paragraph{}La ville est le premier élément qui constitue notre projet. Elle est composé de différentes infrastructures : Les routes, les maison, les bâtiments de travail et les divertissement. Chaque type d'infrastructure possède une utilité qui lui est propre :
+\begin{itemize}
+\item Les Routes permettent aux personnages de se déplacer
+\item Les Maisons permettent aux personnages de se reposer le soir et regagner de l'émotion
+\item Le Travail est une activité imposé à chaque personnages et sera la principale source de baisse d'émotion
+\item Les Divertissement permettent aux personnages lorsqu'ils ne dorment pas de regagner de l'émotion
+\end{itemize}
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/data.png}
+		\caption{Diagramme UML des composantes de la ville}
+	\label{fig:data_ville}
+\end{figure}
+\paragraph{}Toutes les infrastructures possèdent en commun : 
+\begin{itemize}
+\item Un nom de type String
+\item Un type au format int
+\item Une position dans la Map
+\item Un taille
+\item Et un nombre d'utilisateur courant
+\end{itemize}
+\paragraph{}Et les bâtiments (hors routes) possèdent tous en commun ces caractéristiques :
+\begin{itemize}
+\item Une adresse, seule point d'entré dans le bâtiments au niveau de la Map
+\item Une récompense, qui peut être positive ou négative suivant le type de bâtiment
+\item Un nombre maximum d'utilisateur 
+\end{itemize}
+\paragraph{}En plus de ces caractéristiques, les bâtiments de travail et les divertissement possède un temps d'utilisation moyen par les personnages, ainsi que des horaires d'ouvertures durant lesquelles les personnages pourront utiliser ces bâtiments. Il est également impossible pour un personnages d'utiliser un bâtiments lorsque celui ci à atteint son nombre maximum d'utilisateur. Les routes et les maisons sont ouverts 24h/24.
+\paragraph{}La taille de la Map ainsi que la répartition des infrastructures est déterminé à l'avance dans un fichier CSV. La création de la Map dans la mémoire se fait grâce au pattern design Builder. Chaque ligne du fichier CSV renseigne, le type, l'adresse, la taille et sa position dans la Map. Ainsi l'objet MapBuilder va lire les lignes du fichier une par une grâce à la bibliothèque Apache Common CSV, et faire appelle au autres Builder correspondant à chaque type d'infrastructure.
+\paragraph{}Durant leur création, les Infrastructures de type Work ou Entertainement, se voient également attribuer un nom, des horaires d'ouvertures et leur récompenses. Ces informations sont aussi renseigné à l'avance dans un fichier CSV.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{images/builders.png}
+		\caption{Diagramme UML de la construction de la ville}
+	\label{fig:data_builders}
+\end{figure}
 
 \subsubsection{ La population }
 \paragraph{}
@@ -83,4 +120,112 @@ Nous avons voulu rendre nos personnages le moins statique possible.
 Ainsi d'une partie à l'autre, la chance de tomber sur des personnages avec les mêmes propriétés est très faible.
 
 \paragraph{Les différents types de personnages}
+La classe abstraite Character possède deux classes filles avec des fonctionnalités différentes. 
+La premiere, NCharacter, représente les personnages utilisés dans le mode de jeu normal. 
+La seconde, QCharacter, représente les personnages utilisés dans le mode de jeu autonome.
 
+\begin{figure}
+\centering
+\includegraphics[width=9cm, height=7cm]{images/carTree.png}
+\caption{Classe abstraite Character et ses classes filles}
+\label{fig:modele}
+\end{figure}
+
+\paragraph{}
+Les NCharacters possèdent un lieu de travail qui est attribué aléatoirement via une recherche dans la liste des lieux de travail de la carte en debut de jeu.
+Ils possèdent également un objet de classe DataCharacter pour sauvegarder des données sur le personnage pendant le jeu (voir partie statistique de jeu).
+Enfin, les NCharacter possèdent une routine, une liste d'actions qu'il executera tout les jours. (voir routine partie moteur)
+
+\paragraph{}
+Les QCharacters possèdent une position initiale qui sera leur maison à chaque réaparition pour leur permettre d'y retourner en cas de besoin de sommeil.
+Ils possèdent également un environement qui est une représentation binaire de la carte (0 si la case est praticable, 1 si c'est un obstacle). 
+Cet environnement est couplé à un etat courant qui représente la position courante du personnage dans la carte simplifié.
+On compte également le nombre de mort de chaque personnage pour faire des statisqtiques avec .
+Enfin, un QCharacter possède une liste de coordonnées qui lui permettra de retourner à sa maison si il à un besoin en sommeil.
+
+\paragraph{Organisation de la création de la population}
+La création des personnages se fait grâce au design pattern builder (figure 5).
+
+\begin{figure}
+\centering
+\includegraphics[width=14cm, height=12cm]{images/popN.png}
+\caption{Architecture de création des NCharacters et de la population}
+\label{fig:modele}
+\end{figure}
+
+\paragraph{}
+La classe PopulationBuilder va construire une population grâce à la carte de jeu (pour assigner les résidences) et grâce au CharacterBuilder. 
+Ce dernier va faire la lecture dans les fichiers CSV grâce à la bibliothèque Apache-commons-csv et va faire les choix aléatoires pour initialiser les différentes composantes de nos personnages.
+
+\paragraph{}
+On utilise la meme architecture pour créer la population de QCharacter dans le mode autonome.
+
+
+\subsection{Le moteur de jeu}
+\subsubsection{Gestion des jauges des personnages}
+
+\paragraph{}
+L'émotion représente la barre de vie des personnages, elle varie de 0 à 100 en fonction du temps. 
+Si elle atteint 0, le personnage meurt. 
+L'évolution de cette jauge d?émotion est totalement dynamique, elle se fera automatiquement en fonction des actions faites par le personnage. 
+Certaines actions vont apporter un bonus sur la jauge d'émotion du personnage alors que d'autres vont apporter un malus. Pour certaines actions le bonus est constant (par exemple dormir apportera toujours +30) mais pour d'autres le bonus/malus est variable en fonction du lieu dans lequel se fait l'action. 
+Par exemple travailler dans un atelier auto apportera un malus de -25 car la tache est difficile alors que travailler dans une boutique d?électronique apportera un malus de -15. 
+Même fonctionnement pour les bonus des loisirs. 
+Ces valeurs sont initialiser lors que l'initialisation des bâtiments, elles proviennent donc d'un fichiers CSV. 
+Enfin les rewards de sont pas toujours effectif au même moment. 
+Pour la plupart des actions, le personnage perçoit le reward en fin d'action. 
+Pour l'action de déplacement, dans un soucis de mieux représenter la réalité, le malus est retiré à chaque itération de temps. 
+C'est à dire que plus le chemin que le personnage a à faire est long, plus il perd de l'émotion.
+
+\begin{table}[h!]
+\centering
+\begin{tabular} {|p{1.5cm}|p{4cm}|p{3.5cm}|p{1.5cm}|p{5cm}|}
+\hline
+Action & Emotion & Money & fatigue & Effectivité \\
+\hline
+Sleeping & +15 & 0 & +30 & En fin d'action\\
+\hline
+Chilling & 0 & 0 & +5 & En fin d'action\\
+\hline
+Shifting & -1 & -0.33 & -0.33 & A chaque itération de temps\\
+\hline
+Working & Malus variable \newline{[-25;-10]} & Bonus variable \newline{[+15;+30]} & -5 & En fin d'action \\
+\hline
+Entertain & Bonus variable \newline{[+5;+20]} & Malus variable \newline{[-15;0]} & -5 & En fin d'action \\
+\hline
+\end{tabular}
+\caption{Répartition des rewards}
+\label{tab:document}
+\end{table}
+
+\subsubsection{Gestion de la routine}
+
+\paragraph{}
+La routine est un enchaînement d'actions que va exécuter le personnage. 
+Le personnage peut exécuter 5 types d'actions différentes regrouper en familles : les déplacements et les occupations.  
+Les actions d'occupation sont reliées à un lieu alors que les actions de déplacement sont reliées à un lieu de départ, un lieu d'arrivé et un chemin entre les deux.
+
+\begin{figure}
+\centering
+\includegraphics[width=14cm, height=12cm]{images/routine.jpg}
+\caption{Architecture de gestion des routines}
+\label{fig:modele}
+\end{figure}
+
+\paragraph{}
+L'un des dilemme du projet est l?interaction entre les différentes actions pour  que chaque personnage puisse avoir puisse suivre une suite d'actions indépendantes mais que l'utilisateur puisse ajouter des actions a faire sans perturber le bonne enchaînement des actions.
+
+\paragraph{}
+Nous avons décidé de décomposer ce problème en 3 partie :
+\begin{itemize}
+ \item Une partie statique qui organise les grandes lignes des journées du personnage : métro/boulot/dodo
+ \item Une partie dynamique qui évolue au court de la journée et qui représente la liste d'actions que le personnage a à faire
+ \item Une partie utilisateur associé à différente options d'ajout/suppression d'actions 
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics[width=18cm, height=8cm]{images/schemaRoutine.PNG}
+\caption{Architecture de gestion des routines}
+\label{fig:modele}
+\end{figure}
