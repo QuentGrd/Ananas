@@ -1,8 +1,12 @@
 \select@language {french}
-\contentsline {figure}{\numberline {1}{\ignorespaces Diagramme UML des composantes de la ville}}{2}
-\contentsline {figure}{\numberline {2}{\ignorespaces Diagramme UML de la construction de la ville}}{3}
-\contentsline {figure}{\numberline {3}{\ignorespaces Classe abstraite Character}}{4}
-\contentsline {figure}{\numberline {4}{\ignorespaces Classe abstraite Character et ses classes filles}}{5}
-\contentsline {figure}{\numberline {5}{\ignorespaces Architecture de cr\'eation des NCharacters et de la population}}{6}
+\contentsline {figure}{\numberline {1}{\ignorespaces Diagramme UML des composantes de la ville}}{3}
+\contentsline {figure}{\numberline {2}{\ignorespaces Diagramme UML de la construction de la ville}}{4}
+\contentsline {figure}{\numberline {3}{\ignorespaces Classe abstraite Character}}{5}
+\contentsline {figure}{\numberline {4}{\ignorespaces Classe abstraite Character et ses classes filles}}{6}
+\contentsline {figure}{\numberline {5}{\ignorespaces Architecture de cr\'eation des NCharacters et de la population}}{7}
 \contentsline {figure}{\numberline {6}{\ignorespaces Architecture de gestion des routines}}{8}
-\contentsline {figure}{\numberline {7}{\ignorespaces Architecture de gestion des routines}}{8}
+\contentsline {figure}{\numberline {7}{\ignorespaces Architecture de gestion des routines}}{9}
+\contentsline {figure}{\numberline {8}{\ignorespaces Diagramme UML de l'IHM}}{10}
+\contentsline {figure}{\numberline {9}{\ignorespaces IHM du jeu}}{10}
+\contentsline {figure}{\numberline {10}{\ignorespaces Exemple d'affichage d'un personnage dans la liste}}{11}
+\contentsline {figure}{\numberline {11}{\ignorespaces Exemple d'affichage des informations d'un personnage}}{12}

@@ -1,3 +1,4 @@
+\newpage
 \section{Réalisation}
 \label{sec:impl}
 
@@ -82,7 +83,7 @@ niveau pro : 15 \\
 \paragraph{Création des personnages}
 Un personnage est composé d'information de base comme d'un nom, d'un prénom, d'un sexe , d'un age et d'un numéro d'identité.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=7cm, height=5cm]{images/car.jpg}
 \caption{Classe abstraite Character}
@@ -124,7 +125,7 @@ La classe abstraite Character possède deux classes filles avec des fonctionnalit
 La premiere, NCharacter, représente les personnages utilisés dans le mode de jeu normal. 
 La seconde, QCharacter, représente les personnages utilisés dans le mode de jeu autonome.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=9cm, height=7cm]{images/carTree.png}
 \caption{Classe abstraite Character et ses classes filles}
@@ -146,9 +147,9 @@ Enfin, un QCharacter possède une liste de coordonnées qui lui permettra de retou
 \paragraph{Organisation de la création de la population}
 La création des personnages se fait grâce au design pattern builder (figure 5).
 
-\begin{figure}
+\begin{figure}[H]
 \centering
-\includegraphics[width=14cm, height=12cm]{images/popN.png}
+\includegraphics[width=0.75\textwidth]{images/popN.png}
 \caption{Architecture de création des NCharacters et de la population}
 \label{fig:modele}
 \end{figure}
@@ -161,15 +162,16 @@ Ce dernier va faire la lecture dans les fichiers CSV grâce à la bibliothèque Apa
 On utilise la meme architecture pour créer la population de QCharacter dans le mode autonome.
 
 
-\subsection{Le moteur de jeu}
+\subsection{Le moteur de jeu : mode normale}
 \subsubsection{Gestion des jauges des personnages}
 
 \paragraph{}
-L'émotion représente la barre de vie des personnages, elle varie de 0 à 100 en fonction du temps. 
-Si elle atteint 0, le personnage meurt. 
-L'évolution de cette jauge d?émotion est totalement dynamique, elle se fera automatiquement en fonction des actions faites par le personnage. 
-Certaines actions vont apporter un bonus sur la jauge d'émotion du personnage alors que d'autres vont apporter un malus. Pour certaines actions le bonus est constant (par exemple dormir apportera toujours +30) mais pour d'autres le bonus/malus est variable en fonction du lieu dans lequel se fait l'action. 
-Par exemple travailler dans un atelier auto apportera un malus de -25 car la tache est difficile alors que travailler dans une boutique d?électronique apportera un malus de -15. 
+Les jauges représentent les critères de vie des personnages, elles varient de 0 à 100 avec le temps. 
+Si l'une d'elles atteint 0, le personnage meurt. 
+L'évolution de ces jauges est totalement dynamique, elle se fera automatiquement en fonction des actions faites par le personnage. 
+Certaines actions vont apporter un bonus différent sur les jauges du personnage alors que d'autres vnt apporter des malus. 
+Pour certaines actions le bonus est constant (par exemple dormir apportera toujours +30 en fatigue) mais pour d'autres le bonus/malus est variable en fonction du lieu dans lequel se fait l'action. 
+Par exemple travailler dans un atelier auto apportera un malus de -25 en fatigue car la tache est difficile alors que travailler dans une boutique d?électronique apportera un malus de -15. 
 Même fonctionnement pour les bonus des loisirs. 
 Ces valeurs sont initialiser lors que l'initialisation des bâtiments, elles proviennent donc d'un fichiers CSV. 
 Enfin les rewards de sont pas toujours effectif au même moment. 
@@ -177,7 +179,7 @@ Pour la plupart des actions, le personnage perçoit le reward en fin d'action.
 Pour l'action de déplacement, dans un soucis de mieux représenter la réalité, le malus est retiré à chaque itération de temps. 
 C'est à dire que plus le chemin que le personnage a à faire est long, plus il perd de l'émotion.
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular} {|p{1.5cm}|p{4cm}|p{3.5cm}|p{1.5cm}|p{5cm}|}
 \hline
@@ -205,15 +207,15 @@ La routine est un enchaînement d'actions que va exécuter le personnage.
 Le personnage peut exécuter 5 types d'actions différentes regrouper en familles : les déplacements et les occupations.  
 Les actions d'occupation sont reliées à un lieu alors que les actions de déplacement sont reliées à un lieu de départ, un lieu d'arrivé et un chemin entre les deux.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
-\includegraphics[width=14cm, height=12cm]{images/routine.jpg}
+\includegraphics[width=0.75\textwidth]{images/routine.jpg}
 \caption{Architecture de gestion des routines}
 \label{fig:modele}
 \end{figure}
 
 \paragraph{}
-L'un des dilemme du projet est l?interaction entre les différentes actions pour  que chaque personnage puisse avoir puisse suivre une suite d'actions indépendantes mais que l'utilisateur puisse ajouter des actions a faire sans perturber le bonne enchaînement des actions.
+L'un des dilemme du projet est l'interaction entre les différentes actions pour  que chaque personnage puisse suivre une suite d'actions indépendantes mais que l'utilisateur puisse ajouter des actions a faire sans perturber le bonne enchaînement des actions.
 
 \paragraph{}
 Nous avons décidé de décomposer ce problème en 3 partie :
@@ -223,9 +225,19 @@ Nous avons décidé de décomposer ce problème en 3 partie :
  \item Une partie utilisateur associé à différente options d'ajout/suppression d'actions 
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
-\includegraphics[width=18cm, height=8cm]{images/schemaRoutine.PNG}
+\includegraphics[width=1.0\textwidth]{images/schemaRoutine.PNG}
 \caption{Architecture de gestion des routines}
 \label{fig:modele}
 \end{figure}
+
+\paragraph{}
+La liste d'actions communes a chaque journées est stocké dans la liste DailyRoutine. 
+A chaque début de journée, on ajoute toutes les actions de cette liste a celle de la journée courante, CurentRoutine. 
+La currentRoutine à les même propriétés qu'une files mais avec plus de possibilité d'ajout d'actions. 
+On défile currentRoutine et on ajoute cette action à l'action courante, currentAction. 
+Cette action est exécuté par le personnage et lorsqu'elle est finie, on défile à nouveau la currentRoutine. 
+Enfin l'utilisateur peut soit ajouter un action en tête ou en queue dans la currentRoutine.
+
+\input{real_ihm.tex}
