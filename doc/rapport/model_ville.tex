@@ -1,0 +1,38 @@
+\subsection{La ville}
+\label{real_model}
+\paragraph{}La ville est le premier élément qui constitue notre projet. Elle est composé de différentes infrastructures : Les routes, les maison, les bâtiments de travail et les divertissement. Chaque type d'infrastructure possède une utilité qui lui est propre :
+\begin{itemize}
+\item Les Routes permettent aux personnages de se déplacer
+\item Les Maisons permettent aux personnages de se reposer le soir et regagner de l'émotion
+\item Le Travail est une activité imposé à chaque personnages et sera la principale source de baisse d'émotion
+\item Les Divertissement permettent aux personnages lorsqu'ils ne dorment pas de regagner de l'émotion
+\end{itemize}
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{img/data.png}
+		\caption{Diagramme UML des composantes de la ville}
+	\label{fig:data_ville}
+\end{figure}
+\paragraph{}Toutes les infrastructures possèdent en commun : 
+\begin{itemize}
+\item Un nom de type String
+\item Un type au format int
+\item Une position dans la Map
+\item Un taille
+\item Et un nombre d'utilisateur courant
+\end{itemize}
+\paragraph{}Et les bâtiments (hors routes) possèdent tous en commun ces caractéristiques :
+\begin{itemize}
+\item Une adresse, seule point d'entré dans le bâtiments au niveau de la Map
+\item Une récompense, qui peut être positive ou négative suivant le type de bâtiment
+\item Un nombre maximum d'utilisateur 
+\end{itemize}
+\paragraph{}En plus de ces caractéristiques, les bâtiments de travail et les divertissement possède un temps d'utilisation moyen par les personnages, ainsi que des horaires d'ouvertures durant lesquelles les personnages pourront utiliser ces bâtiments. Il est également impossible pour un personnages d'utiliser un bâtiments lorsque celui ci à atteint son nombre maximum d'utilisateur. Les routes et les maisons sont ouverts 24h/24.
+\paragraph{}La taille de la Map ainsi que la répartition des infrastructures est déterminé à l'avance dans un fichier CSV. La création de la Map dans la mémoire se fait grâce au pattern design Builder. Chaque ligne du fichier CSV renseigne, le type, l'adresse, la taille et sa position dans la Map. Ainsi l'objet MapBuilder va lire les lignes du fichier une par une grâce à la bibliothèque Apache Common CSV, et faire appelle au autres Builder correspondant à chaque type d'infrastructure.
+\paragraph{}Durant leur création, les Infrastructures de type Work ou Entertainement, se voient également attribuer un nom, des horaires d'ouvertures et leur récompenses. Ces informations sont aussi renseigné à l'avance dans un fichier CSV.
+\begin{figure}[H]
+	\centering
+		\includegraphics[width=0.75\textwidth]{img/builders.png}
+		\caption{Diagramme UML de la construction de la ville}
+	\label{fig:data_builders}
+\end{figure}
