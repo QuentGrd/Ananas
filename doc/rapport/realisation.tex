@@ -335,6 +335,53 @@ Lors du scanne, le lecteur de QRCode proposera à l'utilisateur de suivre le lien
 
 \subsection{Le moteur de jeu : mode autonome}
 
+\subsection{Logging : Log4J}
+\paragraph{}
+Afin de suivre la bonne création de la carte de jeu et de la création de la population nous avons suivi les étapes clefs ces créations  par un système de logging.
+Les principales étapes qui sont suivies sont :
+\begin{itemize}
+ \item La lecture dans les fichiers CSV (pour les batiments et les personnages)
+ \item Les bon positionnement des batiments dans la carte
+ \item La bonne initialisation des routines
+\end{itemize}
+\paragraph{}
+Pour ce faire nous utilisons l'outils de logging Log4J.
+
+
+\subsection{Phase de test}
+\paragraph{}
+Pour garantire un parfait fonctionnement de notre logiciel nous avons mis en place une phase de test composée de 4 tests différents.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{images/test.PNG}
+\caption{Fonctionnement de notre phase de test}
+\label{fig:modele}
+\end{figure}
+
+\paragraph{Test unitaire}
+Grâce à l'outils JUnit nous réalisons des tests unitaires pour garantir :
+\begin{itemize}
+ \item Création de la population (lecture CSV, tirage aléatoire, initialisation de la routine)
+ \item Test de l'algorithme A* (simulation de plusieur trajet et vérification de l'existance du chemin resultat)
+\end{itemize}
+
+\paragraph{Test de robustesse}
+Nous avons également réalisé des test de cas critiques (augmentation de la population au maximum, ajout d'actions au moment critique ...)
+Nous n'avons relevé aucun problème à ce niveau.
+
+\paragraph{Test de performance}
+Nous avons suivi l'evolution de la consommation CPU tout au long de projet. 
+Ce suivi nous a permis de déceler un problème de rafraichissement des images et de baisser la consommation de notre jeu.
+Cependant nous remarquons que notre jeu consomme beaucoup que ce soit en mode normale ou en mode autonome.
+Nous avons fait tourner le moteur indépendament dans des conditions critique (population au maximum) et il s'avère que ce n'est pas le moteur qui cause cette forte consommation.
+Nous arrivons donc à la conclusion que le problème vient de l'interface graphique mais nous n'arrivons pas à identifier précisement le problème.
+
+\paragraph{Test d'ergonomie}
+Nous avons fait tester notre jeu à un panel (composé de quelques camarades de classe) pour optenir des feedback sur le jeu.
+Tout les retours que nous avons collectés montre que le design de l'application est bien reçu par l'utilisateur.
+Cependant, certains retour on noté une fragilité du gamePlay de notre jeu.
+
 
 \input{real_ihm.tex}
 \input{real_leaderboard.tex}
