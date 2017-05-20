@@ -314,7 +314,7 @@ Toutes ces statistiques sont gérées par le moteur et sont stockées dans l'objet 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{images/dataCharacter.png}
+\includegraphics[width=0.5\textwidth]{images/dataCharacter.png}
 \caption{Classe DataCharacter}
 \label{fig:modele}
 \end{figure}
@@ -334,6 +334,62 @@ Nous transformons donc notre URL en QRCode grâce à la bibliothèque Zxing de Goog
 Lors du scanne, le lecteur de QRCode proposera à l'utilisateur de suivre le lien vers notre site afin de s'enregistrer. 
 
 \subsection{Le moteur de jeu : mode autonome}
+\paragraph{}
+le mode autonome permet de simuler l'évolution d'une population dans un milieu urbain.
+Chaque personnage devra apprendre à se construire sa propre routine quotidienne afin de maximiser le niveau de ses 3 jauges de vie.
+Si l'une de ses jauges arrive à 0, le personnage démenage pour se faire une nouvelle vie (mais n'oublie pas se qu'il à appris) et change donc de maison.
+\paragraph{}
+Pour que les personnages puissent apprendre de leur experience, nous avons décider d'utiliser un algorithme d'apprentissage par renforcement, le Q-Learning.
+\subsection{Le Q-Learning}
+Le Q-Learning est un algorithme qui va permettre à un agent d'apprendre à trouver une récompense dans un environnement qu'il ne connait pas.
+Pour chaque etat de l'environement, l'agent à la possiblité de faire plusieurs actions qui vont le mener à d'autres états de l'environnement.
+C'est actions pour aller d'état en état possède 3 valeurs, une pour chaque jauge, qui lui indique la qualité de cette action pour satisfaire cette jauge.
+Ces valeurs sont initialisées à 0.
+Grace à l'utilisation de l'équation de Q-Learning, l'agent va mettre à jour ces valeurs afin de quantifier l'apport en émotion/en argent/en famille que cette action pourrai lui apporter dans le futur.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{images/Qequation.png}
+\caption{Equation de Q-Learning}
+\label{fig:modele}
+\end{figure}
+
+\paragraph{}
+La fonction Q(s,a) représente donc la quantification de l'espoir de recevoir un reward si l'on effectue l'action a en l'état s. 
+
+\subsubsection{L'algorithme de Q-Learning}
+\paragraph{}
+L'algorithme suit les etapes suivantes : 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{images/Qschema.PNG}
+\caption{Les étapes du Q-Learning}
+\label{fig:modele}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{images/Qalgo.png}
+\caption{Un algorithme possible de Q-Learning}
+\label{fig:modele}
+\end{figure}
+
+\subsubsection{Notre implémantation}
+\paragraph{La priorité}
+L'agent ne peut pas assouvir tout ses besoins en même temps, il doit donc se focaliser sur un seul de ces besoins.
+Nous avons fait le choix de mettre la priorité sur la jauge ayant la valeur la plus basse. 
+Ainsi si il à un besoin en argent, il ne prendra en compte que les valeurs d'argent des actions pour décider de la direction à suivre.
+
+\paragraph{Problème rencontré}
+Comme notre agent ne possède qu'une seul maison (en revanche il peut travailler et se divertir où il veut), il aurait difficile de lui faire apprendre à rentrer chez lui avant que sa jauge de famille arrive à 0.
+Nous avons donc combiné le Q-Learning avec l'algorithme A*. 
+Ainsi il apprend à trouver un travail et un loisir mais quand il à besoin de rentrer chez lui, il cherche juste le chemin le plus court grâce à A* et le suit.
+
+\paragraph{} Pour plus de détails sur ce mode de jeu et le Q-Learning vous pouvez voir la vidéo que nous avons réalisé sur le sujet ou voir la recherche bibliographique de Matthieu Vilain (diponible jour de la soutenance).
+(Lien vers la vidéo : \url{https://www.youtube.com/watch?v=U7T4wBj0xHU})
+
+\input{real_ihm.tex}
 
 \subsection{Logging : Log4J}
 \paragraph{}
@@ -382,6 +438,4 @@ Nous avons fait tester notre jeu à un panel (composé de quelques camarades de cl
 Tout les retours que nous avons collectés montre que le design de l'application est bien reçu par l'utilisateur.
 Cependant, certains retour on noté une fragilité du gamePlay de notre jeu.
 
-
-\input{real_ihm.tex}
 \input{real_leaderboard.tex}
