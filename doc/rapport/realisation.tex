@@ -108,7 +108,7 @@ Un personnage possède également un tableau de jauges contenant :
 \begin{itemize}
  \item une jauge d'émotion 
  \item une jauge d'argent 
- \item une jauge de fatigue
+ \item une jauge de famille
 \end{itemize}
 
 \paragraph{}
@@ -170,8 +170,8 @@ Les jauges représentent les critères de vie des personnages, elles varient de 0 
 Si l'une d'elles atteint 0, le personnage meurt. 
 L'évolution de ces jauges est totalement dynamique, elle se fera automatiquement en fonction des actions faites par le personnage. 
 Certaines actions vont apporter un bonus différent sur les jauges du personnage alors que d'autres vnt apporter des malus. 
-Pour certaines actions le bonus est constant (par exemple dormir apportera toujours +30 en fatigue) mais pour d'autres le bonus/malus est variable en fonction du lieu dans lequel se fait l'action. 
-Par exemple travailler dans un atelier auto apportera un malus de -25 en fatigue car la tache est difficile alors que travailler dans une boutique d?électronique apportera un malus de -15. 
+Pour certaines actions le bonus est constant (par exemple dormir apportera toujours +30 en famille) mais pour d'autres le bonus/malus est variable en fonction du lieu dans lequel se fait l'action. 
+Par exemple travailler dans un atelier auto apportera un malus de -25 en émotion car la tache est difficile alors que travailler dans une boutique d'électronique apportera un malus de -15. 
 Même fonctionnement pour les bonus des loisirs. 
 Ces valeurs sont initialiser lors que l'initialisation des bâtiments, elles proviennent donc d'un fichiers CSV. 
 Enfin les rewards de sont pas toujours effectif au même moment. 
@@ -183,7 +183,7 @@ C'est à dire que plus le chemin que le personnage a à faire est long, plus il pe
 \centering
 \begin{tabular} {|p{1.5cm}|p{4cm}|p{3.5cm}|p{1.5cm}|p{5cm}|}
 \hline
-Action & Emotion & Money & fatigue & Effectivité \\
+Action & Emotion & Money & famille & Effectivité \\
 \hline
 Sleeping & +15 & 0 & +30 & En fin d'action\\
 \hline
@@ -239,6 +239,102 @@ La currentRoutine à les même propriétés qu'une files mais avec plus de possibili
 On défile currentRoutine et on ajoute cette action à l'action courante, currentAction. 
 Cette action est exécuté par le personnage et lorsqu'elle est finie, on défile à nouveau la currentRoutine. 
 Enfin l'utilisateur peut soit ajouter un action en tête ou en queue dans la currentRoutine.
+
+\subsubsection{Gestion des itinéraires : Algorithme A*}
+
+\paragraph{}
+L'utilisateur peut demander à un personnage de se deplacer d'un point A à un point B mais il n'a pas besoin de lui spécifier exactement le chemin à faire.
+En effet le personnage est capable de trouver le chemin le plus court pour aller d'un point A à un point B grâce à l'algorithme de path founding A*.
+
+\paragraph{Fonctionnement de l'algorithme}
+Le principe de l'agorithme est de toujours se rapprocher le plus possible du point d'arrivé.
+Cependant on n'oublie pas les solutions qui nous éloignent directement de l'ojectif car elles pourraient faire partie du chemin final.
+On représente notre carte sous forme de graph avec des noeud praticable (routes et entrées de batiments) et des noeud obstacle (batiments).
+
+\paragraph{}
+On utilisera 2 liste chainées : 
+\begin{itemize}
+ \item une liste ouverte contenant tout les noeuds étudiés
+ \item une liste fermé contenant les noeuds qui semblent faire partie du chemin solution. 
+\end{itemize}
+Pour noter la pertinance d'un noeud, on calcul sa distance à vol d'oiseau au carré avec l'objectif grâce à l'équation : 
+\[P = (x_{arrivee} - x_{debut})^2 + (y_{arrivee} - y_{debut})^2\]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/Astar.png}
+\caption{A* : calcul de la pertinance d'un noeud}
+\label{fig:modele}
+\end{figure}
+
+\paragraph{}
+Enfin on repète les étapes suivantes pour construire le chemin solution :
+\begin{enumerate}
+ \item On prend comme noeud courant le noeud de départ
+ \item On regarde tout les noeuds voisins
+ \item \begin{itemize}
+        \item Si un noeud voisin est un obstacle, on l'oublie
+        \item Si un noeud voisin est déjà dans la liste fermé, on l'oublie
+        \item Si le noeud voisin est dans la liste ouverte, on le met à jour si il a une meilleur pertinance que celui déjà présent dans la liste ouverte (on change sa pertinance et ses parents)
+        \item Sinon, on ajoute le noeud voisin dans la liste ouverte avec comme noeud parent le noeud courant
+       \end{itemize}
+ \item On cherche le meilleur noeud de toute la liste ouverte (si cette derniere est vide, pas de solution, fin de l'algorithme)
+ \item On le met dans la liste fermé et on le retire de la liste ouverte
+ \item Ce noeud devient le noeud courant et on recommence (sauf si c'est le noeud d'arrivé, fin de l'algorithme)
+\end{enumerate}
+
+\paragraph{}
+Pour récupérer le chemin optimal il suffi juste de prend le noeud et de regarder succecivement tout les parents jusqu'au point de départ.
+\paragraph{}
+Cet algorithme nous assure de trouver le chemin optimal pour nos personnages.
+
+\subsubsection{Collecte de données statisqtiques}
+\paragraph{}
+Pour permettre au joueur d'élaborer des stratégies et d'avoir une meilleure vision sur les actions passé des personnages, il a à sa disposition un certain nombre de statistiques.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{images/graph.png}
+\caption{Statistiques pour chaque peronnage}
+\label{fig:modele}
+\end{figure}
+
+\paragraph{}
+Il peut accéder à :
+\begin{itemize}
+ \item La répartition des différents types d'actions depuis le début du jeu
+ \item La comparaison entre la répartition des types d'actions de la journée courante et celle de la journée précédente
+ \item L'évolution des 3 jauges depuis le début du jeu.
+ \item La comparaison de l'évolution de l'émotion entre la journée courante et la journée précédente
+ \item La répartition des rewards en émotion (reward positif, reward négatif, reward nul)
+\end{itemize}
+
+\paragraph{}
+Toutes ces statistiques sont gérées par le moteur et sont stockées dans l'objet dataCharacter de chaque personnages.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{images/dataCharacter.png}
+\caption{Classe DataCharacter}
+\label{fig:modele}
+\end{figure}
+
+\subsubsection{Fin de partie : enregistrement du score}
+\paragraph{}
+A la fin de la partie ou quand le joueur décide de revenir au menu, le jeu lui propose d'enregister son score sur notre site internet (voir partie leaderboard).
+Son score est calculé en fonction du temps de jeu.
+Plus longtemps il réussira à faire vivre sa population, plus son score sera grand. 
+Une fois son score enregitré, le moteur génère une URL renvoyant vers notre site et contenant le niveau de difficulté et le score réalisé. 
+Ces données seront interprété par un formulaire sur le site et le score pourra être enregistré.
+Si l'utilisateur veux directement refaire une partie et ne pas perdre de temps à enregistrer son score sur sa machine de jeu, il peut scanner un QRCode avec son téléphone pour accéder à la version mobile du site.
+Il peut ainsi enregistrer son score sur son téléphone en même temps de refaire une nouvelle partie sur sa machine de jeu.
+\paragraph{Le QRCode}
+est une conversion en binaire d'une chaine de caractères. Ce code binaire est ensuite convertit  sous format image : les petit carrés noir représente les 1 et les blancs les 0.
+Nous transformons donc notre URL en QRCode grâce à la bibliothèque Zxing de Google.
+Lors du scanne, le lecteur de QRCode proposera à l'utilisateur de suivre le lien vers notre site afin de s'enregistrer. 
+
+\subsection{Le moteur de jeu : mode autonome}
+
 
 \input{real_ihm.tex}
 \input{real_leaderboard.tex}
