@@ -1,14 +1,14 @@
 \subsection{Leaderboards}
 \label{real_leader}
-\paragraph{} En fin de partie l'utilisateur à la possibilité d'enregistrer son score sur une plateforme web, et de consulter le classement des meilleurs score à Urban Life Simulator.
+\paragraph{} En fin de partie l'utilisateur a la possibilité d'enregistrer son score sur une plateforme web et de consulter le classement des meilleurs score à Urban Life Simulator.
 
 \subsubsection{Le Site Web}
 \label{sec:siteweb}
-\paragraph{}Les classement aux différents niveaux de difficultés sont disponibles sur un site web hebergé, et accessible 24/24h.
+\paragraph{}Les classements aux différents niveaux de difficultés sont disponibles sur un site web hebergé et accessible 24/24h.
 \begin{figure}[H]
 	\centering
 		\includegraphics[width=0.75\textwidth]{images/realheader.png}
-		\caption{Les différentes pages accessible du site web}
+		\caption{Les différentes pages accessibles du site web}
 	\label{fig:realheader}
 \end{figure}
 \paragraph{}Le site est composé de 5 pages:
@@ -19,16 +19,16 @@
 \item Le classement du mode Hard
 \item Le classement du mode Pro
 \end{itemize}
-\paragraph{}La page d'enregistrement des score est accessible seulement par un lien généré par le jeu en fin de partie, l'utilisateur pourra ensuite scanner un QR Code pour acceder à la page, ou cliquer sur un bouton qui le renverra sur la page si il ne possède pas de lecteur de code QR.
+\paragraph{}La page d'enregistrement des scores est accessible seulement par un lien généré par le jeu en fin de partie, l'utilisateur pourra ensuite scanner un QR Code pour accéder à la page ou cliquer sur un bouton qui le renverra sur la page si il ne possède pas de lecteur de code QR.
 
 \subsubsection{Principe du classement}
 \label{sec:leaderprincipe}
-\paragraph{}Le principe du classement est de classer les meilleurs joueurs à Urban Life Simulator, voici les règles du classements de Urban Life Simulator:
+\paragraph{}Le principe du classement est de classer les meilleurs joueurs à Urban Life Simulator, voici les règles du classement de Urban Life Simulator:
 \begin{itemize}
 \item Les plus hauts scores se retrouveront en haut de la liste.
-\item Le classement ne retiens que les 10 meilleurs scores.
-\item Les scores en dessous du dizième meilleur score ne sont pas retenu, ou sont effacé lorsque le 10eme score est battu.
-\item En cas d'égalité de score dans le classement, le joueur ayant fait le score en premier occupe la place supérieur. Ainsi en cas d'égalisation d'un score, le joueur performant l'égalisation se verra attribué la place inférieur à tous les autres joueurs ayant déjà fait le même score auparavant.
+\item Le classement ne retient que les 10 meilleurs scores.
+\item Les scores en dessous du dizième meilleur score ne sont pas retenus ou sont effacés lorsque le 10eme score est battu.
+\item En cas d'égalité de score dans le classement, le joueur ayant fait le score en premier occupe la place supérieure. Ainsi en cas d'égalisation d'un score, le joueur performant l'égalisation se verra attribué la place inférieure à tous les autres joueurs ayant déjà fait le même score auparavant.
 \end{itemize}
 
 \subsubsection{Modélisation d'un classement}
@@ -39,12 +39,12 @@
 		\caption{Diagramme UML de la Classe Score en PHP}
 	\label{fig:realscore}
 \end{figure}
-\paragraph{}Un score est modélisé par une classe "Score" en PHP ayant pour attribue:
+\paragraph{}Un score est modélisé par une classe "Score" en PHP ayant pour attribut:
 \begin{itemize}
 \item Un nom
 \item Un score
 \end{itemize}
-\paragraph{}La classe "Score" possède pour seules méthodes, les accesseurs et mutateurs des deux attribues précédants. Les 10 meilleurs scores sont ensuite ajouté dans un tableau. Le tableau est ensuite sérializé dans un fichier sur le serveur.
+\paragraph{}La classe "Score" possède pour seules méthodes, les accesseurs et mutateurs des deux attributs précédants. Les 10 meilleurs scores sont ensuite ajoutés dans un tableau. Le tableau est ensuite sérializé dans un fichier sur le serveur.
 
 \subsubsection{Ajout d'un score dans un classement}
 \label{sec:realaddscore}
