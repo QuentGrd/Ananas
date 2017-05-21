@@ -1,27 +1,26 @@
+\newpage
 \section{Spécification}
 \label{sec:spec}
 
 \subsection{Présentation du jeu}
 \label{sec:presentationdujeu}
-\subsubsection{Contexte}
-\paragraph{}Vous avez découvert un remède contre la vieillesse, pour vous remercier la population vous à élu maire de la ville, mais rapidement, d'autres problèmes vont arrivé. En effet, maintenant que l'âge n'est plus une inquiétude, le morale de votre population semble les préoccuper de plus en plus. Certains cas de décès, ayant pour cause la fatigue mentale, l'insatisfaction de la situation financière, ou encore le manque de vie sociale, ont été recensé. Vous avez donc pour but de faire survivre votre population et de combler ses besoins.
 \subsubsection{Le Jeu}
-\paragraph{}Le jeu consiste en une simulation de l'évolution d'une population dans un milieu urbain. Le but du jeu est de faire survivre la population le plus longtemps possible. En mode "normal", le joueur pourra influer sur les différents personnages de la population, afin de la faire survivre. En mode autonôme, la population prend elle même des décision afin de survivre.
+\paragraph{}Le jeu consiste en une simulation de l'évolution d'une population dans un milieu urbain. Le but du jeu est de faire survivre la population le plus longtemps possible. En mode "normal", le joueur pourra influer sur les différents personnages de la population, afin de la faire survivre. En mode autonome, la population prend elle même des décisions afin de survivre.
 
-\subsection{L'Environnement}
+\subsection{L'environnement}
 \label{sec:environnement}
-\paragraph{}L'environnement est une ville composé de différentes infrastructures:
+\paragraph{}L'environnement est une ville composée de différentes infrastructures:
 \begin{itemize}
 \item Tracé (routes)
-\item Batiments:
+\item Bâtiments:
 \begin{itemize}
 \item Maison (domicile des personnages)
-\item Travail (lieux de travails des personnages)
-\item Loisir
+\item Travail (lieux de travail des personnages)
+\item Loisirs
 \end{itemize}
 \end{itemize}
 
-\paragraph{}Les différents batiments auront:
+\paragraph{}Les différents bâtiments auront:
 \begin{itemize}
 \item Un nom
 \item Un nombre maximum d'utilisateurs
@@ -30,36 +29,36 @@
 \item Un taille
 \end{itemize}
 
-\paragraph{}Chaque batiments possèderont ses characteristiques propres:
+\paragraph{}Chaque bâtiment possèdera ses caracteristiques propres:
 \begin{itemize}
 \item Maison
 \begin{itemize}
-\item Un ou plusieurs propriètaire
+\item Un ou plusieurs propriétaire(s)
 \end{itemize}
-\item Travail et Loisir:
+\item Travail et Loisirs:
 \begin{itemize}
-\item Des horaires d'ouvertures et de fermetures
+\item Des horaires d'ouverture et de fermeture
 \item Un temps d'utilisation moyen
 \item Une file d'attente
 \end{itemize}
 \end{itemize}
 
-\paragraph{}Les tracés (routes) permettront aux personages de se déplacer dans l'environnement. L'environnement sera donc un quadrillage de différentes infrastructures, ainsi qu'une horloge permettant de simuler les différentes phases d'une journée (nuit, matin, après-midi, soir).
+\paragraph{}Les tracés (routes) permettront aux personnages de se déplacer dans l'environnement. L'environnement sera donc un quadrillage de différentes infrastructures, ainsi qu'une horloge permettant de simuler les différentes phases d'une journée (nuit, matin, après-midi, soir).
 
 \subsection{Personnages}
 \label{sec:personnages}
 \paragraph{}Le réel but du projet est d'analyser l'évolution d'une population dans un milieu urbain et cela sous la forme d'un jeu. Le point le plus important sera donc la vie quotidienne des personnes.
 
-\paragraph{}Chaque personnages aura pour informations de base:
+\paragraph{}Chaque personnage aura pour informations de base:
 \begin{itemize}
 \item Un nom
 \item Un age
 \item Un sexe
-\item Une adresse (Un domicile representé par un Batiments de type Maison)
+\item Une adresse (Un domicile representé par un Bâtiment de type Maison)
 \item Un travail, avec des horaires de travail
 \end{itemize}
 
-\paragraph{}Chaque personnages suivra une routine modélisé par une suite d'action, laquelle pourra être modifié par le joueur. Les différents type d'actions seront:
+\paragraph{}Chaque personnage suivra une routine modélisée par une suite d'action, laquelle pourra être modifiée par le joueur. Les différents type d'action seront:
 \begin{itemize}
 \item Dormir
 \item Se divertir
@@ -67,29 +66,29 @@
 \item Se déplacer
 \end{itemize}
 
-\paragraph{}Chaque personnages possèdera trois jauge: Émotion, Money et Family; représentant respectivement son besoin en repos, travail, et divertisement. Chaque jauge diminuera au fur et à mesure du temps, le seul moyen de les augmenter est d'utiliser les batiments correspondant.
+\paragraph{}Chaque personnage possèdera trois jauges: Émotion, Money et Family; représentant respectivement son besoin en repos, travail et divertissement. Chaque jauge diminuera au fur et à mesure du temps, le seul moyen de les augmenter est d'utiliser les bâtiments correspondants.
 
 \subsection{Fonctionnalités}
 \label{sec:fonctionnalite}
 \paragraph{} Fonctionnalités du programme:
 \begin{itemize}
-\item Le joueur aura plusieurs actions possibles afn d'infuer sur l'évolution de la ville:
+\item Le joueur aura plusieurs actions possibles afin d'influer sur l'évolution de la ville:
 \begin{itemize}
-\item Agir sur le temps, en stoppant l'horloge, mais aussi en l'accelerant ou la ralentissant
-\item Acceder aux informations des batiments
+\item Agir sur le temps, en stoppant l'horloge, mais aussi en l'accélérant ou la ralentissant
+\item Accéder aux informations des batiments
 \end{itemize}
-\item Le joueur aura plusieurs actions possibles afn d'infuer sur l'évolution de la population:
+\item Le joueur aura plusieurs actions possibles afin d'influer sur l'évolution de la population:
 \begin{itemize}
-\item Acceder aux différentes informations des personnages:
+\item Accéder aux différentes informations des personnages:
 \begin{itemize}
 \item Les informations de base (Nom, Age, Domicile, Travail)
 \item Evolution du comportement du personnage dans le temps via des graphiques
-\item La liste des actions à venir par le personnages
+\item La liste des actions à venir par le personnage
 \end{itemize}
 \item Agir sur le comportement des différents personnages:
 \begin{itemize}
 \item Ajouter des actions à faire au personnage
-\item Supprimer des actions prévu dans l'activité du personnage
+\item Supprimer des actions prévues dans l'activité du personnage
 \end{itemize}
 \end{itemize}
 \end{itemize}

@@ -154,7 +154,7 @@ public class GUIMainMenu extends JFrame{
 	
 	class ActionRulesListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			URI uri = URI.create("https://www.youtube.com/watch?v=U7T4wBj0xHU");
+			URI uri = URI.create("https://www.youtube.com/watch?v=BkDlLuOQTMQ");
 			try {
 				Desktop.getDesktop().browse(uri);
 			} catch (IOException e1) {
