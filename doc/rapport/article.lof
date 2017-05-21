@@ -1,12 +1,47 @@
 \select@language {french}
-\contentsline {figure}{\numberline {1}{\ignorespaces Diagramme UML des composantes de la ville}}{3}
-\contentsline {figure}{\numberline {2}{\ignorespaces Diagramme UML de la construction de la ville}}{4}
-\contentsline {figure}{\numberline {3}{\ignorespaces Classe abstraite Character}}{5}
-\contentsline {figure}{\numberline {4}{\ignorespaces Classe abstraite Character et ses classes filles}}{6}
-\contentsline {figure}{\numberline {5}{\ignorespaces Architecture de cr\'eation des NCharacters et de la population}}{7}
-\contentsline {figure}{\numberline {6}{\ignorespaces Architecture de gestion des routines}}{8}
-\contentsline {figure}{\numberline {7}{\ignorespaces Architecture de gestion des routines}}{9}
-\contentsline {figure}{\numberline {8}{\ignorespaces Diagramme UML de l'IHM}}{10}
-\contentsline {figure}{\numberline {9}{\ignorespaces IHM du jeu}}{10}
-\contentsline {figure}{\numberline {10}{\ignorespaces Exemple d'affichage d'un personnage dans la liste}}{11}
-\contentsline {figure}{\numberline {11}{\ignorespaces Exemple d'affichage des informations d'un personnage}}{12}
+\contentsline {figure}{\numberline {1}{\ignorespaces Diagramme UML des composantes de la ville}}{5}
+\contentsline {figure}{\numberline {2}{\ignorespaces Diagramme UML de la construction de la ville}}{6}
+\contentsline {figure}{\numberline {3}{\ignorespaces Classe abstraite Character}}{7}
+\contentsline {figure}{\numberline {4}{\ignorespaces Classe abstraite Character et ses classes filles}}{8}
+\contentsline {figure}{\numberline {5}{\ignorespaces Architecture de cr\'eation des NCharacters et de la population}}{9}
+\contentsline {figure}{\numberline {6}{\ignorespaces Architecture de gestion des routines}}{10}
+\contentsline {figure}{\numberline {7}{\ignorespaces Architecture de gestion des routines}}{11}
+\contentsline {figure}{\numberline {8}{\ignorespaces A* : calcul de la pertinance d'un noeud}}{12}
+\contentsline {figure}{\numberline {9}{\ignorespaces Statistiques pour chaque peronnage}}{13}
+\contentsline {figure}{\numberline {10}{\ignorespaces Classe DataCharacter}}{13}
+\contentsline {figure}{\numberline {11}{\ignorespaces Equation de Q-Learning}}{14}
+\contentsline {figure}{\numberline {12}{\ignorespaces Les \'etapes du Q-Learning}}{14}
+\contentsline {figure}{\numberline {13}{\ignorespaces Un algorithme possible de Q-Learning}}{15}
+\contentsline {figure}{\numberline {14}{\ignorespaces Prototype pour le Q-Learning}}{15}
+\contentsline {figure}{\numberline {15}{\ignorespaces Prototype pour A*}}{16}
+\contentsline {figure}{\numberline {16}{\ignorespaces Diagramme UML de l'IHM}}{16}
+\contentsline {figure}{\numberline {17}{\ignorespaces IHM du jeu}}{17}
+\contentsline {figure}{\numberline {18}{\ignorespaces Exemple d'affichage d'un personnage dans la liste}}{18}
+\contentsline {figure}{\numberline {19}{\ignorespaces Exemple d'affichage des informations d'un personnage}}{18}
+\contentsline {figure}{\numberline {20}{\ignorespaces Fonctionnement de notre phase de test}}{19}
+\contentsline {figure}{\numberline {21}{\ignorespaces Les diff\'erentes pages accessible du site web}}{20}
+\contentsline {figure}{\numberline {22}{\ignorespaces Diagramme UML de la Classe Score en PHP}}{21}
+\contentsline {figure}{\numberline {23}{\ignorespaces Fen\^etre de selection de niveau en mode normal}}{22}
+\contentsline {figure}{\numberline {24}{\ignorespaces Les differents niveau en mode normal}}{22}
+\contentsline {figure}{\numberline {25}{\ignorespaces La s\'election du nombres de personnages en mode autonome}}{23}
+\contentsline {figure}{\numberline {26}{\ignorespaces Menu principal}}{23}
+\contentsline {figure}{\numberline {27}{\ignorespaces IHM du jeu}}{24}
+\contentsline {figure}{\numberline {28}{\ignorespaces Information des infrastructures}}{24}
+\contentsline {figure}{\numberline {29}{\ignorespaces Information sur l'horloge}}{24}
+\contentsline {figure}{\numberline {30}{\ignorespaces Affichage de la Map}}{25}
+\contentsline {figure}{\numberline {31}{\ignorespaces Liste des personnages}}{26}
+\contentsline {figure}{\numberline {32}{\ignorespaces Affichage de l'IHM avec les informations d\'etaill\'e sur un personnage}}{27}
+\contentsline {figure}{\numberline {33}{\ignorespaces Interface de gestion d'un personnage}}{27}
+\contentsline {figure}{\numberline {34}{\ignorespaces Le personnage "Maelle Reynaud" d\'emarqu\'e par un cercle rouge}}{28}
+\contentsline {figure}{\numberline {35}{\ignorespaces Fen\^etre d'ajout d'action d'un personnage}}{28}
+\contentsline {figure}{\numberline {36}{\ignorespaces Choix d'action disponible}}{29}
+\contentsline {figure}{\numberline {37}{\ignorespaces Choix de detail lors du choix d'une action de type Go Home}}{29}
+\contentsline {figure}{\numberline {38}{\ignorespaces Choix de detail lors du choix d'une action de type Go Work}}{29}
+\contentsline {figure}{\numberline {39}{\ignorespaces Choix de detail lors du choix d'une action de type Entertain}}{29}
+\contentsline {figure}{\numberline {40}{\ignorespaces Choix de la position de l'ajout de l'action}}{30}
+\contentsline {figure}{\numberline {41}{\ignorespaces Fen\^etre de supression d'action d'un personnage}}{30}
+\contentsline {figure}{\numberline {42}{\ignorespaces Fen\^etre de fin de partie avec un exemple de QR Code}}{31}
+\contentsline {figure}{\numberline {43}{\ignorespaces Fen\^etre d'enregistrement du score}}{31}
+\contentsline {figure}{\numberline {44}{\ignorespaces Classement du niveau Pro}}{32}
+\contentsline {figure}{\numberline {45}{\ignorespaces Utilisation de Git}}{33}
+\contentsline {figure}{\numberline {46}{\ignorespaces R\'epartition des commits Git au cours du temps}}{34}
